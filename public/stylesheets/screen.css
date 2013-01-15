@@ -176,39 +176,7 @@ section.required h3::after {
   font-size: 0.6em;
 }
 
-/* line 108, ../../sass/screen.scss */
-section.condensed {
-  position: relative;
-  left: 35%;
-  width: 65%;
-}
-
-/* line 114, ../../sass/screen.scss */
-.condensed header {
-  position: absolute;
-  left: -200px;
-  width: 200px;
-  text-align: right;
-}
-
-/* line 121, ../../sass/screen.scss */
-section.required.condensed h3::after {
-  content: "";
-}
-
-/* line 125, ../../sass/screen.scss */
-.condensed h3 {
-  padding: 0;
-}
-
-/* line 129, ../../sass/screen.scss */
-.condensed.required::after {
-  content: "(required)";
-  color: red;
-  font-size: 0.8em;
-}
-
-/* line 139, ../../sass/screen.scss */
+/* line 112, ../../sass/screen.scss */
 div.form-container {
   padding: 15px;
   background-color: #f7f7f7;
@@ -219,12 +187,12 @@ div.form-container {
   margin: 0 auto;
 }
 
-/* line 150, ../../sass/screen.scss */
+/* line 123, ../../sass/screen.scss */
 input.q-other {
   width: 200px;
 }
 
-/* line 154, ../../sass/screen.scss */
+/* line 127, ../../sass/screen.scss */
 textarea {
   display: block;
   width: 90%;
@@ -233,24 +201,51 @@ textarea {
 }
 
 @media only screen and (max-device-width: 640px) {
-  /* line 161, ../../sass/screen.scss */
+  /* line 134, ../../sass/screen.scss */
   textarea, input[type=text] {
     width: 100%;
     font-size: 120%;
   }
 }
 
-/* line 168, ../../sass/screen.scss */
+/* line 141, ../../sass/screen.scss */
 input[type=text] {
   width: 40%;
 }
 
-/* line 172, ../../sass/screen.scss */
-.condensed input[type=text] {
-  width: 70%;
-}
-
-/* line 176, ../../sass/screen.scss */
+/* line 145, ../../sass/screen.scss */
 input[type=submit] {
   font-size: 150%;
+}
+
+/* line 149, ../../sass/screen.scss */
+section.condensed {
+  text-align: right;
+}
+
+/* line 153, ../../sass/screen.scss */
+.condensed header {
+  float: left;
+}
+
+/* line 159, ../../sass/screen.scss */
+section.required.condensed h3::after {
+  content: "";
+}
+
+/* line 163, ../../sass/screen.scss */
+.condensed h3 {
+  padding: 0;
+}
+
+/* line 167, ../../sass/screen.scss */
+.condensed.required::after {
+  content: "(required)";
+  color: red;
+  font-size: 0.8em;
+}
+
+/* line 173, ../../sass/screen.scss */
+.condensed input[type=text] {
+  width: 60%;
 }

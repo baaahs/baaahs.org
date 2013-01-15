@@ -105,33 +105,6 @@ section.required h3::after {
   font-size: 0.6em;
 }
 
-section.condensed {
-  position: relative;
-  left: 35%;
-  width: 65%;
-}
-
-.condensed header {
-  position: absolute;
-  left: -200px;
-  width: 200px;
-  text-align: right;
-}
-
-section.required.condensed h3::after {
-  content: "";
-}
-
-.condensed h3 {
-  padding: 0;
-}
-
-.condensed.required::after {
-  content: "(required)";
-  color: red;
-  font-size: 0.8em;
-}
-
 .volunteer-page {
   //background: url(http://cunnan.sca.org.au/upload/b/ba/Sheep.jpg);
 }
@@ -169,10 +142,35 @@ input[type=text] {
   width: 40%;
 }
 
-.condensed input[type=text] {
-  width: 70%;
-}
-
 input[type=submit] {
   font-size: 150%;
 }
+
+section.condensed {
+  text-align: right;
+}
+
+.condensed header {
+  //position: absolute;
+  //left: -200px;
+  float: left;
+}
+
+section.required.condensed h3::after {
+  content: "";
+}
+
+.condensed h3 {
+  padding: 0;
+}
+
+.condensed.required::after {
+  content: "(required)";
+  color: red;
+  font-size: 0.8em;
+}
+
+.condensed input[type=text] {
+  width: 60%;
+}
+
