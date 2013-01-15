@@ -83,8 +83,11 @@
         <li><label><input type="checkbox" name="entry.1.group"/>Fundraising/promotions</label></li>
         <li><label><input type="checkbox" name="entry.1.group"/>Web design/documentation</label></li>
         <li><label><input type="checkbox" name="entry.1.group"/>Point me at something, I&#39;ll do it</label></li>
-        <li class="other"><label><input type="checkbox" name="entry.1.group" value="__option__"/>Other</label>
-          <input type="text" name="entry.1.group.other_option_" value=""/>
+      </ul>
+
+      <ul>
+        <li class="other"><label><input type="checkbox" name="entry.1.group" value="__option__"/>Other:</label>
+          <textarea name="entry.1.group.other_option_"></textarea>
         </li>
       </ul>
     </section>
@@ -194,7 +197,7 @@
       el.val(el.parent().text().trim());
     } else {
       el.change(function() {
-        var otherInput = $("input[type=text]", $(this).parent().parent()).first();
+        var otherInput = $("textarea", $(this).parent().parent()).first();
         if ($(this).is(":checked")) {
           otherInput.focus();
         }
@@ -202,7 +205,7 @@
     }
   });
 
-  $(".other input[type=text]").each(function () {
+  $(".other textarea").each(function () {
     $(this).click(function () {
       $("input[type=checkbox]", $(this).parent()).first().attr("checked", true);
     });

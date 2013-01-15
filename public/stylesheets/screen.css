@@ -214,38 +214,43 @@ input[type=text] {
 }
 
 /* line 145, ../../sass/screen.scss */
+.other textarea {
+  height: 6em;
+}
+
+/* line 149, ../../sass/screen.scss */
 input[type=submit] {
   font-size: 150%;
 }
 
-/* line 149, ../../sass/screen.scss */
+/* line 153, ../../sass/screen.scss */
 section.condensed {
   text-align: right;
 }
 
-/* line 153, ../../sass/screen.scss */
+/* line 157, ../../sass/screen.scss */
 .condensed header {
   float: left;
 }
 
-/* line 159, ../../sass/screen.scss */
+/* line 163, ../../sass/screen.scss */
 section.required.condensed h3::after {
   content: "";
 }
 
-/* line 163, ../../sass/screen.scss */
+/* line 167, ../../sass/screen.scss */
 .condensed h3 {
   padding: 0;
 }
 
-/* line 167, ../../sass/screen.scss */
+/* line 171, ../../sass/screen.scss */
 .condensed.required::after {
   content: "(required)";
   color: red;
   font-size: 0.8em;
 }
 
-/* line 173, ../../sass/screen.scss */
+/* line 177, ../../sass/screen.scss */
 .condensed input[type=text] {
   width: 60%;
 }
