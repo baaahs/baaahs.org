@@ -71,65 +71,104 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
 body {
   font-family: Candara, Helvetica, Arial, sans-serif;
   line-height: 1.5em;
-  font: 12px;
+  font-size: 15px;
+  background: #aaa;
+  background-image: url("/images/BM-night.jpg");
+  background-attachment: fixed;
+}
+@media only screen and (max-device-width: 640px) {
+  /* line 10, ../../sass/screen.scss */
+  body {
+    font-size: 14px;
+    background-image: linear-gradient(bottom, #1d2a54 50%, #101830 86%);
+    background-image: -o-linear-gradient(bottom, #1d2a54 50%, #101830 86%);
+    background-image: -moz-linear-gradient(bottom, #1d2a54 50%, #101830 86%);
+    background-image: -webkit-linear-gradient(bottom, #1d2a54 50%, #101830 86%);
+    background-image: -ms-linear-gradient(bottom, #1d2a54 50%, #101830 86%);
+    background-image: -webkit-gradient(linear, left bottom, left top, color-stop(0.5, #1d2a54), color-stop(0.86, #101830));
+  }
 }
 
-/* line 16, ../../sass/screen.scss */
+/* line 37, ../../sass/screen.scss */
 article {
-  background: white;
-  width: 90%;
+  background-color: white;
+  max-width: 600px;
+  min-width: 300px;
   margin: auto;
+  margin-top: 3em;
+  margin-bottom: 3em;
   padding: 2em;
+  box-shadow: 0 0 100px;
+}
+@media only screen and (max-device-width: 640px) {
+  /* line 37, ../../sass/screen.scss */
+  article {
+    padding: 1em;
+    min-width: inherit;
+    width: inherit;
+    margin: 1em;
+  }
 }
 
-/* line 23, ../../sass/screen.scss */
+/* line 55, ../../sass/screen.scss */
 h1, h2, h3, h4, h5, h6 {
   font-weight: bold;
   padding-top: 0.5em;
   padding-bottom: 0.5em;
+  line-height: 1.25em;
 }
 
-/* line 29, ../../sass/screen.scss */
+/* line 62, ../../sass/screen.scss */
 h1 {
   font-size: 200%;
-  margin-bottom: 1em;
+}
+@media only screen and (max-device-width: 640px) {
+  /* line 62, ../../sass/screen.scss */
+  h1 {
+    font-size: 150%;
+  }
 }
 
-/* line 34, ../../sass/screen.scss */
+/* line 70, ../../sass/screen.scss */
 h2 {
-  font-size: 150%;
-  margin-bottom: 1em;
+  font-size: 130%;
+  font-style: italic;
+}
+@media only screen and (max-device-width: 640px) {
+  /* line 70, ../../sass/screen.scss */
+  h2 {
+    font-size: 110%;
+  }
 }
 
-/* line 39, ../../sass/screen.scss */
+/* line 79, ../../sass/screen.scss */
 h3 {
   font-size: 125%;
 }
 
-/* line 43, ../../sass/screen.scss */
-section + section {
+/* line 83, ../../sass/screen.scss */
+section {
   margin-top: 2em;
 }
 
-/* line 47, ../../sass/screen.scss */
+/* line 87, ../../sass/screen.scss */
 p + p {
   margin-top: 1em;
 }
 
+/* line 91, ../../sass/screen.scss */
+p {
+  text-align: justify;
+}
+
 @media (min-width: 800px) {
-  /* line 51, ../../sass/screen.scss */
+  /* line 95, ../../sass/screen.scss */
   .multi-column {
     -webkit-column-count: 2;
   }
 }
-@media (min-width: 1200px) {
-  /* line 51, ../../sass/screen.scss */
-  .multi-column {
-    -webkit-column-count: 3;
-  }
-}
 
-/* line 61, ../../sass/screen.scss */
+/* line 101, ../../sass/screen.scss */
 section.required h3::after {
   content: "(required)";
   padding-left: 1em;
@@ -137,12 +176,39 @@ section.required h3::after {
   font-size: 0.6em;
 }
 
-/* line 68, ../../sass/screen.scss */
-.volunteer-page {
-  background: url(http://cunnan.sca.org.au/upload/b/ba/Sheep.jpg);
+/* line 108, ../../sass/screen.scss */
+section.condensed {
+  position: relative;
+  left: 35%;
+  width: 65%;
 }
 
-/* line 72, ../../sass/screen.scss */
+/* line 114, ../../sass/screen.scss */
+.condensed header {
+  position: absolute;
+  left: -200px;
+  width: 200px;
+  text-align: right;
+}
+
+/* line 121, ../../sass/screen.scss */
+section.required.condensed h3::after {
+  content: "";
+}
+
+/* line 125, ../../sass/screen.scss */
+.condensed h3 {
+  padding: 0;
+}
+
+/* line 129, ../../sass/screen.scss */
+.condensed.required::after {
+  content: "(required)";
+  color: red;
+  font-size: 0.8em;
+}
+
+/* line 139, ../../sass/screen.scss */
 div.form-container {
   padding: 15px;
   background-color: #f7f7f7;
@@ -153,21 +219,38 @@ div.form-container {
   margin: 0 auto;
 }
 
-/* line 83, ../../sass/screen.scss */
+/* line 150, ../../sass/screen.scss */
 input.q-other {
   width: 200px;
 }
 
-/* line 87, ../../sass/screen.scss */
+/* line 154, ../../sass/screen.scss */
 textarea {
   display: block;
   width: 90%;
-  height: 4em;
+  height: 8em;
+  margin-top: 1em;
 }
 
 @media only screen and (max-device-width: 640px) {
-  /* line 93, ../../sass/screen.scss */
+  /* line 161, ../../sass/screen.scss */
   textarea, input[type=text] {
     width: 100%;
+    font-size: 120%;
   }
+}
+
+/* line 168, ../../sass/screen.scss */
+input[type=text] {
+  width: 40%;
+}
+
+/* line 172, ../../sass/screen.scss */
+.condensed input[type=text] {
+  width: 70%;
+}
+
+/* line 176, ../../sass/screen.scss */
+input[type=submit] {
+  font-size: 150%;
 }

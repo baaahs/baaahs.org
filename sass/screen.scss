@@ -10,37 +10,77 @@ $information-phone: "only screen and (max-device-width : 640px)";
 body {
   font-family: Candara, Helvetica, Arial, sans-serif;
   line-height: 1.5em;
-  font: 12px;
+  font-size: 15px;
+  background: #aaa;
+  background-image: url("/images/BM-night.jpg");
+  background-attachment: fixed;
+
+  @media #{$information-phone} {
+    font-size: 14px;
+
+    background-image: linear-gradient(bottom, rgb(29,42,84) 50%, rgb(16,24,48) 86%);
+    background-image: -o-linear-gradient(bottom, rgb(29,42,84) 50%, rgb(16,24,48) 86%);
+    background-image: -moz-linear-gradient(bottom, rgb(29,42,84) 50%, rgb(16,24,48) 86%);
+    background-image: -webkit-linear-gradient(bottom, rgb(29,42,84) 50%, rgb(16,24,48) 86%);
+    background-image: -ms-linear-gradient(bottom, rgb(29,42,84) 50%, rgb(16,24,48) 86%);
+
+    background-image: -webkit-gradient(
+    	linear,
+    	left bottom,
+    	left top,
+    	color-stop(0.5, rgb(29,42,84)),
+    	color-stop(0.86, rgb(16,24,48))
+    );
+  }
 }
 
 article {
-  background: white;
-  width: 90%;
+  background-color: white;
+  max-width: 600px;
+  min-width: 300px;
   margin: auto;
+  margin-top: 3em;
+  margin-bottom: 3em;
   padding: 2em;
+  box-shadow: 0 0 100px;
+
+  @media #{$information-phone} {
+    padding: 1em;
+    min-width: inherit;
+    width: inherit;
+    margin: 1em;
+  }
 }
 
 h1, h2, h3, h4, h5, h6 {
   font-weight: bold;
   padding-top: 0.5em;
   padding-bottom: 0.5em;
+  line-height: 1.25em;
 }
 
 h1 {
   font-size: 200%;
-  margin-bottom: 1em;
+
+  @media #{$information-phone} {
+    font-size: 150%;
+  }
 }
 
 h2 {
-  font-size: 150%;
-  margin-bottom: 1em;
+  font-size: 130%;
+  font-style: italic;
+
+  @media #{$information-phone} {
+    font-size: 110%;
+  }
 }
 
 h3 {
   font-size: 125%;
 }
 
-section + section {
+section {
   margin-top: 2em;
 }
 
@@ -48,13 +88,13 @@ p + p {
   margin-top: 1em;
 }
 
+p {
+  text-align: justify;
+}
+
 .multi-column {
   @media (min-width:800px) {
     -webkit-column-count: 2;
-  }
-
-  @media (min-width:1200px) {
-    -webkit-column-count: 3;
   }
 }
 
@@ -65,8 +105,35 @@ section.required h3::after {
   font-size: 0.6em;
 }
 
+section.condensed {
+  position: relative;
+  left: 35%;
+  width: 65%;
+}
+
+.condensed header {
+  position: absolute;
+  left: -200px;
+  width: 200px;
+  text-align: right;
+}
+
+section.required.condensed h3::after {
+  content: "";
+}
+
+.condensed h3 {
+  padding: 0;
+}
+
+.condensed.required::after {
+  content: "(required)";
+  color: red;
+  font-size: 0.8em;
+}
+
 .volunteer-page {
-  background: url(http://cunnan.sca.org.au/upload/b/ba/Sheep.jpg);
+  //background: url(http://cunnan.sca.org.au/upload/b/ba/Sheep.jpg);
 }
 
 div.form-container {
@@ -87,11 +154,25 @@ input.q-other {
 textarea {
   display: block;
   width: 90%;
-  height: 4em;
+  height: 8em;
+  margin-top: 1em;
 }
 
 textarea, input[type=text] {
   @media #{$information-phone} {
     width: 100%;
+    font-size: 120%;
   }
+}
+
+input[type=text] {
+  width: 40%;
+}
+
+.condensed input[type=text] {
+  width: 70%;
+}
+
+input[type=submit] {
+  font-size: 150%;
 }
