@@ -1,0 +1,15 @@
+# humanstxt.org/
+# The humans responsible & technology colophon
+
+# TEAM
+
+    Christian Williams -- Lead -- @AntiXian666
+
+# THANKS
+
+    Burning Man
+
+# TECHNOLOGY COLOPHON
+
+    HTML5, CSS3, SASS, Sinatra,
+    jQuery, Modernizr

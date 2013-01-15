@@ -1,0 +1,173 @@
+/* Welcome to Compass.
+ * In this file you should write your main styles. (or centralize your imports)
+ * Import this file using the following HTML or equivalent:
+ * <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css" /> */
+/* line 17, ../../../../.rvm/gems/ruby-1.9.3-p362/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font: inherit;
+  font-size: 100%;
+  vertical-align: baseline;
+}
+
+/* line 22, ../../../../.rvm/gems/ruby-1.9.3-p362/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+html {
+  line-height: 1;
+}
+
+/* line 24, ../../../../.rvm/gems/ruby-1.9.3-p362/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+ol, ul {
+  list-style: none;
+}
+
+/* line 26, ../../../../.rvm/gems/ruby-1.9.3-p362/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+/* line 28, ../../../../.rvm/gems/ruby-1.9.3-p362/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+caption, th, td {
+  text-align: left;
+  font-weight: normal;
+  vertical-align: middle;
+}
+
+/* line 30, ../../../../.rvm/gems/ruby-1.9.3-p362/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+q, blockquote {
+  quotes: none;
+}
+/* line 103, ../../../../.rvm/gems/ruby-1.9.3-p362/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+q:before, q:after, blockquote:before, blockquote:after {
+  content: "";
+  content: none;
+}
+
+/* line 32, ../../../../.rvm/gems/ruby-1.9.3-p362/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+a img {
+  border: none;
+}
+
+/* line 116, ../../../../.rvm/gems/ruby-1.9.3-p362/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section, summary {
+  display: block;
+}
+
+/* line 10, ../../sass/screen.scss */
+body {
+  font-family: Candara, Helvetica, Arial, sans-serif;
+  line-height: 1.5em;
+  font: 12px;
+}
+
+/* line 16, ../../sass/screen.scss */
+article {
+  background: white;
+  width: 90%;
+  margin: auto;
+  padding: 2em;
+}
+
+/* line 23, ../../sass/screen.scss */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: bold;
+  padding-top: 0.5em;
+  padding-bottom: 0.5em;
+}
+
+/* line 29, ../../sass/screen.scss */
+h1 {
+  font-size: 200%;
+  margin-bottom: 1em;
+}
+
+/* line 34, ../../sass/screen.scss */
+h2 {
+  font-size: 150%;
+  margin-bottom: 1em;
+}
+
+/* line 39, ../../sass/screen.scss */
+h3 {
+  font-size: 125%;
+}
+
+/* line 43, ../../sass/screen.scss */
+section + section {
+  margin-top: 2em;
+}
+
+/* line 47, ../../sass/screen.scss */
+p + p {
+  margin-top: 1em;
+}
+
+@media (min-width: 800px) {
+  /* line 51, ../../sass/screen.scss */
+  .multi-column {
+    -webkit-column-count: 2;
+  }
+}
+@media (min-width: 1200px) {
+  /* line 51, ../../sass/screen.scss */
+  .multi-column {
+    -webkit-column-count: 3;
+  }
+}
+
+/* line 61, ../../sass/screen.scss */
+section.required h3::after {
+  content: "(required)";
+  padding-left: 1em;
+  color: red;
+  font-size: 0.6em;
+}
+
+/* line 68, ../../sass/screen.scss */
+.volunteer-page {
+  background: url(http://cunnan.sca.org.au/upload/b/ba/Sheep.jpg);
+}
+
+/* line 72, ../../sass/screen.scss */
+div.form-container {
+  padding: 15px;
+  background-color: #f7f7f7;
+  border-style: solid;
+  border-width: 1px;
+  width: 75%;
+  border: 1px solid #0b61a4;
+  margin: 0 auto;
+}
+
+/* line 83, ../../sass/screen.scss */
+input.q-other {
+  width: 200px;
+}
+
+/* line 87, ../../sass/screen.scss */
+textarea {
+  display: block;
+  width: 90%;
+  height: 4em;
+}
+
+@media only screen and (max-device-width: 640px) {
+  /* line 93, ../../sass/screen.scss */
+  textarea, input[type=text] {
+    width: 100%;
+  }
+}
