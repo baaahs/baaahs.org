@@ -196,7 +196,7 @@ input.q-other {
 textarea {
   display: block;
   width: 90%;
-  height: 8em;
+  height: 6em;
   margin-top: 1em;
   margin-left: auto;
   margin-right: auto;
@@ -217,7 +217,7 @@ input[type=text] {
 
 /* line 147, ../../sass/screen.scss */
 .other textarea {
-  height: 6em;
+  height: 4em;
 }
 
 /* line 151, ../../sass/screen.scss */
@@ -261,18 +261,29 @@ section.required.condensed h3::after {
 }
 
 /* line 186, ../../sass/screen.scss */
-.hide-when-requirements-are-unsatisfied {
+.show-when-requirements-are-satisfied {
+  display: block;
+  float: right;
+}
+
+/* line 191, ../../sass/screen.scss */
+.hide-when-requirements-are-satisfied {
   color: red;
   display: none;
   float: right;
 }
 
-/* line 192, ../../sass/screen.scss */
-.unsatisfied-requirements .hide-when-requirements-are-unsatisfied {
+/* line 197, ../../sass/screen.scss */
+.unsatisfied-requirements .hide-when-requirements-are-satisfied {
   display: block;
 }
 
-/* line 196, ../../sass/screen.scss */
+/* line 201, ../../sass/screen.scss */
+.unsatisfied-requirements .show-when-requirements-are-satisfied {
+  display: none;
+}
+
+/* line 205, ../../sass/screen.scss */
 .button {
   display: inline-block;
   outline: none;
@@ -288,23 +299,23 @@ section.required.condensed h3::after {
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
 }
 
-/* line 210, ../../sass/screen.scss */
+/* line 219, ../../sass/screen.scss */
 .button:enabled {
   cursor: pointer;
 }
 
-/* line 213, ../../sass/screen.scss */
+/* line 222, ../../sass/screen.scss */
 .button:enabled:hover {
   text-decoration: none;
 }
 
-/* line 216, ../../sass/screen.scss */
+/* line 225, ../../sass/screen.scss */
 .button:enabled:active {
   position: relative;
   top: 1px;
 }
 
-/* line 221, ../../sass/screen.scss */
+/* line 230, ../../sass/screen.scss */
 .orange {
   color: #fef4e9;
   border: solid 1px #da7c0c;
@@ -314,7 +325,7 @@ section.required.condensed h3::after {
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#faa51a', endColorstr='#f47a20');
 }
 
-/* line 229, ../../sass/screen.scss */
+/* line 238, ../../sass/screen.scss */
 .orange:enabled:hover {
   background: #f47c20;
   background: -webkit-gradient(linear, left top, left bottom, from(#f88e11), to(#f06015));
@@ -322,7 +333,7 @@ section.required.condensed h3::after {
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#f88e11', endColorstr='#f06015');
 }
 
-/* line 235, ../../sass/screen.scss */
+/* line 244, ../../sass/screen.scss */
 .orange:enabled:active {
   color: #fcd3a5;
   background: -webkit-gradient(linear, left top, left bottom, from(#f47a20), to(#faa51a));
@@ -330,7 +341,7 @@ section.required.condensed h3::after {
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#f47a20', endColorstr='#faa51a');
 }
 
-/* line 241, ../../sass/screen.scss */
+/* line 250, ../../sass/screen.scss */
 .orange:disabled {
   opacity: .6;
 }

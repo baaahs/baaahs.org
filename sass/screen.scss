@@ -127,7 +127,7 @@ input.q-other {
 textarea {
   display: block;
   width: 90%;
-  height: 8em;
+  height: 6em;
   margin-top: 1em;
   margin-left: auto;
   margin-right: auto;
@@ -145,7 +145,7 @@ input[type=text] {
 }
 
 .other textarea {
-  height: 6em;
+  height: 4em;
 }
 
 input[type=submit] {
@@ -183,14 +183,23 @@ section.required.condensed h3::after {
   width: 60%;
 }
 
-.hide-when-requirements-are-unsatisfied {
+.show-when-requirements-are-satisfied {
+  display: block;
+  float: right;
+}
+
+.hide-when-requirements-are-satisfied {
   color: red;
   display: none;
   float: right;
 }
 
-.unsatisfied-requirements .hide-when-requirements-are-unsatisfied {
+.unsatisfied-requirements .hide-when-requirements-are-satisfied {
   display: block;
+}
+
+.unsatisfied-requirements .show-when-requirements-are-satisfied {
+  display: none;
 }
 
 .button {

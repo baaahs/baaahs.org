@@ -171,7 +171,8 @@
     </section>
 
     <section id="form-submit">
-      <p class="hide-when-requirements-are-unsatisfied">You haven't filled in some required fields above!</p>
+      <p class="hide-when-requirements-are-satisfied">You haven't filled in some required fields above!</p>
+      <p class="show-when-requirements-are-satisfied">Thanks, that's it! Now submit the sucker!</p>
       <input type="submit" name="submit" class="orange button">
     </section>
 
@@ -225,7 +226,6 @@
         var el = els[0];
         unsatisfied = el.val() == "";
       }
-      console.log(els, unsatisfied);
       if (unsatisfied) allRequirementsSatisfied = false;
     });
     $("#form-submit input[type=submit]")[0].disabled = !allRequirementsSatisfied;
@@ -241,8 +241,8 @@
     }
     req.push(el);
     el.change(checkRequired);
+    el.blur(checkRequired); // blur as well as change, workaround for iOS autofill bug
   });
-  console.log(requirements);
   checkRequired();
 
   (function () {
