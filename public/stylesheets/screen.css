@@ -198,59 +198,139 @@ textarea {
   width: 90%;
   height: 8em;
   margin-top: 1em;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 @media only screen and (max-device-width: 640px) {
-  /* line 134, ../../sass/screen.scss */
+  /* line 136, ../../sass/screen.scss */
   textarea, input[type=text] {
     width: 100%;
     font-size: 120%;
   }
 }
 
-/* line 141, ../../sass/screen.scss */
+/* line 143, ../../sass/screen.scss */
 input[type=text] {
   width: 40%;
 }
 
-/* line 145, ../../sass/screen.scss */
+/* line 147, ../../sass/screen.scss */
 .other textarea {
   height: 6em;
 }
 
-/* line 149, ../../sass/screen.scss */
+/* line 151, ../../sass/screen.scss */
 input[type=submit] {
-  font-size: 150%;
+  font-size: 110%;
+  font-weight: bold;
 }
 
-/* line 153, ../../sass/screen.scss */
+/* line 156, ../../sass/screen.scss */
 section.condensed {
   text-align: right;
 }
 
-/* line 157, ../../sass/screen.scss */
+/* line 160, ../../sass/screen.scss */
 .condensed header {
   float: left;
 }
 
-/* line 163, ../../sass/screen.scss */
+/* line 166, ../../sass/screen.scss */
 section.required.condensed h3::after {
   content: "";
 }
 
-/* line 167, ../../sass/screen.scss */
+/* line 170, ../../sass/screen.scss */
 .condensed h3 {
   padding: 0;
+  padding-right: 1em;
 }
 
-/* line 171, ../../sass/screen.scss */
+/* line 175, ../../sass/screen.scss */
 .condensed.required::after {
-  content: "(required)";
+  content: "\000A(required)";
+  white-space: pre-line;
   color: red;
   font-size: 0.8em;
 }
 
-/* line 177, ../../sass/screen.scss */
+/* line 182, ../../sass/screen.scss */
 .condensed input[type=text] {
   width: 60%;
+}
+
+/* line 186, ../../sass/screen.scss */
+.hide-when-requirements-are-unsatisfied {
+  color: red;
+  display: none;
+  float: right;
+}
+
+/* line 192, ../../sass/screen.scss */
+.unsatisfied-requirements .hide-when-requirements-are-unsatisfied {
+  display: block;
+}
+
+/* line 196, ../../sass/screen.scss */
+.button {
+  display: inline-block;
+  outline: none;
+  text-align: center;
+  text-decoration: none;
+  padding: 0.5em 2em 0.55em;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.3);
+  -webkit-border-radius: .5em;
+  -moz-border-radius: .5em;
+  border-radius: .5em;
+  -webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+  -moz-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+/* line 210, ../../sass/screen.scss */
+.button:enabled {
+  cursor: pointer;
+}
+
+/* line 213, ../../sass/screen.scss */
+.button:enabled:hover {
+  text-decoration: none;
+}
+
+/* line 216, ../../sass/screen.scss */
+.button:enabled:active {
+  position: relative;
+  top: 1px;
+}
+
+/* line 221, ../../sass/screen.scss */
+.orange {
+  color: #fef4e9;
+  border: solid 1px #da7c0c;
+  background: #f78d1d;
+  background: -webkit-gradient(linear, left top, left bottom, from(#faa51a), to(#f47a20));
+  background: -moz-linear-gradient(top, #faa51a, #f47a20);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#faa51a', endColorstr='#f47a20');
+}
+
+/* line 229, ../../sass/screen.scss */
+.orange:enabled:hover {
+  background: #f47c20;
+  background: -webkit-gradient(linear, left top, left bottom, from(#f88e11), to(#f06015));
+  background: -moz-linear-gradient(top, #f88e11, #f06015);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#f88e11', endColorstr='#f06015');
+}
+
+/* line 235, ../../sass/screen.scss */
+.orange:enabled:active {
+  color: #fcd3a5;
+  background: -webkit-gradient(linear, left top, left bottom, from(#f47a20), to(#faa51a));
+  background: -moz-linear-gradient(top, #f47a20, #faa51a);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#f47a20', endColorstr='#faa51a');
+}
+
+/* line 241, ../../sass/screen.scss */
+.orange:disabled {
+  opacity: .6;
 }

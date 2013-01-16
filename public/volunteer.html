@@ -66,8 +66,8 @@
         like to contribute? Can you sleep with someone who has these skills?</label></p>
 
       <ul class="choices multi-column">
-        <li><label><input type="checkbox" name="entry.1.group/">Metalworking</label></li>
-        <li><label><input type="checkbox" name="entry.1.group/">Woodworking</label></li>
+        <li><label><input type="checkbox" name="entry.1.group">Metalworking</label></li>
+        <li><label><input type="checkbox" name="entry.1.group">Woodworking</label></li>
         <li><label><input type="checkbox" name="entry.1.group"/>Driving/errand running during construction</label></li>
         <li><label><input type="checkbox" name="entry.1.group"/>Mechanics/bus maintenance</label></li>
         <li><label><input type="checkbox" name="entry.1.group"/>Structural design/engineering</label></li>
@@ -129,7 +129,7 @@
     </section>
 
     <section>
-      <header><h3><label for="entry_7">Draw this duck:</label></h3></header>
+      <header><h3><label for="entry_7">Draw this turtle:</label></h3></header>
 
       <p><label for="entry_7"></label></p>
 
@@ -161,17 +161,18 @@
         <input type="text" name="entry.11.single" value="" class="q-short" id="entry_11">
       </section>
 
-      <section class="required condensed">
+      <section class="condensed">
         <header><h3><label for="entry_12">Phone number</label></h3></header>
 
-        <p><label for="entry_12">(or other best way to reach you)</label></p>
+        <p><label for="entry_12">(or facebook url, or twitter handle, or other best way to reach you)</label></p>
 
         <input type="text" name="entry.12.single" value="" class="q-short" id="entry_12">
       </section>
     </section>
 
-    <section>
-      <input type="submit" name="submit">
+    <section id="form-submit">
+      <p class="hide-when-requirements-are-unsatisfied">You haven't filled in some required fields above!</p>
+      <input type="submit" name="submit" class="orange button">
     </section>
 
 <input type="hidden" name="pageNumber">
@@ -210,6 +211,39 @@
       $("input[type=checkbox]", $(this).parent()).first().attr("checked", true);
     });
   });
+
+  var requirements = {};
+  var checkRequired = function() {
+    var allRequirementsSatisfied = true;
+    $.each(requirements, function (key, els) {
+      var unsatisfied;
+      if (key.match(/.group$/)) {
+        unsatisfied = els.every(function (el) {
+          return !el.attr("checked");
+        });
+      } else {
+        var el = els[0];
+        unsatisfied = el.val() == "";
+      }
+      console.log(els, unsatisfied);
+      if (unsatisfied) allRequirementsSatisfied = false;
+    });
+    $("#form-submit input[type=submit]")[0].disabled = !allRequirementsSatisfied;
+    $("#form-submit").toggleClass("unsatisfied-requirements", !allRequirementsSatisfied);
+  };
+
+  $(".required input, .required textarea").each(function () {
+    var el = $(this);
+    if (el.attr("name").match(/\.other_option_$/)) return;
+    var req = requirements[el.attr("name")];
+    if (req == null) {
+      requirements[el.attr("name")] = req = [];
+    }
+    req.push(el);
+    el.change(checkRequired);
+  });
+  console.log(requirements);
+  checkRequired();
 
   (function () {
     var divs = document.getElementById("form").
