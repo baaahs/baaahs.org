@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Get On The BAAAHS!</title>
+
+    <meta name="name" content="BAAAHS!">
+    <meta name="description"
+          content="BAAAHS is the Big-Ass Amazingly Awesome Homosexual Sheep, and he&#39;s making his appearance at Burning Man 2013!">
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans|Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
+
+    <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css"/>
+    <link href="/stylesheets/print.css" media="print" rel="stylesheet" type="text/css"/>
+    <!--[if IE]>
+    <link href="/stylesheets/ie.css" media="screen, projection" rel="stylesheet" type="text/css"/>
+    <![endif]-->
+
+    <script src="/js/vendor/modernizr-2.6.2.min.js"></script>
+    <script src="/js/vendor/jquery-1.9.1.min.js"></script>
+    <script src="/js/vendor/jquery-ui-1.10.2.custom.min.js"></script>
+
+</head>
+<body class="index-page" dir="ltr" itemscope itemtype="http://schema.org/CreativeWork/FormObject">
+<!--[if lt IE 8]>
+<p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade
+    your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to
+    improve your experience.</p>
+<![endif]-->
+
+<article>
+    <header>
+        <hgroup class="logotype">
+            <h1>B<span class="a">AA</span>AHS</h1>
+            <h2>big-ass amazingly awesome homosexual sheep</h2>
+        </hgroup>
+
+    </header>
+
+    <div class="content">
+        <div class="background-gradient"></div>
+
+        <img class="schematic" src="/images/schematic.png"/>
+
+        <div class="news">
+            <p>part mutant vehicle.</p>
+            <p>part mobile disco.</p>
+            <p>part inscrutable social statement.</p>
+
+            <br/>
+            <p>BAAAHS is coming to
+                <br/>Black Rock City, August 2013.</p>
+        </div>
+    </div>
+
+    <div class="polaroid">
+        <img src="/images/bus.jpg" alt="Pearl" />
+    </div>
+    <div class="polaroid">
+        <img src="/images/floorplan.gif" alt="Floorplan" />
+    </div>
+    <div class="polaroid">
+        <img src="/images/cutaways.jpg" alt="Cutaway views" />
+    </div>
+
+    <footer></footer>
+</article>
+
+<script src="/js/plugins.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/polaroid.js"></script>
+
+<script type="text/javascript">
+    $("input[type=checkbox]").each(function() {
+        var el = $(this);
+        if (el.val() != "__option__") {
+            el.val(el.parent().text().trim());
+        } else {
+            el.change(function() {
+                var otherInput = $("textarea", $(this).parent().parent()).first();
+                if ($(this).is(":checked")) {
+                    otherInput.focus();
+                }
+            });
+        }
+    });
+
+    $(".other textarea").each(function () {
+        $(this).click(function () {
+            $("input[type=checkbox]", $(this).parent()).first().attr("checked", true);
+        });
+    });
+
+    var requirements = {};
+    var checkRequired = function() {
+        var allRequirementsSatisfied = true;
+        $.each(requirements, function (key, els) {
+            var unsatisfied;
+            if (key.match(/.group$/)) {
+                unsatisfied = els.every(function (el) {
+                    return !el.attr("checked");
+                });
+            } else {
+                var el = els[0];
+                unsatisfied = el.val() == "";
+            }
+            if (unsatisfied) allRequirementsSatisfied = false;
+        });
+        $("#form-submit input[type=submit]")[0].disabled = !allRequirementsSatisfied;
+        $("#form-submit").toggleClass("unsatisfied-requirements", !allRequirementsSatisfied);
+    };
+
+    $(".required input, .required textarea").each(function () {
+        var el = $(this);
+        if (el.attr("name").match(/\.other_option_$/)) return;
+        var req = requirements[el.attr("name")];
+        if (req == null) {
+            requirements[el.attr("name")] = req = [];
+        }
+        req.push(el);
+        el.change(checkRequired);
+        el.blur(checkRequired); // blur as well as change, workaround for iOS autofill bug
+    });
+    checkRequired();
+
+    (function () {
+        var divs = document.getElementById("form").
+                getElementsByTagName("div");
+        var numDivs = divs.length;
+        for (var j = 0; j < numDivs; j++) {
+            if (divs[j].className == "errorbox-bad") {
+                divs[j].lastChild.firstChild.lastChild.focus();
+                return;
+            }
+        }
+        for (var i = 0; i < numDivs; i++) {
+            var div = divs[i];
+            if (div.className == "form-entry" &&
+                    div.firstChild &&
+                    div.firstChild.className == "q-title") {
+                div.lastChild.focus();
+                return;
+            }
+        }
+    })();
+</script>
+
+<script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-39537345-1', 'baaahs.org');
+    ga('send', 'pageview');
+</script>
+
+</body>
+</html>
