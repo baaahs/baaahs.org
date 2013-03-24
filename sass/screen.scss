@@ -50,6 +50,13 @@ body {
 
 div.content {
   padding: 50px 0px 20px 0px;
+  position: relative;
+}
+
+div.polaroids {
+  position: absolute;
+  top: 20px;
+  left: 600px;
 }
 
 div.background-gradient {
@@ -77,12 +84,24 @@ img.schematic {
 }
 
 div.news {
+  h3 {
+    margin-top: 1.5em;
+    margin-bottom: 0.25em;
+    font-family: "Special Elite";
+    color: #333;
+    text-shadow: 1px 1px rgba(16, 16, 16, .25);
+  }
+  p {
+    font-family: "Special Elite";
+    color: #333;
+    text-shadow: 1px 1px rgba(16, 16, 16, .25);
+  }
   margin-top: 60px;
   margin-left: 30px;
   padding: 1em;
   width: 280px;
   height: 531px;
-  background-color: rgba(255,255,255,.8);
+  background-color: rgba(255,255,255,.3);
 }
 
 
@@ -349,7 +368,7 @@ section.required.condensed h3::after {
 }
 
 .polaroid { width:276px; height:282px; background-image:url("/images/polaroid.png"); position:absolute; }
-.polaroid img { width:251px; height:206px; margin:19px 0 0 11px; }
+.polaroid img { width:251px; height:206px; margin:19px 0 0 12.5px; }
 .polaroid p { text-align:center; font-family:Georgia,serif; font-size:20px; color:#2E2E2E; margin-top:15px; }
 //.polaroid { width:368px; height:376px; background-image:url("/images/polaroid.png"); position:absolute; }
 //.polaroid img { width:335px; height:275px; margin:25px 0 0 15px; }

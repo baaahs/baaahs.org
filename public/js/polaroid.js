@@ -23,11 +23,13 @@
 			var wih = window.innerHeight;	
 		}
 		
-		var cssObj = { 'left' : 600 + Math.random()*100,
-			'top' : 400 + Math.random()*100,
+		var cssObj = { 'left' : 0 + Math.random()*100,
+			'top' : 0 + Math.random()*100,
 			'-webkit-transform' : 'rotate('+ rotDegrees +'deg)',  // safari only
 			'transform' : 'rotate('+ rotDegrees +'deg)' }; // added in case CSS3 is standard
 		$(this).css(cssObj);
+
+        $(this).fadeIn(1000);
 	});
 	
 	// Set the Z-Index (used to display images on top while dragging)
