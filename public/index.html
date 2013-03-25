@@ -42,13 +42,11 @@
     <div class="content">
         <div class="background-gradient"></div>
 
-        <img class="schematic" src="/images/schematic.png"/>
-
         <div class="news">
             <h3>BAAAHS is:</h3>
-            <p>- a penetrable social statement.</p>
             <p>- a mutant vehicle.</p>
             <p>- a mobile disco.</p>
+            <p>- a penetrable social statement.</p>
 
             <h3>Debut:</h3>
             <p>Black Rock City, August 2013.</p>
@@ -65,13 +63,13 @@
         </div>
 
         <div class="polaroids">
-            <div class="polaroid">
+            <div class="polaroid fade-in">
                 <img src="/images/bus.jpg" alt="Pearl" />
             </div>
-            <div class="polaroid">
+            <div class="polaroid fade-in">
                 <img src="/images/floorplan.gif" alt="Floorplan" />
             </div>
-            <div class="polaroid">
+            <div class="polaroid fade-in">
                 <img src="/images/cutaways.jpg" alt="Cutaway views" />
             </div>
         </div>
@@ -83,81 +81,6 @@
 <script src="/js/plugins.js"></script>
 <script src="/js/main.js"></script>
 <script src="/js/polaroid.js"></script>
-
-<script type="text/javascript">
-    $("input[type=checkbox]").each(function() {
-        var el = $(this);
-        if (el.val() != "__option__") {
-            el.val(el.parent().text().trim());
-        } else {
-            el.change(function() {
-                var otherInput = $("textarea", $(this).parent().parent()).first();
-                if ($(this).is(":checked")) {
-                    otherInput.focus();
-                }
-            });
-        }
-    });
-
-    $(".other textarea").each(function () {
-        $(this).click(function () {
-            $("input[type=checkbox]", $(this).parent()).first().attr("checked", true);
-        });
-    });
-
-    var requirements = {};
-    var checkRequired = function() {
-        var allRequirementsSatisfied = true;
-        $.each(requirements, function (key, els) {
-            var unsatisfied;
-            if (key.match(/.group$/)) {
-                unsatisfied = els.every(function (el) {
-                    return !el.attr("checked");
-                });
-            } else {
-                var el = els[0];
-                unsatisfied = el.val() == "";
-            }
-            if (unsatisfied) allRequirementsSatisfied = false;
-        });
-        $("#form-submit input[type=submit]")[0].disabled = !allRequirementsSatisfied;
-        $("#form-submit").toggleClass("unsatisfied-requirements", !allRequirementsSatisfied);
-    };
-
-    $(".required input, .required textarea").each(function () {
-        var el = $(this);
-        if (el.attr("name").match(/\.other_option_$/)) return;
-        var req = requirements[el.attr("name")];
-        if (req == null) {
-            requirements[el.attr("name")] = req = [];
-        }
-        req.push(el);
-        el.change(checkRequired);
-        el.blur(checkRequired); // blur as well as change, workaround for iOS autofill bug
-    });
-    checkRequired();
-
-    (function () {
-        var divs = document.getElementById("form").
-                getElementsByTagName("div");
-        var numDivs = divs.length;
-        for (var j = 0; j < numDivs; j++) {
-            if (divs[j].className == "errorbox-bad") {
-                divs[j].lastChild.firstChild.lastChild.focus();
-                return;
-            }
-        }
-        for (var i = 0; i < numDivs; i++) {
-            var div = divs[i];
-            if (div.className == "form-entry" &&
-                    div.firstChild &&
-                    div.firstChild.className == "q-title") {
-                div.lastChild.focus();
-                return;
-            }
-        }
-    })();
-</script>
 
 <script>
     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){

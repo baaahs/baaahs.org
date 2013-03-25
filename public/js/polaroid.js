@@ -7,20 +7,10 @@
 //{
 	// When everything has loaded, place all polaroids on a random position	
 	$(".polaroid").each(function (i) {
-		var tempVal = Math.round(Math.random());
-		if(tempVal == 1) {
+        if(Math.round(Math.random()) == 1) {
 			var rotDegrees = randomXToY(330, 360); // rotate left
 		} else {
 			var rotDegrees = randomXToY(0, 30); // rotate right
-		}
-		
-		// Internet Explorer doesn't have the "window.innerWidth" and "window.innerHeight" properties
-		if(window.innerWidth == undefined) { 
-			var wiw = 1000;
-			var wih = 700;
-		} else {
-			var wiw = window.innerWidth;
-			var wih = window.innerHeight;	
 		}
 		
 		var cssObj = { 'left' : 0 + Math.random()*100,
@@ -28,9 +18,12 @@
 			'-webkit-transform' : 'rotate('+ rotDegrees +'deg)',  // safari only
 			'transform' : 'rotate('+ rotDegrees +'deg)' }; // added in case CSS3 is standard
 		$(this).css(cssObj);
-
-        $(this).fadeIn(1000);
 	});
+
+    $(".fade-in").each(function(i) {
+        $(this).delay(i * 500);
+        $(this).fadeIn(500);
+    });
 	
 	// Set the Z-Index (used to display images on top while dragging)
 	var zindexnr = 1;
@@ -56,8 +49,8 @@
 		start: function(event, ui) {
 			dragging = true;
 			zindexnr++;
-			var cssObj = { 'box-shadow' : '#888 5px 10px 10px', // added in case CSS3 is standard
-				'-webkit-box-shadow' : '#888 5px 10px 10px', // safari only
+			var cssObj = { 'box-shadow' : '5px 10px 10px rgba(0,0,0,.4)', // added in case CSS3 is standard
+				'-webkit-box-shadow' : '5px 10px 10px rgba(0,0,0,.4)', // safari only
 				'margin-left' : '-10px',
 				'margin-top' : '-10px',
 				'z-index' : zindexnr };
