@@ -110,6 +110,8 @@ div.news {
     color: #333;
     text-shadow: 1px 1px rgba(16, 16, 16, .25);
   }
+
+  position: relative;
   margin-top: 60px;
   margin-left: 30px;
   padding: 1em;
@@ -123,6 +125,24 @@ div.news {
   }
 }
 
+.tape {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  opacity: .6;
+}
+
+.top-left.tape {
+  top: -3em;
+  left: -3em;
+  background: url("/images/tape.png") no-repeat;
+}
+
+.bottom-right.tape {
+  bottom: -3em;
+  right: -3em;
+  background: url("/images/tape.png") bottom right no-repeat;
+}
 
 .volunteer-page {
   //background: url(http://cunnan.sca.org.au/upload/b/ba/Sheep.jpg);
