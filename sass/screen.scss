@@ -45,6 +45,13 @@ body {
     background-attachment: fixed;
     border: 1px solid #aaa;
     padding: 0;
+
+    @media #{$information-phone} {
+      margin: 0;
+      width: auto;
+      max-width: inherit;
+      min-width: inherit;
+    }
   }
 }
 
@@ -52,12 +59,22 @@ div.content {
   padding: 50px 0px 20px 0px;
   position: relative;
   background: url(/images/schematic.png) 0 50px no-repeat;
+
+  @media #{$information-phone} {
+    background-size: contain;
+  }
 }
 
 div.polaroids {
   position: absolute;
   top: 20px;
   left: 600px;
+
+  @media #{$information-phone} {
+    position: inherit;
+    top: inherit;
+    left: inherit;
+  }
 }
 
 div.background-gradient {
@@ -99,14 +116,16 @@ div.news {
   width: 280px;
   min-height: 531px;
   background-color: rgba(255,255,255,.3);
+
+  @media #{$information-phone} {
+    margin: 1em;
+    width: 80%;
+  }
 }
 
 
 .volunteer-page {
   //background: url(http://cunnan.sca.org.au/upload/b/ba/Sheep.jpg);
-}
-
-hgroup.logotype {
 }
 
 .logotype {
@@ -127,6 +146,10 @@ hgroup.logotype {
     .a {
       letter-spacing: 0.1em;
     }
+
+    @media #{$information-phone} {
+      font-size: 60pt;
+    }
   }
 
   h2 {
@@ -138,6 +161,10 @@ hgroup.logotype {
     padding: 0;
     margin: auto;
     text-shadow: 3px 2px #000;
+
+    @media #{$information-phone} {
+      font-size: 9pt;
+    }
   }
 }
 
@@ -366,7 +393,10 @@ section.required.condensed h3::after {
 
 .fade-in {
   display: none;
-  //opacity: 0;
+
+  @media #{$information-phone} {
+    display: block;
+  }
 }
 
 .polaroid {
@@ -376,6 +406,12 @@ section.required.condensed h3::after {
   position: absolute;
   box-shadow: 10px 10px 5px rgba(0,0,0,.25);
   -webkit-box-shadow: 10px 10px 5px rgba(0,0,0,.25);
+
+
+  @media #{$information-phone} {
+    position: inherit;
+    margin: 1em;
+  }
 }
 
 .polaroid img {

@@ -5,6 +5,7 @@
 //google.load("jqueryui", "1.7.0");
 //google.setOnLoadCallback(function()
 //{
+if (window.innerWidth > 640) {
 	// When everything has loaded, place all polaroids on a random position	
 	$(".polaroid").each(function (i) {
         if(Math.round(Math.random()) == 1) {
@@ -80,5 +81,5 @@
 		var randVal = minVal+(Math.random()*(maxVal-minVal));
 		return typeof floatVal=='undefined'?Math.round(randVal):randVal.toFixed(floatVal);
 	}
-	
+}
 //});
