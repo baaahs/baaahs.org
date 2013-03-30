@@ -242,6 +242,18 @@
     req.push(el);
     el.change(checkRequired);
     el.blur(checkRequired); // blur as well as change, workaround for iOS autofill bug
+
+    if (el.is(":text") || el.is("textarea")) {
+      el.keyup(function() {
+        var el = $(this);
+        var wasFilled = el.prop("wasFilled");
+        var isFilled = el.val() != "";
+        if (wasFilled != isFilled) {
+          el.prop("wasFilled", isFilled);
+          checkRequired();
+        }
+      });
+    }
   });
   checkRequired();
 
