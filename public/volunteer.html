@@ -209,7 +209,7 @@
 
   $(".other textarea").each(function () {
     $(this).click(function () {
-      $("input[type=checkbox]", $(this).parent()).first().attr("checked", true);
+      $("input[type=checkbox]", $(this).parent()).first().prop("checked", true);
     });
   });
 
@@ -220,7 +220,7 @@
       var unsatisfied;
       if (key.match(/.group$/)) {
         unsatisfied = els.every(function (el) {
-          return !el.attr("checked");
+          return !el.prop("checked");
         });
       } else {
         var el = els[0];
