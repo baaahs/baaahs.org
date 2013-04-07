@@ -8,7 +8,7 @@
 $information-phone: "only screen and (max-device-width : 640px)";
 
 body {
-  font-family: Candara, Helvetica, Arial, sans-serif;
+  font-family: "Noto Sans", sans-serif;
   line-height: 1.5em;
   font-size: 15px;
   background: #181818;
@@ -36,11 +36,10 @@ a:hover {
   color: #eee;
 }
 
-.index-page {
-  font-family: "Open Sans";
-
-  article {
+body.blueprint {
+  div#page {
     header {
+      font-family: "Open Sans";
       background-color: rgba(0, 0, 0, 0.6);
       margin: 0 auto 0 auto;
       padding: 0;
@@ -139,6 +138,17 @@ div.news {
   }
 }
 
+article {
+  background-color: rgba(255,255,255,.3);
+  margin: 1.5em;
+  padding: 1em;
+}
+
+.question {
+  font-weight: bold;
+  font-style: italic;
+}
+
 .tape {
   position: absolute;
   width: 161px;
@@ -162,7 +172,7 @@ div.news {
   //background: url(http://cunnan.sca.org.au/upload/b/ba/Sheep.jpg);
 }
 
-.logotype {
+hgroup.logotype {
   position: relative;
   padding: 20px;
   text-align: center;
@@ -206,7 +216,7 @@ i {
   font-style: italic;
 }
 
-article {
+div#page {
   background-color: white;
   max-width: 600px;
   min-width: 300px;
