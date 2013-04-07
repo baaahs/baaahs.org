@@ -108,8 +108,8 @@ div.background-gradient {
 
 div.news {
   h3 {
-    margin-top: 1.5em;
-    margin-bottom: 0.25em;
+    margin-top: 1em;
+    margin-bottom: 0.125em;
     font-family: "Special Elite";
     color: #333;
     text-shadow: 1px 1px rgba(16, 16, 16, .25);
@@ -120,8 +120,12 @@ div.news {
     text-shadow: 1px 1px rgba(16, 16, 16, .25);
   }
 
+  p + p {
+    margin-top: 0.5em;
+  }
+
   position: relative;
-  margin-top: 60px;
+  margin-top: -20px;
   margin-left: 30px;
   padding: 1em;
   width: 280px;
@@ -130,6 +134,7 @@ div.news {
 
   @media #{$information-phone} {
     margin: 1em;
+    margin-top: -1em;
     width: 80%;
   }
 }

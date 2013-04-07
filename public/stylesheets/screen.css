@@ -175,7 +175,7 @@ div.background-gradient {
 /* line 109, ../../sass/screen.scss */
 div.news {
   position: relative;
-  margin-top: 60px;
+  margin-top: -20px;
   margin-left: 30px;
   padding: 1em;
   width: 280px;
@@ -184,8 +184,8 @@ div.news {
 }
 /* line 110, ../../sass/screen.scss */
 div.news h3 {
-  margin-top: 1.5em;
-  margin-bottom: 0.25em;
+  margin-top: 1em;
+  margin-bottom: 0.125em;
   font-family: "Special Elite";
   color: #333;
   text-shadow: 1px 1px rgba(16, 16, 16, 0.25);
@@ -196,15 +196,20 @@ div.news p {
   color: #333;
   text-shadow: 1px 1px rgba(16, 16, 16, 0.25);
 }
+/* line 123, ../../sass/screen.scss */
+div.news p + p {
+  margin-top: 0.5em;
+}
 @media only screen and (max-device-width: 640px) {
   /* line 109, ../../sass/screen.scss */
   div.news {
     margin: 1em;
+    margin-top: -1em;
     width: 80%;
   }
 }
 
-/* line 137, ../../sass/screen.scss */
+/* line 142, ../../sass/screen.scss */
 .tape {
   position: absolute;
   width: 161px;
@@ -212,28 +217,28 @@ div.news p {
   opacity: .6;
 }
 
-/* line 144, ../../sass/screen.scss */
+/* line 149, ../../sass/screen.scss */
 .top-left.tape {
   top: -3em;
   left: -3em;
   background: url("/images/tape.png") no-repeat;
 }
 
-/* line 150, ../../sass/screen.scss */
+/* line 155, ../../sass/screen.scss */
 .bottom-right.tape {
   bottom: -3em;
   right: -3em;
   background: url("/images/tape.png") bottom right no-repeat;
 }
 
-/* line 160, ../../sass/screen.scss */
+/* line 165, ../../sass/screen.scss */
 .logotype {
   position: relative;
   padding: 20px;
   text-align: center;
   color: #eee;
 }
-/* line 165, ../../sass/screen.scss */
+/* line 170, ../../sass/screen.scss */
 .logotype h1 {
   font-family: "Open Sans Condensed", "Futura Condensed Medium", "Futura Condensed", Futura;
   font-size: 96pt;
@@ -245,17 +250,17 @@ div.news p {
   margin-right: auto;
   text-shadow: 3px 2px #000;
 }
-/* line 175, ../../sass/screen.scss */
+/* line 180, ../../sass/screen.scss */
 .logotype h1 .a {
   letter-spacing: 0.1em;
 }
 @media only screen and (max-device-width: 640px) {
-  /* line 165, ../../sass/screen.scss */
+  /* line 170, ../../sass/screen.scss */
   .logotype h1 {
     font-size: 60pt;
   }
 }
-/* line 184, ../../sass/screen.scss */
+/* line 189, ../../sass/screen.scss */
 .logotype h2 {
   font-family: "Open Sans", "Futura Medium", Futura;
   top: -10px;
@@ -267,18 +272,18 @@ div.news p {
   text-shadow: 3px 2px #000;
 }
 @media only screen and (max-device-width: 640px) {
-  /* line 184, ../../sass/screen.scss */
+  /* line 189, ../../sass/screen.scss */
   .logotype h2 {
     font-size: 9pt;
   }
 }
 
-/* line 200, ../../sass/screen.scss */
+/* line 205, ../../sass/screen.scss */
 i {
   font-style: italic;
 }
 
-/* line 204, ../../sass/screen.scss */
+/* line 209, ../../sass/screen.scss */
 article {
   background-color: white;
   max-width: 600px;
@@ -290,7 +295,7 @@ article {
   box-shadow: 0 0 100px;
 }
 @media only screen and (max-device-width: 640px) {
-  /* line 204, ../../sass/screen.scss */
+  /* line 209, ../../sass/screen.scss */
   article {
     padding: 1em;
     min-width: inherit;
@@ -299,7 +304,7 @@ article {
   }
 }
 
-/* line 222, ../../sass/screen.scss */
+/* line 227, ../../sass/screen.scss */
 h1, h2, h3, h4, h5, h6 {
   font-weight: bold;
   padding-top: 0.5em;
@@ -307,57 +312,57 @@ h1, h2, h3, h4, h5, h6 {
   line-height: 1.25em;
 }
 
-/* line 229, ../../sass/screen.scss */
+/* line 234, ../../sass/screen.scss */
 h1 {
   font-size: 200%;
 }
 @media only screen and (max-device-width: 640px) {
-  /* line 229, ../../sass/screen.scss */
+  /* line 234, ../../sass/screen.scss */
   h1 {
     font-size: 150%;
   }
 }
 
-/* line 237, ../../sass/screen.scss */
+/* line 242, ../../sass/screen.scss */
 h2 {
   font-size: 130%;
   font-style: italic;
 }
 @media only screen and (max-device-width: 640px) {
-  /* line 237, ../../sass/screen.scss */
+  /* line 242, ../../sass/screen.scss */
   h2 {
     font-size: 110%;
   }
 }
 
-/* line 246, ../../sass/screen.scss */
+/* line 251, ../../sass/screen.scss */
 h3 {
   font-size: 125%;
 }
 
-/* line 250, ../../sass/screen.scss */
+/* line 255, ../../sass/screen.scss */
 section {
   margin-top: 2em;
 }
 
-/* line 254, ../../sass/screen.scss */
+/* line 259, ../../sass/screen.scss */
 p + p {
   margin-top: 1em;
 }
 
-/* line 258, ../../sass/screen.scss */
+/* line 263, ../../sass/screen.scss */
 p {
   text-align: justify;
 }
 
 @media (min-width: 800px) {
-  /* line 262, ../../sass/screen.scss */
+  /* line 267, ../../sass/screen.scss */
   .multi-column {
     -webkit-column-count: 2;
   }
 }
 
-/* line 268, ../../sass/screen.scss */
+/* line 273, ../../sass/screen.scss */
 section.required h3::after {
   content: "(required)";
   padding-left: 1em;
@@ -365,7 +370,7 @@ section.required h3::after {
   font-size: 0.6em;
 }
 
-/* line 275, ../../sass/screen.scss */
+/* line 280, ../../sass/screen.scss */
 div.form-container {
   padding: 15px;
   background-color: #f7f7f7;
@@ -376,12 +381,12 @@ div.form-container {
   margin: 0 auto;
 }
 
-/* line 286, ../../sass/screen.scss */
+/* line 291, ../../sass/screen.scss */
 input.q-other {
   width: 200px;
 }
 
-/* line 290, ../../sass/screen.scss */
+/* line 295, ../../sass/screen.scss */
 textarea {
   display: block;
   width: 90%;
@@ -392,51 +397,51 @@ textarea {
 }
 
 @media only screen and (max-device-width: 640px) {
-  /* line 299, ../../sass/screen.scss */
+  /* line 304, ../../sass/screen.scss */
   textarea, input[type=text] {
     width: 100%;
     font-size: 120%;
   }
 }
 
-/* line 306, ../../sass/screen.scss */
+/* line 311, ../../sass/screen.scss */
 input[type=text] {
   width: 40%;
 }
 
-/* line 310, ../../sass/screen.scss */
+/* line 315, ../../sass/screen.scss */
 .other textarea {
   height: 4em;
 }
 
-/* line 314, ../../sass/screen.scss */
+/* line 319, ../../sass/screen.scss */
 input[type=submit] {
   font-size: 110%;
   font-weight: bold;
 }
 
-/* line 319, ../../sass/screen.scss */
+/* line 324, ../../sass/screen.scss */
 section.condensed {
   text-align: right;
 }
 
-/* line 323, ../../sass/screen.scss */
+/* line 328, ../../sass/screen.scss */
 .condensed header {
   float: left;
 }
 
-/* line 329, ../../sass/screen.scss */
+/* line 334, ../../sass/screen.scss */
 section.required.condensed h3::after {
   content: "";
 }
 
-/* line 333, ../../sass/screen.scss */
+/* line 338, ../../sass/screen.scss */
 .condensed h3 {
   padding: 0;
   padding-right: 1em;
 }
 
-/* line 338, ../../sass/screen.scss */
+/* line 343, ../../sass/screen.scss */
 .condensed.required::after {
   content: "\000A(required)";
   white-space: pre-line;
@@ -444,35 +449,35 @@ section.required.condensed h3::after {
   font-size: 0.8em;
 }
 
-/* line 345, ../../sass/screen.scss */
+/* line 350, ../../sass/screen.scss */
 .condensed input[type=text] {
   width: 60%;
 }
 
-/* line 349, ../../sass/screen.scss */
+/* line 354, ../../sass/screen.scss */
 .show-when-requirements-are-satisfied {
   display: block;
   float: right;
 }
 
-/* line 354, ../../sass/screen.scss */
+/* line 359, ../../sass/screen.scss */
 .hide-when-requirements-are-satisfied {
   color: red;
   display: none;
   float: right;
 }
 
-/* line 360, ../../sass/screen.scss */
+/* line 365, ../../sass/screen.scss */
 .unsatisfied-requirements .hide-when-requirements-are-satisfied {
   display: block;
 }
 
-/* line 364, ../../sass/screen.scss */
+/* line 369, ../../sass/screen.scss */
 .unsatisfied-requirements .show-when-requirements-are-satisfied {
   display: none;
 }
 
-/* line 368, ../../sass/screen.scss */
+/* line 373, ../../sass/screen.scss */
 .button {
   display: inline-block;
   outline: none;
@@ -488,23 +493,23 @@ section.required.condensed h3::after {
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
 }
 
-/* line 383, ../../sass/screen.scss */
+/* line 388, ../../sass/screen.scss */
 .button:enabled {
   cursor: pointer;
 }
 
-/* line 387, ../../sass/screen.scss */
+/* line 392, ../../sass/screen.scss */
 .button:enabled:hover {
   text-decoration: none;
 }
 
-/* line 391, ../../sass/screen.scss */
+/* line 396, ../../sass/screen.scss */
 .button:enabled:active {
   position: relative;
   top: 1px;
 }
 
-/* line 396, ../../sass/screen.scss */
+/* line 401, ../../sass/screen.scss */
 .orange {
   color: #fef4e9;
   border: solid 1px #da7c0c;
@@ -514,7 +519,7 @@ section.required.condensed h3::after {
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#faa51a', endColorstr='#f47a20');
 }
 
-/* line 405, ../../sass/screen.scss */
+/* line 410, ../../sass/screen.scss */
 .orange:enabled:hover {
   background: #f47c20;
   background: -webkit-gradient(linear, left top, left bottom, from(#f88e11), to(#f06015));
@@ -522,7 +527,7 @@ section.required.condensed h3::after {
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#f88e11', endColorstr='#f06015');
 }
 
-/* line 412, ../../sass/screen.scss */
+/* line 417, ../../sass/screen.scss */
 .orange:enabled:active {
   color: #fcd3a5;
   background: -webkit-gradient(linear, left top, left bottom, from(#f47a20), to(#faa51a));
@@ -530,23 +535,23 @@ section.required.condensed h3::after {
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#f47a20', endColorstr='#faa51a');
 }
 
-/* line 419, ../../sass/screen.scss */
+/* line 424, ../../sass/screen.scss */
 .orange:disabled {
   opacity: .6;
 }
 
-/* line 423, ../../sass/screen.scss */
+/* line 428, ../../sass/screen.scss */
 .fade-in {
   display: none;
 }
 @media only screen and (max-device-width: 640px) {
-  /* line 423, ../../sass/screen.scss */
+  /* line 428, ../../sass/screen.scss */
   .fade-in {
     display: block;
   }
 }
 
-/* line 431, ../../sass/screen.scss */
+/* line 436, ../../sass/screen.scss */
 .polaroid {
   width: 276px;
   height: 282px;
@@ -556,21 +561,21 @@ section.required.condensed h3::after {
   -webkit-box-shadow: 10px 10px 5px rgba(0, 0, 0, 0.25);
 }
 @media only screen and (max-device-width: 640px) {
-  /* line 431, ../../sass/screen.scss */
+  /* line 436, ../../sass/screen.scss */
   .polaroid {
     position: inherit;
     margin: 1em;
   }
 }
 
-/* line 446, ../../sass/screen.scss */
+/* line 451, ../../sass/screen.scss */
 .polaroid img {
   width: 251px;
   height: 206px;
   margin: 19px 0 0 12.5px;
 }
 
-/* line 452, ../../sass/screen.scss */
+/* line 457, ../../sass/screen.scss */
 .polaroid p {
   text-align: center;
   font-family: Georgia, serif;
