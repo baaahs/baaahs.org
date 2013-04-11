@@ -210,6 +210,11 @@ hgroup.logotype {
       font-size: 9pt;
     }
   }
+
+  a, a:hover, a:active, a:visited {
+    text-decoration: none;
+    color: #eee;
+  }
 }
 
 i {
