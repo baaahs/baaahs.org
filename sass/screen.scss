@@ -283,6 +283,11 @@ p {
   text-align: justify;
 }
 
+ul li {
+  list-style-type: circle;
+  margin-left: 1em;
+}
+
 .multi-column {
   @media (min-width: 800px) {
     -webkit-column-count: 2;
