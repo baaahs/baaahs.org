@@ -5,7 +5,8 @@ require "sinatra/reloader" if development?
 set :bind, '0.0.0.0'
 
 get '/' do
-    File.read(File.join('public', 'index.html'))
+  redirect "/volunteer2015.html"
+  # File.read(File.join('public', 'index.html'))
 end
 
 get '/camp' do
@@ -13,7 +14,7 @@ get '/camp' do
 end
 
 get '/camp.html' do
-    redirect "/camp"
+  redirect "/camp"
 end
 
 #get '/camp' do
@@ -21,5 +22,5 @@ end
 #end
 
 not_found do
-  'This sheep intentionally left blank.'
+  File.read(File.join('public', '404.html'))
 end
