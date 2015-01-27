@@ -1,5 +1,6 @@
 require 'sinatra'
 require "sinatra/compass"
+require "sinatra/reloader" if development?
 
 set :bind, '0.0.0.0'
 

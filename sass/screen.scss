@@ -170,6 +170,17 @@ article {
 
 .volunteer-page {
   //background: url(http://cunnan.sca.org.au/upload/b/ba/Sheep.jpg);
+
+  li {
+    margin-left: .25em;
+    list-style-type: none;
+    display: inline-block;
+    width: 100%;
+  }
+
+  li li {
+    display: block;
+  }
 }
 
 hgroup.logotype {
@@ -291,6 +302,8 @@ ul li {
 .multi-column {
   @media (min-width: 800px) {
     -webkit-column-count: 2;
+    -moz-column-count: 2;
+    column-count: 2;
   }
 }
 

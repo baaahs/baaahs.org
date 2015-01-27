@@ -4,3 +4,4 @@ gem 'thin'
 
 gem 'sinatra-advanced-routes'
 gem 'sinatra-compass'
+gem 'sinatra-contrib'
