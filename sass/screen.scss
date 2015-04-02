@@ -69,7 +69,8 @@ div.content {
   background: url(/images/cruising2014.jpg) 0 50px no-repeat;
 
   @media #{$information-phone} {
-    background-size: contain;
+    background-size: auto;
+    background-position-x: -200px;
   }
 }
 
@@ -203,7 +204,7 @@ hgroup.logotype {
     }
 
     @media #{$information-phone} {
-      font-size: 60pt;
+      font-size: 40pt;
     }
   }
 
@@ -232,6 +233,11 @@ hgroup.logotype {
     width: 150px;
     height: 150px;
     margin-top: -1%;
+
+    @media #{$information-phone} {
+      width: 80px;
+      height: 80px;
+    }
   }
 }
 
