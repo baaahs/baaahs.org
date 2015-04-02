@@ -28,8 +28,8 @@ body {
 }
 
 a:link, a:visited {
-  color: #d7d7d7;
-  text-shadow: 1px 1px #555;
+  color: #333;
+  text-shadow: 1px 1px rgba(16, 16, 16, .25);
 }
 
 a:hover {
@@ -66,7 +66,7 @@ body.blueprint {
 div.content {
   padding: 50px 0px 20px 0px;
   position: relative;
-  background: url(/images/schematic.png) 0 50px no-repeat;
+  background: url(/images/cruising2014.jpg) 0 50px no-repeat;
 
   @media #{$information-phone} {
     background-size: contain;
@@ -107,7 +107,7 @@ div.background-gradient {
 
 div.news {
   h3 {
-    margin-top: 1em;
+    margin-top: 0.75em;
     margin-bottom: 0.125em;
     font-family: "Special Elite";
     color: #333;
@@ -225,6 +225,13 @@ hgroup.logotype {
   a, a:hover, a:active, a:visited {
     text-decoration: none;
     color: #eee;
+  }
+
+  img {
+    float: left;
+    width: 150px;
+    height: 150px;
+    margin-top: -1%;
   }
 }
 
@@ -497,4 +504,8 @@ section.required.condensed h3::after {
   font-size: 20px;
   color: #2E2E2E;
   margin-top: 15px;
+}
+
+.fb-like-box {
+  margin-top: -15px;
 }

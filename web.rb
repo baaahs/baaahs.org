@@ -5,8 +5,8 @@ require "sinatra/reloader" if development?
 set :bind, '0.0.0.0'
 
 get '/' do
-  redirect "/volunteer2015.html"
-  # File.read(File.join('public', 'index.html'))
+  # redirect "/volunteer2015.html"
+  File.read(File.join('public', 'index.html'))
 end
 
 get '/camp' do
