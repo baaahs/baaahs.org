@@ -143,6 +143,10 @@ article {
   background-color: rgba(255,255,255,.3);
   margin: 1.5em;
   padding: 1em;
+
+  .big-image {
+    max-width: 100%;
+  }
 }
 
 .question {
@@ -483,6 +487,25 @@ section.required.condensed h3::after {
   }
 }
 
+article .polaroid {
+  width: inherit;
+  height: inherit;
+  background: #eeeeee;
+  position: inherit;
+
+  max-width: 100%;
+  padding: 2em;
+  margin-top: 1em;
+  margin-bottom: 1em;
+
+  img {
+    width: inherit;
+    height: inherit;
+    max-width: 100%;
+    margin: inherit;
+  }
+}
+
 .polaroid {
   width: 276px;
   height: 282px;
@@ -496,20 +519,20 @@ section.required.condensed h3::after {
     position: inherit;
     margin: 1em;
   }
-}
 
-.polaroid img {
-  width: 251px;
-  height: 206px;
-  margin: 19px 0 0 12.5px;
-}
+  img {
+    width: 251px;
+    height: 206px;
+    margin: 19px 0 0 12.5px;
+  }
 
-.polaroid p {
-  text-align: center;
-  font-family: Georgia, serif;
-  font-size: 20px;
-  color: #2E2E2E;
-  margin-top: 15px;
+  p {
+    text-align: center;
+//    font-family: Georgia, serif;
+    font-size: 150%;
+    color: #2E2E2E;
+    margin-top: 15px;
+  }
 }
 
 .fb-like-box {
