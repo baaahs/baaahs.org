@@ -17,6 +17,10 @@ get '/camp.html' do
   redirect "/camp"
 end
 
+get '/shifts' do
+  redirect "http://www.volunteerspot.com/login/entry/375755452038"
+end
+
 #get '/camp' do
 #    redirect "http://baaahs.wufoo.com/forms/baaahs-on-playa-questionnaire/"
 #end
