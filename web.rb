@@ -25,6 +25,10 @@ end
 #    redirect "http://baaahs.wufoo.com/forms/baaahs-on-playa-questionnaire/"
 #end
 
+get '/name' do
+  File.read(File.join('public', 'name.html'))
+end
+
 not_found do
   File.read(File.join('public', '404.html'))
 end
