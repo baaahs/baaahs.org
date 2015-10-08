@@ -1,0 +1,160 @@
+$information-phone: "only screen and (max-device-width : 640px)";
+
+a:link, a:visited {
+  color: #333;
+  text-shadow: 1px 1px rgba(16, 16, 16, .25);
+}
+
+a:hover {
+  color: #eee;
+}
+
+hgroup.logotype {
+  position: relative;
+  padding: 20px;
+  text-align: center;
+  color: #eee;
+
+  @media #{$information-phone} {
+    padding: 0px;
+  }
+
+  h1 {
+    font-family: "Open Sans Condensed", "Futura Condensed Medium", "Futura Condensed", Futura;
+    font-size: 108pt;
+    font-style: normal;
+    line-height: 80%;
+    padding: 0;
+    margin: 0;
+    margin-left: auto;
+    margin-right: auto;
+    text-shadow: 3px 2px #000;
+    .a {
+      letter-spacing: 0.1em;
+    }
+
+    @media #{$information-phone} {
+      font-size: 48pt;
+    }
+  }
+
+  h2 {
+    font-family: "Open Sans", "Futura Medium", Futura;
+    top: -10px;
+    font-size: 14pt;
+    font-style: normal;
+    font-weight: lighter;
+    padding: 0;
+    margin: auto;
+    text-shadow: 3px 2px #000;
+
+    @media #{$information-phone} {
+      font-size: 9pt;
+    }
+  }
+
+  a, a:hover, a:active, a:visited {
+    text-decoration: none;
+    color: #eee;
+  }
+
+  img.logo {
+    float: left;
+
+    @media #{$information-phone} {
+      width: 25%;
+      height: 25%;
+    }
+  }
+}
+
+i {
+  font-style: italic;
+}
+
+b {
+  font-weight: 900;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: bold;
+  padding-top: 0.5em;
+  padding-bottom: 0.5em;
+  line-height: 1.25em;
+}
+
+h1 {
+  font-size: 200%;
+
+  @media #{$information-phone} {
+    font-size: 150%;
+  }
+}
+
+h2 {
+  font-size: 130%;
+  font-style: italic;
+
+  @media #{$information-phone} {
+    font-size: 110%;
+  }
+}
+
+h3 {
+  font-size: 125%;
+}
+
+section {
+  margin-top: 2em;
+}
+
+p + p {
+  margin-top: 1em;
+}
+
+p {
+  text-align: justify;
+}
+
+ol {
+  padding: 1em 0em 1em 2em;
+  list-style: decimal;
+}
+
+ul li {
+  list-style-type: circle;
+  margin-left: 1em;
+}
+
+sup {
+  vertical-align: super;
+  font-size: smaller;
+}
+
+sub {
+  vertical-align: sub;
+  font-size: smaller;
+}
+
+section {
+  position: relative;
+  clear: right;
+}
+
+#contents > section:not(:first-child) {
+  border-top: 1px solid black;
+  page-break-before: always;
+}
+
+.parts-needed {
+  float: right;
+  top: 0;
+  right: 0;
+  width: 25%;
+  background-color: #eee;
+  padding: .25em 1em .5em 1em;
+  margin: 0 0 .5em 1em;
+  font-size: .9em;
+  border: 1px solid black;
+}
+

@@ -8,13 +8,12 @@ get '/shifts' do
   redirect "http://www.volunteerspot.com/login/entry/375755452038"
 end
 
-get '/*' do |file|
-  puts "#{file} without html"
-  File.read(File.join('public', "#{file}.html"))
-end
-
 get '/' do
   File.read(File.join('public', 'index.html'))
+end
+
+get '/*' do |file|
+  File.read(File.join('public', "#{file}.html"))
 end
 
 not_found do

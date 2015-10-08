@@ -15,7 +15,7 @@ body {
   text-rendering: optimizeLegibility;
 
   @media #{$information-phone} {
-    font-size: 14px;
+    font-size: 12px;
 
     background-image: linear-gradient(bottom, rgb(29, 42, 84) 50%, rgb(16, 24, 48) 86%);
     background-image: -o-linear-gradient(bottom, rgb(29, 42, 84) 50%, rgb(16, 24, 48) 86%);
@@ -25,15 +25,6 @@ body {
 
     background-image: -webkit-gradient(linear, left bottom, left top, color-stop(0.5, rgb(29, 42, 84)), color-stop(0.86, rgb(16, 24, 48)));
   }
-}
-
-a:link, a:visited {
-  color: #333;
-  text-shadow: 1px 1px rgba(16, 16, 16, .25);
-}
-
-a:hover {
-  color: #eee;
 }
 
 body.blueprint {
@@ -188,74 +179,9 @@ article {
   }
 }
 
-hgroup.logotype {
-  position: relative;
-  padding: 20px;
-  text-align: center;
-  color: #eee;
-  h1 {
-    font-family: "Open Sans Condensed", "Futura Condensed Medium", "Futura Condensed", Futura;
-    font-size: 96pt;
-    font-style: normal;
-    line-height: 80%;
-    padding: 0;
-    margin: 0;
-    margin-left: auto;
-    margin-right: auto;
-    text-shadow: 3px 2px #000;
-    .a {
-      letter-spacing: 0.1em;
-    }
-
-    @media #{$information-phone} {
-      font-size: 40pt;
-    }
-  }
-
-  h2 {
-    font-family: "Open Sans", "Futura Medium", Futura;
-    top: -10px;
-    font-size: 14pt;
-    font-style: normal;
-    font-weight: lighter;
-    padding: 0;
-    margin: auto;
-    text-shadow: 3px 2px #000;
-
-    @media #{$information-phone} {
-      font-size: 9pt;
-    }
-  }
-
-  a, a:hover, a:active, a:visited {
-    text-decoration: none;
-    color: #eee;
-  }
-
-  img {
-    float: left;
-    width: 150px;
-    height: 150px;
-    margin-top: -1%;
-
-    @media #{$information-phone} {
-      width: 80px;
-      height: 80px;
-    }
-  }
-}
-
-i {
-  font-style: italic;
-}
-
-b {
-  font-weight: 900;
-}
-
 div#page {
   background-color: white;
-  max-width: 600px;
+  max-width: 900px;
   min-width: 300px;
   margin: auto;
   margin-top: 3em;
@@ -264,56 +190,12 @@ div#page {
   box-shadow: 0 0 100px;
 
   @media #{$information-phone} {
+    background-color: #c7e0ee;
     padding: 1em;
     min-width: inherit;
     width: inherit;
-    margin: 1em;
+    margin: 0;
   }
-}
-
-h1, h2, h3, h4, h5, h6 {
-  font-weight: bold;
-  padding-top: 0.5em;
-  padding-bottom: 0.5em;
-  line-height: 1.25em;
-}
-
-h1 {
-  font-size: 200%;
-
-  @media #{$information-phone} {
-    font-size: 150%;
-  }
-}
-
-h2 {
-  font-size: 130%;
-  font-style: italic;
-
-  @media #{$information-phone} {
-    font-size: 110%;
-  }
-}
-
-h3 {
-  font-size: 125%;
-}
-
-section {
-  margin-top: 2em;
-}
-
-p + p {
-  margin-top: 1em;
-}
-
-p {
-  text-align: justify;
-}
-
-ul li {
-  list-style-type: circle;
-  margin-left: 1em;
 }
 
 .multi-column {
@@ -538,3 +420,5 @@ article .polaroid {
 .fb-like-box {
   margin-top: -15px;
 }
+
+@import "common";
