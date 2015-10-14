@@ -4,9 +4,8 @@ require "sinatra/reloader" if development?
 
 set :bind, '0.0.0.0'
 
-get '/shifts' do
-  redirect "http://www.volunteerspot.com/login/entry/375755452038"
-end
+get('/shifts') { redirect "http://www.volunteerspot.com/login/entry/375755452038" }
+get('/drive') { redirect "https://drive.google.com/drive/folders/0B_TasILTM6TWa18zdHdmNHpUYzg" }
 
 get '/' do
   File.read(File.join('public', 'index.html'))
