@@ -117,7 +117,7 @@ p {
 }
 
 ol {
-  padding: 1em 0em 1em 2em;
+  padding: 1em 0 1em 2em;
   list-style: decimal;
 }
 
@@ -138,7 +138,7 @@ sub {
 
 section {
   position: relative;
-  clear: right;
+  clear: both;
 }
 
 #contents > section:not(:first-child) {

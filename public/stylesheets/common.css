@@ -141,7 +141,7 @@ p {
 
 /* line 119, ../../sass/common.scss */
 ol {
-  padding: 1em 0em 1em 2em;
+  padding: 1em 0 1em 2em;
   list-style: decimal;
 }
 
@@ -166,7 +166,7 @@ sub {
 /* line 139, ../../sass/common.scss */
 section {
   position: relative;
-  clear: right;
+  clear: both;
 }
 
 /* line 144, ../../sass/common.scss */
