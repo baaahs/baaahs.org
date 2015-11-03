@@ -12,8 +12,9 @@ set :bind, '0.0.0.0'
 get('/drive') { redirect "https://drive.google.com/drive/folders/0B_TasILTM6TWa18zdHdmNHpUYzg" }
 
 # old URLs to support for a while!
-get('/setup/setup') { redirect "/setup" } # todo kill after 20151201
 get('/shifts') { redirect "http://www.volunteerspot.com/login/entry/375755452038" } # todo kill after 20151201
+
+get('/psp') { redirect "/psp/index.html" }
 
 # routes!
 
