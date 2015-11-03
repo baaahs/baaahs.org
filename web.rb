@@ -2,34 +2,42 @@ require 'sinatra'
 require "sinatra/compass"
 require "sinatra/reloader" if development?
 
+require 'pathname'
+
+public_html = Pathname('public')
+
 set :bind, '0.0.0.0'
 
-get('/shifts') { redirect "http://www.volunteerspot.com/login/entry/375755452038" }
+# redirects to keep!
 get('/drive') { redirect "https://drive.google.com/drive/folders/0B_TasILTM6TWa18zdHdmNHpUYzg" }
-get('/setup/setup') { redirect "/setup" }
+
+# old URLs to support for a while!
+get('/setup/setup') { redirect "/setup" } # todo kill after 20151201
+get('/shifts') { redirect "http://www.volunteerspot.com/login/entry/375755452038" } # todo kill after 20151201
+
+# routes!
 
 get '/' do
-  File.read(File.join('public', 'index.html'))
+  send_file public_html.join('index.html')
 end
 
 get '/*' do |file|
   file = file.gsub(/\.\./, '')
 
-  begin
-    File.read(File.join('public', "#{file}.html"))
-  rescue
-    dir_file = File.join('public', file)
-    index_file = File.join(dir_file, 'index.html')
-
-    if File.directory?(dir_file) && File.exists?(index_file)
-      File.read(index_file)
+  if public_html.join("#{file}.html").file?
+    send_file public_html.join("#{file}.html")
+  elsif public_html.join(file).directory? && public_html.join(file, 'index.html').file?
+    if file =~ /\/$/
+      send_file public_html.join(file, 'index.html')
     else
-      raise
+      redirect "#{file}/"
     end
+  else
+    pass
   end
 end
 
 not_found do
-  File.read(File.join('public', '404.html'))
+  send_file public_html.join('404.html')
 end
 
