@@ -20,3 +20,15 @@ h1.ui.horizontal.divider.header {
 .row.other.event {
     color: #C24608;
 }
+
+.ui.crew.accordion {
+    background: #f0f0f0;
+    padding: 0.8rem;
+}
+.ui.crew.accordion .title {
+    color: #3294D1;
+}
+
+.ui.crew.accordion mb {
+    color: #3294D1;
+}
