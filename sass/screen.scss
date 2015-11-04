@@ -180,6 +180,7 @@ article {
 }
 
 div#page {
+  position: relative;
   background-color: white;
   max-width: 900px;
   min-width: 300px;
@@ -419,6 +420,22 @@ article .polaroid {
 
 .fb-like-box {
   margin-top: -15px;
+}
+
+#edition-picker {
+  display: block !important;
+  text-align: center;
+  width: 100%;
+  border: 1px solid black;
+
+  ul, li {
+    display: inline;
+    margin: 0;
+  }
+
+  li + li::before {
+    content: " | ";
+  }
 }
 
 @import "common";

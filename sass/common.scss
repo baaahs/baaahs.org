@@ -1,5 +1,30 @@
 $information-phone: "only screen and (max-device-width : 640px)";
 
+$party-color: red;
+$business-color: green;
+$head-and-hind-color: blue;
+$tech-color: orange;
+$support-color: grey;
+
+@page {
+  size: auto;
+  margin: 25mm;
+
+  @top-center {
+    content: element(pageHeader);
+  }
+}
+
+#page-header {
+  display: inherit;
+  position: running(page-header);
+}
+
+#page-footer {
+  display: inherit;
+  position: running(page-footer);
+}
+
 a:link, a:visited {
   color: #333;
   text-shadow: 1px 1px rgba(16, 16, 16, .25);
@@ -20,7 +45,7 @@ hgroup.logotype {
   }
 
   h1 {
-    font-family: "Open Sans Condensed", "Futura Condensed Medium", "Futura Condensed", Futura;
+    font-family: "Open Sans Condensed", "Futura Condensed Medium", "Futura Condensed", Futura, sans-serif;
     font-size: 108pt;
     font-style: normal;
     line-height: 80%;
@@ -39,7 +64,7 @@ hgroup.logotype {
   }
 
   h2 {
-    font-family: "Open Sans", "Futura Medium", Futura;
+    font-family: "Open Sans", "Futura Medium", Futura, sans-serif;;
     top: -10px;
     font-size: 14pt;
     font-style: normal;
@@ -76,6 +101,10 @@ b {
   font-weight: 900;
 }
 
+header h1, header h2 {
+  text-align: center;
+}
+
 h1, h2, h3, h4, h5, h6 {
   font-weight: bold;
   padding-top: 0.5em;
@@ -108,7 +137,7 @@ section {
   margin-top: 2em;
 }
 
-p + p {
+p + p, ul + p, ol + p {
   margin-top: 1em;
 }
 
@@ -129,11 +158,13 @@ ul li {
 sup {
   vertical-align: super;
   font-size: smaller;
+  line-height: 0;
 }
 
 sub {
   vertical-align: sub;
   font-size: smaller;
+  line-height: 0;
 }
 
 section {
@@ -141,9 +172,45 @@ section {
   clear: both;
 }
 
+.hidden {
+  display: none;
+}
+
 #contents > section:not(:first-child) {
   border-top: 1px solid black;
   page-break-before: always;
+}
+
+@mixin crew-section($color) {
+  border-left-width: .25em;
+  border-left-style: dashed;
+  border-left-color: $color;
+  padding-left: 1em;
+}
+
+.crew-marker {
+  border-left-width: 1em !important;
+  border-left-style: solid !important;
+}
+
+section.setup-lead, .crew-marker.setup-lead {
+  @include crew-section($support-color);
+}
+
+section.party-crew, .crew-marker.party-crew {
+  @include crew-section($party-color);
+}
+
+section.business-crew, .crew-marker.business-crew {
+  @include crew-section($business-color);
+}
+
+section.head-and-hind-crew, .crew-marker.head-and-hind-crew {
+  @include crew-section($head-and-hind-color);
+}
+
+section.tech-crew, .crew-marker.tech-crew {
+  @include crew-section($tech-color);
 }
 
 .parts-needed {
@@ -158,3 +225,16 @@ section {
   border: 1px solid black;
 }
 
+.sidebar {
+  float: right;
+  width: 40%;
+  padding-left: 1em;
+
+  img {
+    width: 100%;
+  }
+}
+
+#edition-picker {
+  display: none;
+}

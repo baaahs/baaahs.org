@@ -1,15 +1,35 @@
-/* line 3, ../../sass/common.scss */
+@page {
+  size: auto;
+  margin: 25mm;
+  @top-center {
+    content: element(pageHeader);
+}
+}
+
+/* line 18, ../../sass/common.scss */
+#page-header {
+  display: inherit;
+  position: running(page-header);
+}
+
+/* line 23, ../../sass/common.scss */
+#page-footer {
+  display: inherit;
+  position: running(page-footer);
+}
+
+/* line 28, ../../sass/common.scss */
 a:link, a:visited {
   color: #333;
   text-shadow: 1px 1px rgba(16, 16, 16, 0.25);
 }
 
-/* line 8, ../../sass/common.scss */
+/* line 33, ../../sass/common.scss */
 a:hover {
   color: #eee;
 }
 
-/* line 12, ../../sass/common.scss */
+/* line 37, ../../sass/common.scss */
 hgroup.logotype {
   position: relative;
   padding: 20px;
@@ -17,14 +37,14 @@ hgroup.logotype {
   color: #eee;
 }
 @media only screen and (max-device-width: 640px) {
-  /* line 12, ../../sass/common.scss */
+  /* line 37, ../../sass/common.scss */
   hgroup.logotype {
     padding: 0px;
   }
 }
-/* line 22, ../../sass/common.scss */
+/* line 47, ../../sass/common.scss */
 hgroup.logotype h1 {
-  font-family: "Open Sans Condensed", "Futura Condensed Medium", "Futura Condensed", Futura;
+  font-family: "Open Sans Condensed", "Futura Condensed Medium", "Futura Condensed", Futura, sans-serif;
   font-size: 108pt;
   font-style: normal;
   line-height: 80%;
@@ -34,19 +54,19 @@ hgroup.logotype h1 {
   margin-right: auto;
   text-shadow: 3px 2px #000;
 }
-/* line 32, ../../sass/common.scss */
+/* line 57, ../../sass/common.scss */
 hgroup.logotype h1 .a {
   letter-spacing: 0.1em;
 }
 @media only screen and (max-device-width: 640px) {
-  /* line 22, ../../sass/common.scss */
+  /* line 47, ../../sass/common.scss */
   hgroup.logotype h1 {
     font-size: 48pt;
   }
 }
-/* line 41, ../../sass/common.scss */
+/* line 66, ../../sass/common.scss */
 hgroup.logotype h2 {
-  font-family: "Open Sans", "Futura Medium", Futura;
+  font-family: "Open Sans", "Futura Medium", Futura, sans-serif;
   top: -10px;
   font-size: 14pt;
   font-style: normal;
@@ -56,39 +76,44 @@ hgroup.logotype h2 {
   text-shadow: 3px 2px #000;
 }
 @media only screen and (max-device-width: 640px) {
-  /* line 41, ../../sass/common.scss */
+  /* line 66, ../../sass/common.scss */
   hgroup.logotype h2 {
     font-size: 9pt;
   }
 }
-/* line 56, ../../sass/common.scss */
+/* line 81, ../../sass/common.scss */
 hgroup.logotype a, hgroup.logotype a:hover, hgroup.logotype a:active, hgroup.logotype a:visited {
   text-decoration: none;
   color: #eee;
 }
-/* line 61, ../../sass/common.scss */
+/* line 86, ../../sass/common.scss */
 hgroup.logotype img.logo {
   float: left;
 }
 @media only screen and (max-device-width: 640px) {
-  /* line 61, ../../sass/common.scss */
+  /* line 86, ../../sass/common.scss */
   hgroup.logotype img.logo {
     width: 25%;
     height: 25%;
   }
 }
 
-/* line 71, ../../sass/common.scss */
+/* line 96, ../../sass/common.scss */
 i {
   font-style: italic;
 }
 
-/* line 75, ../../sass/common.scss */
+/* line 100, ../../sass/common.scss */
 b {
   font-weight: 900;
 }
 
-/* line 79, ../../sass/common.scss */
+/* line 104, ../../sass/common.scss */
+header h1, header h2 {
+  text-align: center;
+}
+
+/* line 108, ../../sass/common.scss */
 h1, h2, h3, h4, h5, h6 {
   font-weight: bold;
   padding-top: 0.5em;
@@ -96,86 +121,139 @@ h1, h2, h3, h4, h5, h6 {
   line-height: 1.25em;
 }
 
-/* line 86, ../../sass/common.scss */
+/* line 115, ../../sass/common.scss */
 h1 {
   font-size: 200%;
 }
 @media only screen and (max-device-width: 640px) {
-  /* line 86, ../../sass/common.scss */
+  /* line 115, ../../sass/common.scss */
   h1 {
     font-size: 150%;
   }
 }
 
-/* line 94, ../../sass/common.scss */
+/* line 123, ../../sass/common.scss */
 h2 {
   font-size: 130%;
   font-style: italic;
 }
 @media only screen and (max-device-width: 640px) {
-  /* line 94, ../../sass/common.scss */
+  /* line 123, ../../sass/common.scss */
   h2 {
     font-size: 110%;
   }
 }
 
-/* line 103, ../../sass/common.scss */
+/* line 132, ../../sass/common.scss */
 h3 {
   font-size: 125%;
 }
 
-/* line 107, ../../sass/common.scss */
+/* line 136, ../../sass/common.scss */
 section {
   margin-top: 2em;
 }
 
-/* line 111, ../../sass/common.scss */
-p + p {
+/* line 140, ../../sass/common.scss */
+p + p, ul + p, ol + p {
   margin-top: 1em;
 }
 
-/* line 115, ../../sass/common.scss */
+/* line 144, ../../sass/common.scss */
 p {
   text-align: justify;
 }
 
-/* line 119, ../../sass/common.scss */
+/* line 148, ../../sass/common.scss */
 ol {
   padding: 1em 0 1em 2em;
   list-style: decimal;
 }
 
-/* line 124, ../../sass/common.scss */
+/* line 153, ../../sass/common.scss */
 ul li {
   list-style-type: circle;
   margin-left: 1em;
 }
 
-/* line 129, ../../sass/common.scss */
+/* line 158, ../../sass/common.scss */
 sup {
   vertical-align: super;
   font-size: smaller;
+  line-height: 0;
 }
 
-/* line 134, ../../sass/common.scss */
+/* line 164, ../../sass/common.scss */
 sub {
   vertical-align: sub;
   font-size: smaller;
+  line-height: 0;
 }
 
-/* line 139, ../../sass/common.scss */
+/* line 170, ../../sass/common.scss */
 section {
   position: relative;
   clear: both;
 }
 
-/* line 144, ../../sass/common.scss */
+/* line 175, ../../sass/common.scss */
+.hidden {
+  display: none;
+}
+
+/* line 179, ../../sass/common.scss */
 #contents > section:not(:first-child) {
   border-top: 1px solid black;
   page-break-before: always;
 }
 
-/* line 149, ../../sass/common.scss */
+/* line 191, ../../sass/common.scss */
+.crew-marker {
+  border-left-width: 1em !important;
+  border-left-style: solid !important;
+}
+
+/* line 196, ../../sass/common.scss */
+section.setup-lead, .crew-marker.setup-lead {
+  border-left-width: .25em;
+  border-left-style: dashed;
+  border-left-color: grey;
+  padding-left: 1em;
+}
+
+/* line 200, ../../sass/common.scss */
+section.party-crew, .crew-marker.party-crew {
+  border-left-width: .25em;
+  border-left-style: dashed;
+  border-left-color: red;
+  padding-left: 1em;
+}
+
+/* line 204, ../../sass/common.scss */
+section.business-crew, .crew-marker.business-crew {
+  border-left-width: .25em;
+  border-left-style: dashed;
+  border-left-color: green;
+  padding-left: 1em;
+}
+
+/* line 208, ../../sass/common.scss */
+section.head-and-hind-crew, .crew-marker.head-and-hind-crew {
+  border-left-width: .25em;
+  border-left-style: dashed;
+  border-left-color: blue;
+  padding-left: 1em;
+}
+
+/* line 212, ../../sass/common.scss */
+section.tech-crew, .crew-marker.tech-crew {
+  border-left-width: .25em;
+  border-left-style: dashed;
+  border-left-color: orange;
+  padding-left: 1em;
+}
+
+/* line 216, ../../sass/common.scss */
 .parts-needed {
   float: right;
   top: 0;
@@ -186,4 +264,20 @@ section {
   margin: 0 0 .5em 1em;
   font-size: .9em;
   border: 1px solid black;
+}
+
+/* line 228, ../../sass/common.scss */
+.sidebar {
+  float: right;
+  width: 40%;
+  padding-left: 1em;
+}
+/* line 233, ../../sass/common.scss */
+.sidebar img {
+  width: 100%;
+}
+
+/* line 238, ../../sass/common.scss */
+#edition-picker {
+  display: none;
 }

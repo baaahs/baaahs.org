@@ -17,4 +17,8 @@ body {
   margin: 0;
 }
 
+div.sidebar, div.parts-needed {
+  page-break-inside: avoid;
+}
+
 @import "common";

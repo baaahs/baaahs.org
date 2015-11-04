@@ -4,9 +4,9 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <title>BAAAHS Setup Instructions</title>
+  <title>BAAAHS Setup Guide</title>
 
-  <meta name="name" content="BAAAHS Setup Instructions">
+  <meta name="name" content="BAAAHS Setup Guide">
   <meta name="description"
         content="BAAAHS is the Big-Ass Amazingly Awesome Homosexual Sheep, and you can put him together!">
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
@@ -20,6 +20,40 @@
   <!--[if IE]>
   <link href="/stylesheets/ie.css" media="screen, projection" rel="stylesheet" type="text/css"/>
   <![endif]-->
+
+  <script type="application/javascript">
+    const EDITIONS = ['setup-lead', 'party-crew', 'business-crew', 'head-and-hind-crew', 'tech-crew'];
+
+    var setEdition = function (edition) {
+      EDITIONS.forEach(function (itEdition) {
+        Array.apply(null, document.getElementsByClassName(itEdition)).forEach(function (el) {
+          if (!el.classList.contains('crew-marker')) {
+            el.classList.toggle('hidden', edition && itEdition != edition);
+          }
+        });
+      });
+
+      if (!edition) {
+        Array.apply(null, document.getElementsByClassName('special-edition-only')).forEach(function (el) {
+          el.classList.add('hidden');
+        });
+      }
+
+      document.body.className = 'article';
+
+      if (edition) {
+        document.body.classList.add('special-edition');
+        document.body.classList.add(edition + '-edition');
+      }
+    };
+
+    window.addEventListener('load', function () {
+      setEdition(document.location.hash.substr(1));
+    });
+    window.addEventListener('hashchange', function () {
+      setEdition(document.location.hash.substr(1));
+    });
+  </script>
 </head>
 
 <body class="article" dir="ltr">
@@ -27,7 +61,8 @@
 <div id="page">
   <header class="logotype">
     <hgroup class="logotype">
-      <img src="/images/logo/BAAAHS2015LogoWithBorder-160x136.png" srcset="/images/logo/BAAAHS2015LogoWithBorder-320x272.png 2x " class="logo"/>
+      <img src="/images/logo/BAAAHS2015LogoWithBorder-160x136.png"
+           srcset="/images/logo/BAAAHS2015LogoWithBorder-320x272.png 2x " class="logo"/>
 
       <h1>B<span class="a">AA</span>AHS</h1>
 
@@ -35,8 +70,30 @@
     </hgroup>
   </header>
 
+  <div id="edition-picker">
+    Edition:
+    <ul>
+      <li><a href="#">All</a></li>
+      <li><a href="#setup-lead">Setup Lead</a></li>
+      <li><a href="#party-crew">Party Crew</a></li>
+      <li><a href="#business-crew">Business Crew</a></li>
+      <li><a href="#head-and-hind-crew">Head & Hind Crew</a></li>
+      <li><a href="#tech-crew">Tech</a></li>
+    </ul>
+  </div>
+
   <header>
-    <h1>BAAAHS Setup</h1>
+    <h1>BAAAHS Setup Guide</h1>
+
+    <h2 class="special-edition-only setup-lead">Setup Lead Edition</h2>
+
+    <h2 class="special-edition-only party-crew">Party Crew Edition</h2>
+
+    <h2 class="special-edition-only business-crew">Business Crew Edition</h2>
+
+    <h2 class="special-edition-only head-and-hind-crew">Head & Hind Crew Edition</h2>
+
+    <h2 class="special-edition-only tech-crew">Tech Edition</h2>
   </header>
 
   <div id="contents">
@@ -49,20 +106,22 @@
         <li>Setup:
           <ul>
             <li><a href="#setup-useful-info-section">Generally Useful Knowledge!</a></li>
-            <li><a href="#setup-party-crew-section">Party Crew</a></li>
-            <li><a href="#setup-business-crew-section">Business Crew</a></li>
-            <li><a href="#setup-head-and-hind-crew-section">Head & Hind Crew</a></li>
-            <li><a href="#setup-tech-crew-section">Tech Crew</a></li>
+            <li class="setup-lead"><a href="#setup-lead-section">Setup Lead</a></li>
+            <li class="party-crew"><a href="#setup-party-crew-section">Party Crew</a></li>
+            <li class="business-crew"><a href="#setup-business-crew-section">Business Crew</a></li>
+            <li class="head-and-hind-crew"><a href="#setup-head-and-hind-crew-section">Head & Hind Crew</a></li>
+            <li class="tech-crew"><a href="#setup-tech-crew-section">Tech Crew</a></li>
           </ul>
         </li>
 
         <li>Teardown:
           <ul>
-            <li><a href="#teardown-useful-info-section">Generally Useful Knowledge!</a></li>
-            <li><a href="#teardown-party-crew-section">Party Crew</a></li>
-            <li><a href="#teardown-business-crew-section">Business Crew</a></li>
-            <li><a href="#teardown-head-and-hind-crew-section">Head & Hind Crew</a></li>
-            <li><a href="#teardown-tech-crew-section">Tech Crew</a></li>
+            <li class=""><a href="#teardown-useful-info-section">Generally Useful Knowledge!</a></li>
+            <li class="setup-lead"><a href="#teardown-setup-lead-section">Setup Lead</a></li>
+            <li class="party-crew"><a href="#teardown-party-crew-section">Party Crew</a></li>
+            <li class="business-crew"><a href="#teardown-business-crew-section">Business Crew</a></li>
+            <li class="head-and-hind-crew"><a href="#teardown-head-and-hind-crew-section">Head & Hind Crew</a></li>
+            <li class="tech-crew"><a href="#teardown-tech-crew-section">Tech Crew</a></li>
           </ul>
         </li>
       </ul>
@@ -98,35 +157,6 @@
           <li>Watch for potential problems, mistakes, safety issues, etc.</li>
           <li>Help debug any problems that arise.</li>
         </ul>
-
-        <h4>Setting up for setup:</h4>
-
-        <p><b>Crew tables:</b> each of the crews (Party, Business, and Head & Hind) need a folding table near their
-          workspace.</p>
-
-        <p>Tape the following sheets to each table:</p>
-        <ul>
-          <li>Sign-in sheet</li>
-          <li>Shift signup list</li>
-          <li>Assembly instructions (that crew's section)</li>
-          <li>Bolt sizing chart</li>
-          <li>Panel map (that crew's)</li>
-        </ul>
-
-        <p>Place these items on or under each table:</p>
-        <ul>
-          <li>Gloves</li>
-          <li>Panel hanging totes (<sup>1</sup>/<sub>4</sub>" hardware, vice grips, aligner pins</li>
-          <li>Hand tools (socket wrenches, pliers, …)</li>
-          <li>Other hardware</li>
-          <li>Hardhats</li>
-          <li>Head lamps (if night)</li>
-        </ul>
-
-        <p><b>Craft services:</b> space for food, snacks, and drinks.</p>
-
-        <p><b>Safety:</b> ensure that a well-stocked first aid kit and a fire extinguisher is on site their locations
-          are well-known.</p>
       </section>
 
       <section>
@@ -158,16 +188,166 @@
 
         <p>Noms manages the craft services table. Keep cold drinks (water, soft drinks) and light snacks available
           throughout setup. Coffee and pastries in the AM. For shifts that overlap normal meal times, and for shifts
-          of four hours or more, provide something more substantial like pizza or a sandwich platter.</p>
+          of four hours or more, provide something more substantial like pizza, a sandwich platter, or a traditional
+          German stew made of marinated rabbit or hare with braised onions and perhaps a side of a nice seasonal
+          vegetable.</p>
       </section>
     </section>
 
-    <section class="crew-instructions party-crew" id="setup-useful-info-section">
+    <section class="crew-instructions all-crews" id="setup-useful-info-section">
       <h2>Generally Useful Knowledge!</h2>
+
+      <h3>Safety</h3>
+
+      <p><b>Be careful.</b> Falling tools will hurt if they land on your head. Hardhats aren't a terrible idea. Try
+        not to stand where something might land on you. Actively communicate what you're doing. Hold people's ladders
+        steady.</p>
+
+      <p>Always test that the component you're about to balance against or stand on is actually secure. If you need to
+        lean against or step on a strut for balance, place your weight only at the ends of the strut, never in the
+        middle.
+      </p>
+
+      <p>When installing a component, <b>don't leave it partially secured and walk away</b>! Don't leave components or
+        tools placed precariously.</p>
+
+      <h3>Setup Crews</h3>
+
+      <p>Setup is performed by four teams working simultaneously and (mostly) independently:</p>
+      <ul>
+        <li class="crew-marker party-crew">The <b>Party Crew</b> puts up stuff on the party (driver/left/port) side of
+          the bus. Their stuff is marked red.
+        </li>
+        <li class="crew-marker business-crew">The <b>Business Crew</b> puts up stuff on the business
+          (passenger/right/starboard) side of the bus. Their stuff is marked green.
+        </li>
+        <li class="crew-marker head-and-hind-crew">The <b>Head & Hind Crew</b> puts up the face, head, neck, and rear.
+          Their stuff is marked blue.
+        </li>
+        <li class="crew-marker tech-crew">The <b>Tech Crew</b> sets up sound and lights.
+          Their stuff is marked orange.
+        </li>
+      </ul>
+
+      <p>Each crew has their own set of commonly-used tools marked with colored tape. Power tools are shared, and should
+        be returned to the common table when not in use.
+      </p>
+
+      <h3>Identifying Panels</h3>
+
+      <div class="sidebar">
+        <img src="images/sample-label.png"/>
+      </div>
+
+      <p>
+        Panels are (mostly) identified on each edge with a label. Party side panels have a 'D' in their name after the
+        number, and a red dot. Business side panels have a 'P', and a green dot. Front panels' names start with an 'F',
+        and rear panels start with an 'R'. Yes, this could have been thought out better. Sorry!
+      </p>
+
+      <p>
+        Labels also indicate the neighboring panel for this edge, and which direction is up when mounted properly.
+      </p>
+
+      <p>
+        One day, the labels will be printed and uniform. They'll show which section the panel belongs to. One hap-happy
+        day. Not today.
+      </p>
+
+      <h3>Hanging Panels</h3>
+
+      <div class="parts-needed">
+        <h4>Requires:</h4>
+        • Lots of heavy-duty zip ties.
+        <br/>• Lots of <sup>1</sup>⁄<sub>4</sub>&quot; bolts, various lengths, with wing nuts.
+        <br/><b>Tools:</b> vice grips, aligner pins.
+      </div>
+
+      <p>For stationary setup, use heavy-duty zip ties wherever possible. In some cases, zip ties may not be strong
+        enough and ¼&quot; hardware (bolt, two washers, and a wingnut) will be necessary. Use your judgement when
+        hanging panels: if the connection is under a lot of tension or shearing force, use a bolt instead.
+      </p>
+
+      <ol>
+        <li>Pre-assemble sections of panels on the ground according to the panel map.</li>
+        <li>Raise the panel or section of panels into place.</li>
+        <li>Align edges of panel and use tapered steel aligner pin to line up holes. Pick a hole as near to the end of
+          the edge as possible while still allowing zip tie or hardware to be inserted. Try to reuse holes from previous
+          installations if possible.
+        </li>
+        <li>Use a vice grip to clamp the panel to its neighbor.</li>
+        <li>Remove the steel pin and replace with a heavy-duty zip tie or ¼&quot; hardware.</li>
+        <li>Tighten zip ties to medium tension. Tighten hardware finger-tight, but do not over-tighten.</li>
+        <li>Remove vice grip.</li>
+        <li>Repeat for the other end of the edge.</li>
+        <li>Repeat for other vertices on the panel or panel group.</li>
+      </ol>
+    </section>
+
+    <section class="crew-instructions setup-lead" id="setup-lead-section">
+      <h2>Setup Lead Guide</h2>
+      <h4>Setting up for setup:</h4>
+
+      <p><b>Crew tables:</b> each of the crews (Party, Business, and Head & Hind) need a folding table near their
+        workspace.</p>
+
+      <p>Tape the following sheets to each table:</p>
+      <ul>
+        <li>Sign-in sheet</li>
+        <li>Shift signup list</li>
+        <li>Schedule</li>
+        <li>Bolt sizing chart</li>
+        <li>Panel map (for that crew)</li>
+      </ul>
+
+      <p>Place these items on or under each table:</p>
+
+      <div class="sidebar">
+        <img src="images/tools.jpg" srcset="images/tools@2.jpg 2x"/>
+      </div>
+
+      <ul>
+        <li>Handbook (for that crew) containing:
+          <ul>
+            <li>Panel map</li>
+            <li>This setup guide</li>
+            <li>Bolt sizing chart</li>
+            <li>Schedule</li>
+          </ul>
+        </li>
+        <li>Tool bin containing these items, marked with tape of the appropriate color for that crew:
+          <ul>
+            <li>Aligner pin</li>
+            <li>2 Vice grips</li>
+            <li>3 Clippers or snips</li>
+            <li>Zip ties, various sizes</li>
+            <li>Pliers</li>
+            <li>Crescent wrench</li>
+            <li>Ratchet wrenches or socket wrenches:
+              <ul>
+                <li><sup>3</sup>⁄<sub>4</sub>″ or 19mm (for <sup>1</sup>⁄<sub>2</sub>″ hardware)</li>
+                <li><sup>9</sup>⁄<sub>16</sub>″ or 15mm (for <sup>3</sup>⁄<sub>8</sub>″ hardware)</li>
+                <li><sup>1</sup>⁄<sub>2</sub>″ or 13mm (for <sup>5</sup>⁄<sub>16</sub>″ hardware) (optional)</li>
+                <li><sup>3</sup>⁄<sub>8</sub>″ or 10mm (for <sup>1</sup>⁄<sub>4</sub>″ hardware) (optional)</li>
+              </ul>
+            </li>
+            <li>Bin with <sup>1</sup>⁄<sub>4</sub>″ hardware sets</li>
+          </ul>
+        </li>
+        <li>Gloves</li>
+        <li>Other hardware</li>
+        <li>Hardhats</li>
+        <li>Head lamps (if night)</li>
+      </ul>
+
+      <p><b>Craft services:</b> space for food, snacks, and drinks.</p>
+
+      <p><b>Safety:</b> ensure that a well-stocked first aid kit and a fire extinguisher is on site their locations
+        are well-known.</p>
     </section>
 
     <section class="crew-instructions party-crew" id="setup-party-crew-section">
-      <h2>Party Crew Setup(Driver) Side Setup</h2>
+      <h2>Party Crew Setup (Driver) Side Setup</h2>
 
       <p>The Party Crew works mostly on the "party side", a.k.a. the driver side, of the sheep.</p>
 
@@ -193,7 +373,8 @@
 
           Slide center shelf into holes on side of bus. You’ll need to wiggle it to get it in. It should end up
           flush
-          with the side of the bus. Next, install the right shelf and bolt to center shelf. Last, install the left shelf.
+          with the side of the bus. Next, install the right shelf and bolt to center shelf. Last, install the left
+          shelf.
           For
           stationary setup, the shelves are only secure enough for the speakers OR for a single person at a time.
         </p>
@@ -206,7 +387,7 @@
           <h4>Requires:</h4>
           <b>Mobile:</b> 9﹫2&quot;×⅜&quot; bolts.
           <br/><b>Stationary:</b> 4﹫2&quot;×⅜&quot; bolts.
-          <br/><b>Tools:</b> <sup>9</sup>/<sub>16</sub>" socket wrench, pliers, and aligner pin.
+          <br/><b>Tools:</b> <sup>9</sup>⁄<sub>16</sub>″ socket wrench, pliers, and aligner pin.
         </div>
 
         <h3>Install DJ platform.</h3>
@@ -258,7 +439,7 @@
 
       <div class="parts-needed">
         <h4>Requires:</h4>
-        • Lots of <sup>1</sup>/<sub>4</sub>&quot; bolts, various lengths, with wing nuts.
+        • Lots of <sup>1</sup>⁄<sub>4</sub>&quot; bolts, various lengths, with wing nuts.
         <br/>• Lots of heavy-duty zip ties.
         <br/><b>Tools:</b> vice grips, aligner pins.
       </div>
@@ -343,31 +524,16 @@
         <div class="parts-needed">
           <h4>Requires:</h4>
           2 people.
-          <br/>Step ladder, drill with ___&quot; socket, gaffer tape.
-        </div>
-
-        <h3>Remove the rear side door.</h3>
-
-        <p>With the door closed and latched, remove bus-side bolts from the hinges using a ___&quot; socket. Attach them
-          to
-          the hinges with tape. Carefully unlatch the door and lower it to the ground. It’s super heavy. Store the door.
-        </p>
-      </section>
-
-
-      <section>
-        <div class="parts-needed">
-          <h4>Requires:</h4>
-          3 people.
-          <br/><b>Hardware:</b> 3 ½&quot;, 5&quot;× ½&quot; bolts.
-          <br/><b>Tools:</b>¾&quot; socket and wrench.
+          <br/><b>Hardware:</b> 2 × 3 ½&quot; bolts.
         </div>
 
         <h3>Install lower side platform.</h3>
 
+        <p>Remove the rear side door. Draw the four door bolts open and remove the wooden door from the frame. Place it
+          ______(where?) for storage.</p>
+
         <p>Slide the platform into the rectangular holes below the rear side door; it should be flush against the bus.
-          For
-          stationary setup, drop one ⅜&quot; bolt through the red vinyl into the left rail.</p>
+          Drop one <sup>3</sup>⁄<sub>8</sub>&quot; bolt through the red vinyl into each rail.</p>
       </section>
 
       <section>
@@ -385,9 +551,8 @@
             bracket
             into the lower beam.
           </li>
-          <li>Bolt stair support (large steel C channel with an angle at the bottom) to the upper side platform using 2
-            -
-            3 ½&quot;x½&quot; bolts.
+          <li>Bolt stair support (large steel C channel with an angle at the bottom) to the upper side platform using
+            2 × 3½&quot;x½&quot; bolts.
           </li>
         </ol>
       </section>
@@ -490,7 +655,7 @@
         </ol>
       </section>
 
-      <p>Install panel support struts 7ABC, 17ABC, 17DEF, 33ABC, 4_ABC, and 41ABC. Tighten hardware with tools.
+      <p>Install panel support struts 7ABC, 17ABC, 17DEF, 33ABC, 41ABC, and 41DE. Tighten hardware with tools.
         Short ⅜&quot; bolts at the ends of the struts should point up.
       </p>
 
@@ -663,20 +828,22 @@
 
       <p></p>
 
-      <p>Disable bus suspension. For stationary setup, four jack stands is fine.</p>
+      <p>Disable bus suspension.
+        <span class="stationary">For stationary setup, use four jack stands. Position the stands so they support a
+        part of the bus that is connected to the frame with heavy-gauge steel (<sup>1</sup>⁄<sub>4</sub>″ or thicker),
+        as close to the outer edges of the bus as possible. You'll likely need cinder or wood blocks under the rear
+        jacks. Lift the bus an inch or two using the bottle jack, place the jack stands, and lower the bus onto them.</span>
+        <span class="mobile">For mobile setup, use wood blocks between axle and bus.</span>
+      </p>
     </section>
 
 
     <h2>Party (Driver) Side Teardown</h2>
 
-    <p></p>
-
     <p>All light tubes and bins should have already been removed before starting! It&#39;s ok if the soundsystem is
-      still
-      in place.
+      still in place.
     </p>
 
-    <p></p>
     <ul>
       <li>Take down the panels in reverse order of setup. Lean the panels against a wall or something.
       </li>
