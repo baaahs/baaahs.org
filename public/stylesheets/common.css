@@ -39,7 +39,7 @@ hgroup.logotype {
 @media only screen and (max-device-width: 640px) {
   /* line 37, ../../sass/common.scss */
   hgroup.logotype {
-    padding: 0px;
+    padding: 0;
   }
 }
 /* line 47, ../../sass/common.scss */

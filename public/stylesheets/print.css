@@ -126,7 +126,7 @@ hgroup.logotype {
 @media only screen and (max-device-width: 640px) {
   /* line 37, ../../sass/common.scss */
   hgroup.logotype {
-    padding: 0px;
+    padding: 0;
   }
 }
 /* line 47, ../../sass/common.scss */
@@ -367,4 +367,13 @@ section.tech-crew, .crew-marker.tech-crew {
 /* line 238, ../../sass/common.scss */
 #edition-picker {
   display: none;
+}
+
+/* line 27, ../../sass/print.scss */
+hgroup.logotype h1 {
+  font-size: 90pt;
+}
+/* line 30, ../../sass/print.scss */
+hgroup.logotype h2 {
+  font-size: 12pt;
 }

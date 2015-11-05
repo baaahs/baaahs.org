@@ -25,6 +25,8 @@
     const EDITIONS = ['setup-lead', 'party-crew', 'business-crew', 'head-and-hind-crew', 'tech-crew'];
 
     var setEdition = function (edition) {
+      if (edition && EDITIONS.indexOf(edition) == -1) return;
+
       EDITIONS.forEach(function (itEdition) {
         Array.apply(null, document.getElementsByClassName(itEdition)).forEach(function (el) {
           if (!el.classList.contains('crew-marker')) {
@@ -102,7 +104,7 @@
 
       <ul>
         <li><a href="#roles-section">Roles</a></li>
-
+        <li><a href="#safety-section">Safety</a></li>
         <li>Setup:
           <ul>
             <li><a href="#setup-useful-info-section">Generally Useful Knowledge!</a></li>
@@ -113,7 +115,6 @@
             <li class="tech-crew"><a href="#setup-tech-crew-section">Tech Crew</a></li>
           </ul>
         </li>
-
         <li>Teardown:
           <ul>
             <li class=""><a href="#teardown-useful-info-section">Generally Useful Knowledge!</a></li>
@@ -133,11 +134,11 @@
       <section>
         <h3>Event Producer</h3>
 
-        <p>The event producer is responsible for logistics and ___ related to the event:</p>
+        <p>The event producer is responsible for logistics and ___ related to the event. They:</p>
         <ul>
-          <li>Make sure shifts are staffed ahead of setup.</li>
-          <li>Book any rental vehicles or heavy equipment needed.</li>
-          <li>Support setup lead during setup and teardown (not necessarily on site).</li>
+          <li>make sure shifts are staffed ahead of setup.</li>
+          <li>book any rental vehicles or heavy equipment needed.</li>
+          <li>support setup lead during setup and teardown (not necessarily on site).</li>
         </ul>
       </section>
 
@@ -146,33 +147,33 @@
 
         <p>The setup lead is ultimately responsible for making setup happen. They:</p>
         <ul>
-          <li>Ensure that all necessary hardware, tools, parts, and equipment are obtained and on site.</li>
-          <li>Are on site during setup and teardown.</li>
-          <li>Make sure all crews are properly staffed.</li>
-          <li>Set up work area (crew tables, parts and panel staging areas, craft services, worklights, music).</li>
-          <li>Manage arrival, placement, and departure of vehicles.</li>
-          <li>Manage any outside parties (vendors, clients, cops, concerned busybodies, etc).</li>
-          <li>Mind schedule, re-balance teams, call in reinforcements, etc.</li>
-          <li>Frequently check in with crew leads.</li>
-          <li>Watch for potential problems, mistakes, safety issues, etc.</li>
-          <li>Help debug any problems that arise.</li>
+          <li>ensure that all necessary hardware, tools, parts, and equipment are obtained and on site.</li>
+          <li>are on site during setup and teardown.</li>
+          <li>make sure all crews are properly staffed.</li>
+          <li>set up work area (crew tables, parts and panel staging areas, craft services, worklights, music).</li>
+          <li>manage arrival, placement, and departure of vehicles.</li>
+          <li>manage any outside parties (vendors, clients, cops, concerned busybodies, etc).</li>
+          <li>mind schedule, re-balance teams, call in reinforcements, etc.</li>
+          <li>frequently check in with crew leads.</li>
+          <li>watch for potential problems, mistakes, safety issues, etc.</li>
+          <li>help debug any problems that arise.</li>
         </ul>
       </section>
 
       <section>
         <h3>Crew Lead</h3>
 
-        <p>There is a crew lead for each of the crews (Party, Business, and Head & Hind). Each crew lead is
+        <p>There is a crew lead for each of the crews (Party, Business, Head & Hind, and Tech). Each crew lead is
           responsible for instructing (often inexperienced) crew members in safely assembling
           their part of the sheep. They should:</p>
         <ul>
-          <li>Read and understand the setup instructions ahead of time.</li>
-          <li>Be aware of the setup schedule.</li>
-          <li>Give crew members an overview of what they'll be working on, and communicate goals for the shift.</li>
-          <li>Demonstrate procedures (e.g. panel hanging).</li>
-          <li>Educate crew members on setup basics — sizes of hardware, names of tools, etc.</li>
-          <li>If issues arise, help debug them and pull in the setup lead.</li>
-          <li>Watch for any safety issues.</li>
+          <li>read and understand the setup instructions ahead of time.</li>
+          <li>be aware of the setup schedule.</li>
+          <li>give crew members an overview of what they'll be working on, and communicate goals for the shift.</li>
+          <li>demonstrate procedures (e.g. panel hanging).</li>
+          <li>educate crew members on setup basics — sizes of hardware, names of tools, etc.</li>
+          <li>if issues arise, help debug them and pull in the setup lead.</li>
+          <li>watch for any safety issues.</li>
         </ul>
       </section>
 
@@ -189,19 +190,17 @@
         <p>Noms manages the craft services table. Keep cold drinks (water, soft drinks) and light snacks available
           throughout setup. Coffee and pastries in the AM. For shifts that overlap normal meal times, and for shifts
           of four hours or more, provide something more substantial like pizza, a sandwich platter, or a traditional
-          German stew made of marinated rabbit or hare with braised onions and perhaps a side of a nice seasonal
-          vegetable.</p>
+          German stew made of marinated rabbit or hare with braised onions and a side of Spätzle and perhaps a nice
+          seasonal vegetable. Why not?</p>
       </section>
     </section>
 
-    <section class="crew-instructions all-crews" id="setup-useful-info-section">
-      <h2>Generally Useful Knowledge!</h2>
-
-      <h3>Safety</h3>
+    <section class="crew-instructions all-crews" id="safety-section">
+      <h2>Safety</h2>
 
       <p><b>Be careful.</b> Falling tools will hurt if they land on your head. Hardhats aren't a terrible idea. Try
         not to stand where something might land on you. Actively communicate what you're doing. Hold people's ladders
-        steady.</p>
+        steady. <b>Watch out of each other!</b></p>
 
       <p>Always test that the component you're about to balance against or stand on is actually secure. If you need to
         lean against or step on a strut for balance, place your weight only at the ends of the strut, never in the
@@ -210,6 +209,13 @@
 
       <p>When installing a component, <b>don't leave it partially secured and walk away</b>! Don't leave components or
         tools placed precariously.</p>
+
+      <p>Wear boots or other footwear that protects your toes and has good grip. Wear gloves, especially when handling
+        panels. Use sunblock. Hydrate.</p>
+    </section>
+
+    <section class="crew-instructions all-crews" id="setup-useful-info-section">
+      <h2>Generally Useful Knowledge!</h2>
 
       <h3>Setup Crews</h3>
 
@@ -284,6 +290,20 @@
       </ol>
     </section>
 
+    <h3>Bus Parts</h3>
+    <table>
+      <tr>
+        <td style="vertical-align: top">
+          <img src="images/bus-party-quarter-view.png" width="100%"/>
+          <h4 style="position: relative; top: -5em;">Party side</h4>
+        </td>
+        <td style="vertical-align: top">
+          <img src="images/bus-business-quarter-view.png" width="100%" style="margin-top: 10em;"/>
+          <h4 style="text-align: right; position: relative; top: -5em;">Business side</h4>
+        </td>
+      </tr>
+    </table>
+
     <section class="crew-instructions setup-lead" id="setup-lead-section">
       <h2>Setup Lead Guide</h2>
       <h4>Setting up for setup:</h4>
@@ -302,7 +322,7 @@
 
       <p>Place these items on or under each table:</p>
 
-      <div class="sidebar">
+      <div class="sidebar" style="width: 60%;">
         <img src="images/tools.jpg" srcset="images/tools@2.jpg 2x"/>
       </div>
 
@@ -363,24 +383,25 @@
       <p></p>
 
       <section>
+        <div class="parts-needed">
+          <h4>Requires:</h4>
+          3 people
+          <br/>5 8″×<sup>1</sup>⁄<sub>2</sub>″ bolts.
+          <br/><b>Tools:</b> <sup>9</sup>⁄<sub>16</sub>″ socket wrench, pliers.
+        </div>
+
         <h3>Install speaker shelves.</h3>
 
-        <ol>
-          <li>The largest of the three shelves is positioned in the center of the bus.</li>
-        </ol>
-
         <p>There are three shelves. The largest goes in the center.
-
           Slide center shelf into holes on side of bus. You’ll need to wiggle it to get it in. It should end up
-          flush
-          with the side of the bus. Next, install the right shelf and bolt to center shelf. Last, install the left
-          shelf.
-          For
-          stationary setup, the shelves are only secure enough for the speakers OR for a single person at a time.
+          flush with the side of the bus. Secure with bolts through bus. One person will need to be inside the bus
+          holding bolt heads, which are located inside the benches.
         </p>
-      </section>
 
-      <p></p>
+        <p>Next, install the right shelf and bolt to center shelf and through bus.</p>
+
+        <p>Last, install the left shelf and bolt through bus.</p>
+      </section>
 
       <section>
         <div class="parts-needed">
@@ -395,12 +416,10 @@
         <p>The platform is in two sections, fore and aft. One edge of each is marked as “BUS SIDE”.</p>
         <ol>
           <li>The fore platform is installed first. Slide it into place under the aluminum steps, line up the holes, and
-            bolt
-            in place (finger-tight) to the dropped beam that’s inset two feet from the edge of the bus (2 bolts).
+            bolt in place (finger-tight) to the dropped beam that’s inset two feet from the edge of the bus (2 bolts).
           </li>
           <li>Slide the aft platform in place. To align it properly, pull it away from the bus ½”, drop in place, and
-            slide
-            back toward the bus. Align the holes and bolt to the dropped beam (2 bolts).
+            slide back toward the bus. Align the holes and bolt to the dropped beam (2 bolts).
           </li>
           <li>For mobile, add 5 additional bolts along the edge of the bus.</li>
           <li>Tighten all the bolts with wrenches.</li>
@@ -411,7 +430,7 @@
       <section>
         <h3>Install panel support struts</h3>
 
-        <p>Install panel support struts 7ABC, 17ABC, 17DEF, 33ABC, 4_ABC, and 41ABC. Tighten hardware with tools.
+        <p>Install panel support struts 7ABC, 17ABC, 17DEF, 33ABC, and 41ABC. Tighten hardware with tools.
           Short ⅜&quot; bolts at the ends of the struts should point up.
         </p>
       </section>
@@ -437,82 +456,36 @@
         </ol>
       </section>
 
-      <div class="parts-needed">
-        <h4>Requires:</h4>
-        • Lots of <sup>1</sup>⁄<sub>4</sub>&quot; bolts, various lengths, with wing nuts.
-        <br/>• Lots of heavy-duty zip ties.
-        <br/><b>Tools:</b> vice grips, aligner pins.
-      </div>
-
-      <p><i>Illustration of panel labels</i></p>
-
-      <p>The rest of the panels go up and come down in groups as indicated below. For stationary setup, use heavy-duty
-        zip
-        ties wherever possible. In some cases zip ties may not be strong enough and ¼&quot; hardware (bolt, two washers,
-        and
-        a wingnut) will be necessary.
-      </p>
-      <ol>
-        <li>Raise the panel or group of panels into place.</li>
-        <li>Align edges of panel and use tapered steel pin to line up holes. Pick a hole as near to the end as possible
-          while still allowing hardware to be inserted. Try to reuse holes from previous installations if possible.
-        </li>
-        <li>Use a vice grip to clamp the panel to its neighbor.</li>
-        <li>Remove the steel pin and replace with a heavy-duty zip tie or ¼&quot; hardware.</li>
-        <li>Remove vice grip.</li>
-        <li>Repeat for the other end of the edge.</li>
-        <li>Repeat for other vertices on the panel or panel group.</li>
-      </ol>
-      <p></p>
-
-      <p>Two teams may install the front and rear panels simultaneously.</p>
-
-      <p></p>
-
-      <p>Install remaining front panels in this order:</p>
+      <p>Install remaining forward panels (as described above in Generally Useful Knowledge) in this order:</p>
       <ul>
-        <li>Belly (18/23)</li>
-        <li>Forearm (8/9/14)</li>
-        <li>Lower Breast (2/3)</li>
-        <li>Rack (13/16/15)</li>
-        <li>Lower Back (20)</li>
-        <li>Shoulder (6/12/11/F9/F8 — be ready to attach strut 11)</li>
-        <li>Upper Breast (1/5/4)</li>
-        <li>F3/F4</li>
-        <li>Fore Hoof (10 — inset a bit behind the other panels, attach with zip ties)
+        <li>Belly (14D … 18D … 23D)</li>
+        <li>Forearm (3D … 8D … 9D … F5D … F6D)</li>
+        <li>Breast (1D … 2D … F3D … F4D)</li>
+        <li>Rack (13D … 15D … 16D)</li>
+        <li>Lower Back (20D)</li>
+        <li>Shoulder (4D … 5D … 6D … 11D … 12D)</li>
+        <li>Fore Hoof (10D — inset a bit behind the other panels, attach loosely with zip ties)
         </li>
       </ul>
       <p></p>
 
-      <p>Install remaining rear panels in this order:</p>
+      <p>Install remaining aft panels (as described above in Generally Useful Knowledge) in this order:</p>
       <ul>
-        <li>Ribs (27/28/29)</li>
-        <li>Flank (22/31/30)</li>
-        <li>Leg (33/36/34/37/43 — panel 33 sits on strut 33ABC. Use a short ⅜&quot; bolt, finger-tight.)
+        <li>Leg (33D … 34D … 36D … 37D … 43D — panel 33 sits on strut 33ABC. Use a short ⅜&quot; bolt, finger-tight.)
         </li>
-        <li>Hock (35/41/42 — be ready to attach strut 41)</li>
-        <li>Dock (39/40 — be ready to attach strut 39)</li>
-        <li>Dock 2 (32)</li>
-        <li>Loin (24/25/26)</li>
-        <li>Back (19 — place at back of DJ booth)</li>
-        <li>Hind Hoof (38 — inset a bit behind the other panels, attach with zip ties)
+        <li>Hock (35D … 41D … 42D … R7D — panel 41 sits on strut 41ABC)</li>
+        <li>Ribs (27D … 28D … 29D)</li>
+        <li>Flank (22D … 30D … 31D)</li>
+        <li>Loin (24D … 25D … 26D)</li>
+        <li>Hind Hoof (38D — inset a bit behind the other panels, attach loosely with zip ties)
         </li>
       </ul>
-      <p></p>
-
-      <p></p>
-
-      <p></p>
-
-      <p></p>
 
       <h3>Safety Checks:</h3>
       <ul>
         <li>All tension cables are correctly oriented and tensioned.</li>
         <li>All bolts are tight.</li>
       </ul>
-      <hr style="page-break-before:always;display:none;">
-      <h3></h3>
     </section>
 
     <section class="crew-instructions business-crew" id="setup-business-crew-section">
@@ -569,28 +542,18 @@
 
         <ol>
           <li>With four people, raise the stair so that it is vertical between the two platforms. Position the top of
-            the
-            stair within the C-channel and top of platform (the two metal angles sit on the top surface of the
-            platform).
-            The
-            bottom of the stair sits on top of the lower platform (the two metal angles sit on the top surface of the
-            platform). Position wood blocking between the gap on the side of the lower platform and face of stair, use 2
-            -
-            6&quot;
-            bolts to hold in place.
+            the stair within the C-channel and top of platform (the two metal angles sit on the top surface of the
+            platform). The bottom of the stair sits on top of the lower platform (the two metal angles sit on the top
+            surface of the platform). Position wood blocking between the gap on the side of the lower platform and face
+            of stair, use 2 - 6&quot; bolts to hold in place.
           </li>
           <li>Secure top and bottom metal angles with 3&quot; bolts.</li>
           <li>4&quot; lag bolts are drilled into the backside of the stair thru the c-channel. Use the top two holes,
-            and
-            the
-            two bottom holes. Wood blocking is required - install between channel and stair - for the two bottom bolts.
-            Use
-            the hammer drill. You will need to be below the main platform, on top of the bus roof.
+            and the two bottom holes. Wood blocking is required - install between channel and stair - for the two bottom
+            bolts. Use the hammer drill. You will need to be below the main platform, on top of the bus roof.
           </li>
         </ol>
       </section>
-      <p><b></b>
-      </p>
 
       <section>
         <div class="parts-needed">
@@ -659,11 +622,7 @@
         Short ⅜&quot; bolts at the ends of the struts should point up.
       </p>
 
-      <p></p>
-
-      <p><b>Install the panels.</b></p>
-
-      <p></p>
+      <h3>Install the panels.</h3>
 
       <p>Labeling: Each party (driver) side panel is labeled with its number, a red dot, the numbers of its neighbors,
         and an arrow indicating which way is up. If tags or labels are illegible or missing, let the setup lead know!
@@ -683,66 +642,33 @@
       </ol>
       <p></p>
 
-      <p>The rest of the panels go up and come down in groups as indicated below. For stationary setup, use heavy-duty
-        zip
-        ties wherever possible. In some cases zip ties may not be strong enough and ¼&quot; hardware (bolt, two washers,
-        and
-        a wingnut) will be necessary.
-      </p>
-      <ol>
-        <li>Raise the panel or group of panels into place.</li>
-        <li>Align edges of panel and use tapered steel pin to line up holes. Pick a hole as near to the end as possible
-          while still allowing hardware to be inserted. Try to reuse holes from previous installations if possible.
-        </li>
-        <li>Use a vice grip to clamp the panel to its neighbor.</li>
-        <li>Remove the steel pin and replace with a heavy-duty zip tie or ¼&quot; hardware.</li>
-        <li>Remove vice grip.</li>
-        <li>Repeat for the other end of the edge.</li>
-        <li>Repeat for other vertices on the panel or panel group.</li>
-      </ol>
-      <p></p>
-
-      <p>Two teams may install the front and rear panels simultaneously.</p>
-
-      <p></p>
-
-      <p>Install remaining front panels in this order:</p>
+      <p>Install remaining forward panels (as described above in Generally Useful Knowledge) in this order:</p>
       <ul>
-        <li>Belly (18/23)</li>
-        <li>Forearm (8/9/14)</li>
-        <li>Lower Breast (2/3)</li>
-        <li>Rack (13/16/15)</li>
-        <li>Lower Back (20)</li>
-        <li>Shoulder (6/12/11 — be ready to attach strut 11)</li>
-        <li>More Shoulder (F9/F8)</li>
-        <li>Upper Breast (1/F3)</li>
-        <li>More Upper Breast (4/5)
-        </li>
-        <li>F4/F10</li>
-        <li>Fore Hoof (10 — inset a bit behind the other panels, attach with zip ties)
-        </li>
+        <li>Belly (14P … 18P … 23P)</li>
+        <li>Forearm (8P … 9P)</li>
+        <li>Breast (1P … 2P … 3P … F3P … F4P)</li>
+        <li>Rack (13P … 15P … 16P)</li>
+        <li>Lower Back (20P)</li>
+        <li>Shoulder (4P … 5P … 6P … 11P … 12P)</li>
+        <li>Fore Hoof (10P — inset a bit behind the other panels, attach loosely with zip ties)</li>
       </ul>
       <p></p>
 
-      <p>Install remaining rear panels in this order:</p>
+      <p>Install remaining aft panels (as described above in Generally Useful Knowledge) in this order:</p>
       <ul>
-        <li>Ribs (27/28/29)</li>
-        <li>Flank (22/31/30)</li>
-        <li>Hock-ish? 40/41/42 (panel 41 sits on strut 41ABC at the labeled spot. Use a short ⅜&quot; bolt,
-          finger-tight.)
+        <li>Hock (35P … 41P … 42P … R7P) (panel 41 sits on struts 41ABC and 41DEF at the labeled spots. Use short ⅜&quot;
+          bolts, finger-tight.)
         </li>
-        <li>Leg (33/36/34/37/43 — be ready to attach strut 33)</li>
-        <li>Dock-ish? 39/32/35/RP2</li>
+        <li>Leg (33P … 34P … 36P … 37P … 43P)</li>
+        <li>Ribs (27P … 28P … 29P)</li>
+        <li>Flank (22P … 30P … 31P)</li>
+        <li>Loin (24P … 25P … 26AP … 26BP)</li>
+        <li>Hind Hoof (38P — inset a bit behind the other panels, attach loosely with zip ties)
+        </li>
+        <li>Dock 39/32/35/RP2</li>
         <li>24 (and maybe 25?)</li>
-        <li>Back (19)</li>
-        <li>Hind Hoof (38 — inset a bit behind the other panels, attach with zip ties)
-        </li>
+        <li>Back (19AP … 19BP)</li>
       </ul>
-      <p></p>
-
-      <p></p>
-
-      <p></p>
 
       <h3>Safety Checks:</h3>
       <ul>
@@ -754,38 +680,63 @@
     <section class="crew-instructions head-and-hind-crew" id="setup-head-and-hind-crew-section">
       <h2>Head Assembly</h2>
 
-      <p><b></b></p>
+      <section>
+        <div class="parts-needed">
+          <h4>Requires:</h4>
+          4 people, 15’ rope, front platform, 2 support beams, 2 2″×<sup>3</sup>⁄<sub>8</sub>″ bolts,
+          4 3″×<sup>1</sup>⁄<sub>2</sub>″ bolts, 2 C-clamps, pliers,
+          impact driver with <sup>3</sup>⁄<sub>4</sub>″ socket.
+        </div>
+        <h3>Install front platform extension.</h3>
 
-      <p><b>Install face mounting bracket.</b> Mounts on Arch #1 from top platform. Hardware: four 3&quot;×¼&quot; bolts
-        through top, two 3&quot;×¼&quot; bolts through bottom.
-      </p>
+        <ul>
+          <li>Attach support beams using the <sup>3</sup>⁄<sub>8</sub>″ bolts.</li>
+          <li>Feed rope through loops at front of platform.</li>
+          <li>Place a person on each side of the narrower front section of the fixed platform. Each should have a
+            C-clamp and two <sup>1</sup>⁄<sub>2</sub>″ bolts.
+          </li>
+          <li>Position platform vertically above Arch #1. Align it so the bolt holes will match when lowered into
+            place.
+          </li>
+          <li>Using the rope, carefully lower the platform into position. Make sure it doesn't tip forward. The support
+            beams should rest on the horizontal beam just above the bus roof.
+          </li>
+          <li>Use C-clamps to temporarily secure the platform.</li>
+          <li>One side at a time, insert <sup>1</sup>⁄<sub>2</sub>″ bolts and tighten using impact driver. You may need
+            to leave the bolts a little loose until they've all been inserted since the holes aren't perfectly aligned.
+          </li>
+        </ul>
+      </section>
 
-      <p></p>
+      <section>
+        <div class="parts-needed">
+          <h4>Requires:</h4>
+          4 people, 10' rope, 4 <sup>1</sup>⁄<sub>4</sub>″ bolts, hammer, 2 large vice grips, 4 wood screws, drill.
+        </div>
 
-      <p><b>Install face.</b> Need: 10’ rope, L and R face support struts; small aligner pin; two 2&quot;×¼&quot; bolts;
-        four wood screws and drill.
-      </p>
-      <ol>
-        <li>Set face on the top platform facing forward, and tilted back so he’s looking upward. Attach L and R face
-          support
-          struts to the 5-hole punched angle iron bracket on the brow (use the outer holes, attach with ¼&quot;
-          hardware).
-          Tie rope to brow between struts.
-        </li>
-        <li>With the face still tilted back so he’s looking forward and upward, slide the face along the platform, then
-          along the face mounting bracket until the back edge of his chin rests at the edge of the mounting bracket.
-          There
-          are safety stops to prevent the face from sliding off the edge.
-        </li>
-        <li>Holding onto the L and R face support struts and the rope, tilt the face forward until he’s looking straight
-          ahead. Secure the face (at the back of his chin) to the mounting bracket using two ¼&quot; bolts.
-        </li>
-        <li>Secure the L and R face support struts to the platform where indicated using two wood screws for each strut.
-          Tie
-          the rope to any secure spot on the platform.
-        </li>
-      </ol>
-      <p></p>
+        <h3>Install face.</h3>
+
+        <ol>
+          <li>Set face on the top platform facing forward, and tilted back so he’s looking upward. Attach L and R face
+            support struts to the 5-hole punched angle iron bracket on the brow (use the outer holes, attach with ¼&quot;
+            hardware). Tie one end of the rope between the struts.
+          </li>
+          <li>With the face still tilted back so he’s looking forward and upward, slide the face to the edge of the
+            front platform extension so it aligns with the rusty guides.
+          </li>
+          <li>Position a person to help drop the face into the rusty guides. They'll need a hammer to force it in,
+            maybe.
+          </li>
+          <li>Holding onto the L and R face support struts, tilt the face forward until he’s looking
+            straight ahead. It's further out than you think.
+          </li>
+          <li>Drop the face (at the back of his chin) into the rusty guides. Secure it using a vice grip on each side.
+          </li>
+          <li>Temporarily secure the L and R face support struts to the platform where indicated using two wood screws
+            for each strut. Tie the rope to any fixed point on the platform.
+          </li>
+        </ol>
+      </section>
 
       <p><b>Install ears.</b></p>
 
@@ -818,15 +769,16 @@
 
       <p><b>Install head.</b></p>
 
-      <p><b></b></p>
-      <hr style="page-break-before:always;display:none;">
-      <p><b></b></p>
-
-      <h2>Other Stuff Assembly</h2>
-
-      <p></p>
-
-      <p></p>
+      <p>Install hind panels (as described above in Generally Useful Knowledge) in this order:</p>
+      <ul>
+        <li>Party Side Dock 2 (32D)</li>
+        <li>Business Side Dock 2 (32P)</li>
+        <li>Party Side Dock (39D … 40D … R2D)</li>
+        <li>Business Side Dock (39P … 40P … R2P)</li>
+        <li>Dock Bridge (R1)</li>
+        <li>Party Side Twist (R3D … R4D … R5D … R6D)</li>
+        <li>Business Side Twist (R3P … R4P … R5P … R6P)</li>
+      </ul>
 
       <p>Disable bus suspension.
         <span class="stationary">For stationary setup, use four jack stands. Position the stands so they support a
@@ -837,50 +789,41 @@
       </p>
     </section>
 
+    <section class="crew-instructions party-crew" id="teardown-party-crew-section">
+      <h2>Party Crew Teardown</h2>
 
-    <h2>Party (Driver) Side Teardown</h2>
+      <p>All light tubes and bins should have already been removed before starting! It&#39;s ok if the soundsystem is
+        still in place.
+      </p>
 
-    <p>All light tubes and bins should have already been removed before starting! It&#39;s ok if the soundsystem is
-      still in place.
-    </p>
+      <ul>
+        <li>Take down the panels in reverse order of setup. Lean the panels against a wall or something.
+        </li>
+        <li>Take down struts. DO NOT DISASSEMBLE! LEAVE HARDWARE IN PLACE!</li>
+        <li>Remove speakers.</li>
+        <li>Remove speaker shelves.</li>
+        <li></li>
+      </ul>
+      <p></p>
+    </section>
 
-    <ul>
-      <li>Take down the panels in reverse order of setup. Lean the panels against a wall or something.
-      </li>
-      <li>Take down struts. DO NOT DISASSEMBLE! LEAVE HARDWARE IN PLACE!</li>
-      <li>Remove speakers.</li>
-      <li>Remove speaker shelves.</li>
-      <li></li>
-    </ul>
-    <p></p>
+    <section class="crew-instructions business-crew" id="teardown-business-crew-section">
+      <h2>Business Crew Teardown</h2>
 
-    <p></p>
-    <hr style="page-break-before:always;display:none;">
-    <h2></h2>
+    </section>
 
-    <h2>Business (Passenger) Side Teardown</h2>
+    <section class="crew-instructions head-and-hind-crew" id="teardown-head-and-hind-crew-section">
+      <h2>Head & Hind Teardown</h2>
 
-    <h2></h2>
-    <hr style="page-break-before:always;display:none;">
-    <h2></h2>
+      <h2></h2>
+      <ul>
+        <li><h2 style="display:inline">Take down the rear panels in reverse order.
+        </h2></li>
+        <li>Detach the outer sphincter</li>
+      </ul>
+    </section>
 
-    <h2>Head/Rear Teardown</h2>
-
-    <h2></h2>
-    <ul>
-      <li><h2 style="display:inline">Take down the rear panels in reverse order.
-      </h2></li>
-      <li>Detach the outer sphincter</li>
-    </ul>
-    <hr style="page-break-before:always;display:none;">
-    <h2></h2>
-
-    <h2>Other Stuff Teardown</h2>
-
-    <h2></h2>
-
-    <p></p></div>
-
+  </div>
 </div>
 </body>
 </html>

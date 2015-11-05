@@ -527,14 +527,15 @@ article .polaroid img {
   display: block !important;
   text-align: center;
   width: 100%;
+  padding: .5em 0;
   border: 1px solid black;
 }
-/* line 431, ../../sass/screen.scss */
+/* line 432, ../../sass/screen.scss */
 #edition-picker ul, #edition-picker li {
   display: inline;
   margin: 0;
 }
-/* line 436, ../../sass/screen.scss */
+/* line 437, ../../sass/screen.scss */
 #edition-picker li + li::before {
   content: " | ";
 }
@@ -580,7 +581,7 @@ hgroup.logotype {
 @media only screen and (max-device-width: 640px) {
   /* line 37, ../../sass/common.scss */
   hgroup.logotype {
-    padding: 0px;
+    padding: 0;
   }
 }
 /* line 47, ../../sass/common.scss */
