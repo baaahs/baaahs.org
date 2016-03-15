@@ -65,6 +65,16 @@ div.content {
   }
 }
 
+div.content-no-img {
+  padding: 50px 0px 20px 0px;
+  position: relative;
+
+  @media #{$information-phone} {
+    background-size: auto;
+    background-position-x: -200px;
+  }
+}
+
 div.polaroids {
   position: absolute;
   top: 20px;
@@ -130,6 +140,15 @@ div.news {
   }
 }
 
+h3.page-title {
+  margin-top: 2rem;
+  margin-bottom: -2rem;
+  padding: 0;
+  color: #e8e8e8;
+  text-align: center;
+  font-size: 3em;
+}
+
 article {
   background-color: rgba(255,255,255,.3);
   margin: 1.5em;
@@ -137,6 +156,25 @@ article {
 
   .big-image {
     max-width: 100%;
+  }
+
+  .fb-video {
+    margin-top: 2rem;
+  }
+
+  h3 {
+    padding-top: 2em;
+  }
+  
+  p.survey-link {
+    text-align: center;
+    padding-top: 2rem;
+    padding-bottom: 3rem;
+  }
+
+  a.survey-link {
+    font-size: 2rem;
+    color: #f8f8f8;
   }
 }
 
