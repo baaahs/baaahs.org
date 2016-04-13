@@ -11,6 +11,7 @@ set :bind, '0.0.0.0'
 # redirects to keep!
 get('/drive') { redirect "https://drive.google.com/drive/folders/0B_TasILTM6TWa18zdHdmNHpUYzg" }
 get('/pspride') { redirect "/psp/" }
+get('/join') { redirect "http://goo.gl/forms/XUvltyxql2" }
 
 # old URLs to support for a while!
 get('/shifts') { redirect "http://www.volunteerspot.com/login/entry/375755452038" } # todo kill after 20151201
