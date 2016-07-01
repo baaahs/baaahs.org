@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <style type="text/css">
+    body {
+      background: #0d71bb;
+    }
+
+    table.assets td {
+      border: 1px solid black;
+    }
+
+    .asset-map {
+      width: 100px;
+      height: 100px;
+    }
+  </style>
+
+  <script>
+    var mapsToInit = [];
+    function initMap() {
+      mapsToInit.forEach(function (mapInfo) {
+        var mapDiv = document.getElementById(mapInfo.map);
+        var map = new google.maps.Map(mapDiv, {
+          center: {lat: mapInfo.latitude, lng: mapInfo.longitude},
+          zoom: 12
+        });
+      });
+    }
+  </script>
+  <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBSthjdwfUJh2BtrHrUSgMEaEH_P6-RJP8&callback=initMap"></script>
+
+</head>
+<body>
+<table class="assets">
+  <tr>
+    <td>Tag</td>
+    <td>Name</td>
+    <td>First Seen</td>
+    <td>Last Seen</td>
+    <td>Location</td>
+  </tr>
+
+  <% assets.each do |asset| %>
+    <% latest_scan = asset.scans.order("created_at DESC").first %>
+    <tr>
+      <td><%= asset.tag %></td>
+      <td><%= asset.name %></td>
+      <td><%= asset.created_at %></td>
+      <td><%= latest_scan.created_at %></td>
+      <td>
+        <div id="map-scan-<%= latest_scan.id %>" class="asset-map"></div> <%= latest_scan.latitude %>
+        , <%= latest_scan.longitude %></td>
+    </tr>
+
+    <script>
+      mapsToInit.push({
+        map: 'map-scan-<%= latest_scan.id %>',
+        latitude: <%= latest_scan.latitude %>,
+        longitude: <%= latest_scan.longitude %>
+      });
+    </script>
+  <% end %>
+</table>
+</body>
+</html>

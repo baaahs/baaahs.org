@@ -55,6 +55,10 @@ module BaaahsOrg
       send_file public_html.join('index.html')
     end
 
+    get '/assets' do
+      erb :assets, locals: {assets: ::Asset.all}
+    end
+
     get '/a/:tag' do
       tag = params[:tag]
       asset = ::Asset.find_or_initialize_by tag: tag
