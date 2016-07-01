@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>About BAAAHS!</title>
+
+  <meta name="name" content="BAAAHS!">
+  <meta name="description" content="About the Big-Ass Amazingly Awesome Homosexual Sheep!">
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+  <link href='http://fonts.googleapis.com/css?family=Open+Sans|Open+Sans+Condensed:300|Special+Elite' rel='stylesheet' type='text/css'>
+
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css"/>
+  <link href="/stylesheets/print.css" media="print" rel="stylesheet" type="text/css"/>
+  <!--[if IE]>
+  <link href="/stylesheets/ie.css" media="screen, projection" rel="stylesheet" type="text/css"/>
+  <![endif]-->
+
+  <script src="/js/vendor/modernizr-2.6.2.min.js"></script>
+  <script src="/js/vendor/jquery-1.9.1.min.js"></script>
+  <script src="/js/vendor/jquery-ui-1.10.2.custom.min.js"></script>
+
+</head>
+<body class="about-page blueprint" dir="ltr" itemscope itemtype="http://schema.org/Organization">
+<!--[if lt IE 8]>
+<p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade
+  your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to
+  improve your experience.</p>
+<![endif]-->
+
+<% if asset.name %>
+    Name: <%== asset.name %>
+<% else %>
+    <label for="name">Name:</label> <input id="name"/>
+<% end %>
+
+<p>Tag: <%= tag %></p>
+<p>Asset: <%== asset %></p>
+<p>Is New: <%= is_new %></p>
+<p>Scan: <%== scan %></p>
+
+<script type="application/javascript">
+  var asset = <%= {id: asset.id, tag: asset.tag, name: asset.name}.to_json.html_safe %>;
+
+  function update(asset, values) {
+    var http = new XMLHttpRequest();
+    var url = "/a/" + asset.tag;
+    var params = JSON.stringify(values);
+    http.open("POST", url, true);
+
+    // Send the proper header information along with the request
+    http.setRequestHeader("Content-type", "application/x-json");
+
+    http.onreadystatechange = function () { // Call a function when the state changes.
+      if (http.readyState == 4 && http.status == 200) {
+        alert(http.responseText);
+      }
+    };
+    http.send(params);
+  }
+
+  document.getElementById("name").addEventListener("change", function(e) {
+    update(asset, { name: e.target.value });
+  });
+
+  navigator.geolocation.getCurrentPosition(function (result) {
+    console.log(result);
+    var coords = result.coords;
+    update(asset, {
+      scan: {
+        id: <%= scan.id %>,
+        latitude: coords.latitude,
+        longitude: coords.longitude,
+        accuracy: coords.accuracy,
+        altitude: coords.altitude,
+        altitudeAccuracy: coords.altitudeAccuracy
+      }
+    });
+  })
+</script>
+
+</body>
+</html>
