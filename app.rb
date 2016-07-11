@@ -122,7 +122,18 @@ module BaaahsOrg
                 altitude: body["altitude"],
                 altitude_accuracy: body["altitudeAccuracy"],
       )
+    end
 
+    get '/assman/assets/:tag/scans' do
+      tag = params[:tag]
+      asset = ::Asset.find_by_tag tag
+      scans = ::Scan.where asset: asset
+
+      if request.accept? "application/json"
+        scans.to_json
+      # else
+      #   erb :asset_scans, locals: {asset: asset}
+      end
     end
 
     get '/*' do |file|
