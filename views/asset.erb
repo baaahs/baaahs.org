@@ -31,13 +31,9 @@
 <script type="application/javascript">
   var asset = <%= {id: asset.id, tag: asset.tag, name: asset.name}.to_json.html_safe %>;
 
-  function update(asset, values) {
+  function doHttp(method, url, values) {
     var http = new XMLHttpRequest();
-    var url = "/a/" + asset.tag;
-    var params = JSON.stringify(values);
-    http.open("POST", url, true);
-
-    // Send the proper header information along with the request
+    http.open(method, url, true);
     http.setRequestHeader("Content-type", "application/x-json");
 
     http.onreadystatechange = function () { // Call a function when the state changes.
@@ -45,19 +41,27 @@
         alert(http.responseText);
       }
     };
-    http.send(params);
+
+    http.send(JSON.stringify(values));
+  }
+
+  function updateAsset(asset, values) {
+    doHttp("POST", "/assman/assets/" + asset.tag, values);
+  }
+
+  function createScan(asset, values) {
+    doHttp("PUT", "/assman/assets/" + asset.tag + "/scans", values);
   }
 
   document.getElementById("name").addEventListener("change", function (e) {
-    update(asset, {name: e.target.value});
+    updateAsset(asset, {name: e.target.value});
   });
 
   navigator.geolocation.getCurrentPosition(function (result) {
     console.log(result);
     var coords = result.coords;
-    update(asset, {
+    createScan(asset, {
       scan: {
-        id: <%= scan.id %>,
         latitude: coords.latitude,
         longitude: coords.longitude,
         accuracy: coords.accuracy,

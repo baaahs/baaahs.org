@@ -40,6 +40,7 @@ module BaaahsOrg
 
 
     public_html = Pathname('public')
+    set :public_folder => Pathname(root) + public_html
 
 # redirects to keep!
     get('/drive') { redirect "https://drive.google.com/drive/folders/0B_TasILTM6TWa18zdHdmNHpUYzg" }
@@ -55,31 +56,31 @@ module BaaahsOrg
       send_file public_html.join('index.html')
     end
 
-    get '/assets' do
+    get '/a/:tag' do
+      tag = params[:tag]
+      erb :tag_asset, locals: {tag: tag}
+    end
+
+    get '/assman/assets/:tag' do
+      tag = params[:tag]
+      asset = ::Asset.find_or_initialize_by tag: tag
+      if asset.name.nil? && asset.tag =~ /^[FR]?\d+[DP]$/
+        asset.name = "Panel #{asset.tag}"
+      end
+      asset.save! if asset.changed?
+
+      if request.accept? "application/json"
+        asset.to_json
+      else
+        erb :asset, locals: {asset: asset}
+      end
+    end
+
+    get '/assman/assets' do
       erb :assets, locals: {assets: ::Asset.all}
     end
 
-    get '/a/:tag' do
-      tag = params[:tag]
-      asset = ::Asset.find_or_initialize_by tag: tag
-      is_new = asset.new_record?
-      asset.save! if asset.new_record?
-
-      puts({id: asset.id, tag: asset.tag, name: asset.name}.to_json)
-
-      scan = ::Scan.create!(
-          asset: asset,
-      )
-
-      erb :asset, locals: {
-          tag: tag,
-          asset: asset,
-          is_new: is_new,
-          scan: scan,
-      }
-    end
-
-    post '/a/:tag' do
+    post '/assman/assets/:tag' do
       tag = params[:tag]
       p params
       body = JSON.parse(request.body.read)
@@ -109,10 +110,27 @@ module BaaahsOrg
       asset.save! if asset.changed?
     end
 
+    put '/assman/assets/:tag/scans' do
+      tag = params[:tag]
+      body = JSON.parse(request.body.read)
+      asset = ::Asset.find_by_tag tag
+      ::Scan.create!(
+                asset: asset,
+                latitude: body["latitude"],
+                longitude: body["longitude"],
+                accuracy: body["accuracy"],
+                altitude: body["altitude"],
+                altitude_accuracy: body["altitudeAccuracy"],
+      )
+
+    end
+
     get '/*' do |file|
       file = file.gsub(/\.\./, '')
 
-      if public_html.join("#{file}.html").file?
+      if public_html.join("#{file}").file?
+        send_file public_html.join("#{file}")
+      elsif public_html.join("#{file}.html").file?
         send_file public_html.join("#{file}.html")
       elsif public_html.join(file).directory? && public_html.join(file, 'index.html').file?
         if file =~ /\/$/

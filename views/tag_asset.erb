@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <style type="text/css">
+    body {
+      background: #0d71bb;
+    }
+  </style>
+
+  <script type="application/javascript" src="/js/AssMan.js"></script>
+</head>
+<body dir="ltr" itemscope>
+<header>Super awesome BAAAHS asset tracking!</header>
+
+<!--[if lt IE 8]>
+<p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade
+  your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to
+  improve your experience.</p>
+<![endif]-->
+
+<div id="container"></div>
+</body>
+
+<script type="application/javascript">
+  var container = document.getElementById('container');
+  console.log(container);
+  new AssMan(container).viewAndTag('<%= tag %>');
+</script>
+
+</html>
