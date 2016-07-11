@@ -3,11 +3,33 @@ function AssMan(container) {
 }
 
 AssMan.prototype.viewAndTag = function(tag) {
+    function makeEditable(span, callback) {
+        var parentNode = span.parentNode;
+        span.addEventListener('click', function (e) {
+            var input = document.createElement('input');
+            var text = span.innerText;
+            input.setAttribute('type', 'text');
+            input.setAttribute('value', text);
+            parentNode.replaceChild(input, span);
+            input.addEventListener('change', function (e) {
+                span.innerText = input.value;
+                console.log('value:', input.value);
+                parentNode.replaceChild(span, input);
+
+                callback(input.value);
+            });
+        });
+    }
+
     this.getAsset(tag, {
         success: function(asset) {
             this.container.innerHTML = '<p>Tag: <span id="asset-name"></p>';
             var name = document.getElementById('asset-name');
-            name.innerText = "Asset " + asset.name;
+            name.innerText = asset.name == null ? "" : asset.name;
+
+            makeEditable(name, function(newValue) {
+                this.updateAsset(asset, {name: newValue});
+            }.bind(this));
         }.bind(this),
         failure: function(response) {
             alert(response);
@@ -23,7 +45,9 @@ AssMan.prototype.doHttp = function(method, url, values, callbacks) {
 
     http.onreadystatechange = function () { // Call a function when the state changes.
         if (http.readyState == 4 && http.status == 200) {
-            callbacks.success(JSON.parse(http.responseText));
+            if (callbacks && callbacks.success) {
+                callbacks.success(JSON.parse(http.responseText));
+            }
         }
     };
 
