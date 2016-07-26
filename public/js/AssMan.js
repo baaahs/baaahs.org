@@ -1,6 +1,6 @@
 function AssMan(container) {
     this.container = container;
-    this.userName = document.getElementById("user-name");
+    this.userNameView = document.getElementById("user-name");
     this.mainAlertView = document.getElementById("alert");
     document.getElementById("user-not-me").addEventListener("click", function () {
         this.logIn();
@@ -8,9 +8,10 @@ function AssMan(container) {
 
     var userCookie = Cookies.get("user");
     if (userCookie) {
-        this.user = JSON.parse(userCookie);
+        this.logInAs_(userCookie);
+    } else {
+        this.logIn();
     }
-    console.log("cookie", this.user);
 }
 
 AssMan.prototype.logIn = function () {
@@ -40,11 +41,10 @@ AssMan.prototype.logIn = function () {
                 this.createUser({name: input.value}, {
                     success: function (user) {
                         this.logInAs_(user);
+                        this.hideAlert();
                     }.bind(this)
                 })
             }.bind(this));
-
-            console.log(users);
         }.bind(this),
         failure: function (result) {
             console.log(result);
@@ -53,7 +53,11 @@ AssMan.prototype.logIn = function () {
 };
 
 AssMan.prototype.logInAs_ = function (user) {
-    Cookies.set("user", JSON.stringify(user));
+    this.user = user;
+    console.log("user:", this.user);
+    this.userNameView.innerText = this.user.name;
+
+    Cookies.set("user", user);
 };
 
 AssMan.prototype.showAlert = function () {
@@ -132,6 +136,9 @@ AssMan.prototype.doHttp_ = function (method, url, values, callbacks) {
     http.open(method, url, true);
     http.setRequestHeader("Accept", "application/json");
     http.setRequestHeader("Content-type", "application/json");
+    if (this.user) {
+        http.setRequestHeader("Authorization", "Basic " + btoa(this.user.name + ":pass"));
+    }
 
     http.onreadystatechange = function () { // Call a function when the state changes.
         if (http.readyState == 4 && http.status == 200) {
@@ -243,26 +250,31 @@ HtmlUtils.el = function (tagName, classes, innerText) {
 Cookies = {};
 
 Cookies.set = function (name, value, days) {
+    var expires = "";
     if (days) {
         var date = new Date();
         date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
-        var expires = "; expires=" + date.toGMTString();
+        expires = "; expires=" + date.toGMTString();
     }
-    else var expires = "";
-    document.cookie = name + "=" + value + expires + "; path=/";
+    document.cookie = encodeURIComponent(name) + "="
+        + encodeURIComponent(JSON.stringify(value))
+        + expires + "; path=/";
 };
 
 Cookies.get = function (name) {
-    var nameEQ = name + "=";
+    var nameEQ = encodeURIComponent(name) + "=";
     var ca = document.cookie.split(';');
     for (var i = 0; i < ca.length; i++) {
         var c = ca[i];
         while (c.charAt(0) == ' ') c = c.substring(1, c.length);
-        if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
+        if (c.indexOf(nameEQ) == 0) {
+            var value = decodeURIComponent(c.substring(nameEQ.length, c.length));
+            return value && value.length > 0 ? JSON.parse(value) : null;
+        }
     }
     return null;
 };
 
-Cookies.erase = function (name) {
+Cookies.remove = function (name) {
     Cookies.set(name, "", -1);
 };

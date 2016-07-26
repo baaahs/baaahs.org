@@ -39,6 +39,24 @@ module BaaahsOrg
           :secret => ENV['SESSION_SECRET']
     end
 
+    helpers do
+      def protected!
+        return if authorized?
+        headers['WWW-Authenticate'] = 'Basic realm="Restricted Area"'
+        halt 401, "Not authorized\n"
+      end
+
+      def authorized?
+        @auth ||=  Rack::Auth::Basic::Request.new(request.env)
+        @auth.provided? and @auth.basic? and @auth.credentials
+      end
+
+      def user
+        @auth ||=  Rack::Auth::Basic::Request.new(request.env)
+        ::User.where(name: @auth.credentials[0]).first!
+      end
+    end
+
 
     public_html = Pathname('public')
     set :public_folder => Pathname(root) + public_html
@@ -79,6 +97,7 @@ module BaaahsOrg
     end
 
     post '/assman/assets/:tag' do
+      protected!
       tag = params[:tag]
       p params
       body = JSON.parse(request.body.read)
@@ -88,7 +107,6 @@ module BaaahsOrg
       scan_params = body["scan"]
       if scan_params
         scan = asset.scans.find_by_id scan_params["id"]
-        puts "Scan: #{scan.to_s}"
         if scan
           {
               latitude: "latitude",
@@ -111,11 +129,14 @@ module BaaahsOrg
     end
 
     put '/assman/assets/:tag/scans' do
+      protected!
+
       tag = params[:tag]
       body = JSON.parse(request.body.read)
       asset = ::Asset.find_by_tag tag
       ::Scan.create!(
                 asset: asset,
+                user: user,
                 latitude: body["latitude"],
                 longitude: body["longitude"],
                 accuracy: body["accuracy"],
