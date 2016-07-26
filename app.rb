@@ -15,6 +15,7 @@ $: << File.expand_path('../app', __FILE__)
 
 require 'models/asset'
 require 'models/scan'
+require 'models/user'
 
 class Helper
   include ActionView::Helpers::JavaScriptHelper
@@ -64,9 +65,6 @@ module BaaahsOrg
     get '/assman/assets/:tag' do
       tag = params[:tag]
       asset = ::Asset.find_or_initialize_by tag: tag
-      if asset.name.nil? && asset.tag =~ /^[FR]?\d+[DP]$/
-        asset.name = "Panel #{asset.tag}"
-      end
       asset.save! if asset.changed?
 
       if request.accept? "application/json"
@@ -108,6 +106,8 @@ module BaaahsOrg
       asset.name = body["name"] if body["name"]
       # asset.user = ::User.find_by_id if params[:name]
       asset.save! if asset.changed?
+
+      {}.to_json
     end
 
     put '/assman/assets/:tag/scans' do
@@ -131,6 +131,27 @@ module BaaahsOrg
 
       if request.accept? "application/json"
         scans.to_json
+      # else
+      #   erb :asset_scans, locals: {asset: asset}
+      end
+    end
+
+    get '/assman/users' do
+      users = ::User.all.order(:name)
+
+      if request.accept? "application/json"
+        users.to_json
+      # else
+      #   erb :asset_scans, locals: {asset: asset}
+      end
+    end
+
+    put '/assman/users' do
+      body = JSON.parse(request.body.read)
+      user = User.create!(name: body["name"])
+
+      if request.accept? "application/json"
+        user.to_json
       # else
       #   erb :asset_scans, locals: {asset: asset}
       end

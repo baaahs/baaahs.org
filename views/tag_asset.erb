@@ -6,12 +6,28 @@
     body {
       background: #0d71bb;
     }
+
+    #asset-name {
+      min-width: 100px;
+      border: 1px solid lightgray;
+    }
+
+    img.saving-spinner {
+      width: 16px;
+      height: 16px;
+    }
   </style>
 
   <script type="application/javascript" src="/js/AssMan.js"></script>
 </head>
 <body dir="ltr" itemscope>
-<header>Super awesome BAAAHS asset tracking!</header>
+
+<div id="alert"></div>
+
+<header>
+  Super awesome BAAAHS asset tracking!
+  <div id="user-info">Hi <span id="user-name"></span>! <a id="user-not-me" href="#">Not you?</a></div>
+</header>
 
 <!--[if lt IE 8]>
 <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade
@@ -19,7 +35,7 @@
   improve your experience.</p>
 <![endif]-->
 
-<div id="container"></div>
+<div id="container" style="background-color: white; border: 1px solid black; border-radius: .5em; padding: .5em;"></div>
 </body>
 
 <script type="application/javascript">

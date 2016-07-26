@@ -5,8 +5,12 @@ class CreateSchema < ActiveRecord::Migration
       t.string :name, index: true, null: true
       t.string :notes, null: true
       t.string :state, index: true, null: true
+      t.boolean :is_container, default: false
+      t.belongs_to :container, references: :asset, index: true
       t.timestamps null: false
     end
+
+    add_foreign_key :assets, :assets, column: :container_id
 
     create_table :users do |t|
       t.string :name, index: true, unique: true, null: false
@@ -28,8 +32,11 @@ class CreateSchema < ActiveRecord::Migration
       t.decimal :accuracy, precision: 10, scale: 1
       t.decimal :altitude, precision: 10, scale: 6
       t.decimal :altitude_accuracy, precision: 10, scale: 1
+      t.belongs_to :container_scan, references: :scan, index: true
       t.timestamps index: true, null: false
     end
+
+    add_foreign_key :scans, :scans, column: :container_scan_id
 
     create_table :photos do |t|
       t.belongs_to :asset, index: true, foreign_key: true, null: false

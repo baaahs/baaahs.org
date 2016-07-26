@@ -1,10 +1,81 @@
 function AssMan(container) {
     this.container = container;
+    this.userName = document.getElementById("user-name");
+    this.mainAlertView = document.getElementById("alert");
+    document.getElementById("user-not-me").addEventListener("click", function () {
+        this.logIn();
+    }.bind(this));
+
+    var userCookie = Cookies.get("user");
+    if (userCookie) {
+        this.user = JSON.parse(userCookie);
+    }
+    console.log("cookie", this.user);
 }
 
-AssMan.prototype.viewAndTag = function(tag) {
+AssMan.prototype.logIn = function () {
+    this.getUsers({
+        success: function (users) {
+            var alert = this.showAlert();
+            var ul = document.createElement("ul");
+            alert.appendChild(ul);
+
+            users.forEach(function (user) {
+                var li = document.createElement("li");
+                ul.appendChild(li);
+                var a = document.createElement("a");
+                li.appendChild(a);
+                a.innerText = user.name;
+                a.addEventListener("click", function () {
+                    this.logInAs_(user);
+                    this.hideAlert();
+                }.bind(this));
+            }.bind(this));
+
+            var li = document.createElement("li");
+            ul.appendChild(li);
+            var input = document.createElement("input");
+            li.appendChild(input);
+            input.addEventListener("change", function () {
+                this.createUser({name: input.value}, {
+                    success: function (user) {
+                        this.logInAs_(user);
+                    }.bind(this)
+                })
+            }.bind(this));
+
+            console.log(users);
+        }.bind(this),
+        failure: function (result) {
+            console.log(result);
+        }.bind(this)
+    });
+};
+
+AssMan.prototype.logInAs_ = function (user) {
+    Cookies.set("user", JSON.stringify(user));
+};
+
+AssMan.prototype.showAlert = function () {
+    this.hideAlert();
+    this.mainAlertView.classList.remove("hidden");
+    return this.mainAlertView;
+};
+
+AssMan.prototype.hideAlert = function () {
+    this.mainAlertView.innerHTML = "";
+    this.mainAlertView.classList.add("hidden");
+    return this.mainAlertView;
+};
+
+AssMan.prototype.viewAndTag = function (tag) {
+    if (!this.user) {
+        this.logIn();
+        return;
+    }
+
     this.getAsset(tag, {
-        success: function(asset) {
+        success: function (asset) {
             this.container.innerHTML = '<p>Tag: <span id="asset-name"></p>' +
                 '<p>Scans: <div id="asset-scans"</div></p>';
             var nameSpan = document.getElementById('asset-name');
@@ -12,26 +83,51 @@ AssMan.prototype.viewAndTag = function(tag) {
 
             var scansDiv = document.getElementById('asset-scans');
 
-            this.makeEditable_(nameSpan, function(newValue) {
-                this.updateAsset(asset, {name: newValue});
+            HtmlUtils.makeEditable(nameSpan, function (newValue) {
+                var spinner = HtmlUtils.el('img', ['saving-spinner']);
+                spinner.setAttribute('src', 'http://loadingapng.com/templates/8/preview.gif');
+                nameSpan.parentNode.insertBefore(spinner, nameSpan.nextSibling);
+
+                this.updateAsset(asset, {name: newValue}, {
+                    success: function () {
+                        nameSpan.parentNode.removeChild(spinner);
+
+                    }, failure: function () {
+                        nameSpan.parentNode.removeChild(spinner);
+                    }
+                });
             }.bind(this));
 
             this.locationScan(asset);
 
             this.getScans(tag, {
-                success: function(scans) {
+                success: function (scans) {
                     console.log("scans", scans);
-                    scansDiv.innerText = JSON.stringify(scans);
-                }
+                    var table = document.createElement('table');
+                    var tr = document.createElement('tr');
+                    tr.innerHTML = '<th>Date</th><th>Latitude</th><th>Longitude</th>';
+                    table.appendChild(tr);
+
+                    scans.forEach(function (row) {
+                        tr = document.createElement('tr');
+                        var td = document.createElement('td');
+                        tr.appendChild(HtmlUtils.el('td', [], row.created_at));
+                        tr.appendChild(HtmlUtils.el('td', [], row.latitude));
+                        tr.appendChild(HtmlUtils.el('td', [], row.longitude));
+                        table.appendChild(tr);
+                    }.bind(this));
+                    scansDiv.innerText = '';
+                    scansDiv.appendChild(table);
+                }.bind(this)
             });
         }.bind(this),
-        failure: function(response) {
+        failure: function (response) {
             alert(response);
         }.bind(this)
     });
 };
 
-AssMan.prototype.doHttp_ = function(method, url, values, callbacks) {
+AssMan.prototype.doHttp_ = function (method, url, values, callbacks) {
     var http = new XMLHttpRequest();
     http.open(method, url, true);
     http.setRequestHeader("Accept", "application/json");
@@ -39,8 +135,10 @@ AssMan.prototype.doHttp_ = function(method, url, values, callbacks) {
 
     http.onreadystatechange = function () { // Call a function when the state changes.
         if (http.readyState == 4 && http.status == 200) {
+            console.log('response:', http.responseText);
             if (callbacks && callbacks.success) {
-                callbacks.success(JSON.parse(http.responseText));
+                callbacks.success(
+                    http.responseText ? JSON.parse(http.responseText) : null);
             } else {
                 console.log("No success callback for " + method + " " + url);
             }
@@ -56,27 +154,35 @@ AssMan.prototype.doHttp_ = function(method, url, values, callbacks) {
     http.send(JSON.stringify(values));
 };
 
-AssMan.prototype.getAsset = function(tag, callbacks) {
+AssMan.prototype.getAsset = function (tag, callbacks) {
     this.doHttp_("GET", "/assman/assets/" + tag, null, callbacks);
 };
 
-AssMan.prototype.updateAsset = function(asset, values, callbacks) {
+AssMan.prototype.updateAsset = function (asset, values, callbacks) {
     this.doHttp_("POST", "/assman/assets/" + asset.tag, values, callbacks);
 };
 
-AssMan.prototype.createScan = function(asset, values, callbacks) {
+AssMan.prototype.createScan = function (asset, values, callbacks) {
     this.doHttp_("PUT", "/assman/assets/" + asset.tag + "/scans", values, callbacks);
 };
 
-AssMan.prototype.getScans = function(tag, callbacks) {
+AssMan.prototype.getScans = function (tag, callbacks) {
     this.doHttp_("GET", "/assman/assets/" + tag + "/scans", null, callbacks);
+};
+
+AssMan.prototype.getUsers = function (callbacks) {
+    this.doHttp_("GET", "/assman/users", null, callbacks);
+};
+
+AssMan.prototype.createUser = function (info, callbacks) {
+    this.doHttp_("PUT", "/assman/users", info, callbacks);
 };
 
 // document.getElementById("name").addEventListener("change", function (e) {
 //     updateAsset(asset, {name: e.target.value});
 // });
 
-AssMan.prototype.locationScan = function(asset) {
+AssMan.prototype.locationScan = function (asset) {
     navigator.geolocation.getCurrentPosition(function (result) {
         console.log(result);
         var coords = result.coords;
@@ -90,21 +196,73 @@ AssMan.prototype.locationScan = function(asset) {
     }.bind(this));
 };
 
-AssMan.prototype.makeEditable_ = function(span, callback) {
+function HtmlUtils() {
+}
+
+HtmlUtils.makeEditable = function (span, callback) {
     var parentNode = span.parentNode;
     span.addEventListener('click', function (e) {
+        var editing = true;
         var input = document.createElement('input');
-        var text = span.innerText;
+        var origText = span.innerText;
         input.setAttribute('type', 'text');
-        input.setAttribute('value', text);
+        input.value = origText;
         parentNode.replaceChild(input, span);
-        input.addEventListener('change', function (e) {
+
+        var doChange = function (e) {
+            if (!editing) return;
+
+            editing = false;
             span.innerText = input.value;
-            console.log('value:', input.value);
             parentNode.replaceChild(span, input);
 
-            callback(input.value);
-        });
+            if (input.value != origText) {
+                callback(input.value);
+            }
+        };
+
+        input.addEventListener('change', doChange);
+        input.addEventListener('blur', doChange);
         input.focus();
     });
+};
+
+HtmlUtils.el = function (tagName, classes, innerText) {
+    var el = document.createElement(tagName);
+    if (classes) {
+        for (var i = 0; i < classes.length; i++) {
+            el.classList.add(classes[i]);
+        }
+    }
+
+    if (innerText) el.innerText = innerText;
+
+    return el;
+};
+
+Cookies = {};
+
+Cookies.set = function (name, value, days) {
+    if (days) {
+        var date = new Date();
+        date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+        var expires = "; expires=" + date.toGMTString();
+    }
+    else var expires = "";
+    document.cookie = name + "=" + value + expires + "; path=/";
+};
+
+Cookies.get = function (name) {
+    var nameEQ = name + "=";
+    var ca = document.cookie.split(';');
+    for (var i = 0; i < ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0) == ' ') c = c.substring(1, c.length);
+        if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
+    }
+    return null;
+};
+
+Cookies.erase = function (name) {
+    Cookies.set(name, "", -1);
 };
