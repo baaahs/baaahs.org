@@ -109,6 +109,7 @@ DEPENDENCIES
   actionview
   erubis
   pg
+  rack
   rake
   sinatra
   sinatra-activerecord
