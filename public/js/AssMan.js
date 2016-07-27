@@ -109,15 +109,17 @@ AssMan.prototype.viewAndTag = function (tag) {
                     console.log("scans", scans);
                     var table = document.createElement('table');
                     var tr = document.createElement('tr');
-                    tr.innerHTML = '<th>Date</th><th>Latitude</th><th>Longitude</th>';
+                    tr.innerHTML = '<th>Date</th><th>Latitude</th><th>Longitude</th><th>By</th>';
                     table.appendChild(tr);
 
                     scans.forEach(function (row) {
                         tr = document.createElement('tr');
                         var td = document.createElement('td');
-                        tr.appendChild(HtmlUtils.el('td', [], row.created_at));
+                        var scannedAt = new Date(Date.parse(row.createdAt));
+                        tr.appendChild(HtmlUtils.el('td', [], prettyDate(scannedAt)));
                         tr.appendChild(HtmlUtils.el('td', [], row.latitude));
                         tr.appendChild(HtmlUtils.el('td', [], row.longitude));
+                        tr.appendChild(HtmlUtils.el('td', [], row.userName));
                         table.appendChild(tr);
                     }.bind(this));
                     scansDiv.innerText = '';
@@ -278,3 +280,45 @@ Cookies.get = function (name) {
 Cookies.remove = function (name) {
     Cookies.set(name, "", -1);
 };
+
+/*
+ * JavaScript Pretty Date
+ * Copyright (c) 2011 John Resig (ejohn.org)
+ * Licensed under the MIT and GPL licenses.
+ */
+
+// Takes an ISO time and returns a string representing how
+// long ago the date represents.
+function prettyDate(date) {
+    // var date = new Date((time || "").replace(/-/g, "/").replace(/[TZ]/g, " ")),
+    var diff = (((new Date()).getTime() - date.getTime()) / 1000),
+        day_diff = Math.floor(diff / 86400);
+
+    if (isNaN(day_diff) || day_diff < 0 || day_diff >= 31)
+        return;
+
+    function prefix(number) {
+        return number < 10 ? "0" + number : "" + number;
+    }
+    var at = prefix(date.getHours()) + ":" + prefix(date.getMinutes());
+
+    return day_diff == 0 && (
+        diff < 60 && "just now" ||
+        diff < 120 && "1 minute ago" ||
+        diff < 3600 && Math.floor(diff / 60) + " minutes ago" ||
+        diff < 7200 && "1 hour ago" ||
+        diff < 86400 && Math.floor(diff / 3600) + " hours ago") ||
+        day_diff == 1 && "Yesterday at " + at ||
+        day_diff < 7 && day_diff + " days ago at " + at ||
+        day_diff < 31 && Math.ceil(day_diff / 7) + " weeks ago at" + at;
+}
+
+// If jQuery is included in the page, adds a jQuery plugin to handle it as well
+if (typeof jQuery != "undefined")
+    jQuery.fn.prettyDate = function () {
+        return this.each(function () {
+            var date = prettyDate(this.title);
+            if (date)
+                jQuery(this).text(date);
+        });
+    };

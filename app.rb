@@ -148,10 +148,17 @@ module BaaahsOrg
     get '/assman/assets/:tag/scans' do
       tag = params[:tag]
       asset = ::Asset.find_by_tag tag
-      scans = ::Scan.where asset: asset
+      scans = ::Scan.where(asset: asset).order(:created_at => "DESC")
 
       if request.accept? "application/json"
-        scans.to_json
+        scans.map do |scan|
+          {
+              latitude: scan.latitude,
+              longitude: scan.longitude,
+              userName: scan.user ? scan.user.name : nil,
+              createdAt: scan.created_at,
+          }
+        end.to_json
       # else
       #   erb :asset_scans, locals: {asset: asset}
       end
