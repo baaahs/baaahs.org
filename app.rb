@@ -14,6 +14,7 @@ require 'pathname'
 $: << File.expand_path('../app', __FILE__)
 
 require 'models/asset'
+require 'models/event'
 require 'models/scan'
 require 'models/user'
 
@@ -138,6 +139,7 @@ module BaaahsOrg
 
       tag = params[:tag]
       asset = ::Asset.find_by_tag tag
+      event = json_body["eventId"] ? ::Event.find_by_id(json_body["eventId"]) : nil
       ::Scan.create!(
                 asset: asset,
                 user: current_user,
@@ -146,6 +148,7 @@ module BaaahsOrg
                 accuracy: json_body["accuracy"],
                 altitude: json_body["altitude"],
                 altitude_accuracy: json_body["altitudeAccuracy"],
+                event: event,
       )
     end
 
@@ -160,6 +163,7 @@ module BaaahsOrg
               latitude: scan.latitude,
               longitude: scan.longitude,
               userName: scan.user ? scan.user.name : nil,
+              eventName: scan.event ? scan.event.name : nil,
               createdAt: scan.created_at,
           }
         end.to_json

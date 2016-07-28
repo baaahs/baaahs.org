@@ -1,49 +1,65 @@
 function AssMan(container) {
     this.container = container;
-    this.userNameView = document.getElementById("user-name");
+
     this.mainAlertView = document.getElementById("alert");
+
+    this.userNameView = document.getElementById("user-name");
     document.getElementById("user-not-me").addEventListener("click", function () {
-        this.logIn();
+        this.selectUser();
+    }.bind(this));
+
+    this.eventNameView = document.getElementById("event-name");
+    document.getElementById("event-change").addEventListener("click", function () {
+        this.selectEvent();
     }.bind(this));
 
     this.networkActivity = new CountedActivity(document.getElementById("network-activity"));
     this.locationActivity = new CountedActivity(document.getElementById("location-activity"));
 
-    var userCookie = Cookies.get("user");
-    if (userCookie) {
-        this.logInAs_(userCookie);
-    } else {
-        this.logIn();
-    }
+    this.lastLocation = Cookies.get("lastLocation");
+
+    this.checkRequirements();
 }
 
-AssMan.prototype.logIn = function () {
+AssMan.prototype.checkRequirements = function () {
+    var currentUser = Cookies.get("user");
+    if (!currentUser) {
+        this.selectUser();
+    } else {
+        this.setUser_(currentUser);
+
+        var currentEvent = Cookies.get("event");
+        if (!currentEvent) {
+            this.selectEvent();
+        } else {
+            this.setEvent_(currentEvent);
+        }
+    }
+};
+
+AssMan.prototype.selectUser = function () {
+    this.userNameView.innerText = "unknown person";
     this.getUsers({
         success: function (users) {
             var alert = this.showAlert();
-            var ul = document.createElement("ul");
-            alert.appendChild(ul);
+            var ul = HtmlUtils.append(alert, "ul");
 
             users.forEach(function (user) {
-                var li = document.createElement("li");
-                ul.appendChild(li);
-                var a = document.createElement("a");
-                li.appendChild(a);
-                a.innerText = user.name;
+                var li = HtmlUtils.append(ul, "li");
+                var a = HtmlUtils.append(li, "a", [], user.name);
                 a.addEventListener("click", function () {
-                    this.logInAs_(user);
+                    this.setUser_(user);
                     this.hideAlert();
+                    this.checkRequirements();
                 }.bind(this));
             }.bind(this));
 
-            var li = document.createElement("li");
-            ul.appendChild(li);
-            var input = document.createElement("input");
-            li.appendChild(input);
+            var li = HtmlUtils.append(ul, "li");
+            var input = HtmlUtils.append(li, "input");
             input.addEventListener("change", function () {
                 this.createUser({name: input.value}, {
                     success: function (user) {
-                        this.logInAs_(user);
+                        this.setUser_(user);
                         this.hideAlert();
                     }.bind(this)
                 })
@@ -55,12 +71,53 @@ AssMan.prototype.logIn = function () {
     });
 };
 
-AssMan.prototype.logInAs_ = function (user) {
+AssMan.prototype.setUser_ = function (user) {
     this.user = user;
     console.log("user:", this.user);
     this.userNameView.innerText = this.user.name;
 
     Cookies.set("user", user);
+};
+
+AssMan.prototype.selectEvent = function () {
+    this.userNameView.innerText = "nobody";
+    this.getEvents({
+        success: function (events) {
+            var alert = this.showAlert();
+            var ul = HtmlUtils.append(alert, "ul");
+
+            events.forEach(function (user) {
+                var li = HtmlUtils.append(ul, "li");
+                var a = HtmlUtils.append(li, "a", [], user.name);
+                a.addEventListener("click", function () {
+                    this.setEvent_(user);
+                    this.hideAlert();
+                }.bind(this));
+            }.bind(this));
+
+            var li = HtmlUtils.append(ul, "li");
+            var input = HtmlUtils.append(li, "input");
+            input.addEventListener("change", function () {
+                this.createEvent({name: input.value}, {
+                    success: function (event) {
+                        this.setEvent_(event);
+                        this.hideAlert();
+                    }.bind(this)
+                })
+            }.bind(this));
+        }.bind(this),
+        failure: function (result) {
+            console.log(result);
+        }.bind(this)
+    });
+};
+
+AssMan.prototype.setEvent_ = function (event) {
+    this.event = event;
+    console.log("event:", this.event);
+    this.eventNameView.innerText = this.event.name;
+
+    Cookies.set("event", event);
 };
 
 AssMan.prototype.showAlert = function () {
@@ -77,7 +134,7 @@ AssMan.prototype.hideAlert = function () {
 
 AssMan.prototype.viewAndTag = function (tag) {
     if (!this.user) {
-        this.logIn();
+        this.selectUser();
         return;
     }
 
@@ -88,11 +145,9 @@ AssMan.prototype.viewAndTag = function (tag) {
             var nameSpan = document.getElementById('asset-name');
             nameSpan.innerText = asset.name == null ? "" : asset.name;
 
-            var scansDiv = document.getElementById('asset-scans');
-
             HtmlUtils.makeEditable(nameSpan, function (newValue) {
                 var spinner = HtmlUtils.el('img', ['saving-spinner']);
-                spinner.setAttribute('src', 'http://loadingapng.com/templates/8/preview.gif');
+                spinner.setAttribute('src', '/images/assman/activity.gif');
                 nameSpan.parentNode.insertBefore(spinner, nameSpan.nextSibling);
 
                 this.updateAsset(asset, {name: newValue}, {
@@ -107,23 +162,20 @@ AssMan.prototype.viewAndTag = function (tag) {
 
             this.locationScan(asset);
 
+            var scansDiv = document.getElementById('asset-scans');
             this.getScans(tag, {
                 success: function (scans) {
                     console.log("scans", scans);
-                    var table = document.createElement('table');
-                    var tr = document.createElement('tr');
-                    tr.innerHTML = '<th>Date</th><th>Latitude</th><th>Longitude</th><th>By</th>';
-                    table.appendChild(tr);
+                    var table = HtmlUtils.el('table');
+                    var tr = HtmlUtils.append(table, 'tr');
+                    tr.innerHTML = '<th>Date</th><th>Location</th><th>By</th><th>Event</th>';
 
                     scans.forEach(function (row) {
-                        tr = document.createElement('tr');
-                        var td = document.createElement('td');
-                        var scannedAt = new Date(Date.parse(row.createdAt));
-                        tr.appendChild(HtmlUtils.el('td', [], prettyDate(scannedAt)));
-                        tr.appendChild(HtmlUtils.el('td', [], row.latitude));
-                        tr.appendChild(HtmlUtils.el('td', [], row.longitude));
-                        tr.appendChild(HtmlUtils.el('td', [], row.userName));
-                        table.appendChild(tr);
+                        tr = HtmlUtils.append(table, 'tr');
+                        HtmlUtils.append(tr, 'td', [], prettyDate(new Date(Date.parse(row.createdAt))));
+                        HtmlUtils.append(tr, 'td', [], GeoUtils.distance(row, this.lastLocation));
+                        HtmlUtils.append(tr, 'td', [], row.userName);
+                        HtmlUtils.append(tr, 'td', [], row.eventName);
                     }.bind(this));
                     scansDiv.innerText = '';
                     scansDiv.appendChild(table);
@@ -164,8 +216,6 @@ AssMan.prototype.doHttp_ = function (method, url, values, callbacks) {
             } else {
                 console.log("No failure callback for " + method + " " + url);
             }
-        } else {
-            console.log("unknown readyState " + http.readyState + " for " + url)
         }
     }.bind(this);
 
@@ -214,13 +264,18 @@ AssMan.prototype.locationScan = function (asset) {
         this.locationActivity.decrUses();
         console.log(result);
         var coords = result.coords;
-        this.createScan(asset, {
+        var betterCoords = {
             latitude: coords.latitude,
             longitude: coords.longitude,
             accuracy: coords.accuracy,
             altitude: coords.altitude,
-            altitudeAccuracy: coords.altitudeAccuracy
-        });
+            altitudeAccuracy: coords.altitudeAccuracy,
+            eventId: this.event ? this.event.id : null
+        };
+        this.createScan(asset, betterCoords);
+
+        Cookies.set("lastLocation", betterCoords);
+        this.lastLocation = coords;
     }.bind(this));
 };
 
@@ -255,27 +310,33 @@ HtmlUtils.makeEditable = function (span, callback) {
     });
 };
 
-CountedActivity = function(view) {
+CountedActivity = function (view) {
     this.view = view;
     this.count = 0;
 };
 
-CountedActivity.prototype.incrUses = function() {
+CountedActivity.prototype.incrUses = function () {
     this.count++;
     this.update_();
 };
 
-CountedActivity.prototype.decrUses = function() {
+CountedActivity.prototype.decrUses = function () {
     this.count--;
     this.update_();
 };
 
-CountedActivity.prototype.update_ = function() {
+CountedActivity.prototype.update_ = function () {
     if (this.count == 0) {
         this.view.classList.add("hidden");
     } else {
         this.view.classList.remove("hidden");
     }
+};
+
+HtmlUtils.append = function (parent, tagName, classes, innerText) {
+    var child = HtmlUtils.el(tagName, classes, innerText);
+    parent.appendChild(child);
+    return child;
 };
 
 HtmlUtils.el = function (tagName, classes, innerText) {
@@ -342,6 +403,7 @@ function prettyDate(date) {
     function prefix(number) {
         return number < 10 ? "0" + number : "" + number;
     }
+
     var at = prefix(date.getHours()) + ":" + prefix(date.getMinutes());
 
     return day_diff == 0 && (
@@ -364,3 +426,35 @@ if (typeof jQuery != "undefined")
                 jQuery(this).text(date);
         });
     };
+
+GeoUtils = {};
+
+GeoUtils.distance = function(from, to) {
+    if (!from || !to) { return "unknown"; }
+
+    var distKm = GeoUtils.getDistanceFromLatLonInKm(from.latitude, from.longitude, to.latitude, to.longitude);
+    var distMi = distKm * 0.621371192;
+    var distFt = (distMi * 5280) % 5280;
+    if (distMi > 1) {
+        return distMi.toFixed(1) + "mi";
+    } else {
+        return distFt.toFixed(0) + "ft";
+    }
+};
+
+GeoUtils.getDistanceFromLatLonInKm = function (lat1, lon1, lat2, lon2) {
+    var R = 6371; // Radius of the earth in km
+    var dLat = GeoUtils.deg2rad(lat2 - lat1);  // deg2rad below
+    var dLon = GeoUtils.deg2rad(lon2 - lon1);
+    var a =
+            Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+            Math.cos(GeoUtils.deg2rad(lat1)) * Math.cos(GeoUtils.deg2rad(lat2)) *
+            Math.sin(dLon / 2) * Math.sin(dLon / 2)
+        ;
+    var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    return R * c; // Distance in km
+};
+
+GeoUtils.deg2rad = function (deg) {
+    return deg * (Math.PI / 180)
+}
