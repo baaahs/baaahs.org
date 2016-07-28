@@ -6,6 +6,9 @@ function AssMan(container) {
         this.logIn();
     }.bind(this));
 
+    this.networkActivity = new CountedActivity(document.getElementById("network-activity"));
+    this.locationActivity = new CountedActivity(document.getElementById("location-activity"));
+
     var userCookie = Cookies.get("user");
     if (userCookie) {
         this.logInAs_(userCookie);
@@ -142,8 +145,11 @@ AssMan.prototype.doHttp_ = function (method, url, values, callbacks) {
         http.setRequestHeader("Authorization", "Basic " + btoa(this.user.name + ":pass"));
     }
 
+    this.networkActivity.incrUses();
+
     http.onreadystatechange = function () { // Call a function when the state changes.
         if (http.readyState == 4 && http.status == 200) {
+            this.networkActivity.decrUses();
             console.log('response:', http.responseText);
             if (callbacks && callbacks.success) {
                 callbacks.success(
@@ -152,13 +158,16 @@ AssMan.prototype.doHttp_ = function (method, url, values, callbacks) {
                 console.log("No success callback for " + method + " " + url);
             }
         } else if (http.readyState == 4) {
+            this.networkActivity.decrUses();
             if (callbacks && callbacks.failure) {
                 callbacks.failure(http);
             } else {
                 console.log("No failure callback for " + method + " " + url);
             }
+        } else {
+            console.log("unknown readyState " + http.readyState + " for " + url)
         }
-    };
+    }.bind(this);
 
     http.send(JSON.stringify(values));
 };
@@ -187,12 +196,22 @@ AssMan.prototype.createUser = function (info, callbacks) {
     this.doHttp_("PUT", "/assman/users", info, callbacks);
 };
 
+AssMan.prototype.getEvents = function (callbacks) {
+    this.doHttp_("GET", "/assman/events", null, callbacks);
+};
+
+AssMan.prototype.createEvent = function (info, callbacks) {
+    this.doHttp_("PUT", "/assman/events", info, callbacks);
+};
+
 // document.getElementById("name").addEventListener("change", function (e) {
 //     updateAsset(asset, {name: e.target.value});
 // });
 
 AssMan.prototype.locationScan = function (asset) {
+    this.locationActivity.incrUses();
     navigator.geolocation.getCurrentPosition(function (result) {
+        this.locationActivity.decrUses();
         console.log(result);
         var coords = result.coords;
         this.createScan(asset, {
@@ -234,6 +253,29 @@ HtmlUtils.makeEditable = function (span, callback) {
         input.addEventListener('blur', doChange);
         input.focus();
     });
+};
+
+CountedActivity = function(view) {
+    this.view = view;
+    this.count = 0;
+};
+
+CountedActivity.prototype.incrUses = function() {
+    this.count++;
+    this.update_();
+};
+
+CountedActivity.prototype.decrUses = function() {
+    this.count--;
+    this.update_();
+};
+
+CountedActivity.prototype.update_ = function() {
+    if (this.count == 0) {
+        this.view.classList.add("hidden");
+    } else {
+        this.view.classList.remove("hidden");
+    }
 };
 
 HtmlUtils.el = function (tagName, classes, innerText) {

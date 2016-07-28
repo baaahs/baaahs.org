@@ -16,6 +16,26 @@
       width: 16px;
       height: 16px;
     }
+
+    img.network-activity {
+      position: absolute;
+      width: 16px;
+      height: 16px;
+      top: 1px;
+      right: 1px;
+    }
+
+    img.location-activity {
+      position: absolute;
+      width: 16px;
+      height: 16px;
+      top: 1px;
+      right: 21px;
+    }
+
+    .hidden {
+      display: none;
+    }
   </style>
 
   <script type="application/javascript" src="/js/AssMan.js"></script>
@@ -27,6 +47,8 @@
 <header>
   Super awesome BAAAHS asset tracking!
   <div id="user-info">Hi <span id="user-name"></span>! <a id="user-not-me" href="#">Not you?</a></div>
+  <img id="network-activity" class="network-activity hidden" src="http://loadingapng.com/templates/8/preview.gif"/>
+  <img id="location-activity" class="location-activity hidden" src="http://icons.iconarchive.com/icons/icons8/windows-8/128/Maps-Define-location-activity.png"/>
 </header>
 
 <!--[if lt IE 8]>
