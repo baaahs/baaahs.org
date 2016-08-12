@@ -63,6 +63,20 @@ module BaaahsOrg
         @json_body ||= JSON.parse(request.body.read)
       end
 
+      def asset_info(asset)
+        {
+            tag: asset.tag,
+            name: asset.name,
+            createdAt: asset.created_at,
+            lastScan: scan_info(asset.last_scan),
+            state: asset.state,
+            container: {
+                tag: asset.tag,
+                name: asset.name,
+            }
+        }
+      end
+
       def scan_info(scan)
         {
             latitude: scan.latitude,
@@ -112,7 +126,12 @@ module BaaahsOrg
     end
 
     get '/assman/assets' do
-      erb :assets, locals: {assets: ::Asset.all}
+      assets = ::Asset.all
+      if request.accept?("application/json") && params[:js]
+        assets.map { |asset| asset_info(asset) }.to_json
+      else
+        erb :assets, locals: {assets: assets}
+      end
     end
 
     post '/assman/assets/:tag' do

@@ -1,4 +1,4 @@
-function AssMan(container) {
+function AssMan(container, notScan) {
     this.container = container;
 
     this.mainAlertModalView = document.getElementById("alert-modal");
@@ -150,6 +150,30 @@ AssMan.prototype.scanColumns_ = function (scan) {
     ];
 };
 
+AssMan.prototype.listAssets = function () {
+    this.getAssets({
+        success: function (assets) {
+            this.container.innerHTML = '';
+
+            var assetsTable = new HtmlUtils.Table(["Tag", "Name", "Last Seen", "Where", "By", "While", "In"]);
+            this.container.appendChild(assetsTable.el);
+
+            assets.forEach(function(asset) {
+                var lastScan = asset.lastScan;
+                assetsTable.addRow([
+                    {text: asset.tag},
+                    {text: asset.name},
+                    {text: lastScan ? prettyDate(new Date(Date.parse(lastScan.createdAt))) : ''},
+                    {text: GeoUtils.distance(lastScan, this.lastLocation)},
+                    {text: lastScan ? lastScan.userName : ''},
+                    {text: lastScan ? lastScan.eventName : ''},
+                    {text: asset.container ? asset.container.name : ''},
+                ]);
+            }.bind(this));
+        }.bind(this)
+    });
+};
+
 AssMan.prototype.viewAndTag = function (tag) {
     this.checkRequirements();
 
@@ -261,6 +285,10 @@ AssMan.prototype.doHttp_ = function (method, url, values, callbacks) {
     }.bind(this);
 
     http.send(JSON.stringify(values));
+};
+
+AssMan.prototype.getAssets = function (callbacks) {
+    this.doHttp_("GET", "/assman/assets?js=true", null, callbacks);
 };
 
 AssMan.prototype.getAsset = function (tag, callbacks) {
