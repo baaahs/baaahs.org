@@ -81,7 +81,7 @@
       <td><%= asset.tag %></td>
       <td><%= asset.name %></td>
       <td><%= asset.created_at %></td>
-      <td><%= latest_scan.created_at %></td>
+      <td><%= latest_scan ? latest_scan.created_at : ''%></td>
       <td>
         <div id="map-scan-<%= latest_scan.id %>" class="asset-map"></div> <%= latest_scan.latitude %>
         , <%= latest_scan.longitude %></td>
