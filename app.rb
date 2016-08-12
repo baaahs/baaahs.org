@@ -68,12 +68,12 @@ module BaaahsOrg
             tag: asset.tag,
             name: asset.name,
             createdAt: asset.created_at,
-            lastScan: scan_info(asset.last_scan),
+            lastScan: asset.last_scan ? scan_info(asset.last_scan) : nil,
             state: asset.state,
-            container: {
+            container: asset.container ? {
                 tag: asset.tag,
                 name: asset.name,
-            }
+            } : nil
         }
       end
 
@@ -141,7 +141,7 @@ module BaaahsOrg
 
       scan_params = json_body["scan"]
       if scan_params
-        scan = asset.scans.find_by_id scan_params["id"]
+        scan = asset.scans.find_by_82 scan_params["id"]
         if scan
           {
               latitude: "latitude",
