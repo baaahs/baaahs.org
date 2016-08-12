@@ -15,8 +15,14 @@
       opacity: .125;
     }
 
+    table.assets {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
     table.assets td {
       border: 1px solid black;
+      border-collapse: collapse;
     }
 
     .asset-map {
@@ -66,40 +72,40 @@
   console.log(container);
   new AssMan(container).listAssets();
 </script>
-<table class="assets">
-  <tr>
-    <td>Tag</td>
-    <td>Name</td>
-    <td>First Seen</td>
-    <td>Last Seen</td>
-    <td>Location</td>
-  </tr>
+<!--<table class="assets">-->
+  <!--<tr>-->
+    <!--<td>Tag</td>-->
+    <!--<td>Name</td>-->
+    <!--<td>First Seen</td>-->
+    <!--<td>Last Seen</td>-->
+    <!--<td>Location</td>-->
+  <!--</tr>-->
 
-  <% assets.each do |asset| %>
-    <% latest_scan = asset.scans.order("created_at DESC").first %>
-    <tr>
-      <td><%= asset.tag %></td>
-      <td><%= asset.name %></td>
-      <td><%= asset.created_at %></td>
-      <td><%= latest_scan ? latest_scan.created_at : ''%></td>
-      <td>
-        <% if latest_scan %>
-            <div id="map-scan-<%= latest_scan.id %>" class="asset-map"></div> <%= latest_scan.latitude %>
-            , <%= latest_scan.longitude %>
-        <% end %>
-      </td>
-    </tr>
+  <!--< % assets.each do |asset| %>-->
+    <!--< % latest_scan = asset.scans.order("created_at DESC").first %>-->
+    <!--<tr>-->
+      <!--<td>< %= asset.tag %></td>-->
+      <!--<td>< %= asset.name %></td>-->
+      <!--<td>< %= asset.created_at %></td>-->
+      <!--<td>< %= latest_scan ? latest_scan.created_at : ''%></td>-->
+      <!--<td>-->
+        <!--< % if latest_scan %>-->
+            <!--<div id="map-scan-< %= latest_scan.id %>" class="asset-map"></div> < %= latest_scan.latitude %>-->
+            <!--, < %= latest_scan.longitude %>-->
+        <!--< % end %>-->
+      <!--</td>-->
+    <!--</tr>-->
 
-      <% if latest_scan %>
-          <script>
-            mapsToInit.push({
-              map: 'map-scan-<%= latest_scan.id %>',
-              latitude: <%= latest_scan.latitude %>,
-              longitude: <%= latest_scan.longitude %>
-            });
-          </script>
-      <% end %>
-  <% end %>
-</table>
+      <!--< % if latest_scan %>-->
+          <!--<script>-->
+<!--//            mapsToInit.push({-->
+<!--//              map: 'map-scan-< %= latest_scan.id %>',-->
+<!--//              latitude: < %= latest_scan.latitude %>,-->
+              <!--longitude: < %= latest_scan.longitude %>-->
+<!--//            });-->
+          <!--</script>-->
+      <!--< % end %>-->
+  <!--< % end %>-->
+<!--</table>-->
 </body>
 </html>

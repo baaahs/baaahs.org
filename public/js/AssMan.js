@@ -157,6 +157,7 @@ AssMan.prototype.listAssets = function () {
 
             var assetsTable = new HtmlUtils.Table(["Tag", "Name", "Last Seen", "Where", "By", "While", "In"]);
             this.container.appendChild(assetsTable.el);
+            assetsTable.el.classList.add('assets');
 
             assets.forEach(function(asset) {
                 var lastScan = asset.lastScan;
