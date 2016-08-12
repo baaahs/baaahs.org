@@ -154,22 +154,48 @@ module BaaahsOrg
       container_tag = json_body["containerTag"]
       container = container_tag ? ::Asset.find_by_tag(container_tag) : nil
 
-      scan = ::Scan.create!(
-          asset: asset,
-          user: current_user,
-          latitude: json_body["latitude"],
-          longitude: json_body["longitude"],
-          accuracy: json_body["accuracy"],
-          altitude: json_body["altitude"],
-          altitude_accuracy: json_body["altitudeAccuracy"],
-          event: event,
-          into_container: container
-      )
+      Scan.transaction do
+        scan = ::Scan.create!(
+            asset: asset,
+            user: current_user,
+            latitude: json_body["latitude"],
+            longitude: json_body["longitude"],
+            accuracy: json_body["accuracy"],
+            altitude: json_body["altitude"],
+            altitude_accuracy: json_body["altitudeAccuracy"],
+            event: event,
+            into_container: container
+        )
 
-      asset.container = container
-      asset.save! if asset.changed?
+        asset.container = container
+        asset.save! if asset.changed?
 
-      scan_info(scan).to_json
+        searched_containers = []
+        containers_to_search = [asset]
+        contained_assets = {}
+        until containers_to_search.empty?
+          found_assets = ::Asset.where(container: containers_to_search)
+          searched_containers += containers_to_search
+          found_assets.each { |contained_asset| contained_assets[contained_asset.id] = contained_asset }
+          containers_to_search = found_assets - searched_containers
+        end
+
+        contained_assets.values.each do |contained_asset|
+          ::Scan.create!(
+              asset: contained_asset,
+              user: current_user,
+              latitude: json_body["latitude"],
+              longitude: json_body["longitude"],
+              accuracy: json_body["accuracy"],
+              altitude: json_body["altitude"],
+              altitude_accuracy: json_body["altitudeAccuracy"],
+              event: event,
+              container_scan: scan
+          )
+        end
+
+        scan_info(scan).to_json
+      end
     end
 
     get '/assman/assets/:tag/scans' do
