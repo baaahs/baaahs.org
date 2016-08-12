@@ -62,6 +62,16 @@ module BaaahsOrg
       def json_body
         @json_body ||= JSON.parse(request.body.read)
       end
+
+      def scan_info(scan)
+        {
+            latitude: scan.latitude,
+            longitude: scan.longitude,
+            userName: scan.user ? scan.user.name : nil,
+            eventName: scan.event ? scan.event.name : nil,
+            createdAt: scan.created_at,
+        }
+      end
     end
 
 
@@ -140,16 +150,18 @@ module BaaahsOrg
       tag = params[:tag]
       asset = ::Asset.find_by_tag tag
       event = json_body["eventId"] ? ::Event.find_by_id(json_body["eventId"]) : nil
-      ::Scan.create!(
-                asset: asset,
-                user: current_user,
-                latitude: json_body["latitude"],
-                longitude: json_body["longitude"],
-                accuracy: json_body["accuracy"],
-                altitude: json_body["altitude"],
-                altitude_accuracy: json_body["altitudeAccuracy"],
-                event: event,
+      scan = ::Scan.create!(
+          asset: asset,
+          user: current_user,
+          latitude: json_body["latitude"],
+          longitude: json_body["longitude"],
+          accuracy: json_body["accuracy"],
+          altitude: json_body["altitude"],
+          altitude_accuracy: json_body["altitudeAccuracy"],
+          event: event,
       )
+
+      scan_info(scan).to_json
     end
 
     get '/assman/assets/:tag/scans' do
@@ -159,13 +171,7 @@ module BaaahsOrg
 
       if request.accept? "application/json"
         scans.map do |scan|
-          {
-              latitude: scan.latitude,
-              longitude: scan.longitude,
-              userName: scan.user ? scan.user.name : nil,
-              eventName: scan.event ? scan.event.name : nil,
-              createdAt: scan.created_at,
-          }
+          scan_info(scan)
         end.to_json
       # else
       #   erb :asset_scans, locals: {asset: asset}

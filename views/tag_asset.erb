@@ -6,7 +6,41 @@
 
   <style type="text/css">
     body {
-      background: #0d71bb;
+      background: #ffffff;
+      color: #000000;
+      font-family: 'Helvetica Neue', Arial, Helvetica, sans-serif;
+    }
+
+    #background-image {
+      z-index: -10000;
+      position: fixed;
+      opacity: .125;
+    }
+
+    div#alert-modal {
+      position: fixed;
+      background: rgba(0, 0, 0, .25);
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+    }
+
+    div#alert {
+      position: fixed;
+      background: #ffffff;
+      top: 1em;
+      right: 1em;
+      bottom: 1em;
+      left: 1em;
+      padding: 1em;
+      border: 1px solid black;
+    }
+
+    #alert li {
+      padding-bottom: .5em;
+      list-style: square;
+      list-style-position: outside;
     }
 
     #asset-name {
@@ -35,6 +69,15 @@
       right: 21px;
     }
 
+    #asset-name {
+      font-weight: bold;
+      font-size: 1.2em;
+    }
+
+    table {
+      width: 100%;
+    }
+
     .hidden {
       display: none;
     }
@@ -43,8 +86,11 @@
   <script type="application/javascript" src="/js/AssMan.js"></script>
 </head>
 <body dir="ltr" itemscope>
+<img id="background-image" src="/images/logo/BAAAHS2015LogoWithBorder-640x544.png"/>
 
-<div id="alert"></div>
+<div id="alert-modal" class="hidden">
+  <div id="alert" class="hidden"></div>
+</div>
 
 <header>
   Super awesome BAAAHS asset tracking!
@@ -60,7 +106,7 @@
   improve your experience.</p>
 <![endif]-->
 
-<div id="container" style="background-color: white; border: 1px solid black; border-radius: .5em; padding: .5em;"></div>
+<div id="container"></div>
 </body>
 
 <script type="application/javascript">

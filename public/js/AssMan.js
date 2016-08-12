@@ -1,6 +1,7 @@
 function AssMan(container) {
     this.container = container;
 
+    this.mainAlertModalView = document.getElementById("alert-modal");
     this.mainAlertView = document.getElementById("alert");
 
     this.userNameView = document.getElementById("user-name");
@@ -42,6 +43,9 @@ AssMan.prototype.selectUser = function () {
     this.getUsers({
         success: function (users) {
             var alert = this.showAlert();
+
+            HtmlUtils.append(alert, "div", null, "Who are you?");
+
             var ul = HtmlUtils.append(alert, "ul");
 
             users.forEach(function (user) {
@@ -64,6 +68,7 @@ AssMan.prototype.selectUser = function () {
                     }.bind(this)
                 })
             }.bind(this));
+            HtmlUtils.append(li, "button", null, "Done");
         }.bind(this),
         failure: function (result) {
             console.log(result);
@@ -84,6 +89,9 @@ AssMan.prototype.selectEvent = function () {
     this.getEvents({
         success: function (events) {
             var alert = this.showAlert();
+
+            HtmlUtils.append(alert, "div", null, "What are you doing?");
+
             var ul = HtmlUtils.append(alert, "ul");
 
             events.forEach(function (user) {
@@ -105,6 +113,7 @@ AssMan.prototype.selectEvent = function () {
                     }.bind(this)
                 })
             }.bind(this));
+            HtmlUtils.append(li, "button", null, "Done");
         }.bind(this),
         failure: function (result) {
             console.log(result);
@@ -122,14 +131,25 @@ AssMan.prototype.setEvent_ = function (event) {
 
 AssMan.prototype.showAlert = function () {
     this.hideAlert();
+    this.mainAlertModalView.classList.remove("hidden");
     this.mainAlertView.classList.remove("hidden");
     return this.mainAlertView;
 };
 
 AssMan.prototype.hideAlert = function () {
     this.mainAlertView.innerHTML = "";
+    this.mainAlertModalView.classList.add("hidden");
     this.mainAlertView.classList.add("hidden");
     return this.mainAlertView;
+};
+
+AssMan.prototype.scanColumns_ = function (scan) {
+    return [
+        {text: prettyDate(new Date(Date.parse(scan.createdAt))), sort: scan.createdAt},
+        {text: GeoUtils.distance(scan, this.lastLocation)},
+        {text: scan.userName},
+        {text: scan.eventName}
+    ];
 };
 
 AssMan.prototype.viewAndTag = function (tag) {
@@ -138,9 +158,11 @@ AssMan.prototype.viewAndTag = function (tag) {
         return;
     }
 
+    var scansTable = new HtmlUtils.Table(["Date", "Location", "By", "Event"]);
+
     this.getAsset(tag, {
         success: function (asset) {
-            this.container.innerHTML = '<p>Tag: <span id="asset-name"></p>' +
+            this.container.innerHTML = '<p><span id="asset-name"></p>' +
                 '<p>Scans: <div id="asset-scans"</div></p>';
             var nameSpan = document.getElementById('asset-name');
             nameSpan.innerText = asset.name == null ? "" : asset.name;
@@ -160,25 +182,22 @@ AssMan.prototype.viewAndTag = function (tag) {
                 });
             }.bind(this));
 
-            this.locationScan(asset);
+            this.locationScan(asset, {
+                success: function(scan) {
+                    console.log("Successful scan!", scan);
+                    scansTable.addRow(this.scanColumns_(scan), 0);
+                }.bind(this)
+            });
 
             var scansDiv = document.getElementById('asset-scans');
             this.getScans(tag, {
                 success: function (scans) {
-                    console.log("scans", scans);
-                    var table = HtmlUtils.el('table');
-                    var tr = HtmlUtils.append(table, 'tr');
-                    tr.innerHTML = '<th>Date</th><th>Location</th><th>By</th><th>Event</th>';
+                    scansDiv.innerText = '';
+                    scansDiv.appendChild(scansTable.el);
 
                     scans.forEach(function (row) {
-                        tr = HtmlUtils.append(table, 'tr');
-                        HtmlUtils.append(tr, 'td', [], prettyDate(new Date(Date.parse(row.createdAt))));
-                        HtmlUtils.append(tr, 'td', [], GeoUtils.distance(row, this.lastLocation));
-                        HtmlUtils.append(tr, 'td', [], row.userName);
-                        HtmlUtils.append(tr, 'td', [], row.eventName);
+                        scansTable.addRow(this.scanColumns_(row));
                     }.bind(this));
-                    scansDiv.innerText = '';
-                    scansDiv.appendChild(table);
                 }.bind(this)
             });
         }.bind(this),
@@ -258,7 +277,7 @@ AssMan.prototype.createEvent = function (info, callbacks) {
 //     updateAsset(asset, {name: e.target.value});
 // });
 
-AssMan.prototype.locationScan = function (asset) {
+AssMan.prototype.locationScan = function (asset, callbacks) {
     this.locationActivity.incrUses();
     navigator.geolocation.getCurrentPosition(function (result) {
         this.locationActivity.decrUses();
@@ -272,7 +291,7 @@ AssMan.prototype.locationScan = function (asset) {
             altitudeAccuracy: coords.altitudeAccuracy,
             eventId: this.event ? this.event.id : null
         };
-        this.createScan(asset, betterCoords);
+        this.createScan(asset, betterCoords, callbacks);
 
         Cookies.set("lastLocation", betterCoords);
         this.lastLocation = coords;
@@ -284,6 +303,7 @@ function HtmlUtils() {
 
 HtmlUtils.makeEditable = function (span, callback) {
     var parentNode = span.parentNode;
+
     span.addEventListener('click', function (e) {
         var editing = true;
         var input = document.createElement('input');
@@ -291,6 +311,8 @@ HtmlUtils.makeEditable = function (span, callback) {
         input.setAttribute('type', 'text');
         input.value = origText;
         parentNode.replaceChild(input, span);
+        var doneButton = HtmlUtils.el("button", null, "Done");
+        parentNode.insertBefore(doneButton, input.nextSibling);
 
         var doChange = function (e) {
             if (!editing) return;
@@ -298,6 +320,7 @@ HtmlUtils.makeEditable = function (span, callback) {
             editing = false;
             span.innerText = input.value;
             parentNode.replaceChild(span, input);
+            parentNode.removeChild(doneButton);
 
             if (input.value != origText) {
                 callback(input.value);
@@ -351,6 +374,29 @@ HtmlUtils.el = function (tagName, classes, innerText) {
 
     return el;
 };
+
+HtmlUtils.Table = function(headerColumns) {
+    this.el = HtmlUtils.el('table');
+
+    var tr = HtmlUtils.append(this.el, 'tr');
+    headerColumns.forEach(function(headerColumn) {
+        HtmlUtils.append(tr, 'th', [], headerColumn);
+    }.bind(this));
+};
+
+HtmlUtils.Table.prototype.addRow = function(columns, position) {
+    var tr = HtmlUtils.el('tr');
+    if (position === 0) {
+        this.el.insertBefore(tr, this.el.firstChild.nextSibling);
+    } else {
+        this.el.appendChild(tr);
+    }
+
+    return columns.map(function(column) {
+        HtmlUtils.append(tr, 'td', [], column.text);
+    }.bind(this));
+};
+
 
 Cookies = {};
 
