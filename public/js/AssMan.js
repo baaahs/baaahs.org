@@ -18,8 +18,6 @@ function AssMan(container) {
     this.locationActivity = new CountedActivity(document.getElementById("location-activity"));
 
     this.lastLocation = Cookies.get("lastLocation");
-
-    this.checkRequirements();
 }
 
 AssMan.prototype.checkRequirements = function () {
@@ -153,17 +151,41 @@ AssMan.prototype.scanColumns_ = function (scan) {
 };
 
 AssMan.prototype.viewAndTag = function (tag) {
-    if (!this.user) {
-        this.selectUser();
-        return;
-    }
+    this.checkRequirements();
 
     var scansTable = new HtmlUtils.Table(["Date", "Location", "By", "Event"]);
 
+    var loading = Cookies.get("loading");
+    var unloaded = false;
+    if (loading && loading.tag == tag) {
+        console.log("unloading", loading);
+        unloaded = true;
+        loading = null;
+        Cookies.remove("loading");
+    }
+
     this.getAsset(tag, {
         success: function (asset) {
-            this.container.innerHTML = '<p><span id="asset-name"></p>' +
-                '<p>Scans: <div id="asset-scans"</div></p>';
+            this.container.innerHTML = '';
+
+            if (loading) {
+                var loadingView = HtmlUtils.append(this.container, 'div', [], "Loading ");
+                loadingView.appendChild(document.createTextNode(loading.name + ' '));
+                HtmlUtils.append(loadingView, 'a', [], 'x').addEventListener('click', function() {
+                    Cookies.remove("loading");
+                    loadingView.parentNode.removeChild(loadingView);
+                }.bind(this));
+            }
+
+            var assetNameView = HtmlUtils.append(this.container, 'span');
+            assetNameView.id = 'asset-name';
+            var loadStuffButton = HtmlUtils.append(this.container, 'button', [], "Load stuff into this!");
+            loadStuffButton.addEventListener('click', function() {
+                Cookies.set("loading", asset);
+            }.bind(this));
+
+            var scansDiv = HtmlUtils.append(this.container, 'div', [], "Scans:");
+
             var nameSpan = document.getElementById('asset-name');
             nameSpan.innerText = asset.name == null ? "" : asset.name;
 
@@ -174,6 +196,7 @@ AssMan.prototype.viewAndTag = function (tag) {
 
                 this.updateAsset(asset, {name: newValue}, {
                     success: function () {
+                        asset.name = newValue;
                         nameSpan.parentNode.removeChild(spinner);
 
                     }, failure: function () {
@@ -182,14 +205,13 @@ AssMan.prototype.viewAndTag = function (tag) {
                 });
             }.bind(this));
 
-            this.locationScan(asset, {
+            this.locationScan(asset, loading, {
                 success: function(scan) {
                     console.log("Successful scan!", scan);
                     scansTable.addRow(this.scanColumns_(scan), 0);
                 }.bind(this)
             });
 
-            var scansDiv = document.getElementById('asset-scans');
             this.getScans(tag, {
                 success: function (scans) {
                     scansDiv.innerText = '';
@@ -277,7 +299,7 @@ AssMan.prototype.createEvent = function (info, callbacks) {
 //     updateAsset(asset, {name: e.target.value});
 // });
 
-AssMan.prototype.locationScan = function (asset, callbacks) {
+AssMan.prototype.locationScan = function (asset, container, callbacks) {
     this.locationActivity.incrUses();
     navigator.geolocation.getCurrentPosition(function (result) {
         this.locationActivity.decrUses();
@@ -289,7 +311,8 @@ AssMan.prototype.locationScan = function (asset, callbacks) {
             accuracy: coords.accuracy,
             altitude: coords.altitude,
             altitudeAccuracy: coords.altitudeAccuracy,
-            eventId: this.event ? this.event.id : null
+            eventId: this.event ? this.event.id : null,
+            containerTag: container ? container.tag : null
         };
         this.createScan(asset, betterCoords, callbacks);
 

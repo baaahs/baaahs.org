@@ -1,6 +1,6 @@
 class Asset < ActiveRecord::Base
   has_many :scans
-  has_one :container
+  belongs_to :container, class_name: 'Asset'
 
   before_save do
     if name.nil? || name.empty?

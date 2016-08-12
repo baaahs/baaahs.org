@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160727230000) do
+ActiveRecord::Schema.define(version: 20160812001000) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -100,11 +100,13 @@ ActiveRecord::Schema.define(version: 20160727230000) do
     t.integer  "container_scan_id"
     t.datetime "created_at",                                 null: false
     t.datetime "updated_at",                                 null: false
+    t.integer  "into_container_id"
   end
 
   add_index "scans", ["asset_id"], name: "index_scans_on_asset_id", using: :btree
   add_index "scans", ["container_scan_id"], name: "index_scans_on_container_scan_id", using: :btree
   add_index "scans", ["created_at"], name: "index_scans_on_created_at", using: :btree
+  add_index "scans", ["into_container_id"], name: "index_scans_on_into_container_id", using: :btree
   add_index "scans", ["updated_at"], name: "index_scans_on_updated_at", using: :btree
   add_index "scans", ["user_id"], name: "index_scans_on_user_id", using: :btree
 
@@ -125,6 +127,7 @@ ActiveRecord::Schema.define(version: 20160727230000) do
   add_foreign_key "photos", "assets"
   add_foreign_key "photos", "scans"
   add_foreign_key "scans", "assets"
+  add_foreign_key "scans", "assets", column: "into_container_id"
   add_foreign_key "scans", "events"
   add_foreign_key "scans", "scans", column: "container_scan_id"
   add_foreign_key "scans", "users"

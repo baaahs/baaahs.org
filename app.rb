@@ -150,6 +150,10 @@ module BaaahsOrg
       tag = params[:tag]
       asset = ::Asset.find_by_tag tag
       event = json_body["eventId"] ? ::Event.find_by_id(json_body["eventId"]) : nil
+
+      container_tag = json_body["containerTag"]
+      container = container_tag ? ::Asset.find_by_tag(container_tag) : nil
+
       scan = ::Scan.create!(
           asset: asset,
           user: current_user,
@@ -159,7 +163,11 @@ module BaaahsOrg
           altitude: json_body["altitude"],
           altitude_accuracy: json_body["altitudeAccuracy"],
           event: event,
+          into_container: container
       )
+
+      asset.container = container
+      asset.save! if asset.changed?
 
       scan_info(scan).to_json
     end
