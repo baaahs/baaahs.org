@@ -74,6 +74,10 @@
       font-size: 1.2em;
     }
 
+    #user-name, #event-name {
+      font-weight: bold;
+    }
+
     table {
       width: 100%;
     }
@@ -93,9 +97,9 @@
 </div>
 
 <header>
-  Super awesome BAAAHS asset tracking!
-  <div id="user-info">Hi <span id="user-name"></span>! <a id="user-not-me" href="#">Not you?</a></div>
-  <div id="event-info">Doing: <span id="event-name"></span> <a id="event-change" href="#">Something else?</a></div>
+  <span id="user-info">Hi <span id="user-name"></span>! <a id="user-not-me" href="#">[x]</a></span>
+  | <span id="event-info">Doing: <span id="event-name"></span> <a id="event-change" href="#">[x]</a></span>
+
   <img id="network-activity" class="network-activity hidden" src="/images/assman/activity.gif"/>
   <img id="location-activity" class="location-activity hidden" src="/images/assman/location-activity.gif"/>
 </header>

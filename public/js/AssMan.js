@@ -310,6 +310,8 @@ HtmlUtils.makeEditable = function (span, callback) {
         var origText = span.innerText;
         input.setAttribute('type', 'text');
         input.value = origText;
+        input.select();
+        input.setSelectionRange(0, origText.length);
         parentNode.replaceChild(input, span);
         var doneButton = HtmlUtils.el("button", null, "Done");
         parentNode.insertBefore(doneButton, input.nextSibling);
@@ -460,7 +462,7 @@ function prettyDate(date) {
         diff < 86400 && Math.floor(diff / 3600) + " hours ago") ||
         day_diff == 1 && "Yesterday at " + at ||
         day_diff < 7 && day_diff + " days ago at " + at ||
-        day_diff < 31 && Math.ceil(day_diff / 7) + " weeks ago at" + at;
+        day_diff < 31 && Math.ceil(day_diff / 7) + " weeks ago at " + at;
 }
 
 // If jQuery is included in the page, adds a jQuery plugin to handle it as well

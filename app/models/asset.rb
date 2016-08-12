@@ -3,8 +3,12 @@ class Asset < ActiveRecord::Base
   has_one :container
 
   before_save do
-    if (name.nil? || name.empty?) && tag =~ /^[FR]?\d+[A-C]?[DP]?$/
-      self.name = "Panel #{tag}"
+    if name.nil? || name.empty?
+      if tag =~ /^[FR]?\d+[A-C]?[DP]$/
+        self.name = "Panel #{tag}"
+      else
+        self.name = "Unknown"
+      end
     end
   end
 
