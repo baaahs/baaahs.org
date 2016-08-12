@@ -90,13 +90,15 @@
       </td>
     </tr>
 
-    <script>
-      mapsToInit.push({
-        map: 'map-scan-<%= latest_scan.id %>',
-        latitude: <%= latest_scan.latitude %>,
-        longitude: <%= latest_scan.longitude %>
-      });
-    </script>
+      <% if latest_scan %>
+          <script>
+            mapsToInit.push({
+              map: 'map-scan-<%= latest_scan.id %>',
+              latitude: <%= latest_scan.latitude %>,
+              longitude: <%= latest_scan.longitude %>
+            });
+          </script>
+      <% end %>
   <% end %>
 </table>
 </body>
