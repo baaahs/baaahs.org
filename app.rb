@@ -71,8 +71,8 @@ module BaaahsOrg
             lastScan: asset.last_scan ? scan_info(asset.last_scan) : nil,
             state: asset.state,
             container: asset.container ? {
-                tag: asset.tag,
-                name: asset.name,
+                tag: asset.container.tag,
+                name: asset.container.name,
             } : nil
         }
       end
