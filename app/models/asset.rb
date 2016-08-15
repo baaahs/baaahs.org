@@ -16,7 +16,14 @@ class Asset < ActiveRecord::Base
     scans.order("created_at ASC").first
   end
 
+  def last_scan=(last_scan)
+    @last_scan = last_scan
+    @last_scan_set = true
+  end
+
   def last_scan
-    scans.order("created_at DESC").first
+    @last_scan_set ?
+        @last_scan :
+        @last_scan ||= scans.order("created_at DESC").first
   end
 end

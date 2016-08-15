@@ -64,15 +64,18 @@ module BaaahsOrg
       end
 
       def asset_info(asset)
+        last_scan = asset.last_scan
+        container = asset.container
+
         {
             tag: asset.tag,
             name: asset.name,
             createdAt: asset.created_at,
-            lastScan: asset.last_scan ? scan_info(asset.last_scan) : nil,
+            lastScan: last_scan ? scan_info(last_scan) : nil,
             state: asset.state,
-            container: asset.container ? {
-                tag: asset.container.tag,
-                name: asset.container.name,
+            container: container ? {
+                tag: container.tag,
+                name: container.name,
             } : nil
         }
       end
@@ -126,9 +129,20 @@ module BaaahsOrg
     end
 
     get '/assman/assets' do
-      assets = ::Asset.all
+      assets = ::Asset.all.includes(:container)
+      scans = {}
+      ::Scan.where(asset_id: assets.map { |a| a.id }).
+          select("DISTINCT ON (asset_id) scans.*").
+          order("asset_id, created_at DESC").
+          includes(:user, :event).each do |s|
+        scans[s.asset_id] = s
+      end
+
       if request.accept?("application/json") && params[:js]
-        assets.map { |asset| asset_info(asset) }.to_json
+        assets.map do |asset|
+          asset.last_scan = scans[asset.id]
+          asset_info(asset)
+        end.to_json
       else
         erb :assets, locals: {assets: assets}
       end
