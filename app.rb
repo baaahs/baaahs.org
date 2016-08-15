@@ -129,7 +129,7 @@ module BaaahsOrg
     end
 
     get '/assman/assets' do
-      assets = ::Asset.all.includes(:container)
+      assets = ::Asset.all.includes(:container).order(:tag)
       scans = {}
       ::Scan.where(asset_id: assets.map { |a| a.id }).
           select("DISTINCT ON (asset_id) scans.*").
