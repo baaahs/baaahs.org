@@ -87,6 +87,10 @@ module BaaahsOrg
             userName: scan.user ? scan.user.name : nil,
             eventName: scan.event ? scan.event.name : nil,
             createdAt: scan.created_at,
+            intoContainer: scan.into_container ? {
+                id: scan.into_container.id,
+                name: scan.into_container.name,
+            } : nil
         }
       end
     end
@@ -113,18 +117,19 @@ module BaaahsOrg
 
     get '/a/:tag' do
       tag = params[:tag]
-      erb :tag_asset, locals: {tag: tag}
+      erb :asset, locals: {tag: tag, perform_scan: true}
     end
 
     get '/assman/assets/:tag' do
       tag = params[:tag]
-      asset = ::Asset.find_or_initialize_by tag: tag
-      asset.save! if asset.changed?
 
-      if request.accept? "application/json"
-        asset.to_json
+      if request.accept?("application/json") && params[:js]
+        asset = ::Asset.find_or_initialize_by tag: tag
+        asset.save! if asset.changed?
+
+        asset_info(asset).to_json
       else
-        erb :asset, locals: {asset: asset}
+        erb :asset, locals: {tag: tag, perform_scan: false}
       end
     end
 

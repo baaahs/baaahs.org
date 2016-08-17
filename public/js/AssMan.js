@@ -146,7 +146,8 @@ AssMan.prototype.scanColumns_ = function (scan) {
         {text: prettyDate(new Date(Date.parse(scan.createdAt))), sort: scan.createdAt},
         {text: GeoUtils.distance(scan, this.lastLocation)},
         {text: scan.userName},
-        {text: scan.eventName}
+        {text: scan.eventName},
+        {text: scan.intoContainer ? scan.intoContainer.name : ''},
     ];
 };
 
@@ -155,13 +156,27 @@ AssMan.prototype.listAssets = function () {
         success: function (assets) {
             this.container.innerHTML = '';
 
-            var assetsTable = new HtmlUtils.Table(["Tag", "Name", "Last Seen", "Where", "By", "While", "In"]);
+            var assetsTable = new HtmlUtils.Table(["Tag", "Name", "Last Seen", "Where", "By", "While", "In"]/*,
+                function(columns, tr) {
+                    var td = HtmlUtils.append(tr, 'td', [], columns[1].text);
+                    td.setAttribute("colspan", "7");
+                    HtmlUtils.append(td, 'pre', [],
+                        "(" + columns[0].text + ") " +
+                        " " + columns[2].text +
+                        " by " + columns[4].text +
+                        " While: " + columns[5].text +
+                        " @ " + columns[3].text +
+                        " In: " + columns[6].text
+                    );
+                    return tr;
+                    // td.appendChild(document.createTextNode());
+                }*/);
             this.container.appendChild(assetsTable.el);
             assetsTable.el.classList.add('assets');
 
             assets.forEach(function(asset) {
                 var lastScan = asset.lastScan;
-                assetsTable.addRow([
+                var tr = assetsTable.addRow([
                     {text: asset.tag},
                     {text: asset.name},
                     {text: lastScan ? prettyDate(new Date(Date.parse(lastScan.createdAt))) : ''},
@@ -170,44 +185,60 @@ AssMan.prototype.listAssets = function () {
                     {text: lastScan ? lastScan.eventName : ''},
                     {text: asset.container ? asset.container.name : ''},
                 ]);
+                tr.addEventListener('click', function() {
+                    document.location = 'assets/' + asset.tag;
+                }.bind(this));
             }.bind(this));
         }.bind(this)
     });
 };
 
-AssMan.prototype.viewAndTag = function (tag) {
+AssMan.prototype.viewAsset = function (tag, performScan) {
     this.checkRequirements();
 
-    var scansTable = new HtmlUtils.Table(["Date", "Location", "By", "Event"]);
-
-    var loading = Cookies.get("loading");
-    var unloaded = false;
-    if (loading && loading.tag == tag) {
-        console.log("unloading", loading);
-        unloaded = true;
-        loading = null;
-        Cookies.remove("loading");
+    var loading;
+    if (performScan) {
+        loading = Cookies.get("loading");
+        if (loading && loading.tag == tag) {
+            loading = null;
+            Cookies.remove("loading");
+        }
     }
+
+    var scansTable = new HtmlUtils.Table(["Date", "Location", "By", "Event", "In"]);
+    scansTable.el.classList.add('scans');
 
     this.getAsset(tag, {
         success: function (asset) {
             this.container.innerHTML = '';
 
-            if (loading) {
-                var loadingView = HtmlUtils.append(this.container, 'div', [], "Loading ");
-                loadingView.appendChild(document.createTextNode(loading.name + ' '));
-                HtmlUtils.append(loadingView, 'a', [], 'x').addEventListener('click', function() {
-                    Cookies.remove("loading");
-                    loadingView.parentNode.removeChild(loadingView);
-                }.bind(this));
-            }
-
             var assetNameView = HtmlUtils.append(this.container, 'span');
             assetNameView.id = 'asset-name';
-            var loadStuffButton = HtmlUtils.append(this.container, 'button', [], "Load stuff into this!");
+            var loadStuffButton = HtmlUtils.append(this.container, 'button', ['load-button'], "Load stuff into this!");
             loadStuffButton.addEventListener('click', function() {
                 Cookies.set("loading", asset);
+                loadStuffButton.innerText = 'You are loading stuff into this!';
             }.bind(this));
+
+            if (loading) {
+                var loadingView = HtmlUtils.append(this.container, 'div', [], "Loaded into ");
+                loadingView.appendChild(document.createTextNode(loading.name + ' '));
+                HtmlUtils.append(loadingView, 'a', [], '[x]').addEventListener('click', function() {
+                    Cookies.remove("loading");
+                    loadingView.innerText = "Unloading...";
+
+                    // scan again, but not into a container...
+                    this.locationScan(asset, null, {
+                        success: function(scan) {
+                            loadingView.innerText = "Unloaded from " + loading.name;
+                            loading = false;
+                            scansTable.addRow(this.scanColumns_(scan), 0);
+                        }.bind(this)
+                    });
+                }.bind(this));
+            } else if (asset.container) {
+                HtmlUtils.append(this.container, 'div', [], "Unloaded from " + asset.container.name);
+            }
 
             var scansDiv = HtmlUtils.append(this.container, 'div', [], "Scans:");
 
@@ -230,13 +261,6 @@ AssMan.prototype.viewAndTag = function (tag) {
                 });
             }.bind(this));
 
-            this.locationScan(asset, loading, {
-                success: function(scan) {
-                    console.log("Successful scan!", scan);
-                    scansTable.addRow(this.scanColumns_(scan), 0);
-                }.bind(this)
-            });
-
             this.getScans(tag, {
                 success: function (scans) {
                     scansDiv.innerText = '';
@@ -247,6 +271,15 @@ AssMan.prototype.viewAndTag = function (tag) {
                     }.bind(this));
                 }.bind(this)
             });
+
+            if (performScan) {
+                this.locationScan(asset, loading, {
+                    success: function(scan) {
+                        console.log("Successful scan!", scan);
+                        scansTable.addRow(this.scanColumns_(scan), 0);
+                    }.bind(this)
+                });
+            }
         }.bind(this),
         failure: function (response) {
             alert(response);
@@ -268,7 +301,7 @@ AssMan.prototype.doHttp_ = function (method, url, values, callbacks) {
     http.onreadystatechange = function () { // Call a function when the state changes.
         if (http.readyState == 4 && http.status == 200) {
             this.networkActivity.decrUses();
-            console.log('response:', http.responseText);
+            console.log('response from ' + method + ' ' + url + ':', http.responseText);
             if (callbacks && callbacks.success) {
                 callbacks.success(
                     http.responseText ? JSON.parse(http.responseText) : null);
@@ -293,7 +326,7 @@ AssMan.prototype.getAssets = function (callbacks) {
 };
 
 AssMan.prototype.getAsset = function (tag, callbacks) {
-    this.doHttp_("GET", "/assman/assets/" + tag, null, callbacks);
+    this.doHttp_("GET", "/assman/assets/" + tag + "?js=true", null, callbacks);
 };
 
 AssMan.prototype.updateAsset = function (asset, values, callbacks) {
@@ -429,8 +462,9 @@ HtmlUtils.el = function (tagName, classes, innerText) {
     return el;
 };
 
-HtmlUtils.Table = function(headerColumns) {
+HtmlUtils.Table = function(headerColumns, toRow) {
     this.el = HtmlUtils.el('table');
+    this.toRow = toRow;
 
     var tr = HtmlUtils.append(this.el, 'tr');
     headerColumns.forEach(function(headerColumn) {
@@ -440,15 +474,22 @@ HtmlUtils.Table = function(headerColumns) {
 
 HtmlUtils.Table.prototype.addRow = function(columns, position) {
     var tr = HtmlUtils.el('tr');
+    console.log(this.toRow);
+    if (this.toRow) {
+        tr = this.toRow(columns, tr);
+    } else {
+        columns.map(function(column) {
+            HtmlUtils.append(tr, 'td', [], column.text);
+        }.bind(this))
+    }
+
     if (position === 0) {
         this.el.insertBefore(tr, this.el.firstChild.nextSibling);
     } else {
         this.el.appendChild(tr);
     }
 
-    return columns.map(function(column) {
-        HtmlUtils.append(tr, 'td', [], column.text);
-    }.bind(this));
+    return tr;
 };
 
 

@@ -2,14 +2,127 @@
 <html>
 <head>
   <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
   <style type="text/css">
     body {
-      background: #0d71bb;
+      background: #ffffff;
+      color: #000000;
+      font-family: 'Helvetica Neue', Arial, Helvetica, sans-serif;
+    }
+
+    #background-image {
+      z-index: -10000;
+      position: fixed;
+      opacity: .125;
+    }
+
+    #container {
+      position: relative;
+    }
+
+    div#alert-modal {
+      position: fixed;
+      background: rgba(0, 0, 0, .25);
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+    }
+
+    div#alert {
+      position: fixed;
+      background: #ffffff;
+      top: 1em;
+      right: 1em;
+      bottom: 1em;
+      left: 1em;
+      padding: 1em;
+      border: 1px solid black;
+    }
+
+    #alert li {
+      padding-bottom: .5em;
+      list-style: square;
+      list-style-position: outside;
+    }
+
+    #asset-name {
+      min-width: 100px;
+      border: 1px solid lightgray;
+    }
+
+    img.saving-spinner {
+      width: 16px;
+      height: 16px;
+    }
+
+    img.network-activity {
+      position: absolute;
+      width: 16px;
+      height: 16px;
+      top: 1px;
+      right: 1px;
+    }
+
+    img.location-activity {
+      position: absolute;
+      width: 16px;
+      height: 16px;
+      top: 1px;
+      right: 21px;
+    }
+
+    #asset-name {
+      font-weight: bold;
+      font-size: 1.2em;
+      line-height: 2em;
+    }
+
+    button.load-button {
+      position: absolute;
+      right: 0;
+    }
+
+    #user-name, #event-name {
+      font-weight: bold;
+    }
+
+    table {
+      width: 100%;
+    }
+
+    table.scans {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    table.scans td {
+      border: 1px solid black;
+      border-collapse: collapse;
+    }
+
+    .hidden {
+      display: none;
     }
   </style>
+
+  <script type="application/javascript" src="/js/AssMan.js"></script>
 </head>
 <body dir="ltr" itemscope>
-<header>Super awesome BAAAHS asset tracking!</header>
+<img id="background-image" src="/images/logo/BAAAHS2015LogoWithBorder-640x544.png"/>
+
+<div id="alert-modal" class="hidden">
+  <div id="alert" class="hidden"></div>
+</div>
+
+<header>
+  <span id="user-info">Hi <span id="user-name"></span>! <a id="user-not-me" href="#">[x]</a></span>
+  | <span id="event-info">Doing: <span id="event-name"></span> <a id="event-change" href="#">[x]</a></span>
+
+  <img id="network-activity" class="network-activity hidden" src="/images/assman/activity.gif"/>
+  <img id="location-activity" class="location-activity hidden" src="/images/assman/location-activity.gif"/>
+</header>
 
 <!--[if lt IE 8]>
 <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade
@@ -17,60 +130,17 @@
   improve your experience.</p>
 <![endif]-->
 
-<% if asset.name %>
-  Name: <%== asset.name %>
-<% else %>
-  <label for="name">Name:</label> <input id="name"/>
-<% end %>
-
-<p>Tag: <%= tag %></p>
-<p>Asset: <%== asset %></p>
-<p>Is New: <%= is_new %></p>
-<p>Scan: <%== scan %></p>
+<div id="container"></div>
+</body>
 
 <script type="application/javascript">
-  var asset = <%= {id: asset.id, tag: asset.tag, name: asset.name}.to_json.html_safe %>;
-
-  function doHttp(method, url, values) {
-    var http = new XMLHttpRequest();
-    http.open(method, url, true);
-    http.setRequestHeader("Content-type", "application/x-json");
-
-    http.onreadystatechange = function () { // Call a function when the state changes.
-      if (http.readyState == 4 && http.status == 200) {
-        alert(http.responseText);
-      }
-    };
-
-    http.send(JSON.stringify(values));
-  }
-
-  function updateAsset(asset, values) {
-    doHttp("POST", "/assman/assets/" + asset.tag, values);
-  }
-
-  function createScan(asset, values) {
-    doHttp("PUT", "/assman/assets/" + asset.tag + "/scans", values);
-  }
-
-  document.getElementById("name").addEventListener("change", function (e) {
-    updateAsset(asset, {name: e.target.value});
-  });
-
-  navigator.geolocation.getCurrentPosition(function (result) {
-    console.log(result);
-    var coords = result.coords;
-    createScan(asset, {
-      scan: {
-        latitude: coords.latitude,
-        longitude: coords.longitude,
-        accuracy: coords.accuracy,
-        altitude: coords.altitude,
-        altitudeAccuracy: coords.altitudeAccuracy
-      }
-    });
-  })
+  var container = document.getElementById('container');
+  console.log(container);
+  var assMan = new AssMan(container);
+  var tag = '<%= tag %>';
+  assMan.viewAsset(tag, <%= perform_scan ? 'true' : 'false' %>);
 </script>
 
-</body>
+<input id="file" type="file" accept="image/*">
+
 </html>
