@@ -196,9 +196,8 @@ AssMan.prototype.listAssets = function () {
 AssMan.prototype.viewAsset = function (tag, performScan) {
     this.checkRequirements();
 
-    var loading;
+    var loading = Cookies.get("loading");
     if (performScan) {
-        loading = Cookies.get("loading");
         if (loading && loading.tag == tag) {
             loading = null;
             Cookies.remove("loading");
@@ -220,24 +219,27 @@ AssMan.prototype.viewAsset = function (tag, performScan) {
                 loadStuffButton.innerText = 'You are loading stuff into this!';
             }.bind(this));
 
-            if (loading) {
-                var loadingView = HtmlUtils.append(this.container, 'div', [], "Loaded into ");
-                loadingView.appendChild(document.createTextNode(loading.name + ' '));
-                HtmlUtils.append(loadingView, 'a', [], '[x]').addEventListener('click', function() {
-                    Cookies.remove("loading");
-                    loadingView.innerText = "Unloading...";
+            if (performScan) {
+                if (loading) {
+                    var loadingView = HtmlUtils.append(this.container, 'div', [], "Loaded into ");
+                    loadingView.appendChild(document.createTextNode(loading.name + ' '));
+                    HtmlUtils.append(loadingView, 'a', [], '[x]').addEventListener('click', function() {
+                        // oops, don't really load that
+                        Cookies.remove("loading");
+                        loadingView.innerText = "Unloading...";
 
-                    // scan again, but not into a container...
-                    this.locationScan(asset, null, {
-                        success: function(scan) {
-                            loadingView.innerText = "Unloaded from " + loading.name;
-                            loading = false;
-                            scansTable.addRow(this.scanColumns_(scan), 0);
-                        }.bind(this)
-                    });
-                }.bind(this));
-            } else if (asset.container) {
-                HtmlUtils.append(this.container, 'div', [], "Unloaded from " + asset.container.name);
+                        // scan again, but not into a container...
+                        this.locationScan(asset, null, {
+                            success: function(scan) {
+                                loadingView.innerText = "Unloaded from " + loading.name;
+                                loading = false;
+                                scansTable.addRow(this.scanColumns_(scan), 0);
+                            }.bind(this)
+                        });
+                    }.bind(this));
+                } else if (asset.container) {
+                    HtmlUtils.append(this.container, 'div', [], "Unloaded from " + asset.container.name);
+                }
             }
 
             var scansDiv = HtmlUtils.append(this.container, 'div', [], "Scans:");
