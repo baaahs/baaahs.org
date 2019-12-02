@@ -106,6 +106,12 @@ module BaaahsOrg
 
     get('/assets') { redirect "/assman/assets" }
 
+    # 2020
+    get('/2020') { redirect "https://drive.google.com/drive/folders/1-5VGf1gZXyzGN1lYNVF1KwGBrJ6n9t4L" }
+    get('/2020-form') { redirect "https://docs.google.com/forms/d/e/1FAIpQLSfuh4BvWp1q4eQ_W_sVCDsKmlOPPB1N5RekJHLTjCsR5qdeFQ/viewform" }
+    get('/2020-doc') { redirect "https://docs.google.com/document/d/10Do2qdITwrQxGOeMGd7pe1jrIxQejF-W5jHK2wbagfE" }
+    get('/2020-sheet') { redirect "https://docs.google.com/spreadsheets/d/11FeKLaktPhMq_Oh_mG8TBK3U9_eY2oHBGxE0T3GzLhU" }
+
 # old URLs to support for a while!
     get('/shifts') { redirect "http://www.volunteerspot.com/login/entry/375755452038" } # todo kill after 20151201
 
