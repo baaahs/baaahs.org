@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-ruby '2.1.5'
+ruby '2.4.9'
 
 gem 'rack'
 gem 'sinatra', require: 'sinatra/base'
