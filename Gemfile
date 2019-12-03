@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-ruby '2.5.7'
+ruby '2.6.3'
 
 gem 'rack'
 gem 'sinatra', require: 'sinatra/base'
@@ -12,6 +12,6 @@ gem 'sinatra-compass'
 gem 'sinatra-contrib'
 
 gem 'sinatra-activerecord'
-gem 'pg'
+#gem 'pg'
 
 gem 'actionview'
