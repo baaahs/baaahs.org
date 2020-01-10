@@ -165,7 +165,7 @@
     if (isSignedIn) {
       authorizeButton.style.display = 'none';
       signoutButton.style.display = 'block';
-      listMajors();
+      fetch();
     } else {
       authorizeButton.style.display = 'block';
       signoutButton.style.display = 'none';
@@ -205,20 +205,76 @@
     return el;
   }
 
-  function createCard(row) {
-    const name = row[2].split(" ");
+  const cols = [
+    "timestamp",
+    "email",
+    "name",
+    "teams:BAAAHS – Build",
+    "teams:BAAAHS – Lights",
+    "teams:BAAAHS – Sound",
+    "teams:BAAAHS – Tech",
+    "teams:BAAAHS – New Initiatives",
+    "teams:STATION – Civil Engineering",
+    "teams:STATION – Infrastructure",
+    "teams:STATION – Communal Space",
+    "teams:STATION - Interactivity, Art, and Theming",
+    "teams:STATION – Kitchen/Food",
+    "teams:FUNDRAISING",
+    "teams:EVENTS, PARTIES, AND PROGRAMMING",
+    "teams:PROJECT MANAGEMENT",
+    "teams:STORAGE MANAGEMENT",
+    "teams:COMMUNICATIONS",
+    "teams:ADMIN AND FINANCE",
+    "teams:EXODUS",
+    "teams:CAMP ORGANIZING",
+    "teams:CAMP EVENTS & INTERACTIVITY",
+    "teams:GENERAL ON-PLAYA VOLUNTEER",
+    "explanation",
+    "ideas",
+    "arrival",
+    "camp",
+    "experience",
+    "location",
+    "skills"
+  ];
+
+  const teams = [
+    "BAAAHS – Build",
+    "BAAAHS – Lights",
+    "BAAAHS – Sound",
+    "BAAAHS – Tech",
+    "BAAAHS – New Initiatives",
+    "STATION – Civil Engineering",
+    "STATION – Infrastructure",
+    "STATION – Communal Space",
+    "STATION - Interactivity, Art, and Theming",
+    "STATION – Kitchen/Food",
+    "FUNDRAISING",
+    "EVENTS, PARTIES, AND PROGRAMMING",
+    "PROJECT MANAGEMENT",
+    "STORAGE MANAGEMENT",
+    "COMMUNICATIONS",
+    "ADMIN AND FINANCE",
+    "EXODUS",
+    "CAMP ORGANIZING",
+    "CAMP EVENTS & INTERACTIVITY",
+    "GENERAL ON-PLAYA VOLUNTEER",
+  ];
+
+  function createCard(data) {
+    const name = data.name.split(" ");
     let card = add(null, 'div', 'card');
     add(card, 'div', 'name1').innerText = name[0];
     add(card, 'div', 'name2').innerText = name.slice(1).join(' ');
     let arrival = add(card, 'div', 'arrival');
-    let arrivalString = row[25].split(' ')[1];
+    let arrivalString = data.arrival.split(' ')[1];
     arrival.innerText = arrivalString;
     add(arrival, 'div', 'arrivalBox ' + arrivalString);
-    add(card, 'div', 'location').innerText = row[28];
+    add(card, 'div', 'location').innerText = data.location;
 
     let teamStr = '';
-    for (let i = 0; i < 20; i++) {
-      const s = row[i + 3];
+    for (let i = 0; i < data.teams.length; i++) {
+      const s = data.teams[i];
       if (s.includes('LEAD')) {
         teamStr += '◉';
       } else if (s.includes('CREW')) {
@@ -243,7 +299,7 @@
       "Kitchen management/cooking",
       "Construction/building/structural"
     ];
-    let skillsRow = (row[29] || "").split(/, /);
+    let skillsRow = (data.skills || "").split(/, /);
     for (const opt of skillsOptions) {
       let i = skillsRow.indexOf(opt);
       if (i > -1) {
@@ -263,14 +319,28 @@
    * Print the names and majors of students in a sample spreadsheet:
    * https://docs.google.com/spreadsheets/d/1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgvE2upms/edit
    */
-  function listMajors() {
+  function fetch() {
     gapi.client.sheets.spreadsheets.values.get({
       spreadsheetId: '1YS-hYVvsvhq0xCaZQ9Hws9PQhUbFcoP2yBGCHXI7t9k',
       range: 'Form Responses 1!A2:AD',
     }).then(function(response) {
       const range = response.result;
-      let rows = range.values;
-      rows = rows.sort((a, b) => a[2].localeCompare(b[2]));
+      let rows = range.values.map(entry => {
+        const data = { teams: [] };
+        for (let i = 0; i < entry.length; i++) {
+          const value = entry[i];
+          const colName = cols[i];
+          if (colName.startsWith('teams:')) {
+            data.teams.push(value);
+          } else {
+            data[colName] = value;
+          }
+        }
+
+        return data;
+      });
+
+      rows = rows.sort((a, b) => a.name.localeCompare(b.name));
       if (rows.length > 0) {
         for (let i = 0; i < rows.length; i++) {
           const row = rows[i];
