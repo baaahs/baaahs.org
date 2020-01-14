@@ -106,6 +106,9 @@ module BaaahsOrg
 
     get('/assets') { redirect "/assman/assets" }
 
+    get('/slack') { redirect "https://baaahs.slack.com" }
+    get('/slack-invite') { redirect "https://join.slack.com/t/baaahs/shared_invite/enQtODg3MTE3NTk1ODA4LTRhMDEyZTY1MmI4YjIzN2JlYmUxMWQyNGMyYjA4MDhkMmMwMTU3YWFjOTVjNGZhZGY3YTc4MTNlZDE1NzFmMmY" }
+
     # 2020
     get('/2020') { redirect "https://drive.google.com/drive/folders/1-5VGf1gZXyzGN1lYNVF1KwGBrJ6n9t4L" }
     get('/2020-form') { redirect "https://docs.google.com/forms/d/e/1FAIpQLSfuh4BvWp1q4eQ_W_sVCDsKmlOPPB1N5RekJHLTjCsR5qdeFQ/viewform" }
