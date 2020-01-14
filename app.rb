@@ -1,7 +1,7 @@
 require 'rubygems'
 require 'bundler'
 require 'sinatra'
-require "sinatra/compass"
+# require "sinatra/compass"
 require "sinatra/reloader" if development?
 require "sinatra/activerecord"
 require "action_view"

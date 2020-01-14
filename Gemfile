@@ -12,6 +12,6 @@ gem 'sinatra-compass'
 gem 'sinatra-contrib'
 
 gem 'sinatra-activerecord'
-#gem 'pg'
+gem 'pg'
 
 gem 'actionview'
