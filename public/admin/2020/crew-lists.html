@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Google Sheets API Quickstart</title>
+  <meta charset="utf-8" />
+
+  <script type="application/javascript" src="shared.js"></script>
+  <style type="text/css">
+    @media print
+    {
+      .no-print, .no-print *
+      {
+        display: none !important;
+      }
+    }
+
+    body {
+      font-family: "Trebuchet MS", sans-serif;
+      font-size: .9em;
+    }
+
+    .team, .skill {
+      width: 30%;
+      float: left;
+      margin-right: 1em;
+      margin-bottom: 1em;
+      page-break-inside: avoid;
+    }
+
+    br {
+      clear: left;
+    }
+
+    .title {
+      font-weight: bold;
+      font-size: 1.1em;
+    }
+  </style>
+</head>
+<body>
+
+<!--Add buttons to initiate auth sequence and sign out-->
+<button id="authorize_button" class="no-print" style="display: none;">Authorize</button>
+<button id="signout_button" class="no-print" style="display: none;">Sign Out</button>
+
+<pre id="content" style="white-space: pre-wrap;"></pre>
+
+<script type="text/javascript">
+  const lists = add(null, 'div');
+  document.body.appendChild(lists);
+  let count = 0;
+
+  const teamDivs = teams.map(value => {
+    const teamDiv = add(lists, 'div', 'team');
+    add(teamDiv, 'div', 'title').innerHTML = value;
+    if (++count % 3 === 0) add(lists, 'br');
+    return teamDiv;
+  });
+
+  const skillDivs = skillsOptions.map(value => {
+    const skillDiv = add(lists, 'div', 'skill');
+    add(skillDiv, 'div', 'title').innerHTML = value;
+    if (count++ % 3 === 0) add(lists, 'br');
+    return skillDiv;
+  });
+
+  function addToLists(data) {
+    let arrivalDay = data.arrival.substring(6, 9);
+
+    for (let i = 0; i < data.teams.length; i++) {
+      const s = data.teams[i];
+      if (s.includes('LEAD')) {
+        add(teamDivs[i], 'div', 'lead').innerText = '◉ ' + data.name + ' (' + arrivalDay + ')';
+      } else if (s.includes('CREW')) {
+        add(teamDivs[i], 'div', 'crew').innerText = '◎ ' + data.name + ' (' + arrivalDay + ')';
+      }
+    }
+
+    let skillsRow = (data.skills || "").split(/, /);
+    for (let i = 0; i < skillsOptions.length; i++){
+      let opt = skillsOptions[i];
+      if (skillsRow.indexOf(opt) > -1) {
+        add(skillDivs[i], 'div').innerText = '◎ ' + data.name + ' (' + arrivalDay + ')';
+        skillsRow.splice(i, 1);
+      }
+    }
+  }
+
+  function display(rows) {
+    if (rows.length > 0) {
+      for (let i = 0; i < rows.length; i++) {
+        const row = rows[i];
+        addToLists(row);
+      }
+    } else {
+      appendPre('No data found.');
+    }
+  }
+</script>
+
+<script async defer src="https://apis.google.com/js/api.js"
+        onload="this.onload=function(){};handleClientLoad()"
+        onreadystatechange="if (this.readyState === 'complete') this.onload()">
+</script>
+</body>
+</html>
