@@ -65,12 +65,14 @@
   });
 
   function addToLists(data) {
+    let arrivalDay = data.arrival.substring(6, 9);
+
     for (let i = 0; i < data.teams.length; i++) {
       const s = data.teams[i];
       if (s.includes('LEAD')) {
-        add(teamDivs[i], 'div', 'lead').innerText = '◉ ' + data.name;
+        add(teamDivs[i], 'div', 'lead').innerText = '◉ ' + data.name + ' (' + arrivalDay + ')';
       } else if (s.includes('CREW')) {
-        add(teamDivs[i], 'div', 'crew').innerText = '◎ ' + data.name;
+        add(teamDivs[i], 'div', 'crew').innerText = '◎ ' + data.name + ' (' + arrivalDay + ')';
       }
     }
 
@@ -78,7 +80,7 @@
     for (let i = 0; i < skillsOptions.length; i++){
       let opt = skillsOptions[i];
       if (skillsRow.indexOf(opt) > -1) {
-        add(skillDivs[i], 'div').innerText = '◎ ' + data.name;
+        add(skillDivs[i], 'div').innerText = '◎ ' + data.name + ' (' + arrivalDay + ')';
         skillsRow.splice(i, 1);
       }
     }
