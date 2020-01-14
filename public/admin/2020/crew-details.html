@@ -138,80 +138,11 @@
 <pre id="content" style="white-space: pre-wrap;"></pre>
 
 <script type="text/javascript">
-  function createCard(data) {
-    let card = add(null, 'div', 'card');
-
-    add(card, 'div', 'name').innerText = data.name;
-
-    add(card, 'div', 'email').innerText = data.email;
-    add(card, 'div', 'camp').innerText = data.camp;
-
-    let arrival = add(card, 'div', 'arrival');
-    let arrivalString = data.arrival;
-    arrival.innerText = arrivalString.replace('Early ', '').replace(' or later', '');
-    add(arrival, 'div', 'arrivalBox ' + arrivalString.split(' ')[1]);
-
-    add(card, 'div', 'location').innerText = data.location;
-
-    let teamsDiv = add(card, 'div', 'team infobox');
-    add(teamsDiv, 'div', 'title').innerText = 'Teams: ';
-    let teamColumnsDiv = add(teamsDiv, 'div', 'team-columns');
-    let teamStr = '';
-    for (let i = 0; i < data.teams.length; i++) {
-      const s = data.teams[i];
-      const name = teams[i];
-      if (s.includes('LEAD')) {
-        add(teamColumnsDiv, 'div', 'lead').innerText = '◉ ' + name;
-        teamStr += '◉';
-      } else if (s.includes('CREW')) {
-        add(teamColumnsDiv, 'div').innerText = '◎ ' + name + "\n";
-        teamStr += '◎';
-      } else {
-        // add(teamColumnsDiv, 'div').innerText = '◌ ' + name + "\n";
-        teamStr += '◌';
-      }
-
-      // breaks between groups
-      if (i === 4 || i === 9 || i === 16) {
-        teamStr += '  ';
-      }
-    }
-    add(teamsDiv, 'div', 'bullets').innerText = teamStr;
-    add(teamsDiv, 'div', 'explanation').innerText = data.explanation;
-
-    let ideasDiv = add(card, 'div', 'ideas infobox');
-    add(ideasDiv, 'span', 'title').innerText = 'Ideas: ';
-    add(ideasDiv, 'span').innerText = data.ideas;
-
-    let experienceDiv = add(card, 'div', 'experience infobox');
-    add(experienceDiv, 'span', 'title').innerText = 'Experience: ';
-    add(experienceDiv, 'span').innerText = data.experience;
-
-    let skillsDiv = add(card, 'div', 'skills infobox');
-    add(skillsDiv, 'div', 'title').innerText = 'Skills: ';
-    let skillsRow = (data.skills || "").split(/, /);
-    let skillsStr = '';
-    for (const opt of skillsOptions) {
-      let i = skillsRow.indexOf(opt);
-      if (i > -1) {
-        skillsStr += '●';
-        add(skillsDiv, 'div', 'skill').innerText = '◉ ' + opt;
-        skillsRow.splice(i, 1);
-      } else {
-        skillsStr += '◌';
-      }
-    }
-    add(skillsDiv, 'div', 'bullets').innerText += skillsStr;
-    add(skillsDiv, 'div', 'skills-other').innerText = skillsRow.join(", ");
-
-    return card;
-  }
-
   function display(rows) {
     if (rows.length > 0) {
       for (let i = 0; i < rows.length; i++) {
         const row = rows[i];
-        document.body.appendChild(createCard(row));
+        document.body.appendChild(createFullCard(row));
       }
     } else {
       appendPre('No data found.');
