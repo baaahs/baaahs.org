@@ -19,12 +19,40 @@
       font-size: .9em;
     }
 
-    .list-team, .list-skill {
-      width: 30%;
-      float: left;
-      margin-right: 1em;
-      margin-bottom: 1em;
-      page-break-inside: avoid;
+    .tabs .tab {
+      display: inline-block;
+      background-color: #0b61a4;
+      padding: .2em .5em;
+      margin: .2em;
+      color: white;
+    }
+
+    .tabs .tab:hover {
+      background-color: #ffa4e4;
+      color: black;
+    }
+
+    .tabs .tab.selected {
+      background-color: #00aced;
+      color: black;
+    }
+
+    .lists > div {
+      display: none;
+    }
+
+    .lists div.selected {
+      display: block;
+    }
+
+
+    .legend {
+      float: right;
+      background-color: #a2ceed;
+      padding: 1em;
+      margin-right: 2em;
+      border: 1px solid black;
+      white-space: pre-line;
     }
 
     br {
@@ -163,22 +191,49 @@
 <pre id="content" style="white-space: pre-wrap;"></pre>
 
 <script type="text/javascript">
-  const lists = add(null, 'div');
-  document.body.appendChild(lists);
-  let count = 0;
+  const tabsDiv = add(document.body, 'div', 'tabs');
+  add(document.body, 'div', 'legend', "◉ Lead\n◎ Crew");
+  const listsDiv = add(document.body, 'div', 'lists');
 
-  const teamDivs = teams.map(value => {
-    const teamDiv = add(lists, 'div', 'list-team');
-    add(teamDiv, 'div', 'title').innerHTML = value;
-    if (++count % 3 === 0) add(lists, 'br');
-    return teamDiv;
+  let count = 0;
+  const tabDivs = [];
+  const teamDivs = [];
+  const skillDivs = [];
+
+  function onTabClick(tabDiv, listDiv) {
+    tabDivs.forEach(el => el.classList.remove('selected'));
+    teamDivs.forEach(el => el.classList.remove('selected'));
+    skillDivs.forEach(el => el.classList.remove('selected'));
+
+    tabDiv.classList.add('selected');
+    listDiv.classList.add('selected');
+  }
+
+  add(tabsDiv, 'span', null, 'Teams:');
+  teams.forEach(teamName => {
+    const teamDiv = add(listsDiv, 'div', 'list-team');
+    add(teamDiv, 'div', 'title', teamName);
+    if (++count % 3 === 0) add(listsDiv, 'br');
+
+    let tabDiv = add(tabsDiv, 'span', 'tab', teamName.replace(/(BAAAHS|STATION)—/, ''));
+    tabDiv.onclick = () => onTabClick(tabDiv, teamDiv);
+
+    tabDivs.push(tabDiv);
+    teamDivs.push(teamDiv);
   });
 
-  const skillDivs = skillsOptions.map(value => {
-    const skillDiv = add(lists, 'div', 'list-skill');
-    add(skillDiv, 'div', 'title').innerHTML = value;
-    if (count++ % 3 === 0) add(lists, 'br');
-    return skillDiv;
+  add(tabsDiv, 'br');
+  add(tabsDiv, 'span', null, 'Skills:');
+  skillsOptions.forEach(skillName => {
+    const skillDiv = add(listsDiv, 'div', 'list-skill');
+    add(skillDiv, 'div', 'title', skillName);
+    if (count++ % 3 === 0) add(listsDiv, 'br');
+
+    let tabDiv = add(tabsDiv, 'div', 'tab', skillName);
+    tabDiv.onclick = () => onTabClick(tabDiv, skillDiv);
+
+    tabDivs.push(tabDiv);
+    skillDivs.push(skillDiv);
   });
 
   let currentCard = add(document.body, 'div', 'currentCard');

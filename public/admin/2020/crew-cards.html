@@ -127,15 +127,15 @@
     let card = add(null, 'div', 'card');
 
     const name = data.name.split(" ");
-    add(card, 'div', 'name1').innerText = name[0];
-    add(card, 'div', 'name2').innerText = name.slice(1).join(' ');
+    add(card, 'div', 'name1', name[0]);
+    add(card, 'div', 'name2', name.slice(1).join(' '));
 
     let arrival = add(card, 'div', 'arrival');
     let arrivalString = data.arrival.split(' ')[1];
     arrival.innerText = arrivalString;
     add(arrival, 'div', 'arrivalBox ' + arrivalString);
 
-    add(card, 'div', 'location').innerText = data.location;
+    add(card, 'div', 'location', data.location);
 
     let teamStr = '';
     for (let i = 0; i < data.teams.length; i++) {
@@ -153,7 +153,7 @@
         teamStr += ' ';
       }
     }
-    add(card, 'div', 'team').innerText = teamStr;
+    add(card, 'div', 'team', teamStr);
 
     let skillsStr = '';
     let skillsRow = (data.skills || "").split(/, /);
@@ -166,8 +166,8 @@
         skillsStr += '◌';
       }
     }
-    add(card, 'div', 'skills').innerText = skillsStr;
-    add(card, 'div', 'skills-other').innerText = skillsRow.join(", ");
+    add(card, 'div', 'skills', skillsStr);
+    add(card, 'div', 'skills-other', skillsRow.join(", "));
 
     return card;
   }

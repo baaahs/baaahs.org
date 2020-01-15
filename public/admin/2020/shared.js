@@ -120,43 +120,44 @@ function appendPre(message) {
   pre.appendChild(textContent);
 }
 
-function add(parent, tagName, className) {
+function add(parent, tagName, className, innerText) {
   let el = document.createElement(tagName);
   if (className) el.className = className;
   if (parent) parent.appendChild(el);
+  if (innerText) el.innerText = innerText;
   return el;
 }
 
 function createFullCard(data) {
   let card = add(null, 'div', 'card');
 
-  add(card, 'div', 'name').innerText = data.name;
+  add(card, 'div', 'name', data.name);
 
-  add(card, 'div', 'email').innerText = data.email;
-  add(card, 'div', 'camp').innerText = data.camp;
+  add(card, 'div', 'email', data.email);
+  add(card, 'div', 'camp', data.camp);
 
   let arrival = add(card, 'div', 'arrival');
   let arrivalString = data.arrival;
   arrival.innerText = arrivalString.replace('Early ', '').replace(' or later', '');
   add(arrival, 'div', 'arrivalBox ' + arrivalString.split(' ')[1]);
 
-  add(card, 'div', 'location').innerText = data.location;
+  add(card, 'div', 'location', data.location);
 
   let teamsDiv = add(card, 'div', 'team infobox');
-  add(teamsDiv, 'div', 'title').innerText = 'Teams: ';
+  add(teamsDiv, 'div', 'title', 'Teams: ');
   let teamColumnsDiv = add(teamsDiv, 'div', 'team-columns');
   let teamStr = '';
   for (let i = 0; i < data.teams.length; i++) {
     const s = data.teams[i];
     const name = teams[i];
     if (s.includes('LEAD')) {
-      add(teamColumnsDiv, 'div', 'lead').innerText = '◉ ' + name;
+      add(teamColumnsDiv, 'div', 'lead', '◉ ' + name);
       teamStr += '◉';
     } else if (s.includes('CREW')) {
-      add(teamColumnsDiv, 'div').innerText = '◎ ' + name + "\n";
+      add(teamColumnsDiv, 'div', null, '◎ ' + name + "\n");
       teamStr += '◎';
     } else {
-      // add(teamColumnsDiv, 'div').innerText = '◌ ' + name + "\n";
+      // add(teamColumnsDiv, 'div', '◌ ' + name + "\n");
       teamStr += '◌';
     }
 
@@ -165,33 +166,33 @@ function createFullCard(data) {
       teamStr += '  ';
     }
   }
-  add(teamsDiv, 'div', 'bullets').innerText = teamStr;
-  add(teamsDiv, 'div', 'explanation').innerText = data.explanation;
+  add(teamsDiv, 'div', 'bullets', teamStr);
+  add(teamsDiv, 'div', 'explanation', data.explanation);
 
   let ideasDiv = add(card, 'div', 'ideas infobox');
-  add(ideasDiv, 'span', 'title').innerText = 'Ideas: ';
-  add(ideasDiv, 'span').innerText = data.ideas;
+  add(ideasDiv, 'span', 'title', 'Ideas: ');
+  add(ideasDiv, 'span', null, data.ideas);
 
   let experienceDiv = add(card, 'div', 'experience infobox');
-  add(experienceDiv, 'span', 'title').innerText = 'Experience: ';
-  add(experienceDiv, 'span').innerText = data.experience;
+  add(experienceDiv, 'span', 'title', 'Experience: ');
+  add(experienceDiv, 'span', null, data.experience);
 
   let skillsDiv = add(card, 'div', 'skills infobox');
-  add(skillsDiv, 'div', 'title').innerText = 'Skills: ';
+  add(skillsDiv, 'div', 'title', 'Skills: ');
   let skillsRow = (data.skills || "").split(/, /);
   let skillsStr = '';
   for (const opt of skillsOptions) {
     let i = skillsRow.indexOf(opt);
     if (i > -1) {
       skillsStr += '●';
-      add(skillsDiv, 'div', 'skill').innerText = '◉ ' + opt;
+      add(skillsDiv, 'div', 'skill', '◉ ' + opt);
       skillsRow.splice(i, 1);
     } else {
       skillsStr += '◌';
     }
   }
-  add(skillsDiv, 'div', 'bullets').innerText += skillsStr;
-  add(skillsDiv, 'div', 'skills-other').innerText = skillsRow.join(", ");
+  add(skillsDiv, 'div', 'bullets', skillsStr);
+  add(skillsDiv, 'div', 'skills-other', skillsRow.join(", "));
 
   return card;
 }
