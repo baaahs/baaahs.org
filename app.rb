@@ -106,6 +106,8 @@ module BaaahsOrg
 
     get('/assets') { redirect "/assman/assets" }
 
+    get('/cal') { redirect "https://calendar.google.com/calendar?cid=ODlydDZ0MWs1am1oMm9odnZicXBvbTZyMW9AZ3JvdXAuY2FsZW5kYXIuZ29vZ2xlLmNvbQ" }
+    get('/cal-private') { redirect "https://calendar.google.com/calendar/embed?src=eo8lcds32ki40o14dr6m5t0o5s%40group.calendar.google.com&ctz=America%2FLos_Angeles" }
     get('/slack') { redirect "https://baaahs.slack.com" }
     get('/slack-invite') { redirect "https://join.slack.com/t/baaahs/shared_invite/enQtODg3MTE3NTk1ODA4LTRhMDEyZTY1MmI4YjIzN2JlYmUxMWQyNGMyYjA4MDhkMmMwMTU3YWFjOTVjNGZhZGY3YTc4MTNlZDE1NzFmMmY" }
 
