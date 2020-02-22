@@ -4,11 +4,17 @@
 
   .node circle {
     fill: #fff;
+    stroke: #444;
     stroke-width: 3px;
+  }
+
+  circle.parent {
+    fill: #fcc;
   }
 
   .node text {
     font: 12px sans-serif;
+    text-shadow: -2px 0 1px white, 2px 0 1px white, 0 -2px 1px white, 0 2px 1px white;
   }
 
   .link {
@@ -512,8 +518,8 @@
 
   // Set the dimensions and margins of the diagram
   const margin = {top: 20, right: 90, bottom: 30, left: 90},
-      width = 960 - margin.left - margin.right,
-      height = 500 - margin.top - margin.bottom;
+      width = window.innerWidth - margin.left - margin.right,
+      height = window.innerHeight - margin.top - margin.bottom;
 
   // append the svg object to the body of the page
   // appends a 'group' element to 'svg'
@@ -542,7 +548,7 @@
   root.y0 = 0;
 
   // Collapse after the second level
-  root.children.forEach(collapse);
+  // root.children.forEach(collapse);
 
   update(root);
 
@@ -581,12 +587,18 @@
         })
         .on('click', click);
 
+    function hasChildren(d) {
+      return d.children || d._children;
+    }
+
+    function positionLabelAbove(d) {
+      return d.depth < 2 && hasChildren(d);
+    }
+
     // Add Circle for the nodes
     nodeEnter.append('circle')
-        .attr('class', 'node')
+        .attr('class', (d) => hasChildren(d) ? 'node parent' : 'node leaf')
         .attr('r', 1e-6)
-        .style("fill", "#777")
-        .style("stroke", "#444")
         .on("mouseover", function(d) {
           console.log(d.data.crew.map(s => `<li>${s}</li>`));
           div.transition()
@@ -604,14 +616,10 @@
 
     // Add labels for the nodes
     nodeEnter.append('text')
-        .attr("dy", function(d) {
-          return d.children || d._children ? -20 : ".35em";
-        })
-        .attr("dx", function(d) {
-          return d.children || d._children ? 0 : 13;
-        })
+        .attr("dy", d => positionLabelAbove(d) ? -20 : ".35em")
+        .attr("dx", d => positionLabelAbove(d) ? 0 : 13)
         .attr("text-anchor", function(d) {
-          return d.children || d._children ? "middle" : "start";
+          return positionLabelAbove(d) ? "middle" : "start";
         })
         .text(function(d) { return d.data.name; })
         .style("fill", "#444");
@@ -628,7 +636,7 @@
 
     // Update the node attributes and style
     nodeUpdate.select('circle.node')
-        .attr('r', 10)
+        .attr('r', 6)
         .attr('cursor', 'pointer');
 
 
