@@ -14,7 +14,7 @@
 
   .node text {
     font: 12px sans-serif;
-    text-shadow: -2px 0 1px white, 2px 0 1px white, 0 -2px 1px white, 0 2px 1px white;
+    text-shadow: -2px 0 0 white, 2px 0 0 white, 0 -2px 0 white, 0 2px 0 white;
   }
 
   .link {
@@ -543,7 +543,7 @@
       .style("opacity", 0);
 
   // Assigns parent, children, height, depth
-  root = d3.hierarchy(orgData, function(d) { return d.children; });
+  root = d3.hierarchy(orgData, d => d.children);
   root.x0 = height / 2;
   root.y0 = 0;
 
@@ -554,7 +554,7 @@
 
   // Collapse the node and all it's children
   function collapse(d) {
-    if(d.children) {
+    if (d.children) {
       d._children = d.children;
       d._children.forEach(collapse);
       d.children = null
@@ -571,20 +571,20 @@
         links = treeData.descendants().slice(1);
 
     // Normalize for fixed-depth.
-    nodes.forEach(function(d){ d.y = d.depth * 180});
+    nodes.forEach(function (d) {
+      d.y = d.depth * 180
+    });
 
     // ****************** Nodes section ***************************
 
     // Update the nodes...
     const node = svg.selectAll('g.node')
-        .data(nodes, function(d) {return d.id || (d.id = ++i); });
+        .data(nodes, d => d.id || (d.id = ++i));
 
     // Enter any new modes at the parent's previous position.
     const nodeEnter = node.enter().append('g')
         .attr('class', 'node')
-        .attr("transform", function (d) {
-          return "translate(" + source.y0 + "," + source.x0 + ")";
-        })
+        .attr("transform", d => "translate(" + source.y0 + "," + source.x0 + ")")
         .on('click', click);
 
     function hasChildren(d) {
@@ -599,16 +599,17 @@
     nodeEnter.append('circle')
         .attr('class', (d) => hasChildren(d) ? 'node parent' : 'node leaf')
         .attr('r', 1e-6)
-        .on("mouseover", function(d) {
+        .on("mouseover", d => {
           console.log(d.data.crew.map(s => `<li>${s}</li>`));
           div.transition()
               .duration(200)
               .style("opacity", .9);
-          div.html(`<b>${d.data.lead}</b><br>${d.data.description}${!d.data.crew.length > 0 ? '' : '<hr>Crew:<ul>' + d.data.crew.map(s => `<li>${s}</li>`).join('') + '</ul>'}`)
+          div.html(`<b>${d.data.lead}</b><br>${d.data.description}${!d.data.crew.length > 0 ? ''
+              : '<hr>Crew:<ul>' + d.data.crew.map(s => `<li>${s}</li>`).join('') + '</ul>'}`)
               .style("left", (d3.event.pageX) + "px")
               .style("top", (d3.event.pageY - 28) + "px");
         })
-        .on("mouseout", function(d) {
+        .on("mouseout", d => {
           div.transition()
               .duration(500)
               .style("opacity", 0);
@@ -618,10 +619,8 @@
     nodeEnter.append('text')
         .attr("dy", d => positionLabelAbove(d) ? -20 : ".35em")
         .attr("dx", d => positionLabelAbove(d) ? 0 : 13)
-        .attr("text-anchor", function(d) {
-          return positionLabelAbove(d) ? "middle" : "start";
-        })
-        .text(function(d) { return d.data.name; })
+        .attr("text-anchor", d => positionLabelAbove(d) ? "middle" : "start")
+        .text(d => d.data.name)
         .style("fill", "#444");
 
     // UPDATE
@@ -630,22 +629,17 @@
     // Transition to the proper position for the node
     nodeUpdate.transition()
         .duration(duration)
-        .attr("transform", function(d) {
-          return "translate(" + d.y + "," + d.x + ")";
-        });
+        .attr("transform", d => "translate(" + d.y + "," + d.x + ")");
 
     // Update the node attributes and style
     nodeUpdate.select('circle.node')
         .attr('r', 6)
         .attr('cursor', 'pointer');
 
-
     // Remove any exiting nodes
     const nodeExit = node.exit().transition()
         .duration(duration)
-        .attr("transform", function (d) {
-          return "translate(" + source.y + "," + source.x + ")";
-        })
+        .attr("transform", d => "translate(" + source.y + "," + source.x + ")")
         .remove();
 
     // On exit reduce the node circles size to 0
@@ -660,15 +654,13 @@
 
     // Update the links...
     const link = svg.selectAll('path.link')
-        .data(links, function (d) {
-          return d.id;
-        });
+        .data(links, d => d.id);
 
     // Enter any new links at the parent's previous position.
     const linkEnter = link.enter().insert('path', "g")
         .attr("class", "link")
-        .attr('d', function (d) {
-          var o = {x: source.x0, y: source.y0};
+        .attr('d', d => {
+          const o = {x: source.x0, y: source.y0};
           return diagonal(o, o)
         });
 
@@ -678,18 +670,18 @@
     // Transition back to the parent element position
     linkUpdate.transition()
         .duration(duration)
-        .attr('d', function(d){ return diagonal(d, d.parent) });
+        .attr('d', d => diagonal(d, d.parent));
 
     // Remove any exiting links
     const linkExit = link.exit().transition()
         .duration(duration)
-        .attr('d', function (d) {
-          var o = {x: source.x, y: source.y};
+        .attr('d', d => {
+          const o = {x: source.x, y: source.y};
           return diagonal(o, o)
         });
 
     // Store the old positions for transition.
-    nodes.forEach(function(d){
+    nodes.forEach(d => {
       d.x0 = d.x;
       d.y0 = d.y;
     });
