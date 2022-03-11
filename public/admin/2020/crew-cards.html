@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Google Sheets API Quickstart</title>
+  <title>BAAAHS 2022 Crew Cards</title>
   <meta charset="utf-8" />
 
   <script type="application/javascript" src="shared.js"></script>
@@ -22,6 +22,10 @@
       margin: .5pt;
       border: 1pt solid black;
       page-break-inside: avoid;
+    }
+
+    .remote {
+      background-color: #ffffcc;
     }
 
     .name1, .name2 {
@@ -77,30 +81,32 @@
       top: 1.5em;
       right: .25em;
       width: 50%;
-      opacity: .5;
+      color: gray;
+      /*opacity: .5;*/
       white-space: nowrap;
       text-overflow: ellipsis;
       overflow: hidden;
       text-align: right;
     }
 
-    .team, .skills {
+    .team, .email {
       position: absolute;
-      font-family: Monaco, "Andale Mono", monospace;
+      font-family: "Trebuchet MS", sans-serif;
       font-size: 7.5pt;
     }
 
     .team {
       bottom: .25em;
       left: .25em;
+      font-size: 7pt;
     }
 
-    .skills {
+    .email {
       top: .25em;
       left: .25em;
     }
 
-    .skills-other {
+    .free {
       position: absolute;
       font-family: "Trebuchet MS", sans-serif;
       font-size: 7.5pt;
@@ -131,14 +137,21 @@
     add(card, 'div', 'name2', name.slice(1).join(' '));
 
     let arrival = add(card, 'div', 'arrival');
-    let arrivalString = data.arrival.split(' ')[1];
+    let arrivalString = data.arrival.split(' ')[1].substring(0, 3);
     arrival.innerText = arrivalString;
     add(arrival, 'div', 'arrivalBox ' + arrivalString);
 
     add(card, 'div', 'location', data.location);
+    let isLocal = data.location.match(/San Francisco|SF|Oakland|Bay|Emeryville/);
+    if (!isLocal) card.className += " remote";
 
     let teamStr = '';
     for (let i = 0; i < data.teams.length; i++) {
+      // breaks between groups
+      if (teamSplits.indexOf(i) !== -1) {
+        teamStr += ' ';
+      }
+
       const s = data.teams[i];
       if (s.includes('LEAD')) {
         teamStr += '◉';
@@ -147,27 +160,11 @@
       } else {
         teamStr += '◌';
       }
-
-      // breaks between groups
-      if (i === 4 || i === 9 || i === 16) {
-        teamStr += ' ';
-      }
     }
     add(card, 'div', 'team', teamStr);
 
-    let skillsStr = '';
-    let skillsRow = (data.skills || "").split(/, /);
-    for (const opt of skillsOptions) {
-      let i = skillsRow.indexOf(opt);
-      if (i > -1) {
-        skillsStr += '●';
-        skillsRow.splice(i, 1);
-      } else {
-        skillsStr += '◌';
-      }
-    }
-    add(card, 'div', 'skills', skillsStr);
-    add(card, 'div', 'skills-other', skillsRow.join(", "));
+    add(card, 'div', 'email', data.email.replace("@", "@\n"));
+    add(card, 'div', 'free', data.skills.replaceAll("\n", "¶"));
 
     return card;
   }

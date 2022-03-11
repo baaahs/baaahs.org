@@ -1,6 +1,6 @@
 // Client ID and API key from the Developer Console
-const CLIENT_ID = "238367465427-v63tc6mj1ea4qegldd01ib07ckbmmdhk.apps.googleusercontent.com";
-const API_KEY = "AIzaSyBMlb7FgsPzc80rFgNkirc3jD_JjThkPcc";
+const CLIENT_ID = "309793373722-tr2333pd4gd3qs0vtt54uk2um6eulh4l.apps.googleusercontent.com";
+const API_KEY = "AIzaSyBSthjdwfUJh2BtrHrUSgMEaEH_P6-RJP8";
 
 // Array of API discovery doc URLs for APIs used by the quickstart
 const DISCOVERY_DOCS = ["https://sheets.googleapis.com/$discovery/rest?version=v4"];
@@ -74,34 +74,37 @@ function handleSignoutClick(event) {
   gapi.auth2.getAuthInstance().signOut();
 }
 
+function process(range) {
+  let rows = range.values.map(entry => {
+    const data = {teams: []};
+    for (let i = 0; i < entry.length; i++) {
+      const value = entry[i];
+      const colName = cols[i];
+      if (colName.startsWith('teams:')) {
+        data.teams.push(value);
+      } else {
+        data[colName] = value;
+      }
+    }
+
+    return data;
+  });
+
+  rows = rows.sort((a, b) => a.name.localeCompare(b.name));
+
+  display(rows);
+}
+
 /**
  * Fetch from a spreadsheet.
  */
 function fetch() {
   gapi.client.sheets.spreadsheets.values.get({
-    spreadsheetId: '1YS-hYVvsvhq0xCaZQ9Hws9PQhUbFcoP2yBGCHXI7t9k',
+    spreadsheetId: '1vXopIhDPoF6nHQ9yAOBZzlT0NR5CmRVozPk6Ev0IfVs',
     range: 'Form Responses 1!A2:AD',
   }).then(function(response) {
     const range = response.result;
-
-    let rows = range.values.map(entry => {
-      const data = { teams: [] };
-      for (let i = 0; i < entry.length; i++) {
-        const value = entry[i];
-        const colName = cols[i];
-        if (colName.startsWith('teams:')) {
-          data.teams.push(value);
-        } else {
-          data[colName] = value;
-        }
-      }
-
-      return data;
-    });
-
-    rows = rows.sort((a, b) => a.name.localeCompare(b.name));
-
-    display(rows);
+    process(range);
   }, function(response) {
     appendPre('Error: ' + response.result.error.message);
   });
@@ -131,10 +134,10 @@ function add(parent, tagName, className, innerText) {
 function createFullCard(data) {
   let card = add(null, 'div', 'card');
 
-  add(card, 'div', 'name', data.name);
+  let nameDiv = add(card, 'div', 'name', data.name);
 
   add(card, 'div', 'email', data.email);
-  add(card, 'div', 'camp', data.camp);
+  // add(card, 'div', 'camp', data.camp);
 
   let arrival = add(card, 'div', 'arrival');
   let arrivalString = data.arrival;
@@ -142,12 +145,19 @@ function createFullCard(data) {
   add(arrival, 'div', 'arrivalBox ' + arrivalString.split(' ')[1]);
 
   add(card, 'div', 'location', data.location);
+  let isLocal = data.location.match(/San Francisco|SF|Oakland|Bay|Emeryville/);
+  if (!isLocal) nameDiv.className += " remote";
 
   let teamsDiv = add(card, 'div', 'team infobox');
   add(teamsDiv, 'div', 'title', 'Teams: ');
   let teamColumnsDiv = add(teamsDiv, 'div', 'team-columns');
   let teamStr = '';
   for (let i = 0; i < data.teams.length; i++) {
+    // breaks between groups
+    if (teamSplits.indexOf(i) !== -1) {
+      teamStr += '  ';
+    }
+
     const s = data.teams[i];
     const name = teams[i];
     if (s.includes('LEAD')) {
@@ -159,11 +169,6 @@ function createFullCard(data) {
     } else {
       // add(teamColumnsDiv, 'div', '◌ ' + name + "\n");
       teamStr += '◌';
-    }
-
-    // breaks between groups
-    if (i === 4 || i === 9 || i === 16) {
-      teamStr += '  ';
     }
   }
   add(teamsDiv, 'div', 'bullets', teamStr);
@@ -201,56 +206,45 @@ const cols = [
   "timestamp",
   "email",
   "name",
+  "location",
+  "experience",
   "teams:BAAAHS – Build",
   "teams:BAAAHS – Lights",
   "teams:BAAAHS – Sound",
   "teams:BAAAHS – Tech",
-  "teams:BAAAHS – New Initiatives",
-  "teams:STATION – Civil Engineering",
   "teams:STATION – Infrastructure",
   "teams:STATION – Communal Space",
-  "teams:STATION - Interactivity, Art, and Theming",
+  "teams:STATION - Interactivity, Art, and Theme",
   "teams:STATION – Kitchen/Food",
-  "teams:FUNDRAISING",
   "teams:EVENTS, PARTIES, AND PROGRAMMING",
-  "teams:PROJECT MANAGEMENT",
-  "teams:STORAGE MANAGEMENT",
-  "teams:COMMUNICATIONS",
-  "teams:ADMIN AND FINANCE",
-  "teams:EXODUS",
-  "teams:CAMP ORGANIZING",
-  "teams:CAMP EVENTS & INTERACTIVITY",
+  "teams:EXODUS/LNT",
+  "teams:FUNDRAISING",
+  "teams:ADMINISTRATIVE",
+  "teams:RADICAL INCLUSION/DIVERSITY",
   "teams:GENERAL ON-PLAYA VOLUNTEER",
-  "explanation",
+  "skills",
   "ideas",
-  "arrival",
-  "camp",
-  "experience",
-  "location",
-  "skills"
+  "arrival"
 ];
 
+const teamSplits = [4, 8, 12]
 const teams = [
-  "BAAAHS—Build",
-  "BAAAHS—Lights",
-  "BAAAHS—Sound",
-  "BAAAHS—Tech",
-  "BAAAHS—New Initiatives",
-  "STATION—Civil Engineering",
-  "STATION—Infrastructure",
-  "STATION—Communal Space",
-  "STATION—Interactivity, Art, and Theming",
-  "STATION—Kitchen/Food",
-  "Fundraising",
-  "Events, Parties, and Programming",
-  "Project Management",
-  "Storage Management",
-  "Communications",
-  "Admin and Finance",
-  "Exodus",
-  "Camp Organizing",
-  "Camp Events & Interactivity",
-  "General On-Playa Volunteer",
+  "BAAAHS-Build",
+  "BAAAHS-Lights",
+  "BAAAHS-Sound",
+  "BAAAHS-Tech",
+
+  "STATION-Infrastructure",
+  "STATION-Communal Space",
+  "STATION-Interactivity, Art, and Theme",
+  "STATION-Kitchen/Food",
+
+  "EVENTS, PARTIES, AND PROGRAMMING",
+  "EXODUS/LNT",
+  "FUNDRAISING",
+  "ADMINISTRATIVE",
+  "RADICAL INCLUSION/DIVERSITY",
+  "GENERAL ON-PLAYA VOLUNTEER"
 ];
 
 const skillsOptions = [
