@@ -117,6 +117,9 @@ module BaaahsOrg
     get('/2020-doc') { redirect "https://docs.google.com/document/d/10Do2qdITwrQxGOeMGd7pe1jrIxQejF-W5jHK2wbagfE" }
     get('/2020-sheet') { redirect "https://docs.google.com/spreadsheets/d/11FeKLaktPhMq_Oh_mG8TBK3U9_eY2oHBGxE0T3GzLhU" }
 
+    # 2022
+    get('/crew') { redirect "https://docs.google.com/document/d/11mQX1lZpP0rMNNV1Uni_J0hutXaMEhsjvKtermUuY6Q" }
+
 # old URLs to support for a while!
     get('/shifts') { redirect "http://www.volunteerspot.com/login/entry/375755452038" } # todo kill after 20151201
 
