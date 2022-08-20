@@ -21,6 +21,15 @@
   <link href="/stylesheets/ie.css" media="screen, projection" rel="stylesheet" type="text/css"/>
   <![endif]-->
 
+  <style type="text/css">
+    .brc-edition .not-brc-edition, .brc-edition .street-edition {
+      display: none;
+    }
+    .street-edition .not-street-edition, .street-edition .brc-edition {
+      display: none;
+    }
+  </style>
+
   <script type="application/javascript">
     const EDITIONS = ['setup-lead', 'party-crew', 'business-crew', 'head-and-hind-crew', 'tech-crew'];
 
@@ -49,8 +58,15 @@
       }
     };
 
+    function updateBrcEdition() {
+      let isBrcEdition = document.getElementById("brc-edition-checkbox").checked;
+      document.body.classList.toggle('brc-edition', isBrcEdition);
+      document.body.classList.toggle('street-edition', !isBrcEdition);
+    }
+
     window.addEventListener('load', function () {
       setEdition(document.location.hash.substr(1));
+      updateBrcEdition();
     });
     window.addEventListener('hashchange', function () {
       setEdition(document.location.hash.substr(1));
@@ -81,6 +97,7 @@
       <li><a href="#business-crew">Business Crew</a></li>
       <li><a href="#head-and-hind-crew">Head & Hind Crew</a></li>
       <li><a href="#tech-crew">Tech</a></li>
+      <li><label><input id="brc-edition-checkbox" type="checkbox" checked onclick="updateBrcEdition()"> BRC</label></li>
     </ul>
   </div>
 
@@ -133,7 +150,7 @@
     <section id="roles-section">
       <h2>Roles</h2>
 
-      <section>
+      <section class="street-edition">
         <h3>Event Producer</h3>
 
         <p>The event producer is responsible for logistics and ___ related to the event. They:</p>
@@ -266,12 +283,12 @@
 
       <div class="parts-needed">
         <h4>Requires:</h4>
-        • Lots of heavy-duty zip ties.
-        <br/>• Lots of <sup>1</sup>⁄<sub>4</sub>&quot; bolts, various lengths, with wing nuts.
+        <span class="street-edition"> • Lots of heavy-duty zip ties.
+        <br/></span>• Lots of <sup>1</sup>⁄<sub>4</sub>&quot; bolts, various lengths, with wing nuts.
         <br/><b>Tools:</b> vice grips, aligner pins.
       </div>
 
-      <p>For stationary setup, use heavy-duty zip ties wherever possible. In some cases, zip ties may not be strong
+      <p class="street-edition">For stationary setup, use heavy-duty zip ties wherever possible. In some cases, zip ties may not be strong
         enough and ¼&quot; hardware (bolt, two washers, and a wingnut) will be necessary. Use your judgement when
         hanging panels: if the connection is under a lot of tension or shearing force, use a bolt instead.
       </p>
@@ -408,23 +425,18 @@
       <section>
         <div class="parts-needed">
           <h4>Requires:</h4>
-          <b>Mobile:</b> 9﹫2&quot;×⅜&quot; bolts.
-          <br/><b>Stationary:</b> 4﹫2&quot;×⅜&quot; bolts.
-          <br/><b>Tools:</b> <sup>9</sup>⁄<sub>16</sub>″ socket wrench, pliers, and aligner pin.
+          3 people
+          <br/>2﹫4&quot;×½&quot; bolts.
+          <br/><b>Tools:</b> None.
         </div>
 
-        <h3>Install DJ platform.</h3>
+        <h3>Deploy DJ platform.</h3>
 
-        <p>The platform is in two sections, fore and aft. One edge of each is marked as “BUS SIDE”.</p>
+        <p>The platform and table are permanently attached to the bus and tip into position.</p>
         <ol>
-          <li>The fore platform is installed first. Slide it into place under the aluminum steps, line up the holes, and
-            bolt in place (finger-tight) to the dropped beam that’s inset two feet from the edge of the bus (2 bolts).
-          </li>
-          <li>Slide the aft platform in place. To align it properly, pull it away from the bus ½”, drop in place, and
-            slide back toward the bus. Align the holes and bolt to the dropped beam (2 bolts).
-          </li>
-          <li>For mobile, add 5 additional bolts along the edge of the bus.</li>
-          <li>Tighten all the bolts with wrenches.</li>
+          <li>Remove ratchet straps holding platform and table in place.</li>
+          <li>With two people standing on the center speaker shelf or on ladders, raise the table section and hold it horizontal, while the person in the DJ booth inserts 2&quot; bolts on both ends of the table to secure it in place.</li>
+          <li>Slowly lower the platform section into place.</li>
         </ol>
         <p></p>
       </section>
@@ -440,14 +452,14 @@
       <section>
         <h3>Install the panels.</h3>
 
-        <p>Labeling: Each party (driver) side panel is labeled with its number, a green dot, the numbers of its
+        <p>Labeling: Each party (driver) side panel is labeled with its number, a red dot, the numbers of its
           neighbors, and an arrow indicating which way is up. If tags or labels are illegible or missing, let the
           setup lead know!
         </p>
       </section>
 
       <section>
-        <h3>Install panels 7, 17, and 21.</h3>
+        <h3>Install the Primary Mount panels (7, 17, and 21).</h3>
         <ol>
           <li>Panel 7 sits on strut 7ABC. Use a short ⅜&quot; bolt, finger-tight.</li>
           <li>Panel 17 sits on struts 17ABC and 17DEF. Use short ⅜&quot; bolts, finger-tight.</li>
@@ -461,8 +473,9 @@
       <p>Install remaining forward panels (as described above in Generally Useful Knowledge) in this order:</p>
       <ul>
         <li>Belly (14D … 18D … 23D)</li>
-        <li>Forearm (3D … 8D … 9D … F5D … F6D)</li>
+        <li>Foreshank, first section (8D … 9D)</li>
         <li>Breast (1D … 2D … F3D … F4D)</li>
+        <li>Foreshank, second section (3D … F5D … F6D)</li>
         <li>Rack (13D … 15D … 16D)</li>
         <li>Lower Back (20D)</li>
         <li>Shoulder (4D … 5D … 6D … 11D … 12D)</li>
@@ -620,34 +633,37 @@
         </ol>
       </section>
 
-      <p>Install panel support struts 7ABC, 17ABC, 17DEF, 33ABC, 41ABC, and 41DE. Tighten hardware with tools.
-        Short ⅜&quot; bolts at the ends of the struts should point up.
-      </p>
+      <section>
+        <h3>Install panel support struts</h3>
+
+        <p>Install panel support struts 7ABC, 17ABC, 17DEF, 35ABC(?), 41ABC, and 41DE. Tighten hardware with tools.
+          Short ⅜&quot; bolts at the ends of the struts should point up.
+        </p>
+      </section>
 
       <h3>Install the panels.</h3>
 
-      <p>Labeling: Each party (driver) side panel is labeled with its number, a red dot, the numbers of its neighbors,
+      <p>Labeling: Each business (passenger) side panel is labeled with its number, a green dot, the numbers of its neighbors,
         and an arrow indicating which way is up. If tags or labels are illegible or missing, let the setup lead know!
       </p>
 
       <p></p>
 
-      <p>Install panels 7, 17, and 21.</p>
+      <p>Install the Primary Mount panels (7, 17, and 21).</p>
       <ol>
         <li>Panel 7 sits on strut 7ABC. Use a short ⅜&quot; bolt, finger-tight.</li>
         <li>Panel 17 sits on struts 17ABC and 17DEF. Use short ⅜&quot; bolts, finger-tight.</li>
-        <li>Panel 21 connects to a punched angle iron bracket on the side stair’s upper platform. Use a short ⅜&quot;
+        <li>Panel 21 connects to a punched angle iron bracket on the side extension platform. Use a short ⅜&quot;
           bolt,
           finger-tight. The other end attaches to panel 17. Use ¼&quot; hardware, finger-tight.
         </li>
-        <li>Panel 41 sits on strut 41ABC. Use a short ⅜&quot; bolt, finger-tight.</li>
       </ol>
       <p></p>
 
       <p>Install remaining forward panels (as described above in Generally Useful Knowledge) in this order:</p>
       <ul>
         <li>Belly (14P … 18P … 23P)</li>
-        <li>Forearm (8P … 9P)</li>
+        <li>Foreshank (8P … 9P)</li>
         <li>Breast (1P … 2P … 3P … F3P … F4P)</li>
         <li>Rack (13P … 15P … 16P)</li>
         <li>Lower Back (20P)</li>
@@ -685,14 +701,17 @@
       <section>
         <div class="parts-needed">
           <h4>Requires:</h4>
-          4 people, 15’ rope, front platform, 2 support beams, 2 2″×<sup>3</sup>⁄<sub>8</sub>″ bolts,
-          4 3″×<sup>1</sup>⁄<sub>2</sub>″ bolts, 2 C-clamps, pliers,
-          impact driver with <sup>3</sup>⁄<sub>4</sub>″ socket.
+          4 people
+          <br/>15’ rope, front platform, 2 black steel support beams
+          <br/>• 2@2″×<sup>3</sup>⁄<sub>8</sub>″ bolts
+          <br/>• 4@3″×<sup>1</sup>⁄<sub>2</sub>″ bolts
+          <br/>Tools: 2 C-clamps, pliers, impact driver with <sup>3</sup>⁄<sub>4</sub>″ socket.
+          <br/>Shop stairs.
         </div>
         <h3>Install front platform extension.</h3>
 
         <ul>
-          <li>Attach support beams using the <sup>3</sup>⁄<sub>8</sub>″ bolts.</li>
+          <li>Attach support beams to the sides of the platform using the <sup>3</sup>⁄<sub>8</sub>″ bolts. They'll hang down at a 45° angle.</li>
           <li>Feed rope through loops at front of platform.</li>
           <li>Place a person on each side of the narrower front section of the fixed platform. Each should have a
             C-clamp and two <sup>1</sup>⁄<sub>2</sub>″ bolts.
@@ -739,6 +758,20 @@
           </li>
         </ol>
       </section>
+      <section>
+        <div class="parts-needed">
+          <h4>Requires:</h4>
+          2 people
+          <br/>Panel F15.
+          <br/>Two longish ¼&quot; bolts/wing nuts.
+        </div>
+
+        <h3>Install neck.</h3>
+
+        <ol>
+          <li>Hang F15 from the front of the front platform extension and bolt in place.</li>
+        </ol>
+      </section>
 
       <p><b>Install ears.</b></p>
 
@@ -763,24 +796,28 @@
         </li>
         <li>Mount the aluminum head support stud (with panels and ear already attached) to Arch #1 using two 4&quot;×⅜&quot;
           bolts. The stud sits on the outside of the 2&quot;×2&quot; arch column, resting on the lower 1&quot;×1½&quot;
-          part
-          of the column.
+          part of the column.
         </li>
       </ol>
       <p></p>
 
-      <p><b>Install head.</b></p>
+      <section>
+        <h3>Install remaining head panels.</h3>
+      </section>
 
-      <p>Install hind panels (as described above in Generally Useful Knowledge) in this order:</p>
-      <ul>
-        <li>Party Side Dock 2 (32D)</li>
-        <li>Business Side Dock 2 (32P)</li>
-        <li>Party Side Dock (39D … 40D … R2D)</li>
-        <li>Business Side Dock (39P … 40P … R2P)</li>
-        <li>Dock Bridge (R1)</li>
-        <li>Party Side Twist (R3D … R4D … R5D … R6D)</li>
-        <li>Business Side Twist (R3P … R4P … R5P … R6P)</li>
-      </ul>
+      <section>
+        <h3>Install hind panels (as described above in Generally Useful Knowledge) in this order:</h3>
+
+        <ul>
+          <li>Party Side Dock 2 (32D)</li>
+          <li>Business Side Dock 2 (32P)</li>
+          <li>Party Side Dock (39D … 40D … R2D)</li>
+          <li>Business Side Dock (39P … 40P … R2P)</li>
+          <li>Dock Bridge (R1)</li>
+          <li>Party Side Twist (R3D … R4D … R5D … R6D)</li>
+          <li>Business Side Twist (R3P … R4P … R5P … R6P)</li>
+        </ul>
+      </section>
 
       <p>Disable bus suspension.
         <span class="stationary">For stationary setup, use four jack stands. Position the stands so they support a
