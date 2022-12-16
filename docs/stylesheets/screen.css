@@ -92,7 +92,7 @@ body {
 body.blueprint div#page {
   max-width: 960px;
   min-width: 960px;
-  background-image: url("/images/blueprint.gif");
+  background-image: url("../images/blueprint.gif");
   background-attachment: fixed;
   border: 1px solid #aaa;
   padding: 0;
@@ -104,7 +104,7 @@ body.blueprint div#page header {
   margin: 0 auto 0 auto;
   padding: 0;
   border-bottom: 3px;
-  border-image: url(/images/chalk-h.png) 100% 10 round;
+  border-image: url(../images/chalk-h.png) 100% 10 round;
 }
 @media only screen and (max-device-width: 640px) {
   /* line 31, ../../sass/screen.scss */
@@ -120,7 +120,7 @@ body.blueprint div#page header {
 div.content {
   padding: 50px 0px 20px 0px;
   position: relative;
-  background: url(/images/cruising2014.jpg) 0 50px no-repeat;
+  background: url(../images/cruising2014.jpg) 0 50px no-repeat;
 }
 @media only screen and (max-device-width: 640px) {
   /* line 57, ../../sass/screen.scss */
@@ -267,14 +267,14 @@ article a.survey-link {
 .top-left.tape {
   top: -3em;
   left: -3em;
-  background: url("/images/tape.png") no-repeat;
+  background: url("../images/tape.png") no-repeat;
 }
 
 /* line 199, ../../sass/screen.scss */
 .bottom-right.tape {
   bottom: -3em;
   right: -3em;
-  background: url("/images/tape.png") bottom right no-repeat;
+  background: url("../images/tape.png") bottom right no-repeat;
 }
 
 /* line 208, ../../sass/screen.scss */
@@ -533,7 +533,7 @@ article .polaroid img {
 .polaroid {
   width: 276px;
   height: 282px;
-  background-image: url("/images/polaroid.png");
+  background-image: url("../images/polaroid.png");
   position: absolute;
   box-shadow: 10px 10px 5px rgba(0, 0, 0, 0.25);
   -webkit-box-shadow: 10px 10px 5px rgba(0, 0, 0, 0.25);
