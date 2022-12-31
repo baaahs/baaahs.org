@@ -30,6 +30,7 @@ kotlin {
         }
     }
     sourceSets {
+        @Suppress("UNUSED_VARIABLE")
         val commonMain by getting {
             dependencies {
                 implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:$serializationVersion")
@@ -37,6 +38,7 @@ kotlin {
             }
         }
 
+        @Suppress("UNUSED_VARIABLE")
         val commonTest by getting {
             dependencies {
                 implementation(kotlin("test-common"))
@@ -44,6 +46,7 @@ kotlin {
             }
         }
 
+        @Suppress("UNUSED_VARIABLE")
         val jvmMain by getting {
             dependencies {
                 implementation("io.ktor:ktor-serialization:$ktorVersion")
@@ -58,6 +61,7 @@ kotlin {
             }
         }
 
+        @Suppress("UNUSED_VARIABLE")
         val jsMain by getting {
             dependencies {
                 implementation("io.ktor:ktor-client-js:$ktorVersion")

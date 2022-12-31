@@ -16,7 +16,7 @@ val App = FC<Props> {
     }
 
     h1 {
-        +"Full-Stack Shopping List"
+        +"assman — BAAAHS Asset Manager"
     }
     ul {
         shoppingList.sortedByDescending(ShoppingListItem::priority).forEach { item ->
