@@ -1,19 +1,19 @@
 import org.jetbrains.kotlin.gradle.targets.js.webpack.KotlinWebpack
 
-val kotlinVersion = "1.7.20-Beta"
-val serializationVersion = "1.3.3"
-val ktorVersion = "2.0.3"
+val kotlinVersion = "1.8.0"
+val serializationVersion = "1.4.0"
+val ktorVersion = "2.1.2"
 val logbackVersion = "1.2.11"
-val kotlinWrappersVersion = "1.0.0-pre.354"
+val kotlinWrappersVersion = "1.0.0-pre.451"
 val kmongoVersion = "4.5.0"
 
 plugins {
-    kotlin("multiplatform") version "1.7.20-Beta"
+    kotlin("multiplatform") version "1.8.0"
     application //to run JVM part
-    kotlin("plugin.serialization") version "1.7.20-Beta"
+    kotlin("plugin.serialization") version "1.8.0"
 }
 
-group = "org.example"
+group = "org.baaahs"
 version = "1.0-SNAPSHOT"
 
 repositories {
@@ -24,7 +24,7 @@ kotlin {
     jvm {
         withJava()
     }
-    js {
+    js(IR) {
         browser {
             binaries.executable()
         }
