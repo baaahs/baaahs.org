@@ -1,43 +1,77 @@
-import react.*
-import kotlinx.coroutines.*
-import react.dom.html.ReactHTML.h1
+import externals.react_head.HeadProvider
+import kotlinx.css.Color
+import kotlinx.css.CssBuilder
+import kotlinx.css.LinearDimension
+import kotlinx.css.backgroundColor
+import kotlinx.css.body
+import kotlinx.css.fontFamily
+import kotlinx.css.margin
+import kotlinx.css.maxWidth
+import kotlinx.css.padding
+import kotlinx.css.px
+import org.baaahs.assman.view.InclineMapPage
+import org.baaahs.assman.view.IndexPage
+import react.FC
+import react.Props
+import react.createElement
+import react.dom.html.ReactHTML.div
 import react.dom.html.ReactHTML.li
 import react.dom.html.ReactHTML.ul
+import react.router.Route
+import react.router.Routes
+import react.router.dom.BrowserRouter
+import react.router.dom.Link
+import styled.StyleSheet
 
-private val scope = MainScope()
+object GlobalStyles : StyleSheet("GlobalStyles") {
+    private val styles = CssBuilder(allowClasses = false).apply {
+        body {
+            fontFamily = "Nunito, sans-serif"
+        }
+    }
+
+    fun applyGlobalStyle() {
+        styled.injectGlobal(styles)
+    }
+}
 
 val App = FC<Props> {
-    var shoppingList by useState(emptyList<ShoppingListItem>())
-
-    useEffectOnce {
-        scope.launch {
-            shoppingList = getShoppingList()
+    HeadProvider {
+        externals.react_head.Link {
+            rel = "stylesheet"
+            href = "https://fonts.googleapis.com/css2?family=Nunito&display=swap"
         }
-    }
+        GlobalStyles.applyGlobalStyle()
 
-    h1 {
-        +"assman — BAAAHS Asset Manager"
-    }
-    ul {
-        shoppingList.sortedByDescending(ShoppingListItem::priority).forEach { item ->
-            li {
-                key = item.toString()
-                onClick = {
-                    scope.launch {
-                        deleteShoppingListItem(item)
-                        shoppingList = getShoppingList()
+        BrowserRouter {
+            div {
+                ul {
+                    li {
+                        Link {
+                            to = "/"
+                            +"Home"
+                        }
+                    }
+
+                    li {
+                        Link {
+                            to = "/incline-map"
+                            +"Incline Map"
+                        }
                     }
                 }
-                +"[${item.priority}] ${item.desc} "
             }
-        }
-    }
-    InputComponent {
-        onSubmit = { input ->
-            val cartItem = ShoppingListItem(input.replace("!", ""), input.count { it == '!' })
-            scope.launch {
-                addShoppingListItem(cartItem)
-                shoppingList = getShoppingList()
+
+            Routes {
+                Route {
+                    index = true
+                    element = createElement(IndexPage)
+                }
+
+                Route {
+                    path = "/incline-map"
+                    element = createElement(InclineMapPage)
+                }
             }
         }
     }

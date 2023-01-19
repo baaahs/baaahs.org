@@ -5,7 +5,11 @@ val serializationVersion = "1.4.0"
 val ktorVersion = "2.2.2"
 val logbackVersion = "1.2.11"
 val kotlinWrappersVersion = "1.0.0-pre.451"
-val kmongoVersion = "4.5.0"
+val kmongoVersion = "4.8.0"
+val spekVersion = "807-let-values-SNAPSHOT"
+
+fun kotlinw(target: String): String =
+    "org.jetbrains.kotlin-wrappers:kotlin-$target"
 
 plugins {
     kotlin("multiplatform") version "1.8.0"
@@ -18,6 +22,7 @@ version = "1.0-SNAPSHOT"
 
 repositories {
     mavenCentral()
+    maven("https://jitpack.io")
 }
 
 kotlin {
@@ -44,6 +49,8 @@ kotlin {
             dependencies {
                 implementation(kotlin("test-common"))
                 implementation(kotlin("test-annotations-common"))
+                implementation("com.github.robolectric.spek:spek-dsl:$spekVersion")
+                implementation("com.willowtreeapps.assertk:assertk:0.25")
             }
         }
 
@@ -51,8 +58,12 @@ kotlin {
         val jvmMain by getting {
             dependencies {
                 implementation("io.ktor:ktor-serialization:$ktorVersion")
+                implementation("io.ktor:ktor-client-core:$ktorVersion")
+                implementation("io.ktor:ktor-client-cio:$ktorVersion")
+                implementation("io.ktor:ktor-client-content-negotiation:$ktorVersion")
                 implementation("io.ktor:ktor-server-content-negotiation:$ktorVersion")
                 implementation("io.ktor:ktor-serialization-kotlinx-json:$ktorVersion")
+                implementation("io.ktor:ktor-server-auth:$ktorVersion")
                 implementation("io.ktor:ktor-server-cors:$ktorVersion")
                 implementation("io.ktor:ktor-server-compression:$ktorVersion")
                 implementation("io.ktor:ktor-server-core-jvm:$ktorVersion")
@@ -63,14 +74,29 @@ kotlin {
         }
 
         @Suppress("UNUSED_VARIABLE")
+        val jvmTest by getting {
+            dependencies {
+                implementation(kotlin("test-common"))
+                implementation(kotlin("test-annotations-common"))
+                implementation("io.ktor:ktor-server-test-host:$ktorVersion")
+                runtimeOnly("com.github.robolectric.spek:spek-runner-junit5:$spekVersion")
+            }
+        }
+
+        @Suppress("UNUSED_VARIABLE")
         val jsMain by getting {
             dependencies {
                 implementation("io.ktor:ktor-client-js:$ktorVersion")
                 implementation("io.ktor:ktor-client-content-negotiation:$ktorVersion")
                 implementation("io.ktor:ktor-serialization-kotlinx-json:$ktorVersion")
-                implementation(project.dependencies.enforcedPlatform("org.jetbrains.kotlin-wrappers:kotlin-wrappers-bom:$kotlinWrappersVersion"))
-                implementation("org.jetbrains.kotlin-wrappers:kotlin-react")
-                implementation("org.jetbrains.kotlin-wrappers:kotlin-react-dom")
+                implementation(
+                    project.dependencies.enforcedPlatform("org.jetbrains.kotlin-wrappers:kotlin-wrappers-bom:$kotlinWrappersVersion")
+                )
+                implementation(kotlinw("react"))
+                implementation(kotlinw("react-dom"))
+                implementation(kotlinw("react-router-dom"))
+                implementation(kotlinw("styled-next"))
+                implementation(npm("react-head", "3.4.2", generateExternals = false))
             }
         }
     }
@@ -106,6 +132,12 @@ tasks {
     withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
         kotlinOptions {
             jvmTarget = "1.8"
+        }
+    }
+
+    withType(Test::class) {
+        useJUnitPlatform {
+            includeEngines.add("spek2")
         }
     }
 }
