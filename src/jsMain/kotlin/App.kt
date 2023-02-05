@@ -1,26 +1,25 @@
+import csstype.FontSize
+import csstype.em
+import emotion.react.css
 import externals.react_head.HeadProvider
-import kotlinx.css.Color
+import externals.react_head.Meta
 import kotlinx.css.CssBuilder
-import kotlinx.css.LinearDimension
-import kotlinx.css.backgroundColor
 import kotlinx.css.body
 import kotlinx.css.fontFamily
-import kotlinx.css.margin
-import kotlinx.css.maxWidth
-import kotlinx.css.padding
-import kotlinx.css.px
+import mui.material.CssBaseline
+import mui.material.styles.Theme
+import mui.material.styles.ThemeProvider
 import org.baaahs.assman.view.InclineMapPage
 import org.baaahs.assman.view.IndexPage
 import react.FC
 import react.Props
 import react.createElement
 import react.dom.html.ReactHTML.div
-import react.dom.html.ReactHTML.li
-import react.dom.html.ReactHTML.ul
 import react.router.Route
 import react.router.Routes
 import react.router.dom.BrowserRouter
 import react.router.dom.Link
+import react.useState
 import styled.StyleSheet
 
 object GlobalStyles : StyleSheet("GlobalStyles") {
@@ -35,42 +34,53 @@ object GlobalStyles : StyleSheet("GlobalStyles") {
     }
 }
 
+class Styles(private val theme: Theme) : StyleSheet("base") {
+    val appTabs by css {
+
+    }
+}
+
 val App = FC<Props> {
-    HeadProvider {
-        externals.react_head.Link {
-            rel = "stylesheet"
-            href = "https://fonts.googleapis.com/css2?family=Nunito&display=swap"
-        }
-        GlobalStyles.applyGlobalStyle()
+    val theme by useState { Themes.Light }
 
-        BrowserRouter {
-            div {
-                ul {
-                    li {
-                        Link {
-                            to = "/"
-                            +"Home"
-                        }
-                    }
+    GlobalStyles.applyGlobalStyle()
+    val styles = Styles(theme)
 
-                    li {
-                        Link {
-                            to = "/incline-map"
-                            +"Incline Map"
-                        }
-                    }
-                }
-            }
+    CssBaseline {
+        ThemeProvider {
+            this.theme = theme
 
-            Routes {
-                Route {
-                    index = true
-                    element = createElement(IndexPage)
+            HeadProvider {
+                externals.react_head.Link {
+                    rel = "stylesheet"
+                    href = "https://fonts.googleapis.com/css2?family=Nunito&display=swap"
                 }
 
-                Route {
-                    path = "/incline-map"
-                    element = createElement(InclineMapPage)
+                Meta {
+                    name = "viewport"
+                    content = "initial-scale=1, width=device-width"
+                }
+
+                BrowserRouter {
+                    div {
+                        css { fontSize = FontSize.small; padding = .5.em }
+
+                        Link { to = "/"; +"Home" }
+                        +"|"
+                        Link { to = "/incline-map"; +"Incline Map" }
+                    }
+
+                    Routes {
+                        Route {
+                            index = true
+                            element = createElement(IndexPage)
+                        }
+
+                        Route {
+                            path = "/incline-map"
+                            element = createElement(InclineMapPage)
+                        }
+                    }
                 }
             }
         }

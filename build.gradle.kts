@@ -96,6 +96,8 @@ kotlin {
                 implementation(kotlinw("react-dom"))
                 implementation(kotlinw("react-router-dom"))
                 implementation(kotlinw("styled-next"))
+                implementation(kotlinw("mui"))
+                implementation(kotlinw("emotion"))
                 implementation(npm("react-head", "3.4.2", generateExternals = false))
             }
         }

@@ -1,49 +1,57 @@
 package org.baaahs.assman.view
 
-import kotlinx.coroutines.channels.Channel
-import kotlinx.coroutines.launch
-import kotlinx.js.jso
+import csstype.FontSize
+import mui.material.Button
+import mui.material.ButtonGroup
+import mui.material.ButtonGroupVariant
+import mui.material.Card
+import mui.material.CardContent
+import mui.material.CircularProgress
+import mui.material.CircularProgressVariant
+import mui.material.Size
+import mui.material.Table
+import mui.material.TableBody
+import mui.material.TableCell
+import mui.material.TableCellVariant
+import mui.material.TableContainer
+import mui.material.TableRow
+import mui.material.Typography
+import mui.material.styles.Theme
+import mui.material.styles.TypographyVariant
+import mui.material.styles.useTheme
+import mui.system.sx
 import org.baaahs.assman.model.BattleshipGrid
 import org.baaahs.assman.model.LatLong
-import react.ChildrenBuilder
+import org.baaahs.assman.model.toImperial
 import react.FC
 import react.Props
-import react.dom.html.ReactHTML.div
-import react.dom.html.ReactHTML.h1
-import react.memo
-import react.useEffect
 import react.useEffectOnce
 import react.useMemo
 import react.useState
 import web.geolocation.GeolocationPosition
-import web.geolocation.GeolocationWatchId
-import web.navigator.navigator
-import kotlin.math.max
-import kotlin.math.min
 import kotlin.math.roundToInt
 
-class GeoLocator {
-    suspend fun getCurrentPosition(): GeolocationPosition? {
-        val positionChannel = Channel<GeolocationPosition>()
-        navigator.geolocation.getCurrentPosition({ position ->
-            println("position = ${position}")
-            scope.launch { positionChannel.send(position) }
-        }, options = jso { enableHighAccuracy = true } )
-        return positionChannel.receive()
-    }
+data class GridOption(
+    val title: String,
+    val battleshipGrid: BattleshipGrid
+)
 
-    fun watchPosition(callback: (GeolocationPosition) -> Unit): Watcher {
-        val positionChannel = Channel<GeolocationPosition>()
-        val id = navigator.geolocation.watchPosition(callback, options = jso { enableHighAccuracy = true } )
-        return Watcher(id)
-    }
+val inclineA0 = LatLong(39.375943, -123.094508)
+val inclineK10 = LatLong(39.368254, -123.085697)
 
-    class Watcher(private val id: GeolocationWatchId) {
-        fun release() {
-            navigator.geolocation.clearWatch(id)
-        }
-    }
-}
+val a10Coord = LatLong(39.37175, -123.08760)
+val k0Coord = LatLong(39.37074, -123.08622)
+
+val gridOptions = listOf(
+    GridOption("Campground One", BattleshipGrid(a10Coord, k0Coord, depth = 1)),
+    GridOption("The Incline (10x10)", BattleshipGrid(inclineA0, inclineK10)),
+    GridOption(
+        "The Incline (A-Z)", BattleshipGrid(
+            inclineA0, inclineK10,
+            "ABCDEFGHIJKLMNOPQRSTUVWXYZ", "12345678901234567890123456", 1
+        )
+    )
+)
 
 val InclineMapPage = FC<Props> {
     val geoLocator = useMemo { GeoLocator() }
@@ -54,44 +62,105 @@ val InclineMapPage = FC<Props> {
     }
 //    scope.launch { position = geoLocator.getCurrentPosition() }
 
-    position?.let {
-        val coords = it.coords
-        val latLong = LatLong(coords.latitude, coords.longitude)
-        div { +"Latitude: ${coords.latitude}" }
-        div { +"Longitude: ${coords.longitude}" }
-        div { +"Altitude: ${coords.altitude}" }
+    var gridOption by useState { gridOptions[0] }
+    val grid = gridOption.battleshipGrid
 
-//        thingy(latLong)
-        h1 { +"Battleship Position: ${inclineBattleshipGrid.toPosition(latLong).let { (x,y) ->
-            "${(x * 100).roundToInt() / 100.0},${(y * 100).roundToInt() / 100.0}"
-        }}" }
-        h1 { +"Battleship Coords: ${inclineBattleshipGrid.toCoord(latLong)}" }
+    ButtonGroup {
+        variant = ButtonGroupVariant.contained
 
+        gridOptions.forEach { option ->
+            Button {
+                disabled = gridOption == option
+                onClick = { gridOption = option }
+                +option.title
+            }
+        }
+    }
 
-    } ?: "Locating..."
+//    <Card sx={{ minWidth: 275 }}>
+//    <CardContent>
+//    <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
+//    Word of the Day
+//    </Typography>
+//    <Typography variant="h5" component="div">
+//    be{bull}nev{bull}o{bull}lent
+//    </Typography>
+//    <Typography sx={{ mb: 1.5 }} color="text.secondary">
+//    adjective
+//    </Typography>
+//    <Typography variant="body2">
+//    well meaning and kindly.
+//    <br />
+//    {'"a benevolent smile"'}
+//    </Typography>
+//    </CardContent>
+//    <CardActions>
+//    <Button size="small">Learn More</Button>
+//    </CardActions>
+//    </Card>
+
+    val theme = useTheme<Theme>()
+
+    Card {
+        CardContent {
+            Typography {
+                sx { fontSize = FontSize.small }
+                +"Battleship Coords"
+            }
+
+            position?.let {
+                val coords = it.coords
+                val latLong = LatLong(coords.latitude, coords.longitude)
+                Typography {
+                    variant = TypographyVariant.h1
+                    sx {
+                        color = if (grid.isOutOfBounds(latLong))
+                            theme.palette.error.main else theme.palette.text.primary
+                    }
+                    +grid.toCoord(latLong)
+                }
+
+                TableContainer {
+                    Table {
+                        size = Size.small
+
+                        TableBody {
+                            TableRow {
+                                TableCell { variant = TableCellVariant.head; +"Latitude:" }
+                                TableCell { +coords.latitude.pretty() }
+                                TableCell { variant = TableCellVariant.head; +"Longitude:" }
+                                TableCell { +coords.longitude.pretty() }
+                            }
+                            TableRow {
+                                TableCell { variant = TableCellVariant.head; +"Altitude:" }
+                                TableCell { +(coords.altitude?.pretty() ?: "—") }
+                                TableCell { variant = TableCellVariant.head; +"Heading:" }
+                                TableCell { +(coords.heading?.pretty() ?: "—") }
+                            }
+                            TableRow {
+                                TableCell {
+                                    variant = TableCellVariant.head; +"Battleship Position:"
+                                }
+                                TableCell {
+                                    +grid.toPosition(latLong)
+                                        .let { (x, y) -> "${x.pretty()},${y.pretty()}" }
+                                }
+                                TableCell { variant = TableCellVariant.head; +"Grid Size:" }
+                                TableCell { +grid.gridDimensions().toImperial() }
+                            }
+                        }
+                    }
+                }
+            } ?: CircularProgress {
+                variant = CircularProgressVariant.indeterminate
+            }
+        }
+    }
 }
 
-private fun ChildrenBuilder.thingy(latLong: LatLong ) {
-    val minCoord = LatLong(
-        min(a10Coord.latitude, k0Coord.latitude),
-        min(a10Coord.longitude, k0Coord.longitude)
-    )
+private fun Double.pretty() = ((this * 100).roundToInt() / 100.0).toString()
+private fun Pair<Double, Double>.pretty() = first.pretty() to second.pretty()
 
-    val maxCoord = LatLong(
-        max(a10Coord.latitude, k0Coord.latitude),
-        max(a10Coord.longitude, k0Coord.longitude)
-    )
-
-    val zone = maxCoord - minCoord
-    val offset = latLong - minCoord
-    val latPos = offset.latitude / zone.latitude
-    val longPos = offset.longitude / zone.longitude
-    val latOpts = "0123456789"
-    val longOpts = "ABCDEFGHIJ"
-    div { +"Position: $latPos, $longPos" }
-    h1 { +"Coords: ${latOpts.find(latPos)}${longOpts.find(longPos)}" }
-    h1 { +"Coordinate: ${latOpts.check(latPos)}${longOpts.check(longPos)}" }
-}
 
 fun String.find(where: Double): String {
     val i = (where * length).toInt()
@@ -99,14 +168,8 @@ fun String.find(where: Double): String {
         .mod(length)
     return get(i).toString()
 }
+
 fun String.check(where: Double): String {
     val i = (where * length).toInt()
     return if (i < 0) "-" else if (i >= length) "+" else "_"
 }
-
-val inclineA0 = LatLong(39.375943, -123.094508)
-val inclineK10 = LatLong(39.368254, -123.085697)
-val inclineBattleshipGrid = BattleshipGrid(inclineA0, inclineK10)
-
-val a10Coord = LatLong(39.37074, -123.08760)
-val k0Coord = LatLong(39.37175, -123.08622)

@@ -2,6 +2,8 @@ package org.baaahs.assman.model
 
 import assertk.assertThat
 import assertk.assertions.isEqualTo
+import assertk.assertions.isFalse
+import assertk.assertions.isTrue
 import org.spekframework.spek2.Spek
 import org.spekframework.spek2.dsl.GroupBody
 import org.spekframework.spek2.dsl.Skip
@@ -37,6 +39,32 @@ object BattleshipGridSpec : Spek({
                 assertThat(battleshipGrid.toCoord(LatLong(14.5, -17.5)))
                     .isEqualTo("C5F5")
             }
+
+            it("indicates out of bounds") {
+                assertThat(battleshipGrid.isOutOfBounds(.2 to .8))
+                    .isFalse()
+                assertThat(battleshipGrid.isOutOfBounds(LatLong(12.0, -18.0)))
+                    .isFalse()
+            }
+
+            context("when outside the grid") {
+                it("wraps around (under)") {
+                    assertThat(battleshipGrid.toCoord(-.8 to -1.2))
+                        .isEqualTo("C8A0")
+                }
+
+                it("\"wraps around (over)\"") {
+                    assertThat(battleshipGrid.toCoord(1.2 to 2.8))
+                        .isEqualTo("C8A0")
+                }
+
+                it("indicates out of bounds") {
+                    assertThat(battleshipGrid.isOutOfBounds(-.8 to -1.2))
+                        .isTrue()
+                    assertThat(battleshipGrid.isOutOfBounds(LatLong(22.0, -8.0)))
+                        .isTrue()
+                }
+            }
         }
 
         describe("coordToPosition") {
@@ -71,6 +99,23 @@ object BattleshipGridSpec : Spek({
                 it("computes the location from coordinate, double precision") {
                     assertThat(battleshipGrid.toLatLong("C5F5", true))
                         .isEqualTo(LatLong(14.399999999999999, -17.4))
+                }
+            }
+        }
+
+        describe("gridDimensions") {
+            value(battleshipGrid) {
+                val inclineA0 = LatLong(39.375943, -123.094508)
+                val inclineK10 = LatLong(39.368254, -123.085697)
+                BattleshipGrid(inclineA0, inclineK10)
+            }
+
+            context("of full grid") {
+                it("returns dimensions in meters based on the north/south median") {
+                    assertThat(
+                        battleshipGrid.gridDimensions()
+                            .let { (x, y) -> x.toImperial() to y.toImperial() }
+                    ).isEqualTo("2484ft 10in" to "2805ft")
                 }
             }
         }
