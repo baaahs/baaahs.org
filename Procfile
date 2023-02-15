@@ -1,1 +1,1 @@
-web: bundle exec rackup config.ru -p $PORT
+web: ./build/install/shoppinglist/bin/shoppinglist
