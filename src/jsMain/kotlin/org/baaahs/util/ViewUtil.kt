@@ -1,4 +1,4 @@
-package org.baaahs.assman.view
+package org.baaahs.util
 
 import kotlinx.coroutines.MainScope
 import kotlinx.datetime.Clock

@@ -1,4 +1,3 @@
-import org.baaahs.assman.model.Asset
 import com.mongodb.ConnectionString
 import io.ktor.client.*
 import io.ktor.client.call.*
@@ -24,6 +23,7 @@ import io.ktor.server.sessions.*
 import io.ktor.util.*
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
+import org.baaahs.assman.model.Asset
 import org.litote.kmongo.coroutine.coroutine
 import org.litote.kmongo.eq
 import org.litote.kmongo.id.UUIDStringIdGenerator
@@ -120,8 +120,11 @@ fun main(httpClient: HttpClient = applicationHttpClient) {
                 }
             }
 
+            static("/assman.js") {
+                defaultResource("assman.js")
+            }
             static("/") {
-                resources("")
+                resources("docs")
             }
 
             route(Asset.path) {

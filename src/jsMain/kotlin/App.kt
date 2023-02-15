@@ -9,8 +9,8 @@ import kotlinx.css.fontFamily
 import mui.material.CssBaseline
 import mui.material.styles.Theme
 import mui.material.styles.ThemeProvider
-import org.baaahs.assman.view.InclineMapPage
-import org.baaahs.assman.view.IndexPage
+import org.baaahs.assman.view.AssManIndexPage
+import org.baaahs.view.IndexPage
 import react.FC
 import react.Props
 import react.createElement
@@ -77,8 +77,9 @@ val App = FC<Props> {
                         }
 
                         Route {
-                            path = "/incline-map"
-                            element = createElement(InclineMapPage)
+                            path = "/assman"
+                            index = true
+                            element = createElement(AssManIndexPage)
                         }
                     }
                 }

@@ -1,6 +1,6 @@
 import org.jetbrains.kotlin.gradle.targets.js.webpack.KotlinWebpack
 
-val kotlinVersion = "1.8.0"
+val kotlinVersion = "1.8.10"
 val serializationVersion = "1.4.0"
 val ktorVersion = "2.2.2"
 val logbackVersion = "1.2.11"
@@ -12,9 +12,9 @@ fun kotlinw(target: String): String =
     "org.jetbrains.kotlin-wrappers:kotlin-$target"
 
 plugins {
-    kotlin("multiplatform") version "1.8.0"
+    kotlin("multiplatform") version "1.8.10"
     application //to run JVM part
-    kotlin("plugin.serialization") version "1.8.0"
+    kotlin("plugin.serialization") version "1.8.10"
 }
 
 group = "org.baaahs"
@@ -37,6 +37,12 @@ kotlin {
     sourceSets {
         @Suppress("UNUSED_VARIABLE")
         val commonMain by getting {
+            println("srcDirs: ${resources.srcDirs()}")
+
+            resources.srcDir(project.file("docs"))
+            println("add srcDirs: ${project.file("docs")}")
+            println("after: srcDirs: ${resources.srcDirs()}")
+
             dependencies {
                 implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:$serializationVersion")
                 implementation("io.ktor:ktor-client-core:$ktorVersion")

@@ -7,6 +7,8 @@ import getAsset
 import getAssetList
 import kotlinx.coroutines.launch
 import org.baaahs.assman.model.Asset
+import org.baaahs.util.clock
+import org.baaahs.util.scope
 import react.FC
 import react.Props
 import react.dom.html.ReactHTML
@@ -14,7 +16,7 @@ import react.useEffectOnce
 import react.useMemo
 import react.useState
 
-val IndexPage = FC<Props> {
+val AssManIndexPage = FC<Props> {
     var assetList by useState(emptyList<Asset>())
     val assetCache = useMemo { HashMap<String, Asset>() }
 
