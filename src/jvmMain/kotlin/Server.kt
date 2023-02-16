@@ -93,12 +93,12 @@ fun main(httpClient: HttpClient = applicationHttpClient) {
         }
 
         routing {
-            get("/") {
-                call.respondText(
-                    this::class.java.classLoader.getResource("index.html")!!.readText(),
-                    ContentType.Text.Html
-                )
-            }
+//            get("/") {
+//                call.respondText(
+//                    this::class.java.classLoader.getResource("index.html")!!.readText(),
+//                    ContentType.Text.Html
+//                )
+//            }
 
             get("/incline-map") {
                 call.respondText(
@@ -123,8 +123,9 @@ fun main(httpClient: HttpClient = applicationHttpClient) {
             static("/baaahs-dot-org.js") {
                 defaultResource("baaahs-dot-org.js")
             }
-            static("/") {
+            static("") {
                 resources("docs")
+                defaultResource("index.html", "docs")
             }
 
             route(Asset.path) {

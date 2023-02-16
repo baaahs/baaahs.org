@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>BAAAHS 2022 Crew Lists</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, user-scalable=no">
+
+  <script type="application/javascript" src="shared.js"></script>
+  <style type="text/css">
+    @media print
+    {
+      .no-print, .no-print *
+      {
+        display: none !important;
+      }
+    }
+
+    body {
+      font-family: "Trebuchet MS", sans-serif;
+      font-size: .9em;
+    }
+
+    .tabs .tab {
+      display: inline-block;
+      background-color: #0b61a4;
+      padding: .2em .5em;
+      margin: .2em;
+      color: white;
+    }
+
+    .tabs .tab:hover {
+      background-color: #ffa4e4;
+      color: black;
+    }
+
+    .tabs .tab.selected {
+      background-color: #00aced;
+      color: black;
+    }
+
+    .lists > div {
+      display: none;
+    }
+
+    .lists div.selected {
+      display: block;
+    }
+
+
+    .legend {
+      float: right;
+      background-color: #a2ceed;
+      padding: 1em;
+      margin-right: 2em;
+      border: 1px solid black;
+      white-space: pre-line;
+    }
+
+    br {
+      clear: left;
+    }
+
+    .title {
+      font-weight: bold;
+      font-size: 1.1em;
+    }
+
+    .currentCard .card {
+      position: fixed;
+      right: 1em;
+      bottom: 1em;
+      background-color: white;
+      font-family: "Trebuchet MS", sans-serif;
+      width: 45%;
+      min-height: 20em;
+      padding: 3pt;
+      margin: 3pt;
+      border: 1pt solid black;
+      page-break-inside: avoid;
+    }
+
+    .card .name {
+      /*position: relative;*/
+      font-size: 1.5em;
+      font-weight: bold;
+      width: 100%;
+      margin-top: .1em;
+      margin-bottom: 2em;
+      text-align: center;
+      line-height: 1em;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
+    }
+
+    .card .infobox {
+      position: relative;
+      font-size: .9em;
+      border-top: 1px solid gray;
+      margin-top: .5em;
+      padding-top: .5em;
+      padding-left: 1em;
+      clear: both;
+    }
+
+    .card .infobox .title {
+      font-size: 1.1em;
+      font-weight: bold;
+      margin-left: -1em;
+    }
+
+    .card .team-columns {
+      columns: 2;
+    }
+
+    .card .team-columns div {
+      font-size: .8em;
+    }
+
+    .card .explanation {
+      padding-top: .5em;
+    }
+
+    .card .skill {
+      font-size: .8em;
+    }
+
+    .card .email, .card .arrival {
+      position: absolute;
+      font-size: 10pt;
+      top: 2.25em;
+    }
+
+    .card .arrival {
+      right: .25em;
+    }
+
+    .card .arrivalBox {
+      float: right;
+      background-color: #0b61a4 !important;
+      width: .5em;
+      height: .9em;
+      margin-left: .25em;
+      border: 1px solid black;
+    }
+    .card .arrivalBox.Monday { opacity: 100%; }
+    .card .arrivalBox.Tuesday { opacity: 80%; }
+    .card .arrivalBox.Wednesday { opacity: 60%; }
+    .card .arrivalBox.Thursday { opacity: 40%; }
+    .card .arrivalBox.Friday { opacity: 20%; }
+    .card .arrivalBox.Saturday { opacity: 10%; }
+
+    .card .camp, .card .location {
+      position: absolute;
+      font-size: 9pt;
+      top: 4em;
+      width: 30%;
+      opacity: .5;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
+    }
+
+    .card .location {
+      right: .25em;
+      text-align: right;
+    }
+
+    .card .email {
+      left: .25em;
+    }
+
+    .card .camp {
+      left: .25em;
+      text-align: left;
+    }
+
+    .card .bullets {
+      position: absolute;
+      top: -.5em;
+      right: 0;
+      font-size: .9em;
+    }
+  </style>
+</head>
+<body>
+
+<img src="../../images/logo/BAAAHS2015LogoWithBorder-80x68.png" alt=""
+     srcset="../../images/logo/BAAAHS2015LogoWithBorder-80x68.png 1x,
+             ../../images/logo/BAAAHS2015LogoWithBorder-160x136.png 2x"
+     style="float: right;"/>
+
+<!--Add buttons to initiate auth sequence and sign out-->
+<button id="authorize_button" class="no-print" style="display: none;">Authorize</button>
+<button id="signout_button" class="no-print" style="display: none;">Sign Out</button>
+
+<pre id="content" style="white-space: pre-wrap;"></pre>
+
+<script type="text/javascript">
+  const tabsDiv = add(document.body, 'div', 'tabs');
+  add(document.body, 'div', 'legend', "Applied as:\n◉ Lead\n◎ Crew");
+  const listsDiv = add(document.body, 'div', 'lists');
+
+  let count = 0;
+  const tabDivs = [];
+  const teamDivs = [];
+  const skillDivs = [];
+
+  function onTabClick(tabDiv, listDiv) {
+    tabDivs.forEach(el => el.classList.remove('selected'));
+    teamDivs.forEach(el => el.classList.remove('selected'));
+    skillDivs.forEach(el => el.classList.remove('selected'));
+
+    tabDiv.classList.add('selected');
+    listDiv.classList.add('selected');
+  }
+
+  add(tabsDiv, 'span', null, 'Teams:');
+  teams.forEach(teamName => {
+    const teamDiv = add(listsDiv, 'div', 'list-team');
+    add(teamDiv, 'div', 'title', teamName);
+    if (++count % 3 === 0) add(listsDiv, 'br');
+
+    let tabDiv = add(tabsDiv, 'span', 'tab', teamName.replace(/(BAAAHS|STATION)—/, ''));
+    tabDiv.onclick = () => onTabClick(tabDiv, teamDiv);
+
+    tabDivs.push(tabDiv);
+    teamDivs.push(teamDiv);
+  });
+
+  add(tabsDiv, 'br');
+  add(tabsDiv, 'span', null, 'Skills:');
+  skillsOptions.forEach(skillName => {
+    const skillDiv = add(listsDiv, 'div', 'list-skill');
+    add(skillDiv, 'div', 'title', skillName);
+    if (count++ % 3 === 0) add(listsDiv, 'br');
+
+    let tabDiv = add(tabsDiv, 'div', 'tab', skillName);
+    tabDiv.onclick = () => onTabClick(tabDiv, skillDiv);
+
+    tabDivs.push(tabDiv);
+    skillDivs.push(skillDiv);
+  });
+
+  let currentCard = add(document.body, 'div', 'currentCard');
+  function onNameClick(data) {
+    currentCard.innerHTML = '';
+    currentCard.appendChild(createFullCard(data));
+  }
+
+  function addToLists(data) {
+    let arrivalDay = data.arrival.substring(6, 9);
+
+    for (let i = 0; i < data.teams.length; i++) {
+      const s = data.teams[i];
+      if (s.includes('LEAD')) {
+        let nameDiv = add(teamDivs[i], 'div', 'lead');
+        nameDiv.innerText = '◉ ' + data.name + ' (' + arrivalDay + ')';
+        nameDiv.onclick = () => onNameClick(data);
+      } else if (s.includes('CREW')) {
+        let nameDiv = add(teamDivs[i], 'div', 'crew');
+        nameDiv.innerText = '◎ ' + data.name + ' (' + arrivalDay + ')';
+        nameDiv.onclick = () => onNameClick(data);
+      }
+    }
+
+    let skillsRow = (data.skills || "").split(/, /);
+    for (let i = 0; i < skillsOptions.length; i++){
+      let opt = skillsOptions[i];
+      if (skillsRow.indexOf(opt) > -1) {
+        let nameDiv = add(skillDivs[i], 'div');
+        nameDiv.innerText = '◎ ' + data.name + ' (' + arrivalDay + ')';
+        nameDiv.onclick = () => onNameClick(data);
+        skillsRow.splice(i, 1);
+      }
+    }
+  }
+
+  function display(rows) {
+    if (rows.length > 0) {
+      for (let i = 0; i < rows.length; i++) {
+        const row = rows[i];
+        addToLists(row);
+      }
+    } else {
+      appendPre('No data found.');
+    }
+  }
+</script>
+
+<script async defer src="https://apis.google.com/js/api.js"
+        onload="this.onload=function(){};handleClientLoad()"
+        onreadystatechange="if (this.readyState === 'complete') this.onload()">
+</script>
+</body>
+</html>

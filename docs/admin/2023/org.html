@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<meta charset="UTF-8">
+<style>
+
+  .node circle {
+    fill: #fff;
+    stroke: #444;
+    stroke-width: 3px;
+  }
+
+  circle.parent {
+    fill: #fcc;
+  }
+
+  .node text {
+    font: 12px sans-serif;
+    text-shadow: -2px 0 0 white, 2px 0 0 white, 0 -2px 0 white, 0 2px 0 white;
+  }
+
+  .link {
+    fill: none;
+    stroke: #AB0F05;
+    stroke-width: 3px;
+  }
+
+  div.tooltip {
+    position: absolute;
+    text-align: center;
+    width: 180px;
+    padding: 10px;
+    font: 12px sans-serif;
+    background: lightsteelblue;
+    border: 0;
+    border-radius: 8px;
+    pointer-events: none;
+  }
+
+  ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+  }
+
+</style>
+
+<body>
+
+<!-- load the d3.js library -->
+<script src="https://d3js.org/d3.v4.min.js"></script>
+
+<script>
+
+  const orgData = {
+    "name": "BAAAHS", "description": "", "lead": "Christian Williams", "children": [{
+      "name": "Build",
+      "description": "Erecting sheep and delivering him to DMV for licensing",
+      "lead": "Javi",
+      "crew": [],
+      "children": [{
+        "name": "Panel Resto",
+        "description": "Fix damaged panels",
+        "lead": "David Shapiro",
+        "crew": ["Trent Carslake", "John Theuerkauf", "Michael Guzman"],
+        "children": []
+      }, {
+        "name": "Fore",
+        "description": "Assemble front of sheep",
+        "lead": "Jason Hudak",
+        "crew": ["Zach Ross", "Christian Cononico", "Martijn Vroemen"],
+        "children": []
+      }, {
+        "name": "Aft",
+        "description": "Assemble rear of sheep",
+        "lead": "Alejandro Torroella",
+        "crew": ["Pete Fraser", "Andrew T Herren", "Marcelo Amstalden Möller"],
+        "children": []
+      }, {
+        "name": "Top",
+        "description": "Assemble upper parts of sheep",
+        "lead": "Everett Chubbuck",
+        "crew": ["Zachary Martin", "Ed", "Eugene Leytush"],
+        "children": []
+      }, {
+        "name": "Interior",
+        "description": "Improvements to interior",
+        "lead": "Jimmy Norton",
+        "crew": [],
+        "children": []
+      }, {
+        "name": "Disco Balls",
+        "description": "De-fang mirrors, make em rotate, figure out storage on BAAAHS, power, interior lights, maybe make hook collapsible",
+        "lead": "Eric Formato",
+        "crew": [],
+        "children": []
+      }, {
+        "name": "Upgrades",
+        "description": "Head/ear changes; tail; roller door; reception area lid/upholstery/lighting; Pearl lockdown",
+        "lead": "",
+        "crew": [],
+        "children": []
+      }]
+    }, {
+      "name": "Lights",
+      "description": "Light up BAAAHS",
+      "lead": "Steve Guilliams",
+      "crew": [],
+      "children": [{
+        "name": "QA",
+        "description": "Test and repair faulty sheep panels & document debugging process",
+        "lead": "Coby Anderson",
+        "crew": ["Graham Roth", "Kraig Meyer"],
+        "children": []
+      }, {
+        "name": "Mapping",
+        "description": "Capture pixel location data",
+        "lead": "Tom Varik",
+        "crew": ["Diana Brickell"],
+        "children": []
+      }, {
+        "name": "Install",
+        "description": "Install/test/repair LEDs on new panels, face, ears, etc.; wire power and Ethernet",
+        "lead": "Natalie Coblentz",
+        "crew": ["Alex Nicoll", "Jeremy Smith"],
+        "children": []
+      }, {
+        "name": "Electrical",
+        "description": "Electrical systems on BAAAHS",
+        "lead": "Everett Chubbuck",
+        "crew": [],
+        "children": []
+      }, {
+        "name": "Eyes",
+        "description": "Install and maintain eyes (and perhaps some other movers)",
+        "lead": "Brian McConnell",
+        "crew": [],
+        "children": []
+      }, {
+        "name": "Extras",
+        "description": "Staircase, disco balls, grass, interior, etc.",
+        "lead": "Eric Snyder",
+        "crew": ["Dominic Baldizan"],
+        "children": []
+      }]
+    }, {
+      "name": "Tech",
+      "description": "BAAAHS technology",
+      "lead": "Afik Cohen",
+      "crew": [],
+      "children": [{
+        "name": "Sparklemotion",
+        "description": "Interactivity, performance support, usability, stability",
+        "lead": "Andrew Boice",
+        "crew": ["James Laing", "Tom Varik", "Christian Williams"],
+        "children": []
+      }, {
+        "name": "Shows",
+        "description": "Library of awesome light shows",
+        "lead": "Chris Hasson",
+        "crew": ["Sam Luckenbill"],
+        "children": []
+      }, {
+        "name": "Networking",
+        "description": "Manage sheep networks",
+        "lead": "Justin White",
+        "crew": [],
+        "children": []
+      }, {
+        "name": "Playa Comms",
+        "description": "Sheep-to-shore communications link on playa (tech is mostly done)",
+        "lead": "Marc Ostan",
+        "crew": ["Yotam Hacohen", "Amir Naor"],
+        "children": []
+      }]
+    }, {
+      "name": "Public Works",
+      "description": "BAAAHS Station Public Works",
+      "lead": "Shelby Stark",
+      "crew": [],
+      "children": [{
+        "name": "Infrastructure",
+        "description": "Manage village infrastructure",
+        "lead": "Rory Schritz",
+        "crew": [],
+        "children": [{
+          "name": "Power",
+          "description": "Manage power systems",
+          "lead": "Matt Scribner",
+          "crew": [],
+          "children": []
+        }, {
+          "name": "Water",
+          "description": "Manage H2O and gray water",
+          "lead": "John Simpson",
+          "crew": [],
+          "children": []
+        }, {
+          "name": "Showers",
+          "description": "Build and manage showers",
+          "lead": "Elyah Gordon",
+          "crew": [],
+          "children": []
+        }, {
+          "name": "Fuel",
+          "description": "Manage fuel for village and sheep",
+          "lead": "Patrick Kindler",
+          "crew": [],
+          "children": []
+        }]
+      }, {
+        "name": "Layout",
+        "description": "Physical layout of village with an eye toward flow; placement of camps, interactivity pieces, commons. On-playa site survey.",
+        "lead": "Seth Morgan",
+        "crew": [],
+        "children": []
+      }, {
+        "name": "Lighting",
+        "description": "Lighting for village structures, walkways, commons",
+        "lead": "Patrick McNamara",
+        "crew": [],
+        "children": []
+      }, {
+        "name": "Transport",
+        "description": "Mgt of Wonderbread transport and any other BRC transportation logistics needs",
+        "lead": "Shelby Stark",
+        "crew": [],
+        "children": []
+      }, {
+        "name": "Storage",
+        "description": "Mgt of storage logistics including Wonderbread, camp container, Pearl, all assets",
+        "lead": "Shelby Stark",
+        "crew": [],
+        "children": []
+      }, {
+        "name": "Camps Liaison",
+        "description": "Coordinates comms with camps; represents camps to core teams",
+        "lead": "Mary Droese",
+        "crew": [],
+        "children": []
+      }, {
+        "name": "Village organizer",
+        "description": "General village community needs, e.g. announcements at dinner, work recruiting, etc.",
+        "lead": "Travis Cosban",
+        "crew": [],
+        "children": []
+      }, {
+        "name": "Borg Relations",
+        "description": "Placement and DMV forms, etc.",
+        "lead": "Shelby Stark",
+        "crew": [],
+        "children": [{
+          "name": "Tickets",
+          "description": "Manage DGS and other ticket acquisition",
+          "lead": "Shelby Stark",
+          "crew": [],
+          "children": []
+        }, {
+          "name": "Early Arrival",
+          "description": "Manage early arrival & WAP",
+          "lead": "Shelby Stark",
+          "crew": [],
+          "children": []
+        }]
+      }]
+    }, {
+      "name": "BAAAHS Depot",
+      "description": "Design, build, and manage village common area",
+      "lead": "Joey Matiz",
+      "crew": [],
+      "children": [{
+        "name": "Shade Structure",
+        "description": "Central shady area adjoining tower (acquire & erect)",
+        "lead": "Patrick McNamara",
+        "crew": ["Johnny Stoneburner"],
+        "children": []
+      }, {
+        "name": "Tower",
+        "description": "Order and erect BAAAHS Depot tower",
+        "lead": "Alex Pysarets",
+        "crew": ["Jano Valencia", "Christopher Mc Kenzie, Jr.", "Nathan Rowader"],
+        "children": []
+      }, {
+        "name": "Station Design",
+        "description": "Design tower and depot structure and façade",
+        "lead": "Alex Pysarets",
+        "crew": [],
+        "children": []
+      }, {
+        "name": "Workshop",
+        "description": "Manage workshop and tools during Build Week",
+        "lead": "Sam Brinton",
+        "crew": [],
+        "children": []
+      }, {
+        "name": "Station Sign",
+        "description": "Improve lights and wiring, assemble and install on tower",
+        "lead": "Joey Matiz",
+        "crew": ["Critter Fetkovich"],
+        "children": []
+      }, {
+        "name": "Hospitality",
+        "description": "Depot comfort goods: Build week water cooler/break room, Event week seating/tables for dining area, chillout zone, decor.",
+        "lead": "Michael Schilling",
+        "crew": ["Bob Pullum", "Benjamin Bergen"],
+        "children": []
+      }, {
+        "name": "Fire Dept",
+        "description": "Fire build, operations, & safety training",
+        "lead": "Ryan Raguse",
+        "crew": ["Abdul Kandeel"],
+        "children": [{
+          "name": "Poofers",
+          "description": "Poofers on BAAAHS",
+          "lead": "Michael Schilling",
+          "crew": [],
+          "children": []
+        }, {
+          "name": "Fire Barrell",
+          "description": "Fire near the Depot",
+          "lead": "Ryan Raguse",
+          "crew": [],
+          "children": []
+        }]
+      }]
+    }, {
+      "name": "Theme & Art",
+      "description": "Overall design and delivery of theme and art stuff",
+      "lead": "August Oppenheimer",
+      "crew": [],
+      "children": [{
+        "name": "Art Dept",
+        "description": "Graphic design assistance for other teams (incl. signage for Station)",
+        "lead": "August Oppenheimer",
+        "crew": ["Ved", "Graham Roth", "Christian Cononico", "Dominic Mondavi"],
+        "children": []
+      }, {
+        "name": "Photo/video",
+        "description": "Capturing awesome stuff",
+        "lead": "Chris Galasso",
+        "crew": ["Cristian Armendariz", "Eric Formato"],
+        "children": []
+      }, {
+        "name": "Handbook",
+        "description": "Documentation and printed runbook for BAAAHS & village",
+        "lead": "August Oppenheimer",
+        "crew": ["Bob Pullum"],
+        "children": []
+      }, {
+        "name": "Flockbook",
+        "description": "Mugshots of villagers",
+        "lead": "Graham Roth",
+        "crew": [],
+        "children": []
+      }, {
+        "name": "Bandanas",
+        "description": "",
+        "lead": "Solomon Hursey",
+        "crew": ["Shady"],
+        "children": []
+      }, {
+        "name": "BPHM",
+        "description": "BAAAHS Preternatural History Museum (exhibits in the Depot)",
+        "lead": "Bob Pullum",
+        "crew": ["August Oppenheimer", "Shady"],
+        "children": []
+      }]
+    }, {
+      "name": "Food",
+      "description": "Food at BAAAHS Station",
+      "lead": "Alvin Ko",
+      "crew": [],
+      "children": [{
+        "name": "Build Week",
+        "description": "Meals and snacks during Build Week",
+        "lead": "Canyon Zody",
+        "crew": ["Vivek Ganti", "Tommy Wiles"],
+        "children": []
+      }, {
+        "name": "Burn Week",
+        "description": "Dinner during Burn Week",
+        "lead": "Brandon Roberts",
+        "crew": ["Kevin Song"],
+        "children": []
+      }, {
+        "name": "Kitchen",
+        "description": "Setup and maintenance of village kitchen",
+        "lead": "Kevin Contzen",
+        "crew": ["Alex Conlan", "Alina Weinstein"],
+        "children": []
+      }]
+    }, {
+      "name": "Events",
+      "description": "BAAAHS events, both on-playa and off",
+      "lead": "Devin Jay",
+      "crew": [],
+      "children": [{
+        "name": "Music Director",
+        "description": "General music direction and booking oversight; scheduling for BRC parties",
+        "lead": "Mo Kudeki",
+        "crew": ["Harry Cross"],
+        "children": []
+      }, {
+        "name": "BRC Parties",
+        "description": "Training and support for camps on operating BAAAHS parties",
+        "lead": "Yotam Hacohen",
+        "crew": ["Alvaro Montenegro", "Maclean Shea"],
+        "children": []
+      }, {
+        "name": "Dancefloor",
+        "description": "Optimize dancefloor deployment",
+        "lead": "Roddy Hibbard",
+        "crew": [],
+        "children": []
+      }, {
+        "name": "Village Events",
+        "description": "Coordinate and publicize events in the village (managed by camps)",
+        "lead": "Jeff Krucek",
+        "crew": ["Nathalie Bossé", "Davide Pagnotta", "Lance Burbank", "Therron Ricks"],
+        "children": []
+      }, {
+        "name": "Off-Playa Appearances",
+        "description": "Bookings and organization for off-playa events",
+        "lead": "Raymond Galaviz",
+        "crew": [],
+        "children": []
+      }, {
+        "name": "Soundsystem",
+        "description": "Equipment install, design, upgrades, tuning, training; includes BAAAHS and village systems",
+        "lead": "Chris Kerr",
+        "crew": ["John Anthonie"],
+        "children": []
+      }, {
+        "name": "Stage Management",
+        "description": "Get DJs in and out of the booth on time, filter their m&m's",
+        "lead": "Malcolm MacOmber",
+        "crew": ["Andrei", "Jess Mitchell"],
+        "children": []
+      }, {
+        "name": "Recording",
+        "description": "Make sure every set is recorded, that we have permission to post, and post.",
+        "lead": "Brandon Roberts",
+        "crew": [],
+        "children": []
+      }, {
+        "name": "Campout",
+        "description": "Let's do a BAAAHS campout, eh?",
+        "lead": "Kevin McSpadden",
+        "crew": [],
+        "children": []
+      }, {
+        "name": "Promotions",
+        "description": "Promotion for BAAAHS events, both on-playa and off",
+        "lead": "Evan Cudworth",
+        "crew": [],
+        "children": []
+      }, {
+        "name": "Doyle/SF work party",
+        "description": "Planning for work weekends before BRC",
+        "lead": "Nathaniel Halsey",
+        "crew": ["Alex Conlan"],
+        "children": []
+      }]
+    }, {
+      "name": "Exodus",
+      "description": "Coordinate Exodus efforts across teams and camps",
+      "lead": "Mark Terrelonge",
+      "crew": ["Andrew Fitch", "Dan Melton"],
+      "children": []
+    }, {
+      "name": "Administration",
+      "description": "Keep the wheels on the bus",
+      "lead": "Zachary Fietsch",
+      "crew": [],
+      "children": [{
+        "name": "Accounts",
+        "description": "Numbers in boxes!",
+        "lead": "Trung Lu",
+        "crew": [],
+        "children": []
+      }, {
+        "name": "Fundraising",
+        "description": "$ ~= !!!",
+        "lead": "Lovebird",
+        "crew": [],
+        "children": []
+      }, {
+        "name": "Communications",
+        "description": "Communications, internal and not",
+        "lead": "Shady",
+        "crew": [],
+        "children": [{
+          "name": "External",
+          "description": "FB, baaahs.org",
+          "lead": "Lovebird",
+          "crew": [],
+          "children": []
+        }]
+      }, {
+        "name": "Program Management",
+        "description": "Strategy coordination across all projects",
+        "lead": "Ka-Hai Wong",
+        "crew": ["Nik Laufer-Ede"],
+        "children": []
+      }, {
+        "name": "IT",
+        "description": "Managing our tec stuffs",
+        "lead": "Yotam Hacohen",
+        "crew": [],
+        "children": []
+      }, {
+        "name": "Pearl Management",
+        "description": "Keep 'er runnin'",
+        "lead": "Joey Matiz",
+        "crew": [],
+        "children": []
+      }]
+    }]
+  };
+
+  // Set the dimensions and margins of the diagram
+  const margin = {top: 20, right: 90, bottom: 30, left: 90},
+      width = window.innerWidth - margin.left - margin.right,
+      height = window.innerHeight - margin.top - margin.bottom;
+
+  // append the svg object to the body of the page
+  // appends a 'group' element to 'svg'
+  // moves the 'group' element to the top left margin
+  const svg = d3.select("body").append("svg")
+      .attr("width", width + margin.right + margin.left)
+      .attr("height", height + margin.top + margin.bottom)
+      .append("g")
+      .attr("transform", "translate("
+          + margin.left + "," + margin.top + ")");
+
+  let i = 0,
+      duration = 750,
+      root;
+
+  // declares a tree layout and assigns the size
+  const treemap = d3.tree().size([height, width]);
+
+  const div = d3.select("body").append("div")
+      .attr("class", "tooltip")
+      .style("opacity", 0);
+
+  // Assigns parent, children, height, depth
+  root = d3.hierarchy(orgData, d => d.children);
+  root.x0 = height / 2;
+  root.y0 = 0;
+
+  // Collapse after the second level
+  // root.children.forEach(collapse);
+
+  update(root);
+
+  // Collapse the node and all it's children
+  function collapse(d) {
+    if (d.children) {
+      d._children = d.children;
+      d._children.forEach(collapse);
+      d.children = null
+    }
+  }
+
+  function update(source) {
+
+    // Assigns the x and y position for the nodes
+    const treeData = treemap(root);
+
+    // Compute the new tree layout.
+    const nodes = treeData.descendants(),
+        links = treeData.descendants().slice(1);
+
+    // Normalize for fixed-depth.
+    nodes.forEach(function (d) {
+      d.y = d.depth * 180
+    });
+
+    // ****************** Nodes section ***************************
+
+    // Update the nodes...
+    const node = svg.selectAll('g.node')
+        .data(nodes, d => d.id || (d.id = ++i));
+
+    // Enter any new modes at the parent's previous position.
+    const nodeEnter = node.enter().append('g')
+        .attr('class', 'node')
+        .attr("transform", d => "translate(" + source.y0 + "," + source.x0 + ")")
+        .on('click', click);
+
+    function hasChildren(d) {
+      return d.children || d._children;
+    }
+
+    function positionLabelAbove(d) {
+      return d.depth < 2 && hasChildren(d);
+    }
+
+    // Add Circle for the nodes
+    nodeEnter.append('circle')
+        .attr('class', (d) => hasChildren(d) ? 'node parent' : 'node leaf')
+        .attr('r', 1e-6)
+        .on("mouseover", d => {
+          console.log(d.data.crew.map(s => `<li>${s}</li>`));
+          div.transition()
+              .duration(200)
+              .style("opacity", .9);
+          div.html(`<b>${d.data.lead}</b><br>${d.data.description}${!d.data.crew.length > 0 ? ''
+              : '<hr>Crew:<ul>' + d.data.crew.map(s => `<li>${s}</li>`).join('') + '</ul>'}`)
+              .style("left", (d3.event.pageX) + "px")
+              .style("top", (d3.event.pageY - 28) + "px");
+        })
+        .on("mouseout", d => {
+          div.transition()
+              .duration(500)
+              .style("opacity", 0);
+        });
+
+    // Add labels for the nodes
+    nodeEnter.append('text')
+        .attr("dy", d => positionLabelAbove(d) ? -20 : ".35em")
+        .attr("dx", d => positionLabelAbove(d) ? 0 : 13)
+        .attr("text-anchor", d => positionLabelAbove(d) ? "middle" : "start")
+        .text(d => d.data.name)
+        .style("fill", "#444");
+
+    // UPDATE
+    const nodeUpdate = nodeEnter.merge(node);
+
+    // Transition to the proper position for the node
+    nodeUpdate.transition()
+        .duration(duration)
+        .attr("transform", d => "translate(" + d.y + "," + d.x + ")");
+
+    // Update the node attributes and style
+    nodeUpdate.select('circle.node')
+        .attr('r', 6)
+        .attr('cursor', 'pointer');
+
+    // Remove any exiting nodes
+    const nodeExit = node.exit().transition()
+        .duration(duration)
+        .attr("transform", d => "translate(" + source.y + "," + source.x + ")")
+        .remove();
+
+    // On exit reduce the node circles size to 0
+    nodeExit.select('circle')
+        .attr('r', 1e-6);
+
+    // On exit reduce the opacity of text labels
+    nodeExit.select('text')
+        .style('fill-opacity', 1e-6);
+
+    // ****************** links section ***************************
+
+    // Update the links...
+    const link = svg.selectAll('path.link')
+        .data(links, d => d.id);
+
+    // Enter any new links at the parent's previous position.
+    const linkEnter = link.enter().insert('path', "g")
+        .attr("class", "link")
+        .attr('d', d => {
+          const o = {x: source.x0, y: source.y0};
+          return diagonal(o, o)
+        });
+
+    // UPDATE
+    const linkUpdate = linkEnter.merge(link);
+
+    // Transition back to the parent element position
+    linkUpdate.transition()
+        .duration(duration)
+        .attr('d', d => diagonal(d, d.parent));
+
+    // Remove any exiting links
+    const linkExit = link.exit().transition()
+        .duration(duration)
+        .attr('d', d => {
+          const o = {x: source.x, y: source.y};
+          return diagonal(o, o)
+        });
+
+    // Store the old positions for transition.
+    nodes.forEach(d => {
+      d.x0 = d.x;
+      d.y0 = d.y;
+    });
+
+    // Creates a curved (diagonal) path from parent to the child nodes
+    function diagonal(s, d) {
+      return `M ${s.y} ${s.x}
+            C ${(s.y + d.y) / 2} ${s.x},
+              ${(s.y + d.y) / 2} ${d.x},
+              ${d.y} ${d.x}`;
+    }
+
+    // Toggle children on click.
+    function click(d) {
+      if (d.children) {
+        d._children = d.children;
+        d.children = null;
+      } else {
+        d.children = d._children;
+        d._children = null;
+      }
+      update(d);
+    }
+  }
+
+</script>
+</body>

@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>BAAAHS 2022 Crew Cards</title>
+  <meta charset="utf-8" />
+
+  <script type="application/javascript" src="shared.js"></script>
+  <style type="text/css">
+    @media print
+    {
+      .no-print, .no-print *
+      {
+        display: none !important;
+      }
+    }
+
+    .card {
+      position: relative;
+      float: left;
+      width: 9em;
+      height: 6em;
+      margin: .5pt;
+      border: 1pt solid black;
+      page-break-inside: avoid;
+    }
+
+    .remote {
+      background-color: #ffffcc;
+    }
+
+    .name1, .name2 {
+      position: absolute;
+      font-family: "Trebuchet MS", sans-serif;
+      font-weight: bold;
+      width: 100%;
+      margin-top: .1em;
+      text-align: center;
+      line-height: 1em;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
+    }
+
+    .name1 {
+      font-size: 14pt;
+      top: 1.5em;
+    }
+
+    .name2 {
+      font-size: 9.5pt;
+      top: 4em;
+    }
+
+    .arrival {
+      position: absolute;
+      font-family: "Trebuchet MS", sans-serif;
+      font-size: 8pt;
+      top: .25em;
+      right: .25em;
+    }
+
+    .arrivalBox {
+      float: right;
+      background-color: #0b61a4;
+      width: .5em;
+      height: .9em;
+      margin-left: .25em;
+      border: 1px solid black;
+    }
+    .arrivalBox.Monday { opacity: 100%; }
+    .arrivalBox.Tuesday { opacity: 80%; }
+    .arrivalBox.Wednesday { opacity: 60%; }
+    .arrivalBox.Thursday { opacity: 40%; }
+    .arrivalBox.Friday { opacity: 20%; }
+    .arrivalBox.Saturday { opacity: 10%; }
+
+    .location {
+      position: absolute;
+      font-family: "Trebuchet MS", sans-serif;
+      font-size: 7.5pt;
+      top: 1.5em;
+      right: .25em;
+      width: 50%;
+      color: gray;
+      /*opacity: .5;*/
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      text-align: right;
+    }
+
+    .team, .email {
+      position: absolute;
+      font-family: "Trebuchet MS", sans-serif;
+      font-size: 7.5pt;
+    }
+
+    .team {
+      bottom: .25em;
+      left: .25em;
+      font-size: 7pt;
+    }
+
+    .email {
+      top: .25em;
+      left: .25em;
+    }
+
+    .free {
+      position: absolute;
+      font-family: "Trebuchet MS", sans-serif;
+      font-size: 7.5pt;
+      bottom: 1.5em;
+      left: 0.25em;
+      width: 100%;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+<!--Add buttons to initiate auth sequence and sign out-->
+<button id="authorize_button" class="no-print" style="display: none;">Authorize</button>
+<button id="signout_button" class="no-print" style="display: none;">Sign Out</button>
+
+<pre id="content" style="white-space: pre-wrap;"></pre>
+
+<script type="text/javascript">
+  function createCard(data) {
+    let card = add(null, 'div', 'card');
+
+    const name = data.name.split(" ");
+    add(card, 'div', 'name1', name[0]);
+    add(card, 'div', 'name2', name.slice(1).join(' '));
+
+    let arrival = add(card, 'div', 'arrival');
+    let arrivalString = data.arrival.split(' ')[1].substring(0, 3);
+    arrival.innerText = arrivalString;
+    add(arrival, 'div', 'arrivalBox ' + arrivalString);
+
+    add(card, 'div', 'location', data.location);
+    let isLocal = data.location.match(/San Francisco|SF|Oakland|Bay|Emeryville/);
+    if (!isLocal) card.className += " remote";
+
+    let teamStr = '';
+    for (let i = 0; i < data.teams.length; i++) {
+      // breaks between groups
+      if (teamSplits.indexOf(i) !== -1) {
+        teamStr += ' ';
+      }
+
+      const s = data.teams[i];
+      if (s.includes('LEAD')) {
+        teamStr += '◉';
+      } else if (s.includes('CREW')) {
+        teamStr += '◎';
+      } else {
+        teamStr += '◌';
+      }
+    }
+    add(card, 'div', 'team', teamStr);
+
+    add(card, 'div', 'email', data.email.replace("@", "@\n"));
+    add(card, 'div', 'free', data.skills.replaceAll("\n", "¶"));
+
+    return card;
+  }
+
+  function display(rows) {
+    if (rows.length > 0) {
+      for (let i = 0; i < rows.length; i++) {
+        const row = rows[i];
+        document.body.appendChild(createCard(row));
+      }
+    } else {
+      appendPre('No data found.');
+    }
+  }
+</script>
+
+<script async defer src="https://apis.google.com/js/api.js"
+        onload="this.onload=function(){};handleClientLoad()"
+        onreadystatechange="if (this.readyState === 'complete') this.onload()">
+</script>
+</body>
+</html>

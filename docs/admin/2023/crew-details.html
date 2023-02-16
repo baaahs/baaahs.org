@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>BAAAHS 2022 Crew Details</title>
+  <meta charset="utf-8" />
+
+  <script type="application/javascript" src="shared.js"></script>
+  <style type="text/css">
+    @media print
+    {
+      .no-print, .no-print *
+      {
+        display: none !important;
+      }
+    }
+
+    .card {
+      font-family: "Trebuchet MS", sans-serif;
+      position: relative;
+      /*float: left;*/
+      width: 97%;
+      min-height: 20em;
+      padding: 3pt;
+      margin: 3pt 3pt 2em 3pt;
+      border: 1pt solid black;
+      page-break-inside: avoid;
+    }
+
+    .remote {
+      background-color: #ffffcc;
+    }
+
+    .name {
+      /*position: relative;*/
+      font-size: 1.5em;
+      font-weight: bold;
+      width: 100%;
+      margin-top: .1em;
+      margin-bottom: 2em;
+      text-align: center;
+      line-height: 1em;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
+    }
+
+    .infobox {
+      position: relative;
+      font-size: .9em;
+      border-top: 1px solid gray;
+      margin-top: .5em;
+      padding-top: .5em;
+      padding-left: 1em;
+    }
+
+    .infobox .title {
+      font-size: 1.1em;
+      font-weight: bold;
+      margin-left: -1em;
+    }
+
+    .team-columns {
+      columns: 2;
+    }
+
+    .team-columns div {
+      font-size: .8em;
+    }
+
+    .explanation {
+      padding-top: .5em;
+    }
+
+    .skill {
+      font-size: .8em;
+    }
+
+    .email, .arrival {
+      position: absolute;
+      font-size: 10pt;
+      top: 3.5em;
+    }
+
+    .arrival {
+      right: .25em;
+      top: 2.25em;
+    }
+
+    .arrivalBox {
+      float: right;
+      background-color: #0b61a4 !important;
+      width: .5em;
+      height: .9em;
+      margin-left: .25em;
+      border: 1px solid black;
+    }
+    .arrivalBox.Monday { opacity: 100%; }
+    .arrivalBox.Tuesday { opacity: 80%; }
+    .arrivalBox.Wednesday { opacity: 60%; }
+    .arrivalBox.Thursday { opacity: 40%; }
+    .arrivalBox.Friday { opacity: 20%; }
+    .arrivalBox.Saturday { opacity: 10%; }
+
+    .camp, .location {
+      position: absolute;
+      font-size: 9pt;
+      top: 4em;
+      width: 30%;
+      opacity: .5;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
+    }
+
+    .location {
+      right: .25em;
+      text-align: right;
+    }
+
+    .email {
+      left: .25em;
+    }
+
+    .camp {
+      left: .25em;
+      text-align: left;
+    }
+
+    .bullets {
+      position: absolute;
+      top: 0em;
+      right: 0;
+      font-size: .9em;
+    }
+  </style>
+</head>
+<body>
+
+<!--Add buttons to initiate auth sequence and sign out-->
+<button id="authorize_button" class="no-print" style="display: none;">Authorize</button>
+<button id="signout_button" class="no-print" style="display: none;">Sign Out</button>
+
+<pre id="content" style="white-space: pre-wrap;"></pre>
+
+<script type="text/javascript">
+  function display(rows) {
+    if (rows.length > 0) {
+      for (let i = 0; i < rows.length; i++) {
+        const row = rows[i];
+        document.body.appendChild(createFullCard(row));
+      }
+    } else {
+      appendPre('No data found.');
+    }
+  }
+</script>
+
+<script async defer src="https://apis.google.com/js/api.js"
+        onload="this.onload=function(){};handleClientLoad()"
+        onreadystatechange="if (this.readyState === 'complete') this.onload()">
+</script>
+</body>
+</html>
