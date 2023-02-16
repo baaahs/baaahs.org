@@ -120,8 +120,8 @@ fun main(httpClient: HttpClient = applicationHttpClient) {
                 }
             }
 
-            static("/assman.js") {
-                defaultResource("assman.js")
+            static("/baaahs-dot-org.js") {
+                defaultResource("baaahs-dot-org.js")
             }
             static("/") {
                 resources("docs")

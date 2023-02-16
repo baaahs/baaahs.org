@@ -4,4 +4,4 @@ pluginManagement {
         maven { setUrl("https://plugins.gradle.org/m2/") }
     }
 }
-rootProject.name = "assman"
+rootProject.name = "baaahs-dot-org"
