@@ -210,6 +210,10 @@ function createFullCard(data) {
   add(diversityDiv, 'div', 'title', 'Diversity & Inclusion: ');
   add(diversityDiv, 'span', null, data.diversity);
 
+  let arrivalDiv = add(card, 'div', 'arrival2 infobox');
+  add(arrivalDiv, 'div', 'title', 'Arrival: ');
+  add(arrivalDiv, 'span', null, data.arrival);
+
   let departureDiv = add(card, 'div', 'departure infobox');
   add(departureDiv, 'div', 'title', 'Departure: ');
   add(departureDiv, 'span', null, data.departure);
