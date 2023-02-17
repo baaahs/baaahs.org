@@ -160,10 +160,13 @@ function createFullCard(data) {
 
     const s = data.teams[i];
     const name = teams[i];
-    if (s.includes('LEAD')) {
+    if (s.includes('Ringleader')) {
+      add(teamColumnsDiv, 'div', 'ringleader', '◉ ' + name);
+      teamStr += '◉';
+    } else if (s.includes('Shepherd')) {
       add(teamColumnsDiv, 'div', 'lead', '◉ ' + name);
       teamStr += '◉';
-    } else if (s.includes('CREW')) {
+    } else if (s.includes('Teammate')) {
       add(teamColumnsDiv, 'div', null, '◎ ' + name + "\n");
       teamStr += '◎';
     } else {
@@ -174,13 +177,13 @@ function createFullCard(data) {
   add(teamsDiv, 'div', 'bullets', teamStr);
   add(teamsDiv, 'div', 'explanation', data.explanation);
 
-  let ideasDiv = add(card, 'div', 'ideas infobox');
-  add(ideasDiv, 'span', 'title', 'Ideas: ');
-  add(ideasDiv, 'span', null, data.ideas);
-
   let experienceDiv = add(card, 'div', 'experience infobox');
-  add(experienceDiv, 'span', 'title', 'Experience: ');
+  add(experienceDiv, 'div', 'title', 'Experience: ');
   add(experienceDiv, 'span', null, data.experience);
+
+  let whyBaaahsDiv = add(card, 'div', 'whyBaaahs infobox');
+  add(whyBaaahsDiv, 'div', 'title', 'Why BAAAHS: ');
+  add(whyBaaahsDiv, 'span', null, data.whyBaaahs);
 
   let skillsDiv = add(card, 'div', 'skills infobox');
   add(skillsDiv, 'div', 'title', 'Skills: ');
@@ -199,6 +202,18 @@ function createFullCard(data) {
   add(skillsDiv, 'div', 'bullets', skillsStr);
   add(skillsDiv, 'div', 'skills-other', skillsRow.join(", "));
 
+  let ideasDiv = add(card, 'div', 'ideas infobox');
+  add(ideasDiv, 'div', 'title', 'Ideas: ');
+  add(ideasDiv, 'span', null, data.ideas);
+
+  let diversityDiv = add(card, 'div', 'diversity infobox');
+  add(diversityDiv, 'div', 'title', 'Diversity & Inclusion: ');
+  add(diversityDiv, 'span', null, data.diversity);
+
+  let departureDiv = add(card, 'div', 'departure infobox');
+  add(departureDiv, 'div', 'title', 'Departure: ');
+  add(departureDiv, 'span', null, data.departure);
+
   return card;
 }
 
@@ -212,32 +227,32 @@ const cols = [
   'experience',
   'whyBaaahs',
 
-  'team:Build',
-  'team:Lights',
-  'team:Sound',
-  'team:Tech',
-  'team:Events',
-  'team:Camp',
-  'team:Depot',
-  'team:Infra',
-  'team:Community',
-  'team:Communications',
-  'team:Theme and Art',
-  'team:Food',
-  'team:Campout',
-  'team:Fundraising',
-  'team:Admin/Default World',
-  'team:Exodus',
+  'teams:Build',
+  'teams:Lights',
+  'teams:Sound',
+  'teams:Tech',
+  'teams:Events',
+  'teams:Camp',
+  'teams:Depot',
+  'teams:Infra',
+  'teams:Community',
+  'teams:Communications',
+  'teams:Theme and Art',
+  'teams:Food',
+  'teams:Campout',
+  'teams:Fundraising',
+  'teams:Admin/Default World',
+  'teams:Exodus',
 
   "skills",
 
   "ideas",
-  'ride',
+  'diversity',
 
   'arrival',
-  'aeparture'];
+  'departure'];
 
-const teamSplits = [4, 8, 12]
+const teamSplits = [4, 11]
 const teams = [
   "Build",
   "Lights",

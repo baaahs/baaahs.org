@@ -120,6 +120,33 @@
       text-align: center;
     }
 
+    #details {
+      position: fixed;
+      top: 3.5em;
+      left: 1em;
+      right: 1em;
+      bottom: 1em;
+      z-index: 10;
+      background-color: whitesmoke;
+      border: 1px solid black;
+      border-radius: 1em;
+    }
+
+    #details-contents {
+      margin: 1em;
+    }
+
+    #details #close {
+      position: absolute;
+      top: .25em;
+      right: .25em;
+      padding: 0 .25em;
+      border: 2px solid darkred;
+      border-radius: .25em;
+      font-size: x-large;
+      color: darkred;
+    }
+
     #details .card {
       font-family: "Trebuchet MS", sans-serif;
       position: relative;
@@ -127,9 +154,13 @@
       width: 97%;
       min-height: 20em;
       padding: 3pt;
-      margin: 3pt 3pt 2em 3pt;
-      border: 1pt solid black;
+      margin: 1em;
+      border: none;
       page-break-inside: avoid;
+    }
+
+    .ringleader {
+      color: red;
     }
 
     #details .remote {
@@ -254,18 +285,10 @@
 
 <pre id="content" style="white-space: pre-wrap;"></pre>
 <div id="cards"></div>
-<div id="details" style="
-position: fixed;
-top: 3em;
-left: 1em;
-right: 1em;
-bottom: 1em;
-z-index: 10;
-background-color: whitesmoke;
-border: 1px solid black;
-border-radius: 1em;
-/*display: none;*/
-"></div>
+<div id="details" style="display: none;">
+  <div id="close" onclick="showDetails(null);">&times;</div>
+  <div id="details-contents"></div>
+</div>
 
 <script type="text/javascript">
   function createCard(data) {
@@ -292,9 +315,9 @@ border-radius: 1em;
       }
 
       const s = data.teams[i];
-      if (s.includes('LEAD')) {
+      if (s.includes('Ringleader') || s.includes('Shepherd')) {
         teamStr += '◉';
-      } else if (s.includes('CREW')) {
+      } else if (s.includes('Teammate')) {
         teamStr += '◎';
       } else {
         teamStr += '◌';
@@ -317,6 +340,7 @@ border-radius: 1em;
         const row = rows[i];
         let cardData = createCard(row);
         cardsDiv.appendChild(cardData.card);
+        cardData.card.onclick = function() { showDetails(cardData); };
         displayRecords.push(cardData);
       }
     } else {
@@ -344,10 +368,11 @@ border-radius: 1em;
 
   function showDetails(record) {
     const detailsDiv = document.getElementById("details");
+    const detailsContentsDiv = document.getElementById("details-contents");
     if (record) {
       detailsDiv.style.display = "";
-      detailsDiv.innerHTML = "";
-      detailsDiv.appendChild(createFullCard(record.data));
+      detailsContentsDiv.innerHTML = "";
+      detailsContentsDiv.appendChild(createFullCard(record.data));
     } else {
       detailsDiv.style.display = "none";
     }
