@@ -37,8 +37,6 @@ kotlin {
     sourceSets {
         @Suppress("UNUSED_VARIABLE")
         val commonMain by getting {
-            resources.srcDir(project.file("docs"))
-
             dependencies {
                 implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:$serializationVersion")
                 implementation("io.ktor:ktor-client-core:$ktorVersion")
@@ -111,8 +109,14 @@ application {
     applicationDefaultJvmArgs = listOf("-Dio.ktor.development=true")
 }
 
-tasks.getByName<Tar>("distTar") { dependsOn(":jsJar", ":allMetadataJar") }
-tasks.getByName<Zip>("distZip") { dependsOn(":jsJar", ":allMetadataJar") }
+tasks.getByName<ProcessResources>("jvmProcessResources") {
+    from("docs") {
+        into( "docs")
+    }
+}
+
+//tasks.getByName<Tar>("distTar") { dependsOn(":jsJar", ":allMetadataJar") }
+//tasks.getByName<Zip>("distZip") { dependsOn(":jsJar", ":allMetadataJar") }
 
 // include JS artifacts in any JAR we generate
 tasks.getByName<Jar>("jvmJar") {

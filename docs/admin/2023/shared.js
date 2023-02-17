@@ -75,9 +75,9 @@ function handleSignoutClick(event) {
 }
 
 function process(range) {
-  let rows = range.values.map(entry => {
+  let rows = range.values.slice(1).map(entry => {
     const data = {teams: []};
-    for (let i = 0; i < entry.length; i++) {
+    for (let i = 1; i < entry.length; i++) {
       const value = entry[i];
       const colName = cols[i];
       if (colName.startsWith('teams:')) {
@@ -100,8 +100,8 @@ function process(range) {
  */
 function fetch() {
   gapi.client.sheets.spreadsheets.values.get({
-    spreadsheetId: '1vXopIhDPoF6nHQ9yAOBZzlT0NR5CmRVozPk6Ev0IfVs',
-    range: 'Form Responses 1!A2:AD',
+    spreadsheetId: '1tDerZLB2dZqkxU-mtSQznD8palfd7ySVyUeQtvh5uas',
+    range: 'Form Responses 1!A:AB',
   }).then(function(response) {
     const range = response.result;
     process(range);
@@ -203,48 +203,58 @@ function createFullCard(data) {
 }
 
 const cols = [
-  "timestamp",
-  "email",
-  "name",
-  "location",
-  "experience",
-  "teams:BAAAHS – Build",
-  "teams:BAAAHS – Lights",
-  "teams:BAAAHS – Sound",
-  "teams:BAAAHS – Tech",
-  "teams:STATION – Infrastructure",
-  "teams:STATION – Communal Space",
-  "teams:STATION - Interactivity, Art, and Theme",
-  "teams:STATION – Kitchen/Food",
-  "teams:EVENTS, PARTIES, AND PROGRAMMING",
-  "teams:EXODUS/LNT",
-  "teams:FUNDRAISING",
-  "teams:ADMINISTRATIVE",
-  "teams:RADICAL INCLUSION/DIVERSITY",
-  "teams:GENERAL ON-PLAYA VOLUNTEER",
+  'timestamp',
+  'email',
+  'name',
+  'phone',
+  'location',
+
+  'experience',
+  'whyBaaahs',
+
+  'team:Build',
+  'team:Lights',
+  'team:Sound',
+  'team:Tech',
+  'team:Events',
+  'team:Camp',
+  'team:Depot',
+  'team:Infra',
+  'team:Community',
+  'team:Communications',
+  'team:Theme and Art',
+  'team:Food',
+  'team:Campout',
+  'team:Fundraising',
+  'team:Admin/Default World',
+  'team:Exodus',
+
   "skills",
+
   "ideas",
-  "arrival"
-];
+  'ride',
+
+  'arrival',
+  'aeparture'];
 
 const teamSplits = [4, 8, 12]
 const teams = [
-  "BAAAHS-Build",
-  "BAAAHS-Lights",
-  "BAAAHS-Sound",
-  "BAAAHS-Tech",
-
-  "STATION-Infrastructure",
-  "STATION-Communal Space",
-  "STATION-Interactivity, Art, and Theme",
-  "STATION-Kitchen/Food",
-
-  "EVENTS, PARTIES, AND PROGRAMMING",
-  "EXODUS/LNT",
-  "FUNDRAISING",
-  "ADMINISTRATIVE",
-  "RADICAL INCLUSION/DIVERSITY",
-  "GENERAL ON-PLAYA VOLUNTEER"
+  "Build",
+  "Lights",
+  "Sound",
+  "Tech",
+  "Events",
+  "Camp",
+  "Depot",
+  "Infra",
+  "Community",
+  "Communications",
+  "Theme and Art",
+  "Food",
+  "Campout",
+  "Fundraising",
+  "Admin/Default World",
+  "Exodus",
 ];
 
 const skillsOptions = [

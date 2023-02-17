@@ -93,6 +93,7 @@
       position: absolute;
       font-family: "Trebuchet MS", sans-serif;
       font-size: 7.5pt;
+      /*text-transform: lowercase;*/
     }
 
     .team {
@@ -137,7 +138,7 @@
     add(card, 'div', 'name2', name.slice(1).join(' '));
 
     let arrival = add(card, 'div', 'arrival');
-    let arrivalString = data.arrival.split(' ')[1].substring(0, 3);
+    let arrivalString = (data.arrival.split(' ')[1] || "???").substring(0, 3);
     arrival.innerText = arrivalString;
     add(arrival, 'div', 'arrivalBox ' + arrivalString);
 

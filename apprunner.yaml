@@ -1,0 +1,10 @@
+version: 1.0
+runtime: corretto11
+build:
+  commands:
+    build:
+      - ./gradlew -PisProduction -xcheck -i build
+run:
+  command: ./gradlew -PisProduction run
+  network:
+    port: 9090
