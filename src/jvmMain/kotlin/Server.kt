@@ -93,12 +93,14 @@ fun main(httpClient: HttpClient = applicationHttpClient) {
         }
 
         routing {
-//            get("/") {
-//                call.respondText(
-//                    this::class.java.classLoader.getResource("index.html")!!.readText(),
-//                    ContentType.Text.Html
-//                )
-//            }
+            get("/foo") {
+                val indexHtml = this::class.java.classLoader.getResources("docs/index.html").toList()
+                    .joinToString(",")
+                call.respondText(
+                    "index.html: ${indexHtml}",
+                    ContentType.Text.Html
+                )
+            }
 
             get("/incline-map") {
                 call.respondText(
