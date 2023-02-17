@@ -119,15 +119,153 @@
       overflow: hidden;
       text-align: center;
     }
+
+    #details .card {
+      font-family: "Trebuchet MS", sans-serif;
+      position: relative;
+      /*float: left;*/
+      width: 97%;
+      min-height: 20em;
+      padding: 3pt;
+      margin: 3pt 3pt 2em 3pt;
+      border: 1pt solid black;
+      page-break-inside: avoid;
+    }
+
+    #details .remote {
+      background-color: #ffffcc;
+    }
+
+    #details .name {
+      /*position: relative;*/
+      font-size: 1.5em;
+      font-weight: bold;
+      width: 100%;
+      margin-top: .1em;
+      margin-bottom: 2em;
+      text-align: center;
+      line-height: 1em;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
+    }
+
+    #details .infobox {
+      position: relative;
+      font-size: .9em;
+      border-top: 1px solid gray;
+      margin-top: .5em;
+      padding-top: .5em;
+      padding-left: 1em;
+    }
+
+    #details .infobox .title {
+      font-size: 1.1em;
+      font-weight: bold;
+      margin-left: -1em;
+    }
+
+    #details .team-columns {
+      columns: 2;
+    }
+
+    #details .team-columns div {
+      font-size: .8em;
+    }
+
+    #details .explanation {
+      padding-top: .5em;
+    }
+
+    #details .skill {
+      font-size: .8em;
+    }
+
+    #details .email, #details .arrival {
+      position: absolute;
+      font-size: 10pt;
+      top: 3.5em;
+    }
+
+    #details .arrival {
+      right: .25em;
+      top: 2.25em;
+    }
+
+    #details .arrivalBox {
+      float: right;
+      background-color: #0b61a4 !important;
+      width: .5em;
+      height: .9em;
+      margin-left: .25em;
+      border: 1px solid black;
+    }
+    #details .arrivalBox.Monday { opacity: 100%; }
+    #details .arrivalBox.Tuesday { opacity: 80%; }
+    #details .arrivalBox.Wednesday { opacity: 60%; }
+    #details .arrivalBox.Thursday { opacity: 40%; }
+    #details .arrivalBox.Friday { opacity: 20%; }
+    #details .arrivalBox.Saturday { opacity: 10%; }
+
+    #details .camp, #details .location {
+      position: absolute;
+      font-size: 9pt;
+      top: 4em;
+      width: 30%;
+      opacity: .5;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
+    }
+
+    #details .location {
+      right: .25em;
+      text-align: right;
+    }
+
+    #details .email {
+      left: .25em;
+    }
+
+    #details .camp {
+      left: .25em;
+      text-align: left;
+    }
+
+    #details .bullets {
+      position: absolute;
+      top: 0em;
+      right: 0;
+      font-size: .9em;
+    }
   </style>
 </head>
 <body>
 
 <!--Add buttons to initiate auth sequence and sign out-->
-<button id="authorize_button" class="no-print" style="display: none;">Authorize</button>
-<button id="signout_button" class="no-print" style="display: none;">Sign Out</button>
+<div style="text-wrap: avoid;">
+  <button id="authorize_button" class="no-print" style="display: none;">Authorize</button>
+  <button id="signout_button" class="no-print" style="display: none;">Sign Out</button>
+  <label>
+    Filter:
+    <input type="text" onkeyup="filterCards(this)">
+  </label>
+</div>
 
 <pre id="content" style="white-space: pre-wrap;"></pre>
+<div id="cards"></div>
+<div id="details" style="
+position: fixed;
+top: 3em;
+left: 1em;
+right: 1em;
+bottom: 1em;
+z-index: 10;
+background-color: whitesmoke;
+border: 1px solid black;
+border-radius: 1em;
+/*display: none;*/
+"></div>
 
 <script type="text/javascript">
   function createCard(data) {
@@ -167,17 +305,51 @@
     add(card, 'div', 'email', data.email.replace("@", "@\n"));
     add(card, 'div', 'free', data.skills.replaceAll("\n", "¶"));
 
-    return card;
+    return {data: data, card: card};
   }
 
   function display(rows) {
+    const displayRecords = [];
+    const cardsDiv = document.getElementById("cards");
+
     if (rows.length > 0) {
       for (let i = 0; i < rows.length; i++) {
         const row = rows[i];
-        document.body.appendChild(createCard(row));
+        let cardData = createCard(row);
+        cardsDiv.appendChild(cardData.card);
+        displayRecords.push(cardData);
       }
     } else {
       appendPre('No data found.');
+    }
+
+    document.displayRecords = displayRecords;
+  }
+
+  function filterCards(el) {
+    const pattern = el.value.toLowerCase();
+    const matchingRecords = [];
+    for (const displayRecord of document.displayRecords) {
+      const matches = displayRecord.data.name.toLowerCase().indexOf(pattern) > -1;
+      displayRecord.card.style.display = matches ? "" : "none";
+      if (matches) {
+        matchingRecords.push(displayRecord);
+      }
+    }
+
+    if (matchingRecords.length === 1) {
+      showDetails(matchingRecords[0]);
+    }
+  }
+
+  function showDetails(record) {
+    const detailsDiv = document.getElementById("details");
+    if (record) {
+      detailsDiv.style.display = "";
+      detailsDiv.innerHTML = "";
+      detailsDiv.appendChild(createFullCard(record.data));
+    } else {
+      detailsDiv.style.display = "none";
     }
   }
 </script>
