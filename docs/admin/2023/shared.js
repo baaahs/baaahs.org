@@ -166,13 +166,13 @@ function createFullCard(data) {
     const s = data.teams[i];
     const name = teams[i];
     if (s.includes('Ringleader')) {
-      add(teamColumnsDiv, 'div', 'ringleader', '◉ ' + name);
+      add(teamColumnsDiv, 'div', 'ringleader', '◉ ' + name + " (ringleader)");
       teamStr += '◉';
     } else if (s.includes('Shepherd')) {
-      add(teamColumnsDiv, 'div', 'lead', '◉ ' + name);
+      add(teamColumnsDiv, 'div', 'lead', '◉ ' + name + " (shepherd)");
       teamStr += '◉';
     } else if (s.includes('Teammate')) {
-      add(teamColumnsDiv, 'div', null, '◎ ' + name + "\n");
+      add(teamColumnsDiv, 'div', null, '◎ ' + name + " (crew)");
       teamStr += '◎';
     } else {
       // add(teamColumnsDiv, 'div', '◌ ' + name + "\n");
