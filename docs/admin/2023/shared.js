@@ -53,7 +53,7 @@ function updateSigninStatus(isSignedIn) {
   if (isSignedIn) {
     authorizeButton.style.display = 'none';
     signoutButton.style.display = 'block';
-    fetch();
+    fetchFromGoogle();
   } else {
     authorizeButton.style.display = 'block';
     signoutButton.style.display = 'none';
@@ -98,7 +98,7 @@ function process(range) {
 /**
  * Fetch from a spreadsheet.
  */
-function fetch() {
+function fetchFromGoogle() {
   gapi.client.sheets.spreadsheets.values.get({
     spreadsheetId: '1tDerZLB2dZqkxU-mtSQznD8palfd7ySVyUeQtvh5uas',
     range: 'Form Responses 1!A:AB',
@@ -110,6 +110,11 @@ function fetch() {
   });
 }
 
+function thatsSoFetch(url) {
+  fetch(url)
+      .then((response) => response.json())
+      .then((data) => process(data));
+}
 
 /**
  * Append a pre element to the body containing the given message

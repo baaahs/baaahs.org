@@ -28,6 +28,11 @@ import org.litote.kmongo.coroutine.coroutine
 import org.litote.kmongo.eq
 import org.litote.kmongo.id.UUIDStringIdGenerator
 import org.litote.kmongo.reactivestreams.KMongo
+import java.util.*
+import javax.crypto.Cipher
+import javax.crypto.SecretKey
+import javax.crypto.spec.SecretKeySpec
+
 
 val connectionString: ConnectionString? = System.getenv("MONGODB_URI")?.let {
     ConnectionString("$it?retryWrites=false")
@@ -41,6 +46,21 @@ val collection = database.getCollection<Asset>()
 val applicationHttpClient = HttpClient(CIO) {
     install(io.ktor.client.plugins.contentnegotiation.ContentNegotiation) {
         json()
+    }
+}
+
+object AesResource {
+    fun load(key: String, resource: String): String {
+        val secretKey: SecretKey =
+            SecretKeySpec(Base64.getDecoder().decode(key), "AES")
+        val cipher = Cipher.getInstance("AES") ?: error("Unknown cipher AES.")
+        cipher.init(Cipher.DECRYPT_MODE, secretKey)
+        val encryptedText =
+            this::class.java.classLoader.getResource(resource).readText()
+        val decryptedBytes: ByteArray = cipher.doFinal(
+            Base64.getDecoder().decode(encryptedText)
+        )
+        return String(decryptedBytes)
     }
 }
 
@@ -128,6 +148,11 @@ fun main(httpClient: HttpClient = applicationHttpClient) {
             static("") {
                 resources("docs")
                 defaultResource("index.html", "docs")
+            }
+
+            get("/2023-responses.json") {
+                val key = System.getenv("AES_KEY") ?: error("No AES_KEY set.")
+                call.respondText(AesResource.load(key, "2023-responses.json.aes"), ContentType.Application.Json)
             }
 
             route(Asset.path) {

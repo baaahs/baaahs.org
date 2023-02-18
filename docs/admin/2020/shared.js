@@ -53,7 +53,7 @@ function updateSigninStatus(isSignedIn) {
   if (isSignedIn) {
     authorizeButton.style.display = 'none';
     signoutButton.style.display = 'block';
-    fetch();
+    fetchFromGoogle();
   } else {
     authorizeButton.style.display = 'block';
     signoutButton.style.display = 'none';
@@ -98,7 +98,7 @@ function process(range) {
 /**
  * Fetch from a spreadsheet.
  */
-function fetch() {
+function fetchFromGoogle() {
   gapi.client.sheets.spreadsheets.values.get({
     spreadsheetId: '1vXopIhDPoF6nHQ9yAOBZzlT0NR5CmRVozPk6Ev0IfVs',
     range: 'Form Responses 1!A2:AD',
