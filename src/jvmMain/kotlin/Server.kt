@@ -67,152 +67,11 @@ object AesResource {
 fun main(httpClient: HttpClient = applicationHttpClient) {
     val port = System.getenv("PORT")?.toInt() ?: 9090
     embeddedServer(
-        Netty, port,
+        Netty,
+        port,
         watchPaths = listOf("classes", "developmentExecutable"),
-    ) {
-        install(ContentNegotiation) {
-            json()
-        }
-        install(CORS) {
-            allowMethod(HttpMethod.Get)
-            allowMethod(HttpMethod.Post)
-            allowMethod(HttpMethod.Delete)
-            anyHost()
-        }
-        install(Compression) {
-            gzip()
-        }
-
-        install(Sessions) {
-            cookie<UserSession>("user_session")
-        }
-
-        val redirects = mutableMapOf<String, String>()
-        install(Authentication) {
-            oauth("auth-oauth-google") {
-                urlProvider = { "http://localhost:$port/callback" }
-                providerLookup = {
-                    OAuthServerSettings.OAuth2ServerSettings(
-                        name = "google",
-                        authorizeUrl = "https://accounts.google.com/o/oauth2/auth",
-                        accessTokenUrl = "https://accounts.google.com/o/oauth2/token",
-                        requestMethod = HttpMethod.Post,
-                        clientId = System.getenv("GOOGLE_CLIENT_ID"),
-                        clientSecret = System.getenv("GOOGLE_CLIENT_SECRET"),
-                        defaultScopes = listOf("https://www.googleapis.com/auth/userinfo.profile"),
-                        extraAuthParameters = listOf("access_type" to "offline"),
-                        onStateCreated = { call, state ->
-                            System.err.println("***********************")
-                            System.err.println(call.request.queryParameters.toMap())
-                            redirects[state] = call.request.queryParameters["redirectUrl"]!!
-                        }
-                    )
-                }
-                client = httpClient
-            }
-        }
-
-        routing {
-            get("/foo") {
-                val indexHtml = this::class.java.classLoader.getResources("docs/index.html").toList()
-                    .joinToString(",")
-                call.respondText(
-                    "index.html: ${indexHtml}",
-                    ContentType.Text.Html
-                )
-            }
-
-            get("/incline-map") {
-                call.respondText(
-                    this::class.java.classLoader.getResource("index.html")!!.readText(),
-                    ContentType.Text.Html
-                )
-            }
-
-            authenticate("auth-oauth-google") {
-                get("/login") {
-                    // Redirects to 'authorizeUrl' automatically
-                }
-
-                get("/callback") {
-                    val principal: OAuthAccessTokenResponse.OAuth2? = call.principal()
-                    call.sessions.set(UserSession(principal!!.state!!, principal.accessToken))
-                    val redirect = redirects[principal.state!!]
-                    call.respondRedirect(redirect!!)
-                }
-            }
-
-            static("/baaahs-dot-org.js") {
-                defaultResource("baaahs-dot-org.js")
-            }
-            static("") {
-                resources("docs")
-                defaultResource("index.html", "docs")
-            }
-
-            get("/2023-responses.json") {
-                val key = System.getenv("AES_KEY") ?: error("No AES_KEY set.")
-                call.respondText(AesResource.load(key, "2023-responses.json.aes"), ContentType.Application.Json)
-            }
-
-            route(Asset.path) {
-                get {
-                    call.respond(collection.find().toList())
-                }
-                get("/{id}") {
-                    val id = call.parameters["id"] ?: error("Invalid get request")
-                    call.respond(collection.findOneById(id) ?: HttpStatusCode.NotFound)
-                }
-                post {
-                    collection.insertOne(call.receive<Asset>().copy(id = newId<Asset>()))
-                    call.respond(HttpStatusCode.OK)
-                }
-                delete("/{id}") {
-                    val id = call.parameters["id"] ?: error("Invalid delete request")
-                    collection.deleteOne(Asset::id eq id)
-                    call.respond(HttpStatusCode.OK)
-                }
-            }
-
-            route(UserInfo.path) {
-                get {
-                    val userSession: UserSession? = call.sessions.get()
-                    if (userSession != null) {
-                        try {
-                            val userInfo: UserInfo =
-                                httpClient.get("https://www.googleapis.com/oauth2/v2/userinfo") {
-                                    headers {
-                                        append(
-                                            HttpHeaders.Authorization,
-                                            "Bearer ${userSession.token}"
-                                        )
-                                    }
-                                }.body()
-                            println("userInfo = $userInfo")
-                            call.respond(userInfo)
-                        } catch (e: ClientRequestException) {
-                            try {
-                                val errorResponse: ErrorResponse = e.response.body()
-                                println("errorResponse = $errorResponse")
-                            } catch (e2: Exception) {
-                                e2.printStackTrace()
-                                println("error response: ${e.response.bodyAsText()}")
-                            }
-                            call.respond("foo!")
-                        } catch (e: ConnectTimeoutException) {
-                            call.respond("timeout!")
-                        }
-                    } else {
-                        val redirectUrl = URLBuilder("http://localhost:$port/login").run {
-                            parameters.append("redirectUrl", call.request.uri)
-                            build()
-                        }
-                        call.respondRedirect(redirectUrl)
-                    }
-                }
-            }
-        }
-    }.start(wait = true)
+        module = { Application::baaahsApplicationModule.invoke(this, port, httpClient) }
+    ).start(wait = true)
 }
 
 private fun <T> newId() = UUIDStringIdGenerator.generateNewId<T>().toString()
@@ -239,4 +98,152 @@ data class UserInfo(
 
 fun main() {
     main(applicationHttpClient)
+}
+
+fun Application.baaahsApplicationModule(port: Int, httpClient: HttpClient) {
+    install(ContentNegotiation) {
+        json()
+    }
+    install(CORS) {
+        allowMethod(HttpMethod.Get)
+        allowMethod(HttpMethod.Post)
+        allowMethod(HttpMethod.Delete)
+        anyHost()
+    }
+    install(Compression) {
+        gzip()
+    }
+
+    install(Sessions) {
+        cookie<UserSession>("user_session")
+    }
+
+    val redirects = mutableMapOf<String, String>()
+    install(Authentication) {
+        oauth("auth-oauth-google") {
+            urlProvider = { "http://localhost:$port/callback" }
+            providerLookup = {
+                OAuthServerSettings.OAuth2ServerSettings(
+                    name = "google",
+                    authorizeUrl = "https://accounts.google.com/o/oauth2/auth",
+                    accessTokenUrl = "https://accounts.google.com/o/oauth2/token",
+                    requestMethod = HttpMethod.Post,
+                    clientId = System.getenv("GOOGLE_CLIENT_ID"),
+                    clientSecret = System.getenv("GOOGLE_CLIENT_SECRET"),
+                    defaultScopes = listOf("https://www.googleapis.com/auth/userinfo.profile"),
+                    extraAuthParameters = listOf("access_type" to "offline"),
+                    onStateCreated = { call, state ->
+                        System.err.println("***********************")
+                        System.err.println(call.request.queryParameters.toMap())
+                        redirects[state] = call.request.queryParameters["redirectUrl"]!!
+                    }
+                )
+            }
+            client = httpClient
+        }
+    }
+
+    routing {
+        get("/foo") {
+            val indexHtml = this::class.java.classLoader.getResources("docs/index.html").toList()
+                .joinToString(",")
+            call.respondText(
+                "index.html: ${indexHtml}",
+                ContentType.Text.Html
+            )
+        }
+
+        get("/incline-map") {
+            call.respondText(
+                this::class.java.classLoader.getResource("index.html")!!.readText(),
+                ContentType.Text.Html
+            )
+        }
+
+        authenticate("auth-oauth-google") {
+            get("/login") {
+                // Redirects to 'authorizeUrl' automatically
+            }
+
+            get("/callback") {
+                val principal: OAuthAccessTokenResponse.OAuth2? = call.principal()
+                call.sessions.set(UserSession(principal!!.state!!, principal.accessToken))
+                val redirect = redirects[principal.state!!]
+                call.respondRedirect(redirect!!)
+            }
+        }
+
+        static("/baaahs-dot-org.js") {
+            defaultResource("baaahs-dot-org.js")
+        }
+        static("") {
+            resources("docs")
+            defaultResource("index.html", "docs")
+        }
+
+        get("/2023-responses.json") {
+            val key = System.getenv("AES_KEY") ?: error("No AES_KEY set.")
+            call.respondText(
+                AesResource.load(key, "2023-responses.json.aes"),
+                ContentType.Application.Json
+            )
+        }
+
+        route(Asset.path) {
+            get {
+                call.respond(collection.find().toList())
+            }
+            get("/{id}") {
+                val id = call.parameters["id"] ?: error("Invalid get request")
+                call.respond(collection.findOneById(id) ?: HttpStatusCode.NotFound)
+            }
+            post {
+                collection.insertOne(call.receive<Asset>().copy(id = newId<Asset>()))
+                call.respond(HttpStatusCode.OK)
+            }
+            delete("/{id}") {
+                val id = call.parameters["id"] ?: error("Invalid delete request")
+                collection.deleteOne(Asset::id eq id)
+                call.respond(HttpStatusCode.OK)
+            }
+        }
+
+        route(UserInfo.path) {
+            get {
+                val userSession: UserSession? = call.sessions.get()
+                if (userSession != null) {
+                    try {
+                        val userInfo: UserInfo =
+                            httpClient.get("https://www.googleapis.com/oauth2/v2/userinfo") {
+                                headers {
+                                    append(
+                                        HttpHeaders.Authorization,
+                                        "Bearer ${userSession.token}"
+                                    )
+                                }
+                            }.body()
+                        println("userInfo = $userInfo")
+                        call.respond(userInfo)
+                    } catch (e: ClientRequestException) {
+                        try {
+                            val errorResponse: ErrorResponse = e.response.body()
+                            println("errorResponse = $errorResponse")
+                        } catch (e2: Exception) {
+                            e2.printStackTrace()
+                            println("error response: ${e.response.bodyAsText()}")
+                        }
+                        call.respond("foo!")
+                    } catch (e: ConnectTimeoutException) {
+                        call.respond("timeout!")
+                    }
+                } else {
+                    val redirectUrl = URLBuilder("http://localhost:$port/login").run {
+                        parameters.append("redirectUrl", call.request.uri)
+                        build()
+                    }
+                    call.respondRedirect(redirectUrl)
+                }
+            }
+        }
+    }
 }
