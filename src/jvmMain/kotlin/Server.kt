@@ -16,6 +16,7 @@ import io.ktor.server.netty.*
 import io.ktor.server.plugins.compression.*
 import io.ktor.server.plugins.contentnegotiation.*
 import io.ktor.server.plugins.cors.routing.*
+import io.ktor.server.plugins.statuspages.*
 import io.ktor.server.request.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
@@ -23,44 +24,29 @@ import io.ktor.server.sessions.*
 import io.ktor.util.*
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
+import org.baaahs.AesResource
+import org.baaahs.AwsSecretsManager
+import org.baaahs.FakeSecretsManager
+import org.baaahs.MongoDbStore
+import org.baaahs.PropertiesSecretsManager
 import org.baaahs.assman.model.Asset
-import org.litote.kmongo.coroutine.coroutine
 import org.litote.kmongo.eq
 import org.litote.kmongo.id.UUIDStringIdGenerator
-import org.litote.kmongo.reactivestreams.KMongo
+import java.io.File
 import java.util.*
-import javax.crypto.Cipher
-import javax.crypto.SecretKey
-import javax.crypto.spec.SecretKeySpec
 
-
-val connectionString: ConnectionString? = System.getenv("MONGODB_URI")?.let {
-    ConnectionString("$it?retryWrites=false")
+val secretsManager = when (System.getenv("SECRETS_MANAGER")) {
+    "AWS" -> AwsSecretsManager()
+    else -> PropertiesSecretsManager(Properties().apply {
+        load(File("local.properties").reader())
+    })
 }
 
-val client =
-    if (connectionString != null) KMongo.createClient(connectionString).coroutine else KMongo.createClient().coroutine
-val database = client.getDatabase(connectionString?.database ?: "test")
-val collection = database.getCollection<Asset>()
+val store = MongoDbStore(secretsManager)
 
 val applicationHttpClient = HttpClient(CIO) {
     install(io.ktor.client.plugins.contentnegotiation.ContentNegotiation) {
         json()
-    }
-}
-
-object AesResource {
-    fun load(key: String, resource: String): String {
-        val secretKey: SecretKey =
-            SecretKeySpec(Base64.getDecoder().decode(key), "AES")
-        val cipher = Cipher.getInstance("AES") ?: error("Unknown cipher AES.")
-        cipher.init(Cipher.DECRYPT_MODE, secretKey)
-        val encryptedText =
-            this::class.java.classLoader.getResource(resource).readText()
-        val decryptedBytes: ByteArray = cipher.doFinal(
-            Base64.getDecoder().decode(encryptedText)
-        )
-        return String(decryptedBytes)
     }
 }
 
@@ -82,6 +68,7 @@ data class ErrorResponse(
 )
 
 data class UserSession(val state: String, val token: String)
+
 @Serializable
 data class UserInfo(
     val id: String,
@@ -143,23 +130,17 @@ fun Application.baaahsApplicationModule(port: Int, httpClient: HttpClient) {
         }
     }
 
+    install(StatusPages) {
+        status(HttpStatusCode.NotFound) { call, status ->
+            call.respondText(text = "404: This sheep intentionally left blank.", status = status)
+        }
+
+        exception<Throwable> { call, cause ->
+            call.respondText(text = "500: $cause", status = HttpStatusCode.InternalServerError)
+        }
+    }
+
     routing {
-        get("/foo") {
-            val indexHtml = this::class.java.classLoader.getResources("docs/index.html").toList()
-                .joinToString(",")
-            call.respondText(
-                "index.html: ${indexHtml}",
-                ContentType.Text.Html
-            )
-        }
-
-        get("/incline-map") {
-            call.respondText(
-                this::class.java.classLoader.getResource("index.html")!!.readText(),
-                ContentType.Text.Html
-            )
-        }
-
         authenticate("auth-oauth-google") {
             get("/login") {
                 // Redirects to 'authorizeUrl' automatically
@@ -176,13 +157,14 @@ fun Application.baaahsApplicationModule(port: Int, httpClient: HttpClient) {
         static("/baaahs-dot-org.js") {
             defaultResource("baaahs-dot-org.js")
         }
+
         static("") {
             resources("docs")
             defaultResource("index.html", "docs")
         }
 
         get("/2023-responses.json") {
-            val key = System.getenv("AES_KEY") ?: error("No AES_KEY set.")
+            val key = secretsManager.aesKey ?: error("No AES_KEY set.")
             call.respondText(
                 AesResource.load(key, "2023-responses.json.aes"),
                 ContentType.Application.Json
@@ -192,7 +174,7 @@ fun Application.baaahsApplicationModule(port: Int, httpClient: HttpClient) {
         // redirects to keep!
         get("/drive") { call.respondRedirect("https://drive.google.com/drive/folders/0B_TasILTM6TWa18zdHdmNHpUYzg") }
         get("/pspride") { call.respondRedirect("/psp/") }
-        get("/join") { call.respondRedirect("http://goo.gl/forms/XUvltyxql2") }
+        get("/join") { call.respondRedirect("https://goo.gl/forms/XUvltyxql2") }
 
         get("/assets") { call.respondRedirect("/assman/assets") }
 
@@ -216,19 +198,19 @@ fun Application.baaahsApplicationModule(port: Int, httpClient: HttpClient) {
 
         route(Asset.path) {
             get {
-                call.respond(collection.find().toList())
+                call.respond(store.assets.find().toList())
             }
             get("/{id}") {
                 val id = call.parameters["id"] ?: error("Invalid get request")
-                call.respond(collection.findOneById(id) ?: HttpStatusCode.NotFound)
+                call.respond(store.assets.findOneById(id) ?: HttpStatusCode.NotFound)
             }
             post {
-                collection.insertOne(call.receive<Asset>().copy(id = newId<Asset>()))
+                store.assets.insertOne(call.receive<Asset>().copy(id = newId<Asset>()))
                 call.respond(HttpStatusCode.OK)
             }
             delete("/{id}") {
                 val id = call.parameters["id"] ?: error("Invalid delete request")
-                collection.deleteOne(Asset::id eq id)
+                store.assets.deleteOne(Asset::id eq id)
                 call.respond(HttpStatusCode.OK)
             }
         }
