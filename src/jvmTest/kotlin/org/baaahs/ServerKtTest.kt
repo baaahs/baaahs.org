@@ -1,4 +1,5 @@
-import io.ktor.client.plugins.websocket.*
+package org.baaahs
+
 import io.ktor.client.request.*
 import io.ktor.server.testing.*
 import org.spekframework.spek2.Spek
