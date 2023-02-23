@@ -107,7 +107,7 @@ kotlin {
 }
 
 application {
-    mainClass.set("ServerKt")
+    mainClass.set("org.baaahs.ServerKt")
     applicationDefaultJvmArgs = listOf("-Dio.ktor.development=true")
 }
 

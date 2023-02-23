@@ -28,17 +28,20 @@ import kotlinx.serialization.Serializable
 import org.baaahs.assman.model.Asset
 import org.litote.kmongo.eq
 import org.litote.kmongo.id.UUIDStringIdGenerator
+import org.slf4j.Logger
+import org.slf4j.LoggerFactory
 import java.io.File
 import java.util.*
 
-val secretsManager = when (System.getenv("SECRETS_MANAGER")) {
+private val secretsManager = when (System.getenv("SECRETS_MANAGER")) {
     "AWS" -> AwsSecretsManager()
     else -> PropertiesSecretsManager(Properties().apply {
         load(File("local.properties").reader())
     })
 }
 
-val store = MongoDbStore(secretsManager)
+private val store = MongoDbStore(secretsManager)
+private val logger = LoggerFactory.getLogger("Server")
 
 val applicationHttpClient = HttpClient(CIO) {
     install(io.ktor.client.plugins.contentnegotiation.ContentNegotiation) {
@@ -111,13 +114,11 @@ fun Application.baaahsApplicationModule(port: Int, httpClient: HttpClient) {
                     authorizeUrl = "https://accounts.google.com/o/oauth2/auth",
                     accessTokenUrl = "https://accounts.google.com/o/oauth2/token",
                     requestMethod = HttpMethod.Post,
-                    clientId = System.getenv("GOOGLE_CLIENT_ID"),
-                    clientSecret = System.getenv("GOOGLE_CLIENT_SECRET"),
+                    clientId = secretsManager.googleClientId,
+                    clientSecret = secretsManager.googleClientSecret,
                     defaultScopes = listOf("https://www.googleapis.com/auth/userinfo.profile"),
                     extraAuthParameters = listOf("access_type" to "offline"),
                     onStateCreated = { call, state ->
-                        System.err.println("***********************")
-                        System.err.println(call.request.queryParameters.toMap())
                         redirects[state] = call.request.queryParameters["redirectUrl"]!!
                     }
                 )
@@ -172,8 +173,6 @@ fun Application.baaahsApplicationModule(port: Int, httpClient: HttpClient) {
         get("/pspride") { call.respondRedirect("/psp/") }
         get("/join") { call.respondRedirect("https://goo.gl/forms/XUvltyxql2") }
 
-        get("/assets") { call.respondRedirect("/assman/assets") }
-
         get("/cal") { call.respondRedirect("https://calendar.google.com/calendar?cid=ODlydDZ0MWs1am1oMm9odnZicXBvbTZyMW9AZ3JvdXAuY2FsZW5kYXIuZ29vZ2xlLmNvbQ") }
         get("/cal-private") { call.respondRedirect("https://calendar.google.com/calendar/embed?src=eo8lcds32ki40o14dr6m5t0o5s%40group.calendar.google.com&ctz=America%2FLos_Angeles") }
         get("/slack") { call.respondRedirect("https://baaahs.slack.com") }
@@ -194,6 +193,8 @@ fun Application.baaahsApplicationModule(port: Int, httpClient: HttpClient) {
 
         route(Asset.path) {
             get {
+                call.application.environment.log.info("Hello from /api/v1!")
+
                 call.respond(store.assets.find().toList())
             }
             get("/{id}") {
@@ -225,15 +226,15 @@ fun Application.baaahsApplicationModule(port: Int, httpClient: HttpClient) {
                                     )
                                 }
                             }.body()
-                        println("userInfo = $userInfo")
+                        logger.info("userInfo = $userInfo")
                         call.respond(userInfo)
                     } catch (e: ClientRequestException) {
                         try {
                             val errorResponse: ErrorResponse = e.response.body()
-                            println("errorResponse = $errorResponse")
+                            logger.info("errorResponse = $errorResponse")
                         } catch (e2: Exception) {
                             e2.printStackTrace()
-                            println("error response: ${e.response.bodyAsText()}")
+                            logger.info("error response: ${e.response.bodyAsText()}")
                         }
                         call.respond("foo!")
                     } catch (e: ConnectTimeoutException) {
