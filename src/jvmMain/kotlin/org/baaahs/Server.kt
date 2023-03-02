@@ -33,6 +33,10 @@ import java.util.*
 private val logger = LoggerFactory.getLogger("org.baaahs.Server")
 
 val applicationHttpClient = HttpClient(CIO) {
+    install(HttpTimeout) {
+        requestTimeoutMillis = 3000
+    }
+
     install(io.ktor.client.plugins.contentnegotiation.ContentNegotiation) {
         json()
     }
