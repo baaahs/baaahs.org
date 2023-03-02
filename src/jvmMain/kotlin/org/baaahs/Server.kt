@@ -248,29 +248,9 @@ fun Application.baaahsApplicationModule(env: Env, httpClient: HttpClient) {
                             }.body()
                         logger.info("userInfo = $userInfo")
                         call.respond(userInfo)
-                    } catch (e: ClientRequestException) {
-                        try {
-                            val response = String(e.response.readBytes())
-                            logger.info("client response = $response")
-//                            val errorResponse: ErrorResponse = e.response.body()
-                            val errorResponse: ErrorResponse = e.response.body()
-                            logger.info("errorResponse = $errorResponse")
-                        } catch (e2: Exception) {
-                            e2.printStackTrace()
-                            logger.info("error response: ${e.response.bodyAsText()}")
-                        }
-                        call.respond("foo!")
-                        logger.error("ClientRequestException!", e)
-                    } catch (e: ConnectTimeoutException) {
-                        logger.error("timeout!", e)
-                        call.respond("timeout!")
-                    } catch (e: ResponseException) {
-                        logger.info("error response: ${e.response.bodyAsText()}")
-                        logger.error("ResponseException!", e)
-                        call.respond("exception!")
                     } catch (e: Exception) {
                         logger.error("Exception! ${e.message} ${e::class.simpleName}", e)
-                        call.respond("exception!")
+                        throw e
                     }
                     logger.info("FINISHED")
                 } else {
