@@ -14,6 +14,7 @@ import io.ktor.server.auth.*
 import io.ktor.server.engine.*
 import io.ktor.server.http.content.*
 import io.ktor.server.netty.*
+import io.ktor.server.plugins.*
 import io.ktor.server.plugins.compression.*
 import io.ktor.server.plugins.contentnegotiation.*
 import io.ktor.server.plugins.cors.routing.*
@@ -31,6 +32,7 @@ import java.io.File
 import java.util.*
 
 private val logger = LoggerFactory.getLogger("org.baaahs.Server")
+private val clientLogger = LoggerFactory.getLogger("org.baaahs.Server\$Client")
 
 val applicationHttpClient = HttpClient(CIO) {
     install(HttpTimeout) {
@@ -39,6 +41,16 @@ val applicationHttpClient = HttpClient(CIO) {
 
     install(io.ktor.client.plugins.contentnegotiation.ContentNegotiation) {
         json()
+    }
+
+    HttpResponseValidator {
+        handleResponseExceptionWithRequest { cause, request ->
+            clientLogger.error("Error making request to ${request.url}: ${cause.message}")
+
+            val clientException = cause as? ClientRequestException
+            val exceptionResponse = clientException?.response
+            clientLogger.error("${request.url} response: ${exceptionResponse?.bodyAsText() ?: "Unknown"}")
+        }
     }
 }
 
@@ -244,6 +256,13 @@ fun Application.baaahsApplicationModule(env: Env, httpClient: HttpClient) {
                     } catch (e: ConnectTimeoutException) {
                         logger.error("timeout!", e)
                         call.respond("timeout!")
+                    } catch (e: ResponseException) {
+                        logger.info("error response: ${e.response.bodyAsText()}")
+                        logger.error("ResponseException!", e)
+                        call.respond("exception!")
+                    } catch (e: Exception) {
+                        logger.error("Exception!", e)
+                        call.respond("exception!")
                     }
                     logger.info("FINISHED")
                 } else {
