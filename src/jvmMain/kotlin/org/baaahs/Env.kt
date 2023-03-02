@@ -1,6 +1,6 @@
 package org.baaahs
 
 class Env(
-    val hostPort: String,
+    val hostUrl: String,
     val secretsManager: SecretsManager
 )

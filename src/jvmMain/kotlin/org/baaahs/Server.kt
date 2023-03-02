@@ -48,11 +48,11 @@ fun main(httpClient: HttpClient = applicationHttpClient) {
         })
     }
     val envName = System.getenv("ENV_NAME") ?: "dev"
-    val hostPort = when (envName) {
-        "prod" -> "https://baaahs.org:$port"
+    val hostUrl = when (envName) {
+        "prod" -> "https://baaahs.org"
         else -> "http://localhost:$port"
     }
-    val env = Env(hostPort, secretsManager)
+    val env = Env(hostUrl, secretsManager)
 
     embeddedServer(
         Netty,
@@ -108,7 +108,7 @@ fun Application.baaahsApplicationModule(env: Env, httpClient: HttpClient) {
     val redirects = mutableMapOf<String, String>()
     install(Authentication) {
         oauth("auth-oauth-google") {
-            urlProvider = { "${env.hostPort}/callback" }
+            urlProvider = { "${env.hostUrl}/callback" }
             providerLookup = {
                 OAuthServerSettings.OAuth2ServerSettings(
                     name = "google",
@@ -233,7 +233,7 @@ fun Application.baaahsApplicationModule(env: Env, httpClient: HttpClient) {
                     }
                     logger.info("FINISHED")
                 } else {
-                    val redirectUrl = URLBuilder("${env.hostPort}/login").run {
+                    val redirectUrl = URLBuilder("${env.hostUrl}/login").run {
                         parameters.append("redirectUrl", call.request.uri)
                         build()
                     }
