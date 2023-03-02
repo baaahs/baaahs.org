@@ -26,6 +26,7 @@ import io.ktor.server.sessions.*
 import io.ktor.util.*
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.json.Json
 import org.baaahs.assman.assetManager
 import org.slf4j.LoggerFactory
 import java.io.File
@@ -34,22 +35,26 @@ import java.util.*
 private val logger = LoggerFactory.getLogger("org.baaahs.Server")
 private val clientLogger = LoggerFactory.getLogger("org.baaahs.Server\$Client")
 
+class JsonResponseException(
+    response: HttpResponse,
+    message: String
+) : ResponseException(response, message)
+
 val applicationHttpClient = HttpClient(CIO) {
     install(HttpTimeout) {
         requestTimeoutMillis = 3000
     }
 
     install(io.ktor.client.plugins.contentnegotiation.ContentNegotiation) {
-        json()
+        json(Json { ignoreUnknownKeys = true })
     }
 
     HttpResponseValidator {
-        handleResponseExceptionWithRequest { cause, request ->
-            clientLogger.error("Error making request to ${request.url}: ${cause.message}")
-
-            val clientException = cause as? ClientRequestException
-            val exceptionResponse = clientException?.response
-            clientLogger.error("${request.url} response: ${exceptionResponse?.bodyAsText() ?: "Unknown"}")
+        validateResponse { response ->
+            val error: ErrorResponse = response.body()
+            if (error.code != 0) {
+                throw JsonResponseException(response, "Code: ${error.code}, message: ${error.message}")
+            }
         }
     }
 }
@@ -86,6 +91,7 @@ data class GoogResponse(
 @Serializable
 data class ErrorResponse(
     val code: Int,
+    val message: String? = null
 )
 
 data class UserSession(val state: String, val token: String)
@@ -261,7 +267,7 @@ fun Application.baaahsApplicationModule(env: Env, httpClient: HttpClient) {
                         logger.error("ResponseException!", e)
                         call.respond("exception!")
                     } catch (e: Exception) {
-                        logger.error("Exception!", e)
+                        logger.error("Exception! ${e.message} ${e::class.simpleName}", e)
                         call.respond("exception!")
                     }
                     logger.info("FINISHED")
