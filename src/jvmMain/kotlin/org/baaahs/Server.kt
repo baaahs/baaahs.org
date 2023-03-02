@@ -67,6 +67,11 @@ fun main(httpClient: HttpClient = applicationHttpClient) {
 }
 
 @Serializable
+data class GoogResponse(
+    val error: ErrorResponse
+)
+
+@Serializable
 data class ErrorResponse(
     val code: Int,
 )
@@ -225,6 +230,9 @@ fun Application.baaahsApplicationModule(env: Env, httpClient: HttpClient) {
                         call.respond(userInfo)
                     } catch (e: ClientRequestException) {
                         try {
+                            val response = String(e.response.readBytes())
+                            logger.info("client response = $response")
+//                            val errorResponse: ErrorResponse = e.response.body()
                             val errorResponse: ErrorResponse = e.response.body()
                             logger.info("errorResponse = $errorResponse")
                         } catch (e2: Exception) {
