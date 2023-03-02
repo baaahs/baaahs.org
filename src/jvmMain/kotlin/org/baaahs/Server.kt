@@ -130,10 +130,12 @@ fun Application.baaahsApplicationModule(env: Env, httpClient: HttpClient) {
 
     install(StatusPages) {
         status(HttpStatusCode.NotFound) { call, status ->
+            logger.error("404: ${call.request.uri} not found")
             call.respondText(text = "404: This sheep intentionally left blank.", status = status)
         }
 
         exception<Throwable> { call, cause ->
+            logger.error("500: $cause", cause)
             call.respondText(text = "500: $cause", status = HttpStatusCode.InternalServerError)
         }
     }
