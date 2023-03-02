@@ -196,11 +196,18 @@ fun Application.baaahsApplicationModule(env: Env, httpClient: HttpClient) {
 
         route(UserInfo.path) {
             get {
+                logger.info("GET ${UserInfo.path}...")
                 val userSession: UserSession? = call.sessions.get()
                 if (userSession != null) {
                     try {
+                        logger.info("... http get www.googleapis.com…")
                         val userInfo: UserInfo =
                             httpClient.get("https://www.googleapis.com/oauth2/v2/userinfo") {
+                                this.timeout {
+                                    this.connectTimeoutMillis = 2000
+                                    this.requestTimeoutMillis = 2000
+                                    this.socketTimeoutMillis = 2000
+                                }
                                 headers {
                                     append(
                                         HttpHeaders.Authorization,
@@ -219,9 +226,12 @@ fun Application.baaahsApplicationModule(env: Env, httpClient: HttpClient) {
                             logger.info("error response: ${e.response.bodyAsText()}")
                         }
                         call.respond("foo!")
+                        logger.error("ClientRequestException!", e)
                     } catch (e: ConnectTimeoutException) {
+                        logger.error("timeout!", e)
                         call.respond("timeout!")
                     }
+                    logger.info("FINISHED")
                 } else {
                     val redirectUrl = URLBuilder("${env.hostPort}/login").run {
                         parameters.append("redirectUrl", call.request.uri)
