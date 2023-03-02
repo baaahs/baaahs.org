@@ -25,23 +25,12 @@ import io.ktor.server.sessions.*
 import io.ktor.util.*
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
-import org.baaahs.assman.model.Asset
-import org.litote.kmongo.eq
-import org.litote.kmongo.id.UUIDStringIdGenerator
-import org.slf4j.Logger
+import org.baaahs.assman.assetManager
 import org.slf4j.LoggerFactory
 import java.io.File
 import java.util.*
 
-private val secretsManager = when (System.getenv("SECRETS_MANAGER")) {
-    "AWS" -> AwsSecretsManager()
-    else -> PropertiesSecretsManager(Properties().apply {
-        load(File("local.properties").reader())
-    })
-}
-
-private val store = MongoDbStore(secretsManager)
-private val logger = LoggerFactory.getLogger("Server")
+private val logger = LoggerFactory.getLogger("org.baaahs.Server")
 
 val applicationHttpClient = HttpClient(CIO) {
     install(io.ktor.client.plugins.contentnegotiation.ContentNegotiation) {
@@ -51,15 +40,27 @@ val applicationHttpClient = HttpClient(CIO) {
 
 fun main(httpClient: HttpClient = applicationHttpClient) {
     val port = System.getenv("PORT")?.toInt() ?: 9090
+
+    val secretsManager = when (System.getenv("SECRETS_MANAGER")) {
+        "AWS" -> AwsSecretsManager()
+        else -> PropertiesSecretsManager(Properties().apply {
+            load(File("local.properties").reader())
+        })
+    }
+    val envName = System.getenv("ENV_NAME") ?: "dev"
+    val hostPort = when (envName) {
+        "prod" -> "https://baaahs.org:$port"
+        else -> "http://localhost:$port"
+    }
+    val env = Env(hostPort, secretsManager)
+
     embeddedServer(
         Netty,
         port,
         watchPaths = listOf("classes", "developmentExecutable"),
-        module = { Application::baaahsApplicationModule.invoke(this, port, httpClient) }
+        module = { Application::baaahsApplicationModule.invoke(this, env, httpClient) }
     ).start(wait = true)
 }
-
-private fun <T> newId() = UUIDStringIdGenerator.generateNewId<T>().toString()
 
 @Serializable
 data class ErrorResponse(
@@ -86,7 +87,7 @@ fun main() {
     main(applicationHttpClient)
 }
 
-fun Application.baaahsApplicationModule(port: Int, httpClient: HttpClient) {
+fun Application.baaahsApplicationModule(env: Env, httpClient: HttpClient) {
     install(ContentNegotiation) {
         json()
     }
@@ -107,15 +108,15 @@ fun Application.baaahsApplicationModule(port: Int, httpClient: HttpClient) {
     val redirects = mutableMapOf<String, String>()
     install(Authentication) {
         oauth("auth-oauth-google") {
-            urlProvider = { "http://localhost:$port/callback" }
+            urlProvider = { "${env.hostPort}/callback" }
             providerLookup = {
                 OAuthServerSettings.OAuth2ServerSettings(
                     name = "google",
                     authorizeUrl = "https://accounts.google.com/o/oauth2/auth",
                     accessTokenUrl = "https://accounts.google.com/o/oauth2/token",
                     requestMethod = HttpMethod.Post,
-                    clientId = secretsManager.googleClientId,
-                    clientSecret = secretsManager.googleClientSecret,
+                    clientId = env.secretsManager.googleClientId,
+                    clientSecret = env.secretsManager.googleClientSecret,
                     defaultScopes = listOf("https://www.googleapis.com/auth/userinfo.profile"),
                     extraAuthParameters = listOf("access_type" to "offline"),
                     onStateCreated = { call, state ->
@@ -161,7 +162,7 @@ fun Application.baaahsApplicationModule(port: Int, httpClient: HttpClient) {
         }
 
         get("/2023-responses.json") {
-            val key = secretsManager.aesKey ?: error("No AES_KEY set.")
+            val key = env.secretsManager.aesKey ?: error("No AES_KEY set.")
             call.respondText(
                 AesResource.load(key, "2023-responses.json.aes"),
                 ContentType.Application.Json
@@ -188,29 +189,10 @@ fun Application.baaahsApplicationModule(port: Int, httpClient: HttpClient) {
         get("/crew") { call.respondRedirect("https://docs.google.com/document/d/11mQX1lZpP0rMNNV1Uni_J0hutXaMEhsjvKtermUuY6Q") }
 
         // old URLs to support for a while!
-        get("/shifts") { call.respondRedirect("http://www.volunteerspot.com/login/entry/375755452038") } // todo kill after 20151201
+        get("/shifts") { call.respondRedirect("https://www.volunteerspot.com/login/entry/375755452038") } // todo kill after 20151201
 
 
-        route(Asset.path) {
-            get {
-                call.application.environment.log.info("Hello from /api/v1!")
-
-                call.respond(store.assets.find().toList())
-            }
-            get("/{id}") {
-                val id = call.parameters["id"] ?: error("Invalid get request")
-                call.respond(store.assets.findOneById(id) ?: HttpStatusCode.NotFound)
-            }
-            post {
-                store.assets.insertOne(call.receive<Asset>().copy(id = newId<Asset>()))
-                call.respond(HttpStatusCode.OK)
-            }
-            delete("/{id}") {
-                val id = call.parameters["id"] ?: error("Invalid delete request")
-                store.assets.deleteOne(Asset::id eq id)
-                call.respond(HttpStatusCode.OK)
-            }
-        }
+        assetManager(env)
 
         route(UserInfo.path) {
             get {
@@ -241,7 +223,7 @@ fun Application.baaahsApplicationModule(port: Int, httpClient: HttpClient) {
                         call.respond("timeout!")
                     }
                 } else {
-                    val redirectUrl = URLBuilder("http://localhost:$port/login").run {
+                    val redirectUrl = URLBuilder("${env.hostPort}/login").run {
                         parameters.append("redirectUrl", call.request.uri)
                         build()
                     }
