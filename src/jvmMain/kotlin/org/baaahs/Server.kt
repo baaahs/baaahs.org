@@ -37,10 +37,12 @@ private val clientLogger = LoggerFactory.getLogger("org.baaahs.Server\$Client")
 
 class JsonResponseException(
     response: HttpResponse,
-    message: String
-) : ResponseException(response, message)
+    val errorResponse: ErrorResponse
+) : ResponseException(response, errorResponse.message ?: "Unknown error")
 
 val applicationHttpClient = HttpClient(CIO) {
+    expectSuccess = true
+
     install(HttpTimeout) {
         requestTimeoutMillis = 3000
     }
@@ -50,11 +52,11 @@ val applicationHttpClient = HttpClient(CIO) {
     }
 
     HttpResponseValidator {
-        validateResponse { response ->
-            val error: ErrorResponse = response.body()
-            if (error.code != 0) {
-                throw JsonResponseException(response, "Code: ${error.code}, message: ${error.message}")
-            }
+        handleResponseExceptionWithRequest { exception, request ->
+            val clientException = exception as? ClientRequestException ?: return@handleResponseExceptionWithRequest
+            val exceptionResponse = clientException.response
+            val errorResponse = exceptionResponse.body<ErrorResponseWrapper>()
+            throw JsonResponseException(exceptionResponse, errorResponse.error)
         }
     }
 }
@@ -84,13 +86,13 @@ fun main(httpClient: HttpClient = applicationHttpClient) {
 }
 
 @Serializable
-data class GoogResponse(
+data class ErrorResponseWrapper(
     val error: ErrorResponse
 )
 
 @Serializable
 data class ErrorResponse(
-    val code: Int,
+    val code: Int = -1,
     val message: String? = null
 )
 
