@@ -1,5 +1,8 @@
 package org.baaahs.util
 
+import csstype.PaddingLeft
+import csstype.PaddingTop
+import csstype.StandardLonghandProperties
 import js.core.jso
 import kotlinx.coroutines.MainScope
 import kotlinx.datetime.Clock
@@ -22,3 +25,18 @@ fun <T> breakpoints(init: Breakpoints<T>.() -> Unit): T {
 }
 
 inline val Number.sp get() = this.asDynamic()
+
+var StandardLonghandProperties.paddingX: PaddingLeft
+    get() = error("not implemented")
+    set(value) {
+        paddingLeft = value
+        paddingRight = value
+    }
+
+var StandardLonghandProperties.paddingY: PaddingTop
+    get() = error("not implemented")
+    set(value) {
+        paddingTop = value
+        paddingBottom = value
+    }
+

@@ -31,10 +31,9 @@ val Sidebar = FC<SidebarProps> { props ->
                 padding = 1.sp
             }
 
-            // TODO: SidebarNav
-//            SidebarNav {
-//                pages = pages
-//            }
+            SidebarNav {
+                pages = props.pages
+            }
         }
     }
 }

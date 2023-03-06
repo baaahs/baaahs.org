@@ -5,7 +5,6 @@ import js.core.jso
 import mui.material.PaletteMode
 import mui.material.styles.PaletteColor
 import mui.material.styles.PaletteOptions
-import mui.material.styles.TypeText
 
 val light = jso<PaletteOptions> {
     asDynamic().alternate = jso {

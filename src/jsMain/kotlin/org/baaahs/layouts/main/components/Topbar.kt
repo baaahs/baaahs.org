@@ -14,7 +14,6 @@ import mui.material.ButtonColor
 import mui.material.ButtonVariant
 import mui.material.Link
 import mui.material.LinkUnderline
-import mui.material.Menu
 import mui.material.PaletteMode
 import mui.material.Size
 import mui.material.styles.Theme
@@ -200,7 +199,7 @@ val Topbar = FC<TopbarProps> { props ->
                     borderColor = alpha(theme.palette.divider, 0.2) as BorderColor
                 }
 
-                Menu {}
+                mui.icons.material.Menu {}
             }
         }
     }

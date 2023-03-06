@@ -8,7 +8,6 @@ import react.ReactNode
 import react.create
 import react.router.Navigate
 import react.router.PathRoute
-import react.router.Route
 
 class SiteRoute(val path: String, val renderer: () -> ReactNode)
 

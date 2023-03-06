@@ -12,7 +12,12 @@ import mui.material.styles.Theme
 import mui.material.styles.useTheme
 import mui.system.sx
 import org.baaahs.layouts.main.Main
-import org.baaahs.views.index.components.*
+import org.baaahs.views.index.components.Benefits
+import org.baaahs.views.index.components.Features
+import org.baaahs.views.index.components.GetStarted
+import org.baaahs.views.index.components.Hero
+import org.baaahs.views.index.components.QuickStart
+import org.baaahs.views.index.components.Services
 import react.FC
 import react.Props
 import react.dom.svg.ReactSVG.path

@@ -91,7 +91,7 @@ val Main = FC<MainProps> { props ->
             onClose = handleSidebarClose
             this.open = open
             variant = DrawerVariant.temporary
-            this.pages = pages
+            this.pages = org.baaahs.layouts.pages
         }
         main {
             children

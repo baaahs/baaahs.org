@@ -1,10 +1,10 @@
 package org.baaahs
 
+import kotlinext.js.require
 import org.baaahs.components.Page
 import react.FC
 import react.Props
 import react.router.dom.BrowserRouter
-import kotlinext.js.require
 
 val styles = run {
     require("slick-carousel/slick/slick.css")
