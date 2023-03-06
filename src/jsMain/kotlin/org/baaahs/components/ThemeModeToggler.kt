@@ -2,8 +2,6 @@ package org.baaahs.components
 
 import csstype.Auto
 import csstype.BorderColor
-import csstype.Padding
-import csstype.px
 import externals.mui.material.styles.alpha
 import mui.material.Button
 import mui.material.ButtonColor
@@ -12,6 +10,7 @@ import mui.material.PaletteMode
 import mui.material.styles.Theme
 import mui.material.styles.useTheme
 import mui.system.sx
+import org.baaahs.util.sp
 import react.FC
 import react.Props
 import react.dom.aria.ariaLabel
@@ -31,9 +30,9 @@ val ThemeModeToggler = FC<Props> {
         ariaLabel = "Dark mode toggler"
         color = if (mode == PaletteMode.light) ButtonColor.primary else ButtonColor.secondary
         sx {
-            borderRadius = 2.px
+            borderRadius = 2.sp
             minWidth = Auto.auto
-            padding = 0.5 as Padding
+            padding = 0.5.sp
             borderColor = alpha(theme.palette.divider, 0.2) as BorderColor
         }
 

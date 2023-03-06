@@ -3,8 +3,10 @@ package org.baaahs.view
 import csstype.Border
 import csstype.ClassName
 import csstype.VerticalAlign
+import csstype.px
 import emotion.react.css
 import js.core.jso
+import org.baaahs.util.sp
 import react.FC
 import react.Props
 import react.dom.html.HTMLAttributes
@@ -114,11 +116,11 @@ val IndexPage = FC<Props> {
                     img {
                         alt = ""
                         css {
-                            border = "0" as Border
+                            border = 0.px
                         }
                         src = "https://www.paypalobjects.com/en_US/i/scr/pixel.gif"
-                        width = 1.0
-                        height = 1.0
+                        width = 1.sp
+                        height = 1.sp
                     }
                 }
             }

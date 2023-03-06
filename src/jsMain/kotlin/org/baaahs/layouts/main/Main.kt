@@ -1,8 +1,6 @@
 package org.baaahs.layouts.main
 
 import csstype.Color
-import csstype.PaddingBottom
-import csstype.PaddingTop
 import csstype.Position
 import csstype.important
 import csstype.integer
@@ -14,6 +12,7 @@ import mui.material.AppBarPosition
 import mui.material.Box
 import mui.material.Container
 import mui.material.Divider
+import mui.material.DrawerVariant
 import mui.material.styles.Theme
 import mui.material.styles.useTheme
 import mui.material.useMediaQuery
@@ -23,6 +22,7 @@ import org.baaahs.components.TopNav
 import org.baaahs.layouts.main.components.Footer
 import org.baaahs.layouts.main.components.Sidebar
 import org.baaahs.layouts.main.components.Topbar
+import org.baaahs.util.sp
 import react.FC
 import react.PropsWithChildren
 import react.dom.html.ReactHTML.main
@@ -69,7 +69,7 @@ val Main = FC<MainProps> { props ->
         AppBar {
             position = AppBarPosition.sticky
             sx {
-                top = 0.px
+                top = 0.sp
 
                 backgroundColor = if (trigger) Color(theme.palette.background.paper) else bgcolor
             }
@@ -77,12 +77,12 @@ val Main = FC<MainProps> { props ->
             elevation = if (trigger) 1 else 0
             Container {
                 sx {
-                    paddingTop = 1.px
-                    paddingBottom = 1.px
+                    paddingTop = 1.sp
+                    paddingBottom = 1.sp
                 }
                 Topbar {
                     onSidebarOpen = handleSidebarOpen
-                    pages = pages
+                    pages = org.baaahs.layouts.pages
                     this.colorInvert = if (trigger) false else colorInvert
                 }
             }
@@ -90,7 +90,7 @@ val Main = FC<MainProps> { props ->
         Sidebar {
             onClose = handleSidebarClose
             this.open = open
-            variant = "temporary"
+            variant = DrawerVariant.temporary
             this.pages = pages
         }
         main {
@@ -99,8 +99,8 @@ val Main = FC<MainProps> { props ->
         }
         Container {
             sx {
-                paddingTop = "4" as PaddingTop
-                paddingBottom = "4" as PaddingBottom
+                paddingTop = 4.sp
+                paddingBottom = 4.sp
             }
             Footer {}
         }

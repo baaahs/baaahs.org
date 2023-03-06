@@ -107,6 +107,7 @@ kotlin {
                 )
                 implementation(kotlinw("emotion"))
                 implementation(kotlinw("mui"))
+                implementation(kotlinw("mui-icons"))
                 implementation(kotlinw("react"))
                 implementation(kotlinw("react-dom"))
                 implementation(kotlinw("react-router-dom"))
