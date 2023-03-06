@@ -23,6 +23,8 @@ plugins {
 group = "org.baaahs"
 version = "1.0-SNAPSHOT"
 
+val noTestDeps = project.hasProperty("noTestDeps") || project.hasProperty("isProduction")
+
 repositories {
     mavenCentral()
     maven("https://jitpack.io")
@@ -56,7 +58,7 @@ kotlin {
         @Suppress("UNUSED_VARIABLE")
         val commonTest by getting {
             dependencies {
-                if (!project.hasProperty("noTestDeps")) {
+                if (!noTestDeps) {
                     implementation(kotlin("test-common"))
                     implementation(kotlin("test-annotations-common"))
                     implementation("com.github.robolectric.spek:spek-dsl:$spekVersion")
@@ -91,7 +93,7 @@ kotlin {
         @Suppress("UNUSED_VARIABLE")
         val jvmTest by getting {
             dependencies {
-                if (!project.hasProperty("noTestDeps")) {
+                if (!noTestDeps) {
                     implementation(kotlin("test-common"))
                     implementation(kotlin("test-annotations-common"))
                     implementation("io.ktor:ktor-server-test-host:$ktorVersion")
