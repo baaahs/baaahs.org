@@ -56,10 +56,12 @@ kotlin {
         @Suppress("UNUSED_VARIABLE")
         val commonTest by getting {
             dependencies {
-                implementation(kotlin("test-common"))
-                implementation(kotlin("test-annotations-common"))
-                implementation("com.github.robolectric.spek:spek-dsl:$spekVersion")
-                implementation("com.willowtreeapps.assertk:assertk:0.25")
+                if (!project.hasProperty("noTestDeps")) {
+                    implementation(kotlin("test-common"))
+                    implementation(kotlin("test-annotations-common"))
+                    implementation("com.github.robolectric.spek:spek-dsl:$spekVersion")
+                    implementation("com.willowtreeapps.assertk:assertk:0.25")
+                }
             }
         }
 
@@ -89,10 +91,12 @@ kotlin {
         @Suppress("UNUSED_VARIABLE")
         val jvmTest by getting {
             dependencies {
-                implementation(kotlin("test-common"))
-                implementation(kotlin("test-annotations-common"))
-                implementation("io.ktor:ktor-server-test-host:$ktorVersion")
-                runtimeOnly("com.github.robolectric.spek:spek-runner-junit5:$spekVersion")
+                if (!project.hasProperty("noTestDeps")) {
+                    implementation(kotlin("test-common"))
+                    implementation(kotlin("test-annotations-common"))
+                    implementation("io.ktor:ktor-server-test-host:$ktorVersion")
+                    runtimeOnly("com.github.robolectric.spek:spek-runner-junit5:$spekVersion")
+                }
             }
         }
 
