@@ -59,5 +59,7 @@ fun getTheme(mode: String, themeToggler: () -> Unit): Theme =
                     }
                 }
             }
-        }, themeToggler)
+
+            asDynamic().themeToggler = themeToggler
+        })
     )

@@ -102,8 +102,7 @@ val TopNav = FC<TopNavProps> { props ->
             }
         }
         Box {
-            // TODO
-//            ThemeModeToggler { }
+            ThemeModeToggler { }
         }
     }
 }
