@@ -41,21 +41,17 @@ val IndexView = FC<Props> {
                     backgroundImage = "linear-gradient(to bottom, ${alpha(theme.palette.background.paper, 0)}, ${alpha(theme.palette.asDynamic().alternate.main, 1)} 100%)" as BackgroundImage
                     backgroundRepeat = BackgroundRepeat.repeatX
                     position = Position.relative
-
                 }
 
                 Container {
                     maxWidth = "600"
-                    QuickStart {
-                    }
+                    QuickStart {}
                 }
                 Container {
-                    Features {
-                    }
+                    Features {}
                 }
                 Container {
-                    Benefits {
-                    }
+                    Benefits {}
                 }
                 Box {
                     this as SVGAttributes<SVGSVGElement>
@@ -77,8 +73,7 @@ val IndexView = FC<Props> {
                 }
             }
             Container {
-                GetStarted {
-                }
+                GetStarted {}
             }
         }
     }
