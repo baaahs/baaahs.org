@@ -4,12 +4,15 @@ val kotlinVersion = "1.8.10"
 val serializationVersion = "1.4.0"
 val ktorVersion = "2.2.2"
 val logbackVersion = "1.2.11"
-val kotlinWrappersVersion = "1.0.0-pre.451"
+val kotlinWrappersVersion = "1.0.0-pre.507"
 val kmongoVersion = "4.8.0"
 val spekVersion = "807-let-values-SNAPSHOT"
 
 fun kotlinw(target: String): String =
     "org.jetbrains.kotlin-wrappers:kotlin-$target"
+
+fun ktor(target: String): String =
+    "io.ktor:ktor-$target:$ktorVersion"
 
 plugins {
     kotlin("multiplatform") version "1.8.10"
@@ -32,6 +35,12 @@ kotlin {
     js(IR) {
         browser {
             binaries.executable()
+
+            commonWebpackConfig {
+                cssSupport {
+                    enabled.set(true)
+                }
+            }
         }
     }
     sourceSets {
@@ -39,7 +48,7 @@ kotlin {
         val commonMain by getting {
             dependencies {
                 implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:$serializationVersion")
-                implementation("io.ktor:ktor-client-core:$ktorVersion")
+                implementation(ktor("client-core"))
                 implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.4.0")
             }
         }
@@ -57,19 +66,21 @@ kotlin {
         @Suppress("UNUSED_VARIABLE")
         val jvmMain by getting {
             dependencies {
-                implementation("io.ktor:ktor-client-core:$ktorVersion")
-                implementation("io.ktor:ktor-client-cio:$ktorVersion")
-                implementation("io.ktor:ktor-client-content-negotiation:$ktorVersion")
-                implementation("io.ktor:ktor-serialization:$ktorVersion")
-                implementation("io.ktor:ktor-serialization-kotlinx-json:$ktorVersion")
-                implementation("io.ktor:ktor-server-content-negotiation:$ktorVersion")
-                implementation("io.ktor:ktor-server-auth:$ktorVersion")
-                implementation("io.ktor:ktor-server-cors:$ktorVersion")
-                implementation("io.ktor:ktor-server-compression:$ktorVersion")
-                implementation("io.ktor:ktor-server-core-jvm:$ktorVersion")
-                implementation("io.ktor:ktor-server-netty:$ktorVersion")
-                implementation("io.ktor:ktor-server-status-pages:$ktorVersion")
+                implementation(ktor("client-core"))
+                implementation(ktor("client-cio"))
+                implementation(ktor("client-content-negotiation"))
+                implementation(ktor("serialization"))
+                implementation(ktor("serialization-kotlinx-json"))
+                implementation(ktor("server-content-negotiation"))
+                implementation(ktor("server-auth"))
+                implementation(ktor("server-cors"))
+                implementation(ktor("server-compression"))
+                implementation(ktor("server-core-jvm"))
+                implementation(ktor("server-html-builder-jvm"))
+                implementation(ktor("server-netty"))
+                implementation(ktor("server-status-pages"))
                 implementation("ch.qos.logback:logback-classic:$logbackVersion")
+                implementation("org.jetbrains.kotlinx:kotlinx-html-jvm:0.7.2")
                 implementation("org.litote.kmongo:kmongo-coroutine-serialization:$kmongoVersion")
                 implementation("software.amazon.awssdk:secretsmanager")
             }
@@ -94,13 +105,16 @@ kotlin {
                 implementation(
                     project.dependencies.enforcedPlatform("org.jetbrains.kotlin-wrappers:kotlin-wrappers-bom:$kotlinWrappersVersion")
                 )
+                implementation(kotlinw("emotion"))
+                implementation(kotlinw("mui"))
                 implementation(kotlinw("react"))
                 implementation(kotlinw("react-dom"))
                 implementation(kotlinw("react-router-dom"))
                 implementation(kotlinw("styled-next"))
-                implementation(kotlinw("mui"))
-                implementation(kotlinw("emotion"))
+
+                implementation(npm("aos", "^2.3.4", generateExternals = false))
                 implementation(npm("react-head", "3.4.2", generateExternals = false))
+                implementation(npm("slick-carousel", "^1.8.1", generateExternals = false))
             }
         }
     }

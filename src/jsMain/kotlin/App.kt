@@ -15,6 +15,7 @@ import react.FC
 import react.Props
 import react.createElement
 import react.dom.html.ReactHTML.div
+import react.router.PathRoute
 import react.router.Route
 import react.router.Routes
 import react.router.dom.BrowserRouter
@@ -71,12 +72,12 @@ val App = FC<Props> {
                     }
 
                     Routes {
-                        Route {
+                        PathRoute {
                             index = true
                             element = createElement(IndexPage)
                         }
 
-                        Route {
+                        PathRoute {
                             path = "/assman"
                             index = true
                             element = createElement(AssManIndexPage)

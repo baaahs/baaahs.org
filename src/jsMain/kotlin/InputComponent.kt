@@ -1,11 +1,11 @@
-import dom.html.HTMLFormElement
-import dom.html.HTMLInputElement
 import react.*
 import react.dom.events.ChangeEventHandler
 import react.dom.events.FormEventHandler
-import react.dom.html.InputType
 import react.dom.html.ReactHTML.form
 import react.dom.html.ReactHTML.input
+import web.html.HTMLFormElement
+import web.html.HTMLInputElement
+import web.html.InputType
 
 external interface InputProps : Props {
     var onSubmit: (String) -> Unit

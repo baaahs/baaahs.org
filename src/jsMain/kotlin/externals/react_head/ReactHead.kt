@@ -3,11 +3,6 @@
 
 package externals.react_head
 
-import dom.html.HTMLBaseElement
-import dom.html.HTMLLinkElement
-import dom.html.HTMLMetaElement
-import dom.html.HTMLStyleElement
-import dom.html.HTMLTitleElement
 import react.ComponentType
 import react.Props
 import react.ReactElement
@@ -16,6 +11,11 @@ import react.dom.html.HTMLAttributes
 import react.dom.html.LinkHTMLAttributes
 import react.dom.html.MetaHTMLAttributes
 import react.dom.html.StyleHTMLAttributes
+import web.html.HTMLBaseElement
+import web.html.HTMLLinkElement
+import web.html.HTMLMetaElement
+import web.html.HTMLStyleElement
+import web.html.HTMLTitleElement
 
 external interface HeadProviderProps : Props {
     var headTags: Array<ReactElement<*>>?

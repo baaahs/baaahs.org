@@ -3,13 +3,11 @@ package org.baaahs.view
 import csstype.Border
 import csstype.ClassName
 import csstype.VerticalAlign
-import dom.html.HTMLElement
 import emotion.react.css
-import kotlinx.js.jso
+import js.core.jso
 import react.FC
 import react.Props
 import react.dom.html.HTMLAttributes
-import react.dom.html.InputType
 import react.dom.html.ReactHTML.a
 import react.dom.html.ReactHTML.div
 import react.dom.html.ReactHTML.footer
@@ -23,6 +21,9 @@ import react.dom.html.ReactHTML.img
 import react.dom.html.ReactHTML.input
 import react.dom.html.ReactHTML.p
 import react.dom.html.ReactHTML.span
+import web.html.HTMLElement
+import web.html.InputType
+import web.window.WindowTarget
 
 val IndexPage = FC<Props> {
     div {
@@ -78,7 +79,7 @@ val IndexPage = FC<Props> {
             form {
                 action = "https://www.paypal.com/cgi-bin/webscr"
                 method = "post"
-                target = "_top"
+                target = "_top" as WindowTarget
 
                 input {
                     type = InputType.hidden

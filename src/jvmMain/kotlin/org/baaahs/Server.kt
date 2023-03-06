@@ -12,6 +12,7 @@ import io.ktor.serialization.kotlinx.json.*
 import io.ktor.server.application.*
 import io.ktor.server.auth.*
 import io.ktor.server.engine.*
+import io.ktor.server.html.*
 import io.ktor.server.http.content.*
 import io.ktor.server.netty.*
 import io.ktor.server.plugins.*
@@ -24,6 +25,7 @@ import io.ktor.server.response.*
 import io.ktor.server.routing.*
 import io.ktor.server.sessions.*
 import io.ktor.util.*
+import kotlinx.html.HTML
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.Json
@@ -181,6 +183,10 @@ fun Application.baaahsApplicationModule(env: Env, httpClient: HttpClient) {
                 val redirect = redirects[principal.state!!]
                 call.respondRedirect(redirect!!)
             }
+        }
+
+        get("/new/{...}") {
+            call.respondHtml(HttpStatusCode.OK, HTML::index)
         }
 
         static("/baaahs-dot-org.js") {

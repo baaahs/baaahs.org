@@ -1,8 +1,8 @@
 package org.baaahs.assman.view
 
+import js.core.jso
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.launch
-import kotlinx.js.jso
 import org.baaahs.util.scope
 import web.geolocation.GeolocationPosition
 import web.geolocation.GeolocationWatchId
