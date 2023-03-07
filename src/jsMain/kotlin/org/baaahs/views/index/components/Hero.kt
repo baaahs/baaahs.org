@@ -76,7 +76,6 @@ val Hero = FC<Props> {
         defaultMatches = true
     })
 
-    +"Hero!"
     Box {
         sx {
             backgroundImage =
