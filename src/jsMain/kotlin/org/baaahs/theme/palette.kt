@@ -31,10 +31,10 @@ val light = jso<PaletteOptions> {
     }
     divider = "rgba(0, 0, 0, 0.12)"
     background = jso {
-        paper = "#ffffff"
-        default = "#ffffff"
+        paper = "#fff8ee"
+        default = "#fff8ee"
         asDynamic().level2 = "#f5f5f5"
-        asDynamic().level1 = "#ffffff"
+        asDynamic().level1 = "#fff8ee"
     }
 };
 

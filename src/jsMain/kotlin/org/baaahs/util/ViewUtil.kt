@@ -1,5 +1,7 @@
 package org.baaahs.util
 
+import csstype.MarginLeft
+import csstype.MarginTop
 import csstype.PaddingLeft
 import csstype.PaddingTop
 import csstype.StandardLonghandProperties
@@ -38,5 +40,19 @@ var StandardLonghandProperties.paddingY: PaddingTop
     set(value) {
         paddingTop = value
         paddingBottom = value
+    }
+
+var StandardLonghandProperties.marginX: MarginLeft
+    get() = error("not implemented")
+    set(value) {
+        marginLeft = value
+        marginRight = value
+    }
+
+var StandardLonghandProperties.marginY: MarginTop
+    get() = error("not implemented")
+    set(value) {
+        marginTop = value
+        marginBottom = value
     }
 

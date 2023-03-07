@@ -94,7 +94,7 @@ val Main = FC<MainProps> { props ->
             this.pages = org.baaahs.layouts.pages
         }
         main {
-            children
+            +props.children
             Divider {}
         }
         Container {
@@ -105,8 +105,6 @@ val Main = FC<MainProps> { props ->
             Footer {}
         }
     }
-
-
 }
 
 external interface MainProps : PropsWithChildren {

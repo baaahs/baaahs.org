@@ -35,11 +35,11 @@ val IndexView = FC<Props> {
 
         Main {
             bgcolor = "background.paper"
-            Hero {
-            }
+
+            Hero {}
+
             Container {
-                Services {
-                }
+                Services {}
             }
             Box {
                 sx {
