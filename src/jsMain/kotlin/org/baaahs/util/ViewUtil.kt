@@ -8,6 +8,10 @@ import csstype.StandardLonghandProperties
 import js.core.jso
 import kotlinx.coroutines.MainScope
 import kotlinx.datetime.Clock
+import mui.material.ButtonProps
+import mui.types.PropsWithComponent
+import react.IntrinsicType
+import react.PropsWithClassName
 
 val scope = MainScope()
 val clock = Clock.System
@@ -56,3 +60,18 @@ var StandardLonghandProperties.marginY: MarginTop
         marginBottom = value
     }
 
+fun <T : PropsWithClassName> ButtonProps.useComponent(
+    component: IntrinsicType<T>,
+    init: T.() -> Unit = {}
+) {
+    this.asDynamic().component = component
+    init.invoke(this.asDynamic())
+}
+
+fun <T : PropsWithClassName> PropsWithComponent.useComponent(
+    component: IntrinsicType<T>,
+    init: T.() -> Unit = {}
+) {
+    this.component = component
+    init.invoke(this.asDynamic())
+}

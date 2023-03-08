@@ -37,18 +37,15 @@ import org.baaahs.util.breakpoints
 import org.baaahs.util.marginX
 import org.baaahs.util.paddingY
 import org.baaahs.util.sp
+import org.baaahs.util.useComponent
 import react.FC
 import react.Props
-import react.dom.html.ImgHTMLAttributes
 import react.dom.html.ReactHTML.a
 import react.dom.html.ReactHTML.img
 import react.dom.html.ReactHTML.p
 import react.dom.svg.ReactSVG.path
 import react.dom.svg.ReactSVG.svg
-import react.dom.svg.SVGAttributes
-import web.html.HTMLImageElement
 import web.html.Loading
-import web.svg.SVGSVGElement
 
 data class Image(val cover: String, val coverDark: String)
 
@@ -110,7 +107,7 @@ val Hero = FC<Props> {
                     }
                     Typography {
                         variant = TypographyVariant.h6
-                        component = p
+                        useComponent(p)
                         sx {
                             color = Color("text.secondary")
                             fontWeight = integer(400)
@@ -133,7 +130,7 @@ val Hero = FC<Props> {
                         }
 
                         Button {
-                            asDynamic().component = a
+                            useComponent(a)
                             variant = ButtonVariant.contained
                             color = ButtonColor.primary
                             size = Size.large
@@ -149,7 +146,7 @@ val Hero = FC<Props> {
                             }
 
                             Button {
-                                asDynamic().component = a
+                                useComponent(a)
                                 href = "/about"
                                 variant = ButtonVariant.outlined
                                 color = ButtonColor.primary
@@ -198,10 +195,11 @@ val Hero = FC<Props> {
                                     }
 
                                     Box {
-                                        component = img; this as ImgHTMLAttributes<HTMLImageElement>
-                                        loading = Loading.lazy
-                                        src =
-                                            if (theme.palette.mode == PaletteMode.dark) image.coverDark else image.cover
+                                        useComponent(img) {
+                                            loading = Loading.lazy
+                                            src =
+                                                if (theme.palette.mode == PaletteMode.dark) image.coverDark else image.cover
+                                        }
                                         sx {
                                             height = 1.sp
                                             width = 1.sp
@@ -216,12 +214,13 @@ val Hero = FC<Props> {
             }
         }
         Box {
-            component = svg; this as SVGAttributes<SVGSVGElement>
-            preserveAspectRatio = "none"
-            xmlns = "http://www.w3.org/2000/svg"
-            x = 0.0
-            y = 0.0
-            viewBox = "0 0 1920 100.1"
+            useComponent(svg) {
+                preserveAspectRatio = "none"
+                xmlns = "http://www.w3.org/2000/svg"
+                x = 0.0
+                y = 0.0
+                viewBox = "0 0 1920 100.1"
+            }
             sx {
                 width = 100.pct
 

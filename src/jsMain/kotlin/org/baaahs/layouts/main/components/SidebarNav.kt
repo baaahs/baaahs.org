@@ -17,14 +17,11 @@ import org.baaahs.util.breakpoints
 import org.baaahs.util.paddingX
 import org.baaahs.util.paddingY
 import org.baaahs.util.sp
+import org.baaahs.util.useComponent
 import react.FC
 import react.Props
-import react.dom.html.AnchorHTMLAttributes
-import react.dom.html.ImgHTMLAttributes
 import react.dom.html.ReactHTML.a
 import react.dom.html.ReactHTML.img
-import web.html.HTMLAnchorElement
-import web.html.HTMLImageElement
 import web.window.WindowTarget
 
 val SidebarNav = FC<SidebarNavProps> { props ->
@@ -42,20 +39,22 @@ val SidebarNav = FC<SidebarNavProps> { props ->
                 sx {
                     display = Display.flex
                 }
-                component = a; this as AnchorHTMLAttributes<HTMLAnchorElement>
-                href = "/"
-                title = "theFront"
+                useComponent(a) {
+                    href = "/"
+                    title = "theFront"
+                }
                 sx { width = breakpoints { xs = 100.px; md = 120.px } }
 
                 Box {
-                    component = img; this as ImgHTMLAttributes<HTMLImageElement>
-                    src = if (mode == PaletteMode.light) {
-                        "https://assets.maccarianagency.com/the-front/logos/logo.svg"
-                    } else {
-                        "https://assets.maccarianagency.com/the-front/logos/logo-negative.svg"
+                    useComponent(img) {
+                        src = if (mode == PaletteMode.light) {
+                            "https://assets.maccarianagency.com/the-front/logos/logo.svg"
+                        } else {
+                            "https://assets.maccarianagency.com/the-front/logos/logo-negative.svg"
+                        }
+                        height = 1.sp
+                        width = 1.sp
                     }
-                    height = 1.sp
-                    width = 1.sp
                 }
             }
         }
@@ -106,7 +105,7 @@ val SidebarNav = FC<SidebarNavProps> { props ->
                     size = Size.large
                     variant = ButtonVariant.outlined
                     fullWidth = true
-                    asDynamic().component = a
+                    useComponent(a)
                     href = "/docs/introduction"
                     +"Documentation"
                 }
@@ -118,8 +117,9 @@ val SidebarNav = FC<SidebarNavProps> { props ->
                     variant = ButtonVariant.contained
                     color = ButtonColor.primary
                     fullWidth = true
-                    asDynamic().component = a; this as AnchorHTMLAttributes<HTMLAnchorElement>
-                    target = WindowTarget._blank
+                    useComponent(a) {
+                        target = WindowTarget._blank
+                    }
                     href = "https://mui.com/store/items/the-front-landing-page/"
                     +"Purchase now"
                 }

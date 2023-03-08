@@ -12,6 +12,7 @@ import mui.material.styles.TypographyVariant
 import mui.system.sx
 import org.baaahs.util.breakpoints
 import org.baaahs.util.sp
+import org.baaahs.util.useComponent
 import react.FC
 import react.Props
 import react.dom.html.ReactHTML.a
@@ -31,7 +32,7 @@ val TopNav = FC<TopNavProps> { props ->
 
             Link {
                 underline = LinkUnderline.none
-                component = a
+                useComponent(a)
                 href = "/demos"
                 color = if (colorInvert) {
                     "common.white"
@@ -72,7 +73,7 @@ val TopNav = FC<TopNavProps> { props ->
 
             Link {
                 underline = LinkUnderline.none
-                component = a
+                useComponent(a)
                 href = "/blocks"
                 color = if (colorInvert) "common.white" else "text.primary"
                 sx {
@@ -90,7 +91,7 @@ val TopNav = FC<TopNavProps> { props ->
 
             Link {
                 underline = LinkUnderline.none
-                component = a
+                useComponent(a)
                 href = "/docs/introduction"
                 color = if (colorInvert) "common.white" else "text.primary"
                 +"Docs"

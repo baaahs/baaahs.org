@@ -12,6 +12,7 @@ import mui.material.styles.Theme
 import mui.material.styles.useTheme
 import mui.system.sx
 import org.baaahs.layouts.main.Main
+import org.baaahs.util.useComponent
 import org.baaahs.views.index.components.Benefits
 import org.baaahs.views.index.components.Features
 import org.baaahs.views.index.components.GetStarted
@@ -22,8 +23,6 @@ import react.FC
 import react.Props
 import react.dom.svg.ReactSVG.path
 import react.dom.svg.ReactSVG.svg
-import react.dom.svg.SVGAttributes
-import web.svg.SVGSVGElement
 
 val IndexView = FC<Props> {
     val theme = useTheme<Theme>()
@@ -59,13 +58,13 @@ val IndexView = FC<Props> {
                     Benefits {}
                 }
                 Box {
-                    this as SVGAttributes<SVGSVGElement>
-                    component = svg
-                    preserveAspectRatio = "none"
-                    xmlns = "http://www.w3.org/2000/svg"
-                    x = 0.0
-                    y = 0.0
-                    viewBox = "0 0 1920 100.1"
+                    useComponent(svg) {
+                        preserveAspectRatio = "none"
+                        xmlns = "http://www.w3.org/2000/svg"
+                        x = 0.0
+                        y = 0.0
+                        viewBox = "0 0 1920 100.1"
+                    }
                     sx {
                         width = 100.pct
                         marginBottom = theme.spacing(-1)

@@ -23,15 +23,12 @@ import org.baaahs.layouts.Page
 import org.baaahs.layouts.main.components.topbar.NavItem
 import org.baaahs.util.breakpoints
 import org.baaahs.util.sp
+import org.baaahs.util.useComponent
 import react.FC
 import react.Props
 import react.dom.aria.ariaLabel
-import react.dom.html.AnchorHTMLAttributes
-import react.dom.html.ImgHTMLAttributes
 import react.dom.html.ReactHTML.a
 import react.dom.html.ReactHTML.img
-import web.html.HTMLAnchorElement
-import web.html.HTMLImageElement
 import web.window.WindowTarget
 
 val Topbar = FC<TopbarProps> { props ->
@@ -50,9 +47,10 @@ val Topbar = FC<TopbarProps> { props ->
             width = 1.sp
         }
         Box {
-            component = a; this as AnchorHTMLAttributes<HTMLAnchorElement>
-            href = "/"
-            title = "theFront"
+            useComponent(a) {
+                href = "/"
+                title = "theFront"
+            }
 
             sx {
                 display = Display.flex
@@ -60,14 +58,15 @@ val Topbar = FC<TopbarProps> { props ->
             }
 
             Box {
-                component = img; this as ImgHTMLAttributes<HTMLImageElement>
-                src = if (mode == PaletteMode.light && !colorInvert) {
-                    "https://assets.maccarianagency.com/the-front/logos/logo.svg"
-                } else {
-                    "https://assets.maccarianagency.com/the-front/logos/logo-negative.svg"
+                useComponent(img) {
+                    src = if (mode == PaletteMode.light && !colorInvert) {
+                        "https://assets.maccarianagency.com/the-front/logos/logo.svg"
+                    } else {
+                        "https://assets.maccarianagency.com/the-front/logos/logo-negative.svg"
+                    }
+                    height = 1.sp
+                    width = 1.sp
                 }
-                height = 1.sp
-                width = 1.sp
             }
         }
         Box {
@@ -81,7 +80,7 @@ val Topbar = FC<TopbarProps> { props ->
 
                 Link {
                     underline = LinkUnderline.none
-                    component = a
+                    useComponent(a)
                     href = "/events"
                     color = if (colorInvert) "common.white" else "text.primary"
                     sx {
@@ -97,7 +96,7 @@ val Topbar = FC<TopbarProps> { props ->
 
                 Link {
                     underline = LinkUnderline.none
-                    component = a
+                    useComponent(a)
                     href = "/music"
                     color = if (colorInvert) "common.white" else "text.primary"
                     sx {
@@ -113,7 +112,7 @@ val Topbar = FC<TopbarProps> { props ->
 
                 Link {
                     underline = LinkUnderline.none
-                    component = a
+                    useComponent(a)
                     href = "/fundraising"
                     color = if (colorInvert) "common.white" else "text.primary"
                     sx {
@@ -129,7 +128,7 @@ val Topbar = FC<TopbarProps> { props ->
 
                 Link {
                     underline = LinkUnderline.none
-                    component = a
+                    useComponent(a)
                     href = "/about"
                     color = if (colorInvert) "common.white" else "text.primary"
                     sx {
@@ -171,8 +170,9 @@ val Topbar = FC<TopbarProps> { props ->
                 Button {
                     variant = ButtonVariant.contained
                     color = ButtonColor.primary
-                    asDynamic().component = a; this as AnchorHTMLAttributes<HTMLAnchorElement>
-                    target = WindowTarget._blank
+                    useComponent(a) {
+                        target = WindowTarget._blank
+                    }
                     href = "/crew/"
                     size = Size.large
                     +"Crew login"

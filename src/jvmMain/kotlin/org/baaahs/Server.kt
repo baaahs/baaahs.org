@@ -25,6 +25,7 @@ import io.ktor.server.response.*
 import io.ktor.server.routing.*
 import io.ktor.server.sessions.*
 import io.ktor.util.*
+import io.ktor.util.pipeline.*
 import kotlinx.html.HTML
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
@@ -37,11 +38,6 @@ import java.util.*
 private val logger = LoggerFactory.getLogger("org.baaahs.Server")
 private val clientLogger = LoggerFactory.getLogger("org.baaahs.Server\$Client")
 
-class JsonResponseException(
-    response: HttpResponse,
-    val errorResponse: ErrorResponse
-) : ResponseException(response, errorResponse.message ?: "Unknown error")
-
 val applicationHttpClient = HttpClient(CIO) {
     expectSuccess = true
 
@@ -51,15 +47,6 @@ val applicationHttpClient = HttpClient(CIO) {
 
     install(io.ktor.client.plugins.contentnegotiation.ContentNegotiation) {
         json(Json { ignoreUnknownKeys = true })
-    }
-
-    HttpResponseValidator {
-        handleResponseExceptionWithRequest { exception, request ->
-            val clientException = exception as? ClientRequestException ?: return@handleResponseExceptionWithRequest
-            val exceptionResponse = clientException.response
-            val errorResponse = exceptionResponse.body<ErrorResponseWrapper>()
-            throw JsonResponseException(exceptionResponse, errorResponse.error)
-        }
     }
 }
 
@@ -179,6 +166,7 @@ fun Application.baaahsApplicationModule(env: Env, httpClient: HttpClient) {
 
             get("/callback") {
                 val principal: OAuthAccessTokenResponse.OAuth2? = call.principal()
+                logger.info("Callback: $principal state: ${principal?.state} accessToken: ${principal?.accessToken}")
                 call.sessions.set(UserSession(principal!!.state!!, principal.accessToken))
                 val redirect = redirects[principal.state!!]
                 call.respondRedirect(redirect!!)
@@ -232,34 +220,23 @@ fun Application.baaahsApplicationModule(env: Env, httpClient: HttpClient) {
         assetManager(env)
 
         route(UserInfo.path) {
+            val googleAuthApi = GoogleAuthApi(httpClient)
+
             get {
                 logger.info("GET ${UserInfo.path}...")
                 val userSession: UserSession? = call.sessions.get()
+                var userInfo: UserInfo? = null
                 if (userSession != null) {
                     try {
-                        logger.info("... http get www.googleapis.com…")
-                        val userInfo: UserInfo =
-                            httpClient.get("https://www.googleapis.com/oauth2/v2/userinfo") {
-                                this.timeout {
-                                    this.connectTimeoutMillis = 2000
-                                    this.requestTimeoutMillis = 2000
-                                    this.socketTimeoutMillis = 2000
-                                }
-                                headers {
-                                    append(
-                                        HttpHeaders.Authorization,
-                                        "Bearer ${userSession.token}"
-                                    )
-                                }
-                            }.body()
-                        logger.info("userInfo = $userInfo")
+                        userInfo = googleAuthApi.getUserInfo(userSession)
                         call.respond(userInfo)
-                    } catch (e: Exception) {
-                        logger.error("Exception! ${e.message} ${e::class.simpleName}", e)
-                        throw e
+                        logger.info("FINISHED")
+                    } catch (e: UnauthorizedException) {
+                        call.sessions.clear<UserSession>()
                     }
-                    logger.info("FINISHED")
-                } else {
+                }
+
+                if (userInfo == null) {
                     val redirectUrl = URLBuilder("${env.hostUrl}/login").run {
                         parameters.append("redirectUrl", call.request.uri)
                         build()
@@ -267,6 +244,35 @@ fun Application.baaahsApplicationModule(env: Env, httpClient: HttpClient) {
                     call.respondRedirect(redirectUrl)
                 }
             }
+        }
+    }
+}
+
+class UnauthorizedException(cause: Exception) : Exception(cause)
+
+class GoogleAuthApi(private val httpClient: HttpClient) {
+    suspend fun getUserInfo(userSession: UserSession): UserInfo {
+        try {
+            val userInfo: UserInfo =
+                httpClient.get("https://www.googleapis.com/oauth2/v2/userinfo") {
+                    headers {
+                        append(HttpHeaders.Authorization, "Bearer ${userSession.token}")
+                    }
+                    logger.info("HTTP GET www.googleapis.com auth token=${userSession.token}")
+                }.body()
+            logger.info("userInfo = $userInfo")
+            return userInfo
+        } catch (e: ClientRequestException) {
+            if (e.response.status == HttpStatusCode.Unauthorized) {
+                logger.error("Unauthorized! ${e.message} ${e::class.simpleName}", e)
+                throw UnauthorizedException(e)
+            } else {
+                logger.error("Exception! ${e.message} ${e::class.simpleName}", e)
+                throw e
+            }
+        } catch (e: Exception) {
+            logger.error("Exception! ${e.message} ${e::class.simpleName}", e)
+            throw e
         }
     }
 }
