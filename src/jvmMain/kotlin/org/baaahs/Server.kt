@@ -31,12 +31,12 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.Json
 import org.baaahs.assman.assetManager
+import org.baaahs.auth.GoogleAuthApi
 import org.slf4j.LoggerFactory
 import java.io.File
 import java.util.*
 
 private val logger = LoggerFactory.getLogger("org.baaahs.Server")
-private val clientLogger = LoggerFactory.getLogger("org.baaahs.Server\$Client")
 
 val applicationHttpClient = HttpClient(CIO) {
     expectSuccess = true
@@ -74,17 +74,6 @@ fun main(httpClient: HttpClient = applicationHttpClient) {
     ).start(wait = true)
 }
 
-@Serializable
-data class ErrorResponseWrapper(
-    val error: ErrorResponse
-)
-
-@Serializable
-data class ErrorResponse(
-    val code: Int = -1,
-    val message: String? = null
-)
-
 data class UserSession(val state: String, val token: String)
 
 @Serializable
@@ -106,6 +95,8 @@ fun main() {
 }
 
 fun Application.baaahsApplicationModule(env: Env, httpClient: HttpClient) {
+    val googleAuthApi = GoogleAuthApi(httpClient)
+
     install(ContentNegotiation) {
         json()
     }
@@ -128,19 +119,9 @@ fun Application.baaahsApplicationModule(env: Env, httpClient: HttpClient) {
         oauth("auth-oauth-google") {
             urlProvider = { "${env.hostUrl}/callback" }
             providerLookup = {
-                OAuthServerSettings.OAuth2ServerSettings(
-                    name = "google",
-                    authorizeUrl = "https://accounts.google.com/o/oauth2/auth",
-                    accessTokenUrl = "https://accounts.google.com/o/oauth2/token",
-                    requestMethod = HttpMethod.Post,
-                    clientId = env.secretsManager.googleClientId,
-                    clientSecret = env.secretsManager.googleClientSecret,
-                    defaultScopes = listOf("https://www.googleapis.com/auth/userinfo.profile"),
-                    extraAuthParameters = listOf("access_type" to "offline"),
-                    onStateCreated = { call, state ->
-                        redirects[state] = call.request.queryParameters["redirectUrl"]!!
-                    }
-                )
+                googleAuthApi.getServerSettings(env) { call, state ->
+                    redirects[state] = call.request.queryParameters["redirectUrl"]!!
+                }
             }
             client = httpClient
         }
@@ -220,7 +201,6 @@ fun Application.baaahsApplicationModule(env: Env, httpClient: HttpClient) {
         assetManager(env)
 
         route(UserInfo.path) {
-            val googleAuthApi = GoogleAuthApi(httpClient)
 
             get {
                 logger.info("GET ${UserInfo.path}...")
@@ -249,30 +229,3 @@ fun Application.baaahsApplicationModule(env: Env, httpClient: HttpClient) {
 }
 
 class UnauthorizedException(cause: Exception) : Exception(cause)
-
-class GoogleAuthApi(private val httpClient: HttpClient) {
-    suspend fun getUserInfo(userSession: UserSession): UserInfo {
-        try {
-            val userInfo: UserInfo =
-                httpClient.get("https://www.googleapis.com/oauth2/v2/userinfo") {
-                    headers {
-                        append(HttpHeaders.Authorization, "Bearer ${userSession.token}")
-                    }
-                    logger.info("HTTP GET www.googleapis.com auth token=${userSession.token}")
-                }.body()
-            logger.info("userInfo = $userInfo")
-            return userInfo
-        } catch (e: ClientRequestException) {
-            if (e.response.status == HttpStatusCode.Unauthorized) {
-                logger.error("Unauthorized! ${e.message} ${e::class.simpleName}", e)
-                throw UnauthorizedException(e)
-            } else {
-                logger.error("Exception! ${e.message} ${e::class.simpleName}", e)
-                throw e
-            }
-        } catch (e: Exception) {
-            logger.error("Exception! ${e.message} ${e::class.simpleName}", e)
-            throw e
-        }
-    }
-}
