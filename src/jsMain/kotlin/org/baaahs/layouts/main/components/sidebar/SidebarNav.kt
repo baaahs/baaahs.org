@@ -1,18 +1,21 @@
-package org.baaahs.layouts.main.components
+package org.baaahs.layouts.main.components.sidebar
 
+import csstype.AlignItems
 import csstype.Display
+import csstype.FontWeight
 import csstype.px
 import mui.material.Box
 import mui.material.Button
 import mui.material.ButtonColor
 import mui.material.ButtonVariant
+import mui.material.Link
+import mui.material.LinkUnderline
 import mui.material.PaletteMode
 import mui.material.Size
 import mui.material.styles.Theme
 import mui.material.styles.useTheme
 import mui.system.sx
 import org.baaahs.layouts.Page
-import org.baaahs.layouts.main.components.topbar.NavItem
 import org.baaahs.util.breakpoints
 import org.baaahs.util.paddingX
 import org.baaahs.util.paddingY
@@ -48,9 +51,9 @@ val SidebarNav = FC<SidebarNavProps> { props ->
                 Box {
                     useComponent(img) {
                         src = if (mode == PaletteMode.light) {
-                            "https://assets.maccarianagency.com/the-front/logos/logo.svg"
+                            "/images/baaahs-logo.svg"
                         } else {
-                            "https://assets.maccarianagency.com/the-front/logos/logo-negative.svg"
+                            "/images/baaahs-logo.svg"
                         }
                         height = 1.sp
                         width = 1.sp
@@ -63,6 +66,65 @@ val SidebarNav = FC<SidebarNavProps> { props ->
                 paddingX = 2.sp
                 paddingY = 2.sp
             }
+            Box {
+                Box {
+                    Link {
+                        underline = LinkUnderline.none
+                        useComponent(a)
+                        href = "/events"
+                        sx {
+                            display = Display.flex
+                            alignItems = AlignItems.center
+                            fontWeight = FontWeight.bold
+                        }
+
+                        +"events"
+                    }
+                }
+                Box {
+                    Link {
+                        underline = LinkUnderline.none
+                        useComponent(a)
+                        href = "/music"
+                        sx {
+                            display = Display.flex
+                            alignItems = AlignItems.center
+                            fontWeight = FontWeight.bold
+                        }
+
+                        +"music"
+                    }
+                }
+                Box {
+                    Link {
+                        underline = LinkUnderline.none
+                        useComponent(a)
+                        href = "/fundraising"
+                        sx {
+                            display = Display.flex
+                            alignItems = AlignItems.center
+                            fontWeight = FontWeight.bold
+                        }
+
+                        +"fundraising"
+                    }
+                }
+                Box {
+                    Link {
+                        underline = LinkUnderline.none
+                        useComponent(a)
+                        href = "/about"
+                        sx {
+                            display = Display.flex
+                            alignItems = AlignItems.center
+                            fontWeight = FontWeight.bold
+                        }
+
+                        +"about"
+                    }
+                }
+            }
+
             Box {
                 NavItem {
                     title = "Landings"
@@ -106,8 +168,8 @@ val SidebarNav = FC<SidebarNavProps> { props ->
                     variant = ButtonVariant.outlined
                     fullWidth = true
                     useComponent(a)
-                    href = "/docs/introduction"
-                    +"Documentation"
+                    href = "/crew"
+                    +"Join the flock"
                 }
             }
             Box {
@@ -120,8 +182,8 @@ val SidebarNav = FC<SidebarNavProps> { props ->
                     useComponent(a) {
                         target = WindowTarget._blank
                     }
-                    href = "https://mui.com/store/items/the-front-landing-page/"
-                    +"Purchase now"
+                    href = "/crew"
+                    +"Crew login"
                 }
             }
         }

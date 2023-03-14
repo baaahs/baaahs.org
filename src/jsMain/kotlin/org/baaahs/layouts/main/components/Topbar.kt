@@ -2,7 +2,7 @@ package org.baaahs.layouts.main.components
 
 import csstype.AlignItems
 import csstype.Auto
-import csstype.BorderColor
+import csstype.Color
 import csstype.Display
 import csstype.JustifyContent
 import csstype.None
@@ -196,7 +196,7 @@ val Topbar = FC<TopbarProps> { props ->
                     borderRadius = 2.sp
                     minWidth = Auto.auto
                     padding = 1.sp
-                    borderColor = alpha(theme.palette.divider, 0.2) as BorderColor
+                    borderColor = Color(alpha(theme.palette.divider, 0.2))
                 }
 
                 mui.icons.material.Menu {}

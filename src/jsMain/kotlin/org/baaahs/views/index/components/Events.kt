@@ -17,13 +17,10 @@ val Events = FC<EventsProps> {
             variant = TypographyVariant.h4
             sx {
                 color = Color("text.primary")
+                fontWeight = integer(700)
             }
             align = TypographyAlign.center
             gutterBottom = true
-            sx {
-                fontWeight = integer(700)
-
-            }
 
             +"upcoming events"
 

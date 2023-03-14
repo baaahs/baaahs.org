@@ -1,6 +1,6 @@
 package org.baaahs.layouts
 
-data class Page(val title: String, val href: String)
+data class Page(val title: String, val href: String, val isNew: Boolean = false)
 
 val pages = mapOf(
     "landings" to listOf(

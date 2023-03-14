@@ -8,6 +8,7 @@ import mui.material.DrawerAnchor
 import mui.material.DrawerVariant
 import mui.system.sx
 import org.baaahs.layouts.Page
+import org.baaahs.layouts.main.components.sidebar.SidebarNav
 import org.baaahs.util.sp
 import react.FC
 import react.Props
