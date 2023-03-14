@@ -10,7 +10,7 @@ import kotlinx.coroutines.MainScope
 import kotlinx.datetime.Clock
 import mui.material.ButtonProps
 import mui.types.PropsWithComponent
-import react.IntrinsicType
+import react.ElementType
 import react.PropsWithClassName
 
 val scope = MainScope()
@@ -61,7 +61,7 @@ var StandardLonghandProperties.marginY: MarginTop
     }
 
 fun <T : PropsWithClassName> ButtonProps.useComponent(
-    component: IntrinsicType<T>,
+    component: ElementType<T>,
     init: T.() -> Unit = {}
 ) {
     this.asDynamic().component = component
@@ -69,7 +69,7 @@ fun <T : PropsWithClassName> ButtonProps.useComponent(
 }
 
 fun <T : PropsWithClassName> PropsWithComponent.useComponent(
-    component: IntrinsicType<T>,
+    component: ElementType<T>,
     init: T.() -> Unit = {}
 ) {
     this.component = component

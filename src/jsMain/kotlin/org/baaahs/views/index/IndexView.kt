@@ -13,10 +13,11 @@ import mui.material.styles.useTheme
 import mui.system.sx
 import org.baaahs.layouts.main.Main
 import org.baaahs.util.useComponent
-import org.baaahs.views.index.components.Benefits
+import org.baaahs.views.index.components.Events
 import org.baaahs.views.index.components.Features
 import org.baaahs.views.index.components.GetStarted
 import org.baaahs.views.index.components.Hero
+import org.baaahs.views.index.components.Music
 import org.baaahs.views.index.components.QuickStart
 import org.baaahs.views.index.components.Services
 import react.FC
@@ -51,12 +52,9 @@ val IndexView = FC<Props> {
                     maxWidth = "600"
                     QuickStart {}
                 }
-                Container {
-                    Features {}
-                }
-                Container {
-                    Benefits {}
-                }
+                Container { Music {} }
+                Container { Events {} }
+                Container { Features {} }
                 Box {
                     useComponent(svg) {
                         preserveAspectRatio = "none"
