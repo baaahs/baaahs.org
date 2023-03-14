@@ -60,9 +60,9 @@ val Topbar = FC<TopbarProps> { props ->
             Box {
                 useComponent(img) {
                     src = if (mode == PaletteMode.light && !colorInvert) {
-                        "https://assets.maccarianagency.com/the-front/logos/logo.svg"
+                        "/images/baaahs-logo.svg"
                     } else {
-                        "https://assets.maccarianagency.com/the-front/logos/logo-negative.svg"
+                        "/images/baaahs-logo.svg"
                     }
                     height = 1.sp
                     width = 1.sp
