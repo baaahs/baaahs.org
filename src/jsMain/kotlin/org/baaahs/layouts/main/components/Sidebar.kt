@@ -28,9 +28,10 @@ import react.FC
 import react.Props
 import react.PropsWithChildren
 import react.dom.html.ReactHTML
+import react.dom.html.ReactHTML.a
 import web.window.WindowTarget
 
-private val navItem = FC<NavItemProps> { props ->
+private val navItem = FC<SidebarNavItemProps> { props ->
     Box {
         Link {
             useComponent(ReactHTML.a)
@@ -48,7 +49,7 @@ private val navItem = FC<NavItemProps> { props ->
     }
 }
 
-private external interface NavItemProps : PropsWithChildren {
+private external interface SidebarNavItemProps : PropsWithChildren {
     var url: String
 }
 
@@ -76,7 +77,7 @@ val Sidebar = FC<SidebarProps> { props ->
                     sx { width = 1.sp; paddingX = 2.sp; paddingY = 1.sp }
 
                     Box {
-                        useComponent(ReactHTML.a) { href = "/"; title = "BAAAHS" }
+                        useComponent(a) { href = "/"; title = "BAAAHS" }
                         sx { display = Display.flex; width = breakpoints { xs = 100.px; md = 120.px } }
                         BaaahsLogotype {}
                     }

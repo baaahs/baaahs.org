@@ -17,25 +17,40 @@ import mui.material.LinkUnderline
 import mui.material.Size
 import mui.material.Typography
 import mui.material.TypographyAlign
-import mui.material.styles.Theme
 import mui.material.styles.TypographyVariant
-import mui.material.styles.useTheme
 import mui.system.responsive
 import mui.system.sx
+import org.baaahs.layouts.Navigation
 import org.baaahs.util.breakpoints
 import org.baaahs.util.sp
 import org.baaahs.util.useComponent
 import org.baaahs.views.BaaahsLogotype
 import react.FC
 import react.Props
+import react.PropsWithChildren
 import react.dom.html.ReactHTML.a
 import react.dom.html.ReactHTML.p
 import web.window.WindowTarget
 
-val Footer = FC<FooterProps> {
-    val theme = useTheme<Theme>()
-    val mode = theme.palette.mode
+private val navItem = FC<FooterNavItemProps> { props ->
+    Box {
+        sx { marginTop = 1.sp; marginRight = 2.sp }
+        Link {
+            underline = LinkUnderline.none
+            useComponent(a)
+            href = props.url
+            color = "text.primary"
+            variant = "subtitle2"
+            +props.children
+        }
+    }
+}
 
+private external interface FooterNavItemProps : PropsWithChildren {
+    var url: String
+}
+
+val Footer = FC<FooterProps> {
     Grid {
         container = true
         spacing = 2.sp
@@ -53,66 +68,25 @@ val Footer = FC<FooterProps> {
                 }
 
                 Box {
-                    sx {
-                        display = Display.flex
-                        width = 100.px
-                    }
-                    useComponent(a) {
-                        href = "/"
-                        title = "theFront"
-                    }
+                    useComponent(a) { href = "/"; title = "BAAAHS" }
+                    sx { display = Display.flex; width = 100.px }
                     BaaahsLogotype {}
                 }
+
                 Box {
                     sx {
                         display = Display.flex
                         flexWrap = FlexWrap.wrap
                         alignItems = AlignItems.center
                     }
-                    Box {
-                        sx { marginTop = 1.sp; marginRight = 2.sp }
-                        Link {
-                            underline = LinkUnderline.none
-                            useComponent(a)
-                            href = "/events"
-                            color = "text.primary"
-                            variant = "subtitle2"
-                            +"events"
+
+                    Navigation.pages.forEach { page ->
+                        navItem {
+                            url = page.href
+                            page.render(this)
                         }
                     }
-                    Box {
-                        sx { marginTop = 1.sp; marginRight = 2.sp }
-                        Link {
-                            underline = LinkUnderline.none
-                            useComponent(a)
-                            href = "/music"
-                            color = "text.primary"
-                            variant = "subtitle2"
-                            +"music"
-                        }
-                    }
-                    Box {
-                        sx { marginTop = 1.sp; marginRight = 2.sp }
-                        Link {
-                            underline = LinkUnderline.none
-                            useComponent(a)
-                            href = "/fundraising"
-                            color = "text.primary"
-                            variant = "subtitle2"
-                            +"fundraising"
-                        }
-                    }
-                    Box {
-                        sx { marginTop = 1.sp; marginRight = 2.sp }
-                        Link {
-                            underline = LinkUnderline.none
-                            useComponent(a)
-                            href = "/about"
-                            color = "text.primary"
-                            variant = "subtitle2"
-                            +"about"
-                        }
-                    }
+
                     Box {
                         sx { marginTop = 1.sp }
                         Button {
@@ -129,6 +103,7 @@ val Footer = FC<FooterProps> {
                 }
             }
         }
+
         Grid {
             item = true
             columns = breakpoints { xs = responsive(12) }
