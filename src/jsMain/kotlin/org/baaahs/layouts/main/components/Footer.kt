@@ -14,7 +14,6 @@ import mui.material.ButtonVariant
 import mui.material.Grid
 import mui.material.Link
 import mui.material.LinkUnderline
-import mui.material.PaletteMode
 import mui.material.Size
 import mui.material.Typography
 import mui.material.TypographyAlign
@@ -26,10 +25,10 @@ import mui.system.sx
 import org.baaahs.util.breakpoints
 import org.baaahs.util.sp
 import org.baaahs.util.useComponent
+import org.baaahs.views.BaaahsLogotype
 import react.FC
 import react.Props
 import react.dom.html.ReactHTML.a
-import react.dom.html.ReactHTML.img
 import react.dom.html.ReactHTML.p
 import web.window.WindowTarget
 
@@ -62,17 +61,7 @@ val Footer = FC<FooterProps> {
                         href = "/"
                         title = "theFront"
                     }
-                    Box {
-                        useComponent(img) {
-                            src = if (mode == PaletteMode.light) {
-                                "/images/baaahs-logo.svg"
-                            } else {
-                                "/images/baaahs-logo.svg"
-                            }
-                            height = 1.sp
-                            width = 1.sp
-                        }
-                    }
+                    BaaahsLogotype {}
                 }
                 Box {
                     sx {

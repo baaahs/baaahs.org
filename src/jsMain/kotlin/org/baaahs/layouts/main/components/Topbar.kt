@@ -6,6 +6,7 @@ import csstype.Color
 import csstype.Display
 import csstype.JustifyContent
 import csstype.None
+import csstype.TextTransform
 import csstype.px
 import externals.mui.material.styles.alpha
 import mui.material.Box
@@ -14,30 +15,49 @@ import mui.material.ButtonColor
 import mui.material.ButtonVariant
 import mui.material.Link
 import mui.material.LinkUnderline
-import mui.material.PaletteMode
 import mui.material.Size
 import mui.material.styles.Theme
 import mui.material.styles.useTheme
 import mui.system.sx
-import org.baaahs.layouts.Page
-import org.baaahs.layouts.main.components.topbar.NavItem
+import org.baaahs.layouts.Navigation
 import org.baaahs.util.breakpoints
 import org.baaahs.util.sp
 import org.baaahs.util.useComponent
+import org.baaahs.views.BaaahsLogotype
 import react.FC
 import react.Props
+import react.PropsWithChildren
 import react.dom.aria.ariaLabel
 import react.dom.html.ReactHTML.a
-import react.dom.html.ReactHTML.img
 import web.window.WindowTarget
 
+private external interface TopbarNavItemProps : PropsWithChildren {
+    var url: String
+}
+
 val Topbar = FC<TopbarProps> { props ->
+    val theme = useTheme<Theme>()
     val colorInvert = props.colorInvert ?: false
 
-    val theme = useTheme<Theme>()
-    val mode = theme.palette.mode
-    val landingPages = props.pages["landings"] ?: error("no landing pages")
-    val companyPages = props.pages["company"] ?: error("no company pages")
+    val navItem = FC<TopbarNavItemProps> { linkProps ->
+        Box {
+            sx { marginRight = breakpoints { xs = 2.sp; sm = 4.sp } }
+
+            Link {
+                useComponent(a)
+                href = linkProps.url
+                underline = LinkUnderline.none
+                color = if (colorInvert) "common.white" else "text.primary"
+                sx {
+                    display = Display.flex
+                    alignItems = AlignItems.center
+                    textTransform = TextTransform.lowercase
+                }
+
+                +linkProps.children
+            }
+        }
+    }
 
     Box {
         sx {
@@ -46,125 +66,42 @@ val Topbar = FC<TopbarProps> { props ->
             alignItems = AlignItems.center
             width = 1.sp
         }
+
         Box {
-            useComponent(a) {
-                href = "/"
-                title = "theFront"
-            }
-
-            sx {
-                display = Display.flex
-                width = breakpoints { xs = 100.px; md = 120.px }
-            }
-
-            Box {
-                useComponent(img) {
-                    src = if (mode == PaletteMode.light && !colorInvert) {
-                        "/images/baaahs-logo.svg"
-                    } else {
-                        "/images/baaahs-logo.svg"
-                    }
-                    height = 1.sp
-                    width = 1.sp
-                }
-            }
+            useComponent(a) { href = "/"; title = "BAAAHS" }
+            sx { display = Display.flex; width = breakpoints { xs = 120.px; md = 150.px } }
+            BaaahsLogotype {}
         }
+
         Box {
             sx {
                 display = breakpoints { xs = None.none; md = Display.flex }
                 alignItems = AlignItems.center
+                "& a" { marginRight = 4.sp }
             }
 
-            Box {
-                sx { marginRight = breakpoints { xs = 1.sp; sm = 2.sp } }
-
-                Link {
-                    underline = LinkUnderline.none
-                    useComponent(a)
-                    href = "/events"
-                    color = if (colorInvert) "common.white" else "text.primary"
-                    sx {
-                        display = Display.flex
-                        alignItems = AlignItems.center
-                    }
-
-                    +"events"
-                }
-            }
-            Box {
-                sx { marginRight = breakpoints { xs = 1.sp; sm = 2.sp } }
-
-                Link {
-                    underline = LinkUnderline.none
-                    useComponent(a)
-                    href = "/music"
-                    color = if (colorInvert) "common.white" else "text.primary"
-                    sx {
-                        display = Display.flex
-                        alignItems = AlignItems.center
-                    }
-
-                    +"music"
-                }
-            }
-            Box {
-                sx { marginRight = breakpoints { xs = 1.sp; sm = 2.sp } }
-
-                Link {
-                    underline = LinkUnderline.none
-                    useComponent(a)
-                    href = "/fundraising"
-                    color = if (colorInvert) "common.white" else "text.primary"
-                    sx {
-                        display = Display.flex
-                        alignItems = AlignItems.center
-                    }
-
-                    +"fundraising"
-                }
-            }
-            Box {
-                sx { marginRight = breakpoints { xs = 1.sp; sm = 2.sp } }
-
-                Link {
-                    underline = LinkUnderline.none
-                    useComponent(a)
-                    href = "/about"
-                    color = if (colorInvert) "common.white" else "text.primary"
-                    sx {
-                        display = Display.flex
-                        alignItems = AlignItems.center
-                    }
-
-                    +"about"
+            Navigation.pages.forEach { page ->
+                navItem {
+                    url = page.href
+                    page.render(this)
                 }
             }
         }
+
         Box {
             sx {
                 display = breakpoints { xs = None.none; md = Display.flex }
                 alignItems = AlignItems.end
+                "& a" { marginLeft = 4.sp }
             }
 
-            Box {
-                NavItem {
-                    title = "soundcloud"
-                    id = "landing-pages"
-                    items = landingPages
-                    this.colorInvert = colorInvert
+            Navigation.outboundLinks.forEach { page ->
+                navItem {
+                    url = page.href
+                    page.render(this)
                 }
             }
-            Box {
-                sx {
-                    marginLeft = 4.sp
-                }
-                NavItem {
-                    title = "email"
-                    id = "company-pages"
-                    items = companyPages
-                    this.colorInvert = colorInvert
-                }
-            }
+
             Box {
                 sx { marginLeft = 4.sp }
                 Button {
@@ -207,6 +144,5 @@ val Topbar = FC<TopbarProps> { props ->
 
 external interface TopbarProps : Props {
     var onSidebarOpen: (() -> Unit)
-    var pages: Map<String, List<Page>>
     var colorInvert: Boolean?
 }

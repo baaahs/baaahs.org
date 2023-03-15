@@ -14,9 +14,9 @@ val light = jso<PaletteOptions> {
     asDynamic().cardShadow = "rgba(23, 70, 161, .11)"
     mode = PaletteMode.light
     primary = jso<PaletteColor> {
-        main = Color("#377dff")
-        light = Color("#467de3")
-        dark = Color("#2f6ad9")
+        main = Color("#1e2022")
+        light = Color("#2f3134")
+        dark = Color("#2f3134")
         contrastText = Color("#fff")
     }
     secondary = jso<PaletteColor> {

@@ -82,7 +82,6 @@ val Main = FC<MainProps> { props ->
                 }
                 Topbar {
                     onSidebarOpen = handleSidebarOpen
-                    pages = org.baaahs.layouts.pages
                     this.colorInvert = if (trigger) false else colorInvert
                 }
             }
@@ -91,7 +90,6 @@ val Main = FC<MainProps> { props ->
             onClose = handleSidebarClose
             this.open = open
             variant = DrawerVariant.temporary
-            this.pages = org.baaahs.layouts.pages
         }
         main {
             +props.children
