@@ -5,11 +5,14 @@ import csstype.Auto
 import csstype.BackgroundColor
 import csstype.BackgroundImage
 import csstype.BackgroundRepeat
+import csstype.ClassName
 import csstype.Color
 import csstype.Display
 import csstype.FlexDirection
+import csstype.FontStyle
 import csstype.None
 import csstype.Position
+import csstype.TextDecoration
 import csstype.deg
 import csstype.integer
 import csstype.pct
@@ -17,7 +20,10 @@ import csstype.px
 import csstype.rem
 import csstype.rotate
 import csstype.translate3d
+import emotion.react.css
 import externals.mui.material.styles.alpha
+import js.core.ArrayLike
+import js.core.asList
 import js.core.jso
 import mui.material.Box
 import mui.material.Button
@@ -40,30 +46,82 @@ import org.baaahs.util.sp
 import org.baaahs.util.useComponent
 import react.FC
 import react.Props
+import react.PropsWithChildren
 import react.dom.html.ReactHTML.a
 import react.dom.html.ReactHTML.img
 import react.dom.html.ReactHTML.p
+import react.dom.html.ReactHTML.span
 import react.dom.svg.ReactSVG.path
 import react.dom.svg.ReactSVG.svg
+import web.dom.document
 import web.html.Loading
 
 data class Image(val cover: String, val coverDark: String)
 
+private external interface HoverableLetter : PropsWithChildren {
+    var letterSelector: String
+}
+
+private val hoverableLetter = FC<HoverableLetter> { props ->
+    span {
+        onMouseOver = {
+            document.querySelectorAll(props.letterSelector).forEach {
+                it.classList.add("baaahs-letter-active")
+            }
+            console.log("Select " + props.letterSelector)
+        }
+        onMouseOut = {
+            document.querySelectorAll(props.letterSelector).forEach {
+                it.classList.remove("baaahs-letter-active")
+            }
+            console.log("Deselect " + props.letterSelector)
+        }
+        +props.children
+    }
+}
+
 val imageGroups = listOf(
     listOf(
-        Image("https://assets.maccarianagency.com/screenshots/the-front/img1.png", "https://assets.maccarianagency.com/screenshots/the-front/img1--dark.png"),
-        Image("https://assets.maccarianagency.com/screenshots/the-front/img4.png", "https://assets.maccarianagency.com/screenshots/the-front/img4--dark.png")
+        Image(
+            "https://assets.maccarianagency.com/screenshots/the-front/img1.png",
+            "https://assets.maccarianagency.com/screenshots/the-front/img1--dark.png"
+        ),
+        Image(
+            "https://assets.maccarianagency.com/screenshots/the-front/img4.png",
+            "https://assets.maccarianagency.com/screenshots/the-front/img4--dark.png"
+        )
     ),
     listOf(
-        Image("https://assets.maccarianagency.com/screenshots/the-front/img13.png", "https://assets.maccarianagency.com/screenshots/the-front/img13--dark.png"),
-        Image("https://assets.maccarianagency.com/screenshots/the-front/img10.png", "https://assets.maccarianagency.com/screenshots/the-front/img10--dark.png"),
-        Image("https://assets.maccarianagency.com/screenshots/the-front/img7.png", "https://assets.maccarianagency.com/screenshots/the-front/img7--dark.png")
+        Image(
+            "https://assets.maccarianagency.com/screenshots/the-front/img13.png",
+            "https://assets.maccarianagency.com/screenshots/the-front/img13--dark.png"
+        ),
+        Image(
+            "https://assets.maccarianagency.com/screenshots/the-front/img10.png",
+            "https://assets.maccarianagency.com/screenshots/the-front/img10--dark.png"
+        ),
+        Image(
+            "https://assets.maccarianagency.com/screenshots/the-front/img7.png",
+            "https://assets.maccarianagency.com/screenshots/the-front/img7--dark.png"
+        )
     ),
     listOf(
-        Image("https://assets.maccarianagency.com/screenshots/the-front/img6.png", "https://assets.maccarianagency.com/screenshots/the-front/img6--dark.png"),
-        Image("https://assets.maccarianagency.com/screenshots/the-front/img24.png", "https://assets.maccarianagency.com/screenshots/the-front/img24--dark.png"),
-        Image("https://assets.maccarianagency.com/screenshots/the-front/img17.png", "https://assets.maccarianagency.com/screenshots/the-front/img17--dark.png"),
-        Image("https://assets.maccarianagency.com/screenshots/the-front/img12.png", "https://assets.maccarianagency.com/screenshots/the-front/img12--dark.png")
+        Image(
+            "https://assets.maccarianagency.com/screenshots/the-front/img6.png",
+            "https://assets.maccarianagency.com/screenshots/the-front/img6--dark.png"
+        ),
+        Image(
+            "https://assets.maccarianagency.com/screenshots/the-front/img24.png",
+            "https://assets.maccarianagency.com/screenshots/the-front/img24--dark.png"
+        ),
+        Image(
+            "https://assets.maccarianagency.com/screenshots/the-front/img17.png",
+            "https://assets.maccarianagency.com/screenshots/the-front/img17--dark.png"
+        ),
+        Image(
+            "https://assets.maccarianagency.com/screenshots/the-front/img12.png",
+            "https://assets.maccarianagency.com/screenshots/the-front/img12--dark.png"
+        )
     )
 )
 
@@ -76,7 +134,12 @@ val Hero = FC<Props> {
     Box {
         sx {
             backgroundImage =
-                "linear-gradient(to bottom, ${alpha(theme.palette.background.paper, 0)}, ${alpha(theme.palette.asDynamic().alternate.main, 1)} 100%)" as BackgroundImage
+                "linear-gradient(to bottom, ${alpha(theme.palette.background.paper, 0)}, ${
+                    alpha(
+                        theme.palette.asDynamic().alternate.main,
+                        1
+                    )
+                } 100%)" as BackgroundImage
             backgroundRepeat = BackgroundRepeat.repeatX
             position = Position.relative
 
@@ -92,6 +155,8 @@ val Hero = FC<Props> {
             }
 
             Container {
+                id = "hero"
+
                 Box {
                     sx { maxWidth = breakpoints { xs = 1.sp; sm = 50.pct } }
 
@@ -103,18 +168,42 @@ val Hero = FC<Props> {
                             fontWeight = integer(700)
                         }
 
-                        +"BAAAHS"
+                        hoverableLetter { letterSelector = ".baaahs-letter-b"; +"B" }
+                        hoverableLetter { letterSelector = ".baaahs-letter-a1"; +"A" }
+                        hoverableLetter { letterSelector = ".baaahs-letter-a2"; +"A" }
+                        hoverableLetter { letterSelector = ".baaahs-letter-a3"; +"A" }
+                        hoverableLetter { letterSelector = ".baaahs-letter-h"; +"H" }
+                        hoverableLetter { letterSelector = ".baaahs-letter-s"; +"S" }
                     }
+
                     Typography {
                         variant = TypographyVariant.h6
                         useComponent(p)
                         sx {
                             color = Color("text.secondary")
                             fontWeight = integer(400)
+
+                            "& .baaahs-letter-active" {
+                                fontStyle = FontStyle.italic
+                                textDecoration = TextDecoration.underline
+                            }
                         }
 
-                        +"BAAAHS (the Big Ass Amazingly Awesome Homosexual Sheep) is a mutant vehicle, a mobile disco, and a penetrable social statement."
+                        +"BAAAHS (the "
+                        span { css(ClassName("baaahs-letter-b")) {}; +"Big" }
+                        +"-"
+                        span { css(ClassName("baaahs-letter-a1")) {}; +"Ass" }
+                        +" "
+                        span { css(ClassName("baaahs-letter-a2")) {}; +"Amazingly" }
+                        +" "
+                        span { css(ClassName("baaahs-letter-a3")) {}; +"Awesome" }
+                        +" "
+                        span { css(ClassName("baaahs-letter-h")) {}; +"Homosexual" }
+                        +" "
+                        span { css(ClassName("baaahs-letter-s")) {}; +"Sheep" }
+                        +") is a mutant vehicle, a mobile disco, and a penetrable social statement."
                     }
+
                     Box {
                         sx {
                             display = Display.flex
@@ -235,3 +324,5 @@ val Hero = FC<Props> {
         }
     }
 }
+
+fun <T> ArrayLike<T>.forEach(block: (T) -> Unit) = asList().forEach { block(it) }
