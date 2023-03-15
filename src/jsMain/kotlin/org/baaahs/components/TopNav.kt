@@ -26,26 +26,17 @@ val TopNav = FC<TopNavProps> { props ->
             alignItems = AlignItems.center
         }
         Box {
-            sx {
-                marginRight = breakpoints { xs = 1.sp; sm = 2.sp }
-            }
+            sx { marginRight = breakpoints { xs = 1.sp; sm = 2.sp } }
 
             Link {
                 underline = LinkUnderline.none
                 useComponent(a)
                 href = "/demos"
-                color = if (colorInvert) {
-                    "common.white"
-                } else {
-                    "text.primary"
-                }
-                sx {
-                    display = Display.flex
-                    alignItems = AlignItems.center
-
-                }
+                color = if (colorInvert) "common.white" else "text.primary"
+                sx { display = Display.flex; alignItems = AlignItems.center }
 
                 +"Demos"
+
                 Box {
                     sx {
                         padding = 0.5.sp
@@ -56,11 +47,7 @@ val TopNav = FC<TopNavProps> { props ->
                     }
                     Typography {
                         variant = TypographyVariant.caption
-                        sx {
-                            color = Color("common.white")
-                            lineHeight = 1.sp
-                        }
-
+                        sx { color = Color("common.white"); lineHeight = 1.sp }
                         +"new"
                     }
                 }
@@ -76,10 +63,7 @@ val TopNav = FC<TopNavProps> { props ->
                 useComponent(a)
                 href = "/blocks"
                 color = if (colorInvert) "common.white" else "text.primary"
-                sx {
-                    display = Display.flex
-                    alignItems = AlignItems.center
-                }
+                sx { display = Display.flex; alignItems = AlignItems.center }
 
                 +"Components"
             }

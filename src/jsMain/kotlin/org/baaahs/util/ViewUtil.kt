@@ -9,6 +9,8 @@ import js.core.jso
 import kotlinx.coroutines.MainScope
 import kotlinx.datetime.Clock
 import mui.material.ButtonProps
+import mui.material.PaletteMode
+import mui.material.styles.Theme
 import mui.types.PropsWithComponent
 import react.ElementType
 import react.PropsWithClassName
@@ -75,3 +77,5 @@ fun <T : PropsWithClassName> PropsWithComponent.useComponent(
     this.component = component
     init.invoke(this.asDynamic())
 }
+
+fun Theme.isDark(): Boolean = palette.mode == PaletteMode.dark
