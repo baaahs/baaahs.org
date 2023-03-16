@@ -9,11 +9,14 @@ import csstype.ClassName
 import csstype.Color
 import csstype.Display
 import csstype.FlexDirection
+import csstype.FontFamily
 import csstype.FontStyle
 import csstype.None
 import csstype.Position
 import csstype.TextDecoration
 import csstype.deg
+import csstype.dropShadow
+import csstype.em
 import csstype.integer
 import csstype.pct
 import csstype.px
@@ -164,8 +167,11 @@ val Hero = FC<Props> {
                         variant = TypographyVariant.h2
                         gutterBottom = true
                         sx {
+                            fontSize = breakpoints {
+                                xs = 4.5.rem; sm = 4.5.rem; md = 4.5.rem; lg = 5.75.rem; xl = 5.75.rem
+                            }
                             color = Color("text.primary")
-                            fontWeight = integer(700)
+                            fontFamily = "Smooth Circulars" as FontFamily
                         }
 
                         hoverableLetter { letterSelector = ".baaahs-letter-b"; +"B" }
@@ -174,6 +180,36 @@ val Hero = FC<Props> {
                         hoverableLetter { letterSelector = ".baaahs-letter-a3"; +"A" }
                         hoverableLetter { letterSelector = ".baaahs-letter-h"; +"H" }
                         hoverableLetter { letterSelector = ".baaahs-letter-s"; +"S" }
+                    }
+
+                    Typography {
+                        variant = TypographyVariant.h3
+                        gutterBottom = true
+                        sx {
+                            fontSize = breakpoints {
+                                xs = 0.85.rem; sm = 0.85.rem; md = 0.85.rem; lg = 0.85.rem; xl = 0.85.rem
+                            }
+                            color = Color("text.primary")
+                            fontFamily = "Smooth Circulars" as FontFamily
+                            marginTop = (-20).px
+
+                            "& .baaahs-letter-active" {
+                                textDecoration = TextDecoration.underline
+                                filter = dropShadow(0.px, 0.px, 1.em)
+                            }
+                        }
+
+                        span { css(ClassName("baaahs-letter-b")) {}; +"Big" }
+                        +"-"
+                        span { css(ClassName("baaahs-letter-a1")) {}; +"Ass" }
+                        +" "
+                        span { css(ClassName("baaahs-letter-a2")) {}; +"Amazingly" }
+                        +" "
+                        span { css(ClassName("baaahs-letter-a3")) {}; +"Awesome" }
+                        +" "
+                        span { css(ClassName("baaahs-letter-h")) {}; +"Homosexual" }
+                        +" "
+                        span { css(ClassName("baaahs-letter-s")) {}; +"Sheep" }
                     }
 
                     Typography {

@@ -1,5 +1,8 @@
 package org.baaahs.components
 
+import externals.react_head.HeadProvider
+import externals.react_head.Link
+import externals.react_head.Meta
 import js.core.jso
 import kotlinx.browser.localStorage
 import mui.material.CssBaseline
@@ -19,7 +22,7 @@ fun useDarkMode(): Triple<String, () -> Unit, Boolean> {
     fun setMode(mode: String) {
         try {
             localStorage.setItem("themeMode", mode)
-        } catch(e: Exception) {
+        } catch (e: Exception) {
             /* do nothing */
         }
 
@@ -42,7 +45,7 @@ fun useDarkMode(): Triple<String, () -> Unit, Boolean> {
             } else {
                 setMode("light")
             }
-        } catch(e: Exception) {
+        } catch (e: Exception) {
             setMode("light")
         }
 
@@ -77,15 +80,27 @@ val Page = FC<PropsWithChildren> { props ->
         externals.aos.refresh()
     }
 
-    ThemeProvider {
-        theme = getTheme(themeMode, themeToggler)
+    HeadProvider {
+        Link {
+            rel = "stylesheet"
+            href = "/fonts/fonts.css"
+        }
 
-        /* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */
-        CssBaseline {}
+        Meta {
+            name = "viewport"
+            content = "initial-scale=1, width=device-width"
+        }
 
-        Paper {
-            elevation = 0
-            +props.children
+        ThemeProvider {
+            theme = getTheme(themeMode, themeToggler)
+
+            /* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */
+            CssBaseline {}
+
+            Paper {
+                elevation = 0
+                +props.children
+            }
         }
     }
 }

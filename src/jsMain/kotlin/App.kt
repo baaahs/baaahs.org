@@ -16,7 +16,6 @@ import react.Props
 import react.createElement
 import react.dom.html.ReactHTML.div
 import react.router.PathRoute
-import react.router.Route
 import react.router.Routes
 import react.router.dom.BrowserRouter
 import react.router.dom.Link

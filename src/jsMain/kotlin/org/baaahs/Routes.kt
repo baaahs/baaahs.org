@@ -1,5 +1,6 @@
 package org.baaahs
 
+import org.baaahs.layouts.Navigation
 import org.baaahs.views.index.IndexView
 import org.baaahs.views.viewsRoutes
 import react.FC
@@ -30,6 +31,15 @@ val Routes = FC<Props> {
         PathRoute {
             path = "/new"
             element = IndexView.create()
+        }
+
+        Navigation.pages.forEach { page ->
+            page.element?.run {
+                PathRoute {
+                    path = page.href
+                    element = page.element
+                }
+            }
         }
 
         PathRoute {
