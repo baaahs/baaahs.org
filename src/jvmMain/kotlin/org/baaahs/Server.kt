@@ -194,7 +194,7 @@ fun Application.baaahsApplicationModule(env: Env, httpClient: HttpClient) {
         // 2022
         get("/crew") { call.respondRedirect("https://bit.ly/baaahs-2023-application") }
 
-        // 2022
+        // 2023
         get("/apply") { call.respondRedirect("https://docs.google.com/document/d/11mQX1lZpP0rMNNV1Uni_J0hutXaMEhsjvKtermUuY6Q") }
 
         // old URLs to support for a while!
