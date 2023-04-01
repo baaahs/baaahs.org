@@ -195,6 +195,7 @@ fun Application.baaahsApplicationModule(env: Env, httpClient: HttpClient) {
 
         // 2023
         get("/apply") { call.respondRedirect("https://bit.ly/baaahs-2023-application") }
+        get("/campout") { call.respondRedirect("https://baaahs.ticketspice.com/baaahs-campout") }
 
         // old URLs to support for a while!
         get("/shifts") { call.respondRedirect("https://www.volunteerspot.com/login/entry/375755452038") } // todo kill after 20151201
