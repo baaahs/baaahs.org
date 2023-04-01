@@ -30,7 +30,6 @@ import kotlinx.html.HTML
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.Json
-import org.baaahs.assman.assetManager
 import org.baaahs.auth.GoogleAuthApi
 import org.slf4j.LoggerFactory
 import java.io.File
@@ -201,7 +200,7 @@ fun Application.baaahsApplicationModule(env: Env, httpClient: HttpClient) {
         get("/shifts") { call.respondRedirect("https://www.volunteerspot.com/login/entry/375755452038") } // todo kill after 20151201
 
 
-        assetManager(env)
+//        assetManager(env)
 
         route(UserInfo.path) {
 
