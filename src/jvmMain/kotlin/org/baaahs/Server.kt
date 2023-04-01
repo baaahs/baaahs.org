@@ -192,7 +192,10 @@ fun Application.baaahsApplicationModule(env: Env, httpClient: HttpClient) {
         get("/2020-sheet") { call.respondRedirect("https://docs.google.com/spreadsheets/d/11FeKLaktPhMq_Oh_mG8TBK3U9_eY2oHBGxE0T3GzLhU") }
 
         // 2022
-        get("/crew") { call.respondRedirect("https://docs.google.com/document/d/11mQX1lZpP0rMNNV1Uni_J0hutXaMEhsjvKtermUuY6Q") }
+        get("/crew") { call.respondRedirect("https://bit.ly/baaahs-2023-application") }
+
+        // 2022
+        get("/apply") { call.respondRedirect("https://docs.google.com/document/d/11mQX1lZpP0rMNNV1Uni_J0hutXaMEhsjvKtermUuY6Q") }
 
         // old URLs to support for a while!
         get("/shifts") { call.respondRedirect("https://www.volunteerspot.com/login/entry/375755452038") } // todo kill after 20151201
