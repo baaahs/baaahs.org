@@ -1,8 +1,8 @@
 import org.jetbrains.kotlin.gradle.targets.js.webpack.KotlinWebpack
 
-val kotlinVersion = "1.8.10"
+val kotlinVersion = "1.8.22"
 val serializationVersion = "1.4.0"
-val ktorVersion = "2.2.2"
+val ktorVersion = "2.3.1"
 val logbackVersion = "1.2.11"
 val kotlinWrappersVersion = "1.0.0-pre.507"
 val kmongoVersion = "4.8.0"

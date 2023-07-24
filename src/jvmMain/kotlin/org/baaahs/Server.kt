@@ -1,13 +1,10 @@
 package org.baaahs
 
 import io.ktor.client.*
-import io.ktor.client.call.*
 import io.ktor.client.engine.cio.*
-import io.ktor.client.network.sockets.*
 import io.ktor.client.plugins.*
-import io.ktor.client.request.*
-import io.ktor.client.statement.*
 import io.ktor.http.*
+import io.ktor.http.content.*
 import io.ktor.serialization.kotlinx.json.*
 import io.ktor.server.application.*
 import io.ktor.server.auth.*
@@ -15,7 +12,6 @@ import io.ktor.server.engine.*
 import io.ktor.server.html.*
 import io.ktor.server.http.content.*
 import io.ktor.server.netty.*
-import io.ktor.server.plugins.*
 import io.ktor.server.plugins.compression.*
 import io.ktor.server.plugins.contentnegotiation.*
 import io.ktor.server.plugins.cors.routing.*
@@ -24,7 +20,6 @@ import io.ktor.server.request.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
 import io.ktor.server.sessions.*
-import io.ktor.util.*
 import io.ktor.util.pipeline.*
 import kotlinx.html.HTML
 import kotlinx.serialization.SerialName
@@ -34,6 +29,7 @@ import org.baaahs.auth.GoogleAuthApi
 import org.slf4j.LoggerFactory
 import java.io.File
 import java.util.*
+import kotlin.collections.set
 
 private val logger = LoggerFactory.getLogger("org.baaahs.Server")
 
@@ -157,14 +153,11 @@ fun Application.baaahsApplicationModule(env: Env, httpClient: HttpClient) {
             call.respondHtml(HttpStatusCode.OK, HTML::index)
         }
 
-        static("/baaahs-dot-org.js") {
-            defaultResource("baaahs-dot-org.js")
-        }
+        staticResources("/baaahs-dot-org.js", "")
 
-        static("") {
-            resources("docs")
-            defaultResource("index.html", "docs")
-        }
+        staticResources("/", "docs")
+        get("setup/") { respondWith("setup/index.html", "docs") }
+
 
         get("/2023-responses.json") {
             val key = env.secretsManager.aesKey ?: error("No AES_KEY set.")
@@ -178,6 +171,7 @@ fun Application.baaahsApplicationModule(env: Env, httpClient: HttpClient) {
         get("/drive") { call.respondRedirect("https://drive.google.com/drive/folders/0B_TasILTM6TWa18zdHdmNHpUYzg") }
         get("/pspride") { call.respondRedirect("/psp/") }
         get("/join") { call.respondRedirect("https://goo.gl/forms/XUvltyxql2") }
+        get("/setup") { call.respondRedirect("/setup/") }
 
         get("/cal") { call.respondRedirect("https://calendar.google.com/calendar?cid=ODlydDZ0MWs1am1oMm9odnZicXBvbTZyMW9AZ3JvdXAuY2FsZW5kYXIuZ29vZ2xlLmNvbQ") }
         get("/cal-private") { call.respondRedirect("https://calendar.google.com/calendar/embed?src=eo8lcds32ki40o14dr6m5t0o5s%40group.calendar.google.com&ctz=America%2FLos_Angeles") }
@@ -196,6 +190,7 @@ fun Application.baaahsApplicationModule(env: Env, httpClient: HttpClient) {
         // 2023
         get("/apply") { call.respondRedirect("https://bit.ly/baaahs-2023-application") }
         get("/campout") { call.respondRedirect("https://baaahs.ticketspice.com/baaahs-campout") }
+        get("/dj") { call.respondRedirect("https://docs.google.com/forms/d/e/1FAIpQLSeaDIVG7c5uKHetUvo1IX4R6PrTg1agjyGdEMnxYOvTBCF_YQ/viewform?usp=sf_link") }
 
         // old URLs to support for a while!
         get("/shifts") { call.respondRedirect("https://www.volunteerspot.com/login/entry/375755452038") } // todo kill after 20151201
@@ -229,6 +224,12 @@ fun Application.baaahsApplicationModule(env: Env, httpClient: HttpClient) {
             }
         }
     }
+}
+
+private suspend fun PipelineContext<Unit, ApplicationCall>.respondWith(path: String, resourcePackage: String) {
+    val file = call.resolveResource(path, resourcePackage)
+    if (file is OutgoingContent)
+        call.respond(HttpStatusCode.OK, file)
 }
 
 class UnauthorizedException(cause: Exception) : Exception(cause)
