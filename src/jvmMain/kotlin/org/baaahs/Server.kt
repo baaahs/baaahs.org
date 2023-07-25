@@ -172,7 +172,8 @@ fun Application.baaahsApplicationModule(env: Env, httpClient: HttpClient) {
         get("/pspride") { call.respondRedirect("/psp/") }
         get("/join") { call.respondRedirect("https://goo.gl/forms/XUvltyxql2") }
         get("/setup") { call.respondRedirect("/setup/") }
-
+        get("/geometry") { call.respondRedirect("https://baaahs.github.io/geometry/html/viewer.html?#map") }
+        get("/model") { call.respondRedirect("https://baaahs.github.io/geometry/html/viewer.html?#map") }
         get("/cal") { call.respondRedirect("https://calendar.google.com/calendar?cid=ODlydDZ0MWs1am1oMm9odnZicXBvbTZyMW9AZ3JvdXAuY2FsZW5kYXIuZ29vZ2xlLmNvbQ") }
         get("/cal-private") { call.respondRedirect("https://calendar.google.com/calendar/embed?src=eo8lcds32ki40o14dr6m5t0o5s%40group.calendar.google.com&ctz=America%2FLos_Angeles") }
         get("/slack") { call.respondRedirect("https://baaahs.slack.com") }
