@@ -1,5 +1,6 @@
 package org.baaahs.views.index
 
+import Foopz
 import csstype.BackgroundImage
 import csstype.BackgroundRepeat
 import csstype.Overflow
@@ -52,6 +53,7 @@ val IndexView = FC<Props> {
                     maxWidth = "600"
                     QuickStart {}
                 }
+                Container { Foopz {} }
                 Container { Music {} }
                 Container { Events {} }
                 Container { Features {} }

@@ -104,6 +104,8 @@ kotlin {
 
         @Suppress("UNUSED_VARIABLE")
         val jsMain by getting {
+            kotlin.srcDir("src/jsMain/js")
+
             dependencies {
                 implementation("io.ktor:ktor-client-js:$ktorVersion")
                 implementation("io.ktor:ktor-client-content-negotiation:$ktorVersion")
@@ -122,6 +124,11 @@ kotlin {
                 implementation(npm("aos", "^2.3.4", generateExternals = false))
                 implementation(npm("react-head", "3.4.2", generateExternals = false))
                 implementation(npm("slick-carousel", "^1.8.1", generateExternals = false))
+
+                implementation(devNpm("babel-loader", "9.1.2"))
+                implementation(devNpm("@babel/core", "7.21.4"))
+                implementation(devNpm("@babel/preset-env", "7.21.4"))
+                implementation(devNpm("@babel/preset-react", "7.18.6"))
             }
         }
     }
@@ -132,17 +139,7 @@ application {
     applicationDefaultJvmArgs = listOf("-Dio.ktor.development=true")
 }
 
-tasks.getByName<ProcessResources>("jvmProcessResources") {
-    from("docs") {
-        into( "docs")
-    }
-}
-
-//tasks.getByName<Tar>("distTar") { dependsOn(":jsJar", ":allMetadataJar") }
-//tasks.getByName<Zip>("distZip") { dependsOn(":jsJar", ":allMetadataJar") }
-
-// include JS artifacts in any JAR we generate
-tasks.getByName<Jar>("jvmJar") {
+val webpackTask = run {
     val taskName = if (project.hasProperty("isProduction")
         || project.gradle.startParameter.taskNames.contains("installDist")
     ) {
@@ -150,7 +147,21 @@ tasks.getByName<Jar>("jvmJar") {
     } else {
         "jsBrowserDevelopmentWebpack"
     }
-    val webpackTask = tasks.getByName<KotlinWebpack>(taskName)
+    tasks.getByName<KotlinWebpack>(taskName)
+}
+
+tasks.getByName<ProcessResources>("jvmProcessResources") {
+    dependsOn(webpackTask)
+
+    from("docs") { into( "docs") }
+//    from("build/developmentExecutable") { include("baaahs-dot-org.js") }
+}
+
+//tasks.getByName<Tar>("distTar") { dependsOn(":jsJar", ":allMetadataJar") }
+//tasks.getByName<Zip>("distZip") { dependsOn(":jsJar", ":allMetadataJar") }
+
+// include JS artifacts in any JAR we generate
+tasks.getByName<Jar>("jvmJar") {
     dependsOn(webpackTask) // make sure JS gets compiled first
 
     from(File(webpackTask.destinationDirectory, webpackTask.outputFileName)) // bring output file along into the JAR

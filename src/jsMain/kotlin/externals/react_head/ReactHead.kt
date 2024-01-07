@@ -26,14 +26,14 @@ external interface HeadProviderProps : Props {
         set(value) = definedExternally
 }
 
-external var HeadProvider: ComponentType<HeadProviderProps>
+external val HeadProvider: ComponentType<HeadProviderProps>
 
-external var Title: ComponentType<HTMLAttributes<HTMLTitleElement>>
+external val Title: ComponentType<HTMLAttributes<HTMLTitleElement>>
 
-external var Style: ComponentType<StyleHTMLAttributes<HTMLStyleElement>>
+external val Style: ComponentType<StyleHTMLAttributes<HTMLStyleElement>>
 
-external var Meta: ComponentType<MetaHTMLAttributes<HTMLMetaElement>>
+external val Meta: ComponentType<MetaHTMLAttributes<HTMLMetaElement>>
 
-external var Link: ComponentType<LinkHTMLAttributes<HTMLLinkElement>>
+external val Link: ComponentType<LinkHTMLAttributes<HTMLLinkElement>>
 
-external var Base: ComponentType<BaseHTMLAttributes<HTMLBaseElement>>
+external val Base: ComponentType<BaseHTMLAttributes<HTMLBaseElement>>

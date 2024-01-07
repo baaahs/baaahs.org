@@ -82,6 +82,11 @@ val Page = FC<PropsWithChildren> { props ->
 
     HeadProvider {
         Link {
+            rel = "icon"
+            href = "/images/favicon.png"
+        }
+
+        Link {
             rel = "stylesheet"
             href = "/fonts/fonts.css"
         }
