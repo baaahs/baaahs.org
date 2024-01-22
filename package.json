@@ -1,0 +1,68 @@
+{
+  "name": "thefront-js--react-scripts",
+  "author": "maccarian",
+  "email": "hi@maccarianagency.com",
+  "version": "4.8.0",
+  "private": true,
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "cross-env GENERATE_SOURCEMAP=false react-scripts build",
+    "prettier:fix": "prettier './src/**/*.js' --write",
+    "eslint:fix": "eslint ./src --fix",
+    "codeStyle:fix": "npm run prettier:fix && npm run eslint:fix",
+    "clear-all": "rimraf ./build ./node_modules"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.5%",
+      "last 2 versions",
+      "Firefox ESR",
+      "not dead",
+      "not IE 11",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "dependencies": {
+    "@emotion/react": "^11.10.4",
+    "@emotion/styled": "^11.10.4",
+    "@mui/icons-material": "^5.10.3",
+    "@mui/material": "^5.10.5",
+    "aos": "^2.3.4",
+    "card-validator": "^8.1.1",
+    "formik": "^2.2.9",
+    "jarallax": "^2.0.4",
+    "prop-types": "^15.8.1",
+    "react": "^18.2.0",
+    "react-countup": "^6.3.1",
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.4.0",
+    "react-scripts": "^5.0.1",
+    "react-slick": "^0.29.0",
+    "react-syntax-highlighter": "^15.5.0",
+    "react-visibility-sensor": "^5.1.1",
+    "slick-carousel": "^1.8.1",
+    "web-vitals": "^3.0.2",
+    "yup": "^0.32.11"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.0.0",
+    "@babel/plugin-syntax-flow": "^7.14.5",
+    "@babel/plugin-transform-react-jsx": "^7.14.9",
+    "cross-env": "^7.0.3",
+    "eslint": "^8.23.1",
+    "prettier": "^2.7.1",
+    "rimraf": "^3.0.2",
+    "typescript": "^2.7",
+    "yarn-upgrade-all": "^0.7.1"
+  }
+}
