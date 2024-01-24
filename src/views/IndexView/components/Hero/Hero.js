@@ -3,7 +3,7 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import useMediaQuery from '@mui/material/useMediaQuery';
-import { alpha, useTheme } from '@mui/material/styles';
+import {alpha, useTheme} from '@mui/material/styles';
 
 import Container from 'components/Container';
 
@@ -81,6 +81,7 @@ const Hero = () => {
   const isMd = useMediaQuery(theme.breakpoints.up('md'), {
     defaultMatches: true,
   });
+  const isDark = theme.palette.mode === 'dark';
 
   return (
     <Box
@@ -102,6 +103,7 @@ const Hero = () => {
               alt="BAAAAHS"
               width={{ xs: 300, md: 580 }}
               marginBottom={{ xs: 1, sm: 2 }}
+              sx={{ filter: isDark ? 'drop-shadow(0 0 4px white) drop-shadow(0 0 4px white)' : '' }}
             />
             <Typography
               variant="h6"
