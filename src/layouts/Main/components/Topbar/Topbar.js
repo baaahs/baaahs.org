@@ -64,6 +64,17 @@ const Topbar = ({ onSidebarOpen, colorInvert = false }) => {
           <Link
             underline="none"
             component="a"
+            href="/campout"
+            color={colorInvert ? 'common.white' : 'text.primary'}
+            sx={{ display: 'flex', alignItems: 'center', fontWeight: 'bold' }}
+          >
+            campout
+          </Link>
+        </Box>
+        <Box marginRight={{ xs: 2, sm: 4 }}>
+          <Link
+            underline="none"
+            component="a"
             href="/fundraising"
             color={colorInvert ? 'common.white' : 'text.primary'}
             sx={{ display: 'flex', alignItems: 'center', fontWeight: 'bold' }}
