@@ -7,10 +7,10 @@ import { alpha, useTheme } from '@mui/material/styles';
 import MenuIcon from '@mui/icons-material/Menu';
 
 import { ThemeModeToggler } from './components';
+import BAAAHSLogo from '../../../Main/BAAAHSLogo';
 
 const Topbar = ({ onSidebarOpen }) => {
   const theme = useTheme();
-  const { mode } = theme.palette;
 
   return (
     <Box
@@ -26,16 +26,7 @@ const Topbar = ({ onSidebarOpen }) => {
         title="BAAAHS"
         width={{ xs: 100, md: 120 }}
       >
-        <Box
-          component={'img'}
-          src={
-            mode === 'light'
-              ? '/images/baaahs-logo.svg'
-              : '/images/baaahs-logo.svg'
-          }
-          height={1}
-          width={1}
-        />
+        <BAAAHSLogo/>
       </Box>
       <Box sx={{ display: { xs: 'none', md: 'flex' } }} alignItems={'center'}>
         <Box marginLeft={3}>
@@ -74,7 +65,7 @@ const Topbar = ({ onSidebarOpen }) => {
           </Link>
         </Box>
         <Box marginLeft={3}>
-          <ThemeModeToggler />
+          <ThemeModeToggler/>
         </Box>
         <Box marginLeft={3}>
           <Button
@@ -91,7 +82,7 @@ const Topbar = ({ onSidebarOpen }) => {
       </Box>
       <Box sx={{ display: { xs: 'flex', md: 'none' } }} alignItems={'center'}>
         <Box marginRight={1}>
-          <ThemeModeToggler />
+          <ThemeModeToggler/>
         </Box>
         <Button
           onClick={() => onSidebarOpen()}
@@ -104,7 +95,7 @@ const Topbar = ({ onSidebarOpen }) => {
             borderColor: alpha(theme.palette.divider, 0.2),
           }}
         >
-          <MenuIcon />
+          <MenuIcon/>
         </Button>
       </Box>
     </Box>
