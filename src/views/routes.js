@@ -53,6 +53,7 @@ import {
   AccountSecurity as AccountSecurityView,
   NotFound as NotFoundView,
   NotFoundCover as NotFoundCoverView,
+  CampoutHome as CampoutHomeView,
 } from 'views';
 
 const routes = [
@@ -263,6 +264,10 @@ const routes = [
   {
     path: '/not-found-cover',
     renderer: (params = {}) => <NotFoundCoverView {...params} />,
+  },
+  {
+    path: '/campout',
+    renderer: (params = {}) => <CampoutHomeView {...params} />,
   },
 ];
 
