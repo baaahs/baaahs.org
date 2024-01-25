@@ -1,5 +1,6 @@
 export { default as Home } from './Home';
 export { default as IndexView } from './IndexView';
+export { Org2024 } from './Org';
 export { default as Customers } from './Customers';
 export { default as HireUs } from './HireUs';
 export { default as Faq } from './Faq';

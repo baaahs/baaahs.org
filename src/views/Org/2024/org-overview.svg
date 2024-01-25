@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg viewBox="-575 -468 2100 1216" width="2100px" height="1216px" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    .ring {
+      stroke: black;
+      stroke-width: 1;
+      fill: rgb(210, 230, 255);
+<!--      opacity: .5;-->
+    }
+  
+    .project {
+      stroke: black;
+      stroke-width: 1;
+      fill: rgb(135, 135, 240);
+      opacity: .5;
+    }
+  </style>
+  <ellipse class="ring" cx="-282" cy="-98" rx="293" ry="190" id="Build&quot; style=&quot;stroke: rgb(0, 0, 0); opacity: 0.5; fill: rgb(49, 106, 220);"/>
+  <ellipse class="ring" cx="-165" cy="-336" rx="144" ry="118" id="ellipse-1"/>
+  <ellipse class="ring" cx="28" cy="-302" rx="124" ry="109" id="ellipse-2"/>
+  <ellipse class="ring" cx="88" cy="-79" rx="117" ry="134" id="ellipse-3"/>
+  <ellipse class="ring" cx="20" cy="167" rx="223" ry="156" id="ellipse-4"/>
+  <ellipse class="ring" cx="18" cy="433" rx="210" ry="153" id="ellipse-5"/>
+  <ellipse class="ring" cx="420" cy="506" rx="264" ry="124" id="ellipse-6"/>
+  <ellipse class="ring" cx="325" cy="37" rx="190" ry="150" id="ellipse-7"/>
+  <ellipse class="ring" cx="602" cy="14" rx="142" ry="150" id="ellipse-8"/>
+  <ellipse class="ring" cx="447" cy="278" rx="313" ry="140" id="ellipse-9"/>
+  <ellipse class="ring" cx="899" cy="89" rx="205" ry="219" id="ellipse-10"/>
+  <ellipse class="ring" cx="860" cy="441" rx="226" ry="168" id="ellipse-11"/>
+  <ellipse class="ring" cx="1206" cy="39" rx="151" ry="182" id="ellipse-12"/>
+  <ellipse class="ring" cx="1213" cy="316" rx="172" ry="124" id="ellipse-13"/>
+  <ellipse class="ring" cx="1184" cy="496" rx="130" ry="98" id="ellipse-14"/>
+  <ellipse class="ring" cx="1046" cy="657" rx="143" ry="91" id="ellipse-15"/>
+  <ellipse class="ring" cx="154" cy="655" rx="143" ry="91" id="ellipse-16"/>
+  <ellipse class="ring" cx="1360" cy="-175" rx="143" ry="91" id="ellipse-17"/>
+
+  <rect x="-507" y="-218" width="121" height="48" class="project"/>
+  <rect x="-525" y="-151" width="121" height="48" class="project"/>
+  <rect x="-532" y="-91" width="121" height="48" class="project"/>
+  <rect x="-492" y="-29" width="121" height="48" class="project"/>
+  <rect x="-379" y="-51" width="121" height="48" class="project"/>
+  <rect x="-375" y="-250" width="121" height="48" class="project"/>
+  <rect x="-375" y="-184" width="121" height="48" class="project"/>
+  <rect x="-235" y="-216" width="121" height="48" class="project"/>
+  <rect x="-178" y="-155" width="121" height="48" class="project"/>
+  <rect x="-168" y="-92" width="121" height="48" class="project"/>
+  <rect x="-285" y="-71" width="121" height="48" class="project"/>
+  <rect x="-362" y="22" width="121" height="48" class="project"/>
+  <rect x="-227" y="-9" width="121" height="48" class="project"/>
+  <rect x="-203" y="-468" width="121" height="48" class="project"/>
+  <rect x="-276" y="-419" width="121" height="48" class="project"/>
+  <rect x="-194" y="-407" width="121" height="48" class="project"/>
+  <rect x="-313" y="-366" width="121" height="48" class="project"/>
+  <rect x="-118" y="-389" width="121" height="48" class="project"/>
+  <rect x="-300" y="-303" width="121" height="48" class="project"/>
+  <rect x="-228" y="-275" width="121" height="48" class="project"/>
+  <rect x="-154" y="-281" width="121" height="48" class="project"/>
+  <rect x="-127" y="-339" width="121" height="48" class="project"/>
+  <rect x="-21" y="-390" width="121" height="48" class="project"/>
+  <rect x="66" y="-334" width="121" height="48" class="project"/>
+  <rect x="72" y="-272" width="121" height="48" class="project"/>
+  <rect x="-72" y="-216" width="121" height="48" class="project"/>
+  <rect x="31" y="-210" width="121" height="48" class="project"/>
+  <rect x="-66" y="-144" width="121" height="48" class="project"/>
+  <rect x="39" y="-155" width="121" height="48" class="project"/>
+  <rect x="125" y="-160" width="121" height="48" class="project"/>
+  <rect x="-72" y="-58" width="121" height="48" class="project"/>
+  <rect x="17" y="-58" width="121" height="48" class="project"/>
+  <rect x="120" y="-55" width="121" height="48" class="project"/>
+  <rect x="6" y="6" width="121" height="48" class="project"/>
+  <rect x="-135" y="72" width="121" height="48" class="project"/>
+  <rect x="-189" y="160" width="121" height="48" class="project"/>
+  <rect x="-141" y="263" width="121" height="48" class="project"/>
+  <rect x="-30" y="265" width="121" height="48" class="project"/>
+  <rect x="80" y="141" width="121" height="48" class="project"/>
+  <rect x="105" y="53" width="121" height="48" class="project"/>
+  <rect x="134" y="208" width="121" height="48" class="project"/>
+  <rect x="95" y="274" width="121" height="48" class="project"/>
+  <rect x="-169" y="366" width="121" height="48" class="project"/>
+  <rect x="-67" y="346" width="121" height="48" class="project"/>
+  <rect x="76" y="365" width="121" height="48" class="project"/>
+  <rect x="-159" y="451" width="121" height="48" class="project"/>
+  <rect x="-67" y="511" width="121" height="48" class="project"/>
+  <rect x="44" y="512" width="121" height="48" class="project"/>
+  <rect x="165" y="411" width="121" height="48" class="project"/>
+  <rect x="163" y="492" width="121" height="48" class="project"/>
+  <rect x="294" y="389" width="121" height="48" class="project"/>
+  <rect x="407" y="398" width="121" height="48" class="project"/>
+  <rect x="514" y="428" width="121" height="48" class="project"/>
+  <rect x="286" y="542" width="121" height="48" class="project"/>
+  <rect x="395" y="544" width="121" height="48" class="project"/>
+  <rect x="526" y="499" width="121" height="48" class="project"/>
+  <rect x="216" y="-120" width="121" height="48" class="project"/>
+  <rect x="342" y="-113" width="121" height="48" class="project"/>
+  <rect x="392" y="-30" width="121" height="48" class="project"/>
+  <rect x="213" y="-40" width="121" height="48" class="project"/>
+  <rect x="230" y="68" width="121" height="48" class="project"/>
+  <rect x="350" y="61" width="121" height="48" class="project"/>
+  <rect x="458" y="47" width="121" height="48" class="project"/>
+  <rect x="554" y="64" width="121" height="48" class="project"/>
+  <rect x="499" y="-66" width="121" height="48" class="project"/>
+  <rect x="476" y="-121" width="121" height="48" class="project"/>
+  <rect x="574" y="-122" width="121" height="48" class="project"/>
+  <rect x="639" y="-65" width="121" height="48" class="project"/>
+  <rect x="632" y="42" width="121" height="48" class="project"/>
+  <rect x="866" y="-64" width="121" height="48" class="project"/>
+  <rect x="300" y="142" width="121" height="48" class="project"/>
+  <rect x="285" y="208" width="121" height="48" class="project"/>
+  <rect x="406" y="208" width="121" height="48" class="project"/>
+  <rect x="495" y="125" width="121" height="48" class="project"/>
+  <rect x="523" y="197" width="121" height="48" class="project"/>
+  <rect x="642" y="127" width="121" height="48" class="project"/>
+  <rect x="790" y="183" width="121" height="48" class="project"/>
+  <rect x="300" y="313" width="121" height="48" class="project"/>
+  <rect x="465" y="326" width="121" height="48" class="project"/>
+  <rect x="627" y="337" width="121" height="48" class="project"/>
+  <rect x="629" y="426" width="121" height="48" class="project"/>
+  <rect x="696" y="499" width="121" height="48" class="project"/>
+  <rect x="750" y="340" width="121" height="48" class="project"/>
+  <rect x="721" y="254" width="121" height="48" class="project"/>
+  <rect x="809" y="509" width="121" height="48" class="project"/>
+  <rect x="934" y="498" width="121" height="48" class="project"/>
+  <rect x="984" y="423" width="121" height="48" class="project"/>
+  <rect x="933" y="345" width="121" height="48" class="project"/>
+  <rect x="1075" y="341" width="121" height="48" class="project"/>
+  <rect x="1068" y="261" width="121" height="48" class="project"/>
+  <rect x="1167" y="212" width="121" height="48" class="project"/>
+  <rect x="1278" y="242" width="121" height="48" class="project"/>
+  <rect x="1262" y="316" width="121" height="48" class="project"/>
+  <rect x="1189" y="365" width="121" height="48" class="project"/>
+  <rect x="1094" y="423" width="121" height="48" class="project"/>
+  <rect x="1079" y="522" width="121" height="48" class="project"/>
+  <rect x="1209" y="530" width="121" height="48" class="project"/>
+  <rect x="1162" y="130" width="121" height="48" class="project"/>
+  <rect x="1020" y="136" width="121" height="48" class="project"/>
+  <rect x="1012" y="-23" width="121" height="48" class="project"/>
+  <rect x="1075" y="-98" width="121" height="48" class="project"/>
+  <rect x="1206" y="-75" width="121" height="48" class="project"/>
+  <rect x="1274" y="64" width="121" height="48" class="project"/>
+  <rect x="1197" y="-181" width="121" height="48" class="project"/>
+  <rect x="1231" y="-243" width="121" height="48" class="project"/>
+  <rect x="1329" y="-249" width="121" height="48" class="project"/>
+  <rect x="1404" y="-196" width="121" height="48" class="project"/>
+  <rect x="1331" y="-145" width="121" height="48" class="project"/>
+</svg>
