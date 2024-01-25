@@ -2,7 +2,16 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8" />
-    <link rel="shortcut icon" href="/images/favicon.png" />
+    <link id="favicon" rel="shortcut icon" href="/images/favicon.png" />
+    <script>
+      const favicon = document.getElementById("favicon");
+      const hostname = document.location.hostname;
+      if (hostname === "staging.baaahs.org") {
+        favicon.setAttribute("href", "images/favicon-staging.png");
+      } else if (hostname === "dev.baaahs.org" || hostname.indexOf("baaahs.org") === -1) {
+        favicon.setAttribute("href", "images/favicon-dev.png");
+      }
+    </script>
     <meta
       name="viewport"
       content="width=device-width, initial-scale=1, shrink-to-fit=no"
