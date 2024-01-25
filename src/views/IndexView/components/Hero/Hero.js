@@ -81,13 +81,11 @@ const HoverableLetter = ({ letterSelector, children }) => {
     <span
       onMouseOver={() => {
         document.querySelectorAll(letterSelector).forEach((el) => {
-          console.log('over ', letterSelector, el);
           el.classList.add('baaahs-letter-hover');
         });
       }}
       onMouseOut={() => {
         document.querySelectorAll(letterSelector).forEach((el) => {
-          console.log('out ', letterSelector, el);
           el.classList.remove('baaahs-letter-hover');
         });
       }}
@@ -123,6 +121,7 @@ const Hero = () => {
               color='text.primary'
               fontFamily={'Smooth Circulars'}
               fontSize={{ xs: '4.5rem', sm: '4.5rem', md: '4.5rem', lg: '5.75rem', xl: '5.75.rem' }}
+              sx={{ cursor: 'default' }}
             >
               <HoverableLetter letterSelector='.baaahs-letter-b'>B</HoverableLetter>
               <HoverableLetter letterSelector='.baaahs-letter-a1'>A</HoverableLetter>
@@ -142,10 +141,11 @@ const Hero = () => {
               fontFamily={'Smooth Circulars'}
               fontSize={{ xs: '.85rem', sm: '.85rem', md: '.85rem', lg: '.85rem', xl: '.85rem' }}
               sx={{
-                fontWeight: 700,
+                fontWeight: 400,
+                cursor: 'default',
                 '& .baaahs-letter-hover': {
-                  fontStyle: 'italic',
-                  textDecoration: 'underline'
+                  fontWeight: 700,
+                  fontStyle: 'italic'
                 }
               }}
             >
