@@ -5,3 +5,5 @@ export { default as Features } from './Features';
 export { default as Music } from './Music';
 export { default as Events } from './Events';
 export { default as GetStarted } from './GetStarted';
+export { default as WhoWeAre } from './WhoWeAre';
+export { default as TenPrinciples } from './TenPrinciples';

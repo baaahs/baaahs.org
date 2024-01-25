@@ -21,6 +21,7 @@ gatsbyjs/public
 
 # misc
 .DS_Store
+.DS_Store?
 
 # debug
 npm-debug.log*
