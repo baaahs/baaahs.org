@@ -2,14 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
-import { useTheme } from '@mui/material/styles';
 import Link from '@mui/material/Link';
 import NavItem from './components/NavItem';
+import BAAAHSLogo from '../../../../BAAAHSLogo';
 
 const SidebarNav = ({ pages }) => {
-  const theme = useTheme();
-  const { mode } = theme.palette;
-
   const {
     landings: landingPages,
     secondary: secondaryPages,
@@ -29,16 +26,7 @@ const SidebarNav = ({ pages }) => {
           title="BAAAHS"
           width={{ xs: 120, md: 150 }}
         >
-          <Box
-            component={'img'}
-            src={
-              mode === 'light'
-                ? '/images/baaahs-logo.svg'
-                : '/images/baaahs-logo.svg'
-            }
-            height={1}
-            width={1}
-          />
+          <BAAAHSLogo/>
         </Box>
       </Box>
       <Box paddingX={2} paddingY={2}>
