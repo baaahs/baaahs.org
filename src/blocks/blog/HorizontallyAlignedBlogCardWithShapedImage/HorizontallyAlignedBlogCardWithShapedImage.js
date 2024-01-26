@@ -7,24 +7,23 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Avatar from '@mui/material/Avatar';
 import Chip from '@mui/material/Chip';
-
 import Container from 'components/Container';
 
 const mock = {
   image: 'https://assets.maccarianagency.com/backgrounds/img4.jpg',
   description:
     'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
-  title:
-    'Labore et dolore magna aliqua. Eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+  title: 'BAAAHS Campout 2024 - WHAAAT?',
+  date: '24-27 May',
   author: {
-    name: 'Chary Smith',
-    avatar: 'https://assets.maccarianagency.com/avatars/img6.jpg',
+    name: 'Clifford Hall',
+    avatar: 'https://assets.maccarianagency.com/avatars/img1.jpg',
   },
-  date: '22 Nov',
 };
 
-const HorizontallyAlignedBlogCardWithShapedImage = () => {
+const HorizontallyAlignedBlogCardWithShapedImage = ({ data }) => {
   const theme = useTheme();
+  const { image, description, title, date, author } = data || mock;
   return (
     <Container>
       <Box
@@ -61,7 +60,7 @@ const HorizontallyAlignedBlogCardWithShapedImage = () => {
               component={'img'}
               height={1}
               width={1}
-              src={mock.image}
+              src={image}
               alt="..."
               sx={{
                 objectFit: 'cover',
@@ -116,9 +115,9 @@ const HorizontallyAlignedBlogCardWithShapedImage = () => {
           >
             <Box>
               <Typography variant={'h5'} gutterBottom>
-                {mock.title}
+                {title}
               </Typography>
-              <Typography color="text.secondary">{mock.description}</Typography>
+              <Typography color="text.secondary">{description}</Typography>
             </Box>
             <Box>
               <Divider sx={{ marginY: 2 }} />
@@ -127,13 +126,15 @@ const HorizontallyAlignedBlogCardWithShapedImage = () => {
                 justifyContent={'space-between'}
                 alignItems={'center'}
               >
-                <Box display={'flex'} alignItems={'center'}>
-                  <Avatar src={mock.author.avatar} sx={{ marginRight: 1 }} />
-                  <Typography color={'text.secondary'}>
-                    {mock.author.name}
-                  </Typography>
-                </Box>
-                <Typography color={'text.secondary'}>{mock.date}</Typography>
+                {author && (
+                  <Box display={'flex'} alignItems={'center'}>
+                    <Avatar src={author.avatar} sx={{ marginRight: 1 }} />
+                    <Typography color={'text.secondary'}>
+                      {author.name}
+                    </Typography>
+                  </Box>
+                )}
+                <Typography color={'text.secondary'}>{date}</Typography>
               </Box>
             </Box>
           </CardContent>

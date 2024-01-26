@@ -21,6 +21,8 @@ gatsbyjs/public
 
 # misc
 .DS_Store
+.DS_Store?
+
 /.idea/
 /.gradle/
 /build/
