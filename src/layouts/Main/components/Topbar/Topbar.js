@@ -7,7 +7,10 @@ import { alpha, useTheme } from '@mui/material/styles';
 import MenuIcon from '@mui/icons-material/Menu';
 import IconSoundcloud from 'svg/illustrations/IconSoundcloud';
 import IconEmail from 'svg/illustrations/IconEmail';
+import IconInstagram from 'svg/illustrations/IconInstagram';
+import IconFacebook from 'svg/illustrations/IconFacebook';
 import BAAAHSLogo from '../../BAAAHSLogo';
+
 
 const defaultNavBarItems = [
   {
@@ -97,16 +100,26 @@ const Topbar = ({ onSidebarOpen, colorInvert = false, data }) => {
           </Link>
         </Box>
         <Box marginLeft={4}>
-          <Button
-            variant="contained"
-            color="primary"
+          <Link
+            underline="none"
             component="a"
-            target="blank"
-            href="/crew"
-            size="large"
+            href="https://www.instagram.com/baaahsstation"
+            color={colorInvert ? 'common.white' : 'text.primary'}
+            sx={{ display: 'flex', alignItems: 'center' }}
           >
-            Crew login
-          </Button>
+            <IconInstagram />
+          </Link>
+        </Box>
+        <Box marginLeft={4}>
+          <Link
+            underline="none"
+            component="a"
+            href="https://facebook.com/BAAAHS.13"
+            color={colorInvert ? 'common.white' : 'text.primary'}
+            sx={{ display: 'flex', alignItems: 'center' }}
+          >
+            <IconFacebook />
+          </Link>
         </Box>
       </Box>
       <Box sx={{ display: { xs: 'block', md: 'none' } }} alignItems={'center'}>
