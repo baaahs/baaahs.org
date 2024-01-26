@@ -55,6 +55,7 @@ import {
   NotFoundCover,
   CampoutHome,
   CampoutWhatToExpect,
+  Org2024,
 } from 'views';
 
 function page(path, view) {
@@ -119,6 +120,7 @@ const routes = [
   page('/not-found-cover', NotFoundCover),
   page('/campout', CampoutHome),
   page('/campout/what-to-expect', CampoutWhatToExpect),
+  page('/org/2024', Org2024),
 ];
 
 export default routes;
