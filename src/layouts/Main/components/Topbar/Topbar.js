@@ -7,10 +7,10 @@ import { alpha, useTheme } from '@mui/material/styles';
 import MenuIcon from '@mui/icons-material/Menu';
 import IconSoundcloud from 'svg/illustrations/IconSoundcloud';
 import IconEmail from 'svg/illustrations/IconEmail';
+import BAAAHSLogo from '../../BAAAHSLogo';
 
 const Topbar = ({ onSidebarOpen, colorInvert = false }) => {
   const theme = useTheme();
-  const { mode } = theme.palette;
 
   return (
     <Box
@@ -26,16 +26,7 @@ const Topbar = ({ onSidebarOpen, colorInvert = false }) => {
         title="theFront"
         width={{ xs: 120, md: 150 }}
       >
-        <Box
-          component={'img'}
-          src={
-            mode === 'light' && !colorInvert
-              ? '/images/baaahs-logo.svg'
-              : '/images/baaahs-logo.svg'
-          }
-          height={1}
-          width={1}
-        />
+        <BAAAHSLogo/>
       </Box>
       <Box sx={{ display: { xs: 'none', md: 'flex' } }} alignItems={'center'}>
         <Box marginRight={{ xs: 2, sm: 4 }}>
@@ -103,7 +94,7 @@ const Topbar = ({ onSidebarOpen, colorInvert = false }) => {
             color={colorInvert ? 'common.white' : 'text.primary'}
             sx={{ display: 'flex', alignItems: 'center' }}
           >
-            <IconSoundcloud />
+            <IconSoundcloud/>
           </Link>
         </Box>
         <Box marginLeft={4}>
@@ -114,7 +105,7 @@ const Topbar = ({ onSidebarOpen, colorInvert = false }) => {
             color={colorInvert ? 'common.white' : 'text.primary'}
             sx={{ display: 'flex', alignItems: 'center' }}
           >
-            <IconEmail />
+            <IconEmail/>
           </Link>
         </Box>
         <Box marginLeft={4}>
@@ -142,7 +133,7 @@ const Topbar = ({ onSidebarOpen, colorInvert = false }) => {
             borderColor: alpha(theme.palette.divider, 0.2),
           }}
         >
-          <MenuIcon />
+          <MenuIcon/>
         </Button>
       </Box>
     </Box>

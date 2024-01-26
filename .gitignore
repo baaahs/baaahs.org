@@ -21,6 +21,12 @@ gatsbyjs/public
 
 # misc
 .DS_Store
+.DS_Store?
+
+/.idea/
+/.gradle/
+/build/
+local.properties
 
 # debug
 npm-debug.log*

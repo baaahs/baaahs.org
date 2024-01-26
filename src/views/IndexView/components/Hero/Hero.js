@@ -76,6 +76,23 @@ const images = [
   },
 ];
 
+const HoverableLetter = ({ letterSelector, children }) => {
+  return (
+    <span
+      onMouseOver={() => {
+        document.querySelectorAll(letterSelector).forEach((el) => {
+          el.classList.add('baaahs-letter-hover');
+        });
+      }}
+      onMouseOut={() => {
+        document.querySelectorAll(letterSelector).forEach((el) => {
+          el.classList.remove('baaahs-letter-hover');
+        });
+      }}
+    >{children}</span>
+  );
+};
+
 const Hero = () => {
   const theme = useTheme();
   const isMd = useMediaQuery(theme.breakpoints.up('md'), {
@@ -96,20 +113,56 @@ const Hero = () => {
       <Box paddingY={{ xs: 0, sm: '4rem', md: '8rem' }}>
         <Container>
           <Box maxWidth={{ xs: 1, sm: '50%' }}>
-            <Box
-              component={'img'}
-              src={'/images/baaahs.svg'}
-              alt="BAAAAHS"
+            <Typography
+              component='h2'
+              gutterBottom={true}
               width={{ xs: 300, md: 580 }}
               marginBottom={{ xs: 1, sm: 2 }}
-            />
+              color='text.primary'
+              fontFamily={'Smooth Circulars'}
+              fontSize={{ xs: '4.5rem', sm: '4.5rem', md: '4.5rem', lg: '5.75rem', xl: '5.75.rem' }}
+              sx={{ cursor: 'default' }}
+            >
+              <HoverableLetter letterSelector='.baaahs-letter-b'>B</HoverableLetter>
+              <HoverableLetter letterSelector='.baaahs-letter-a1'>A</HoverableLetter>
+              <HoverableLetter letterSelector='.baaahs-letter-a2'>A</HoverableLetter>
+              <HoverableLetter letterSelector='.baaahs-letter-a3'>A</HoverableLetter>
+              <HoverableLetter letterSelector='.baaahs-letter-h'>H</HoverableLetter>
+              <HoverableLetter letterSelector='.baaahs-letter-s'>S</HoverableLetter>
+            </Typography>
+
+            <Typography
+              variant="h3"
+              marginTop="-20px"
+              marginBottom="2em"
+              gutterBottom={true}
+              component="p"
+              color="text.primary"
+              fontFamily={'Smooth Circulars'}
+              fontSize={{ xs: '.85rem', sm: '.85rem', md: '.85rem', lg: '.85rem', xl: '.85rem' }}
+              sx={{
+                fontWeight: 400,
+                cursor: 'default',
+                '& .baaahs-letter-hover': {
+                  fontWeight: 700,
+                  fontStyle: 'italic'
+                }
+              }}
+            >
+              <span className="baaahs-letter-b">Big</span>-
+              <span className="baaahs-letter-a1">Ass</span><span> </span>
+              <span className="baaahs-letter-a2">Amazingly</span><span> </span>
+              <span className="baaahs-letter-a3">Awesome</span><span> </span>
+              <span className="baaahs-letter-h">Homosexual</span><span> </span>
+              <span className="baaahs-letter-s">Sheep</span><span> </span>
+            </Typography>
+
             <Typography
               variant="h6"
               component="p"
               color="text.primary"
-              sx={{ fontWeight: 700 }}
             >
-              The Big Ass Amazingly Awesome Homosexual Sheep (BAAAHS) is a
+              The Big-Ass Amazingly Awesome Homosexual Sheep (BAAAHS) is a
               mutant vehicle, a mobile disco, and a penetrable social statement.
             </Typography>
             <Box

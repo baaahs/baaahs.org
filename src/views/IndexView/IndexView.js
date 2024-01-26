@@ -3,7 +3,7 @@ import { alpha, useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Main from 'layouts/Main';
 import Container from 'components/Container';
-import { GetStarted, Features, Music, Events, Hero } from './components';
+import { Events, Hero, WhoWeAre, TenPrinciples } from './components';
 
 const IndexView = () => {
   const theme = useTheme();
@@ -22,13 +22,13 @@ const IndexView = () => {
           }}
         >
           <Container>
-            <Music />
+            <WhoWeAre />
+          </Container>
+          <Container>
+            <TenPrinciples />
           </Container>
           <Container>
             <Events />
-          </Container>
-          <Container>
-            <Features />
           </Container>
           <Box
             component={'svg'}
@@ -48,9 +48,6 @@ const IndexView = () => {
             ></path>
           </Box>
         </Box>
-        <Container>
-          <GetStarted />
-        </Container>
       </Main>
     </Box>
   );

@@ -4,12 +4,9 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Link from '@mui/material/Link';
 import Typography from '@mui/material/Typography';
-import { useTheme } from '@mui/material/styles';
+import BAAAHSLogo from '../../../Main/BAAAHSLogo';
 
 const Footer = () => {
-  const theme = useTheme();
-  const { mode } = theme.palette;
-
   return (
     <Grid container spacing={2}>
       <Grid item xs={12}>
@@ -27,16 +24,7 @@ const Footer = () => {
             title="theFront"
             width={80}
           >
-            <Box
-              component={'img'}
-              src={
-                mode === 'light'
-                  ? '/images/baaahs-logo.svg'
-                  : '/images/baaahs-logo.svg'
-              }
-              height={1}
-              width={1}
-            />
+            <BAAAHSLogo/>
           </Box>
           <Box display="flex" flexWrap={'wrap'} alignItems={'center'}>
             <Box marginTop={1} marginRight={2}>
