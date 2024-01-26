@@ -9,9 +9,33 @@ import IconSoundcloud from 'svg/illustrations/IconSoundcloud';
 import IconEmail from 'svg/illustrations/IconEmail';
 import BAAAHSLogo from '../../BAAAHSLogo';
 
-const Topbar = ({ onSidebarOpen, colorInvert = false }) => {
+const defaultNavBarItems = [
+  {
+    title: 'events',
+    href: '/events',
+  },
+  {
+    title: 'music',
+    href: '/music',
+  },
+  {
+    title: 'campout',
+    href: '/campout',
+  },
+  {
+    title: 'fundraising',
+    href: '/fundraising',
+  },
+  {
+    title: 'about',
+    href: '/about',
+  },
+];
+
+const Topbar = ({ onSidebarOpen, colorInvert = false, data }) => {
   const theme = useTheme();
 
+  const navItems = data?.navItems ?? defaultNavBarItems;
   return (
     <Box
       display={'flex'}
@@ -26,64 +50,28 @@ const Topbar = ({ onSidebarOpen, colorInvert = false }) => {
         title="theFront"
         width={{ xs: 120, md: 150 }}
       >
-        <BAAAHSLogo/>
+        <BAAAHSLogo />
       </Box>
       <Box sx={{ display: { xs: 'none', md: 'flex' } }} alignItems={'center'}>
-        <Box marginRight={{ xs: 2, sm: 4 }}>
-          <Link
-            underline="none"
-            component="a"
-            href="/events"
-            color={colorInvert ? 'common.white' : 'text.primary'}
-            sx={{ display: 'flex', alignItems: 'center', fontWeight: 'bold' }}
-          >
-            events
-          </Link>
-        </Box>
-        <Box marginRight={{ xs: 2, sm: 4 }}>
-          <Link
-            underline="none"
-            component="a"
-            href="/music"
-            color={colorInvert ? 'common.white' : 'text.primary'}
-            sx={{ display: 'flex', alignItems: 'center', fontWeight: 'bold' }}
-          >
-            music
-          </Link>
-        </Box>
-        <Box marginRight={{ xs: 2, sm: 4 }}>
-          <Link
-            underline="none"
-            component="a"
-            href="/campout"
-            color={colorInvert ? 'common.white' : 'text.primary'}
-            sx={{ display: 'flex', alignItems: 'center', fontWeight: 'bold' }}
-          >
-            campout
-          </Link>
-        </Box>
-        <Box marginRight={{ xs: 2, sm: 4 }}>
-          <Link
-            underline="none"
-            component="a"
-            href="/fundraising"
-            color={colorInvert ? 'common.white' : 'text.primary'}
-            sx={{ display: 'flex', alignItems: 'center', fontWeight: 'bold' }}
-          >
-            fundraising
-          </Link>
-        </Box>
-        <Box marginRight={{ xs: 2, sm: 4 }}>
-          <Link
-            underline="none"
-            component="a"
-            href="/about"
-            color={colorInvert ? 'common.white' : 'text.primary'}
-            sx={{ display: 'flex', alignItems: 'center', fontWeight: 'bold' }}
-          >
-            about
-          </Link>
-        </Box>
+        {navItems.map((item, i) => {
+          return (
+            <Box key={i} marginRight={{ xs: 2, sm: 4 }}>
+              <Link
+                underline="none"
+                component="a"
+                href={item.href}
+                color={colorInvert ? 'common.white' : 'text.primary'}
+                sx={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  fontWeight: 'bold',
+                }}
+              >
+                {item.title}
+              </Link>
+            </Box>
+          );
+        })}
       </Box>
       <Box sx={{ display: { xs: 'none', md: 'flex' } }} alignItems={'right'}>
         <Box marginLeft={4}>
@@ -94,7 +82,7 @@ const Topbar = ({ onSidebarOpen, colorInvert = false }) => {
             color={colorInvert ? 'common.white' : 'text.primary'}
             sx={{ display: 'flex', alignItems: 'center' }}
           >
-            <IconSoundcloud/>
+            <IconSoundcloud />
           </Link>
         </Box>
         <Box marginLeft={4}>
@@ -105,7 +93,7 @@ const Topbar = ({ onSidebarOpen, colorInvert = false }) => {
             color={colorInvert ? 'common.white' : 'text.primary'}
             sx={{ display: 'flex', alignItems: 'center' }}
           >
-            <IconEmail/>
+            <IconEmail />
           </Link>
         </Box>
         <Box marginLeft={4}>
@@ -133,7 +121,7 @@ const Topbar = ({ onSidebarOpen, colorInvert = false }) => {
             borderColor: alpha(theme.palette.divider, 0.2),
           }}
         >
-          <MenuIcon/>
+          <MenuIcon />
         </Button>
       </Box>
     </Box>

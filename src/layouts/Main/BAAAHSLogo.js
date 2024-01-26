@@ -9,17 +9,18 @@ const BAAAHSLogo = () => {
     <Box
       component={'img'}
       src={
-        mode === 'light'
-          ? '/images/baaahs-logo.svg'
-          : '/images/baaahs-logo.svg'
+        mode === 'light' ? '/images/baaahs-logo.svg' : '/images/baaahs-logo.svg'
       }
       height={1}
       width={1}
       sx={{
-        filter: mode === 'dark'
-          ? 'drop-shadow(0 0 2px white) drop-shadow(0 0 1px white)' : ''
+        filter:
+          mode === 'dark'
+            ? 'drop-shadow(0 0 2px white) drop-shadow(0 0 1px white)'
+            : '',
       }}
     >
+      {/* TODO: Add link to root page */}
     </Box>
   );
 };
