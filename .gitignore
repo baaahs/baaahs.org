@@ -23,6 +23,11 @@ gatsbyjs/public
 .DS_Store
 .DS_Store?
 
+/.idea/
+/.gradle/
+/build/
+local.properties
+
 # debug
 npm-debug.log*
 yarn-debug.log*
