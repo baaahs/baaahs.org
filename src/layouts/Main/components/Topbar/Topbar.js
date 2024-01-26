@@ -9,11 +9,36 @@ import IconSoundcloud from 'svg/illustrations/IconSoundcloud';
 import IconEmail from 'svg/illustrations/IconEmail';
 import IconInstagram from 'svg/illustrations/IconInstagram';
 import IconFacebook from 'svg/illustrations/IconFacebook';
+import BAAAHSLogo from '../../BAAAHSLogo';
 
-const Topbar = ({ onSidebarOpen, colorInvert = false }) => {
+
+const defaultNavBarItems = [
+  {
+    title: 'events',
+    href: '/events',
+  },
+  {
+    title: 'music',
+    href: '/music',
+  },
+  {
+    title: 'campout',
+    href: '/campout',
+  },
+  {
+    title: 'fundraising',
+    href: '/fundraising',
+  },
+  {
+    title: 'about',
+    href: '/about',
+  },
+];
+
+const Topbar = ({ onSidebarOpen, colorInvert = false, data }) => {
   const theme = useTheme();
-  const { mode } = theme.palette;
 
+  const navItems = data?.navItems ?? defaultNavBarItems;
   return (
     <Box
       display={'flex'}
@@ -28,62 +53,28 @@ const Topbar = ({ onSidebarOpen, colorInvert = false }) => {
         title="theFront"
         width={{ xs: 120, md: 150 }}
       >
-        <Box
-          component={'img'}
-          src={
-            mode === 'light' && !colorInvert
-              ? '/images/baaahs-logo.svg'
-              : '/images/baaahs-logo.svg'
-          }
-          height={1}
-          width={1}
-        />
+        <BAAAHSLogo />
       </Box>
       <Box sx={{ display: { xs: 'none', md: 'flex' } }} alignItems={'center'}>
-        <Box marginRight={{ xs: 2, sm: 4 }}>
-          <Link
-            underline="none"
-            component="a"
-            href="/events"
-            color={colorInvert ? 'common.white' : 'text.primary'}
-            sx={{ display: 'flex', alignItems: 'center', fontWeight: 'bold' }}
-          >
-            events
-          </Link>
-        </Box>
-        <Box marginRight={{ xs: 2, sm: 4 }}>
-          <Link
-            underline="none"
-            component="a"
-            href="/music"
-            color={colorInvert ? 'common.white' : 'text.primary'}
-            sx={{ display: 'flex', alignItems: 'center', fontWeight: 'bold' }}
-          >
-            music
-          </Link>
-        </Box>
-        <Box marginRight={{ xs: 2, sm: 4 }}>
-          <Link
-            underline="none"
-            component="a"
-            href="/fundraising"
-            color={colorInvert ? 'common.white' : 'text.primary'}
-            sx={{ display: 'flex', alignItems: 'center', fontWeight: 'bold' }}
-          >
-            fundraising
-          </Link>
-        </Box>
-        <Box marginRight={{ xs: 2, sm: 4 }}>
-          <Link
-            underline="none"
-            component="a"
-            href="/about"
-            color={colorInvert ? 'common.white' : 'text.primary'}
-            sx={{ display: 'flex', alignItems: 'center', fontWeight: 'bold' }}
-          >
-            about
-          </Link>
-        </Box>
+        {navItems.map((item, i) => {
+          return (
+            <Box key={i} marginRight={{ xs: 2, sm: 4 }}>
+              <Link
+                underline="none"
+                component="a"
+                href={item.href}
+                color={colorInvert ? 'common.white' : 'text.primary'}
+                sx={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  fontWeight: 'bold',
+                }}
+              >
+                {item.title}
+              </Link>
+            </Box>
+          );
+        })}
       </Box>
       <Box sx={{ display: { xs: 'none', md: 'flex' } }} alignItems={'right'}>
         <Box marginLeft={4}>
