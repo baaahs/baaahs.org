@@ -38,7 +38,8 @@ resource "google_compute_managed_ssl_certificate" "non-prod" {
 }
 
 # ---------------------------------------------------------------------------
-# The four backend buckets themselves
+# The four backend buckets themselves, each of which needs to have public
+# permissions set on it.
 
 resource "google_storage_bucket" "prod" {
     name          = "www.baaahs.org"
@@ -61,10 +62,18 @@ resource "google_storage_bucket" "prod" {
     }
 }
 
+resource "google_storage_bucket_access_control" "prod_public" {
+    bucket = google_storage_bucket.prod.name
+    role = "READER"
+    entity = "allUsers"
+}
+
 resource "google_storage_bucket" "static" {
     name          = "static.baaahs.org"
     location      = "US"
-    force_destroy = true
+
+    # In case this bucket gets nuked from terraform, don't kill the content
+    force_destroy = false
 
     uniform_bucket_level_access = true
 
@@ -78,6 +87,12 @@ resource "google_storage_bucket" "static" {
         response_header = ["*"]
         max_age_seconds = 3600
     }
+}
+
+resource "google_storage_bucket_access_control" "static_public" {
+    bucket = google_storage_bucket.static.name
+    role = "READER"
+    entity = "allUsers"
 }
 
 resource "google_storage_bucket" "staging" {
@@ -101,6 +116,12 @@ resource "google_storage_bucket" "staging" {
     }
 }
 
+resource "google_storage_bucket_access_control" "staging_public" {
+    bucket = google_storage_bucket.staging.name
+    role = "READER"
+    entity = "allUsers"
+}
+
 /* Temporarily removing until quota is increased
 resource "google_storage_bucket" "dev" {
     name          = "dev.baaahs.org"
@@ -122,6 +143,13 @@ resource "google_storage_bucket" "dev" {
         max_age_seconds = 3600
     }
 }
+
+resource "google_storage_bucket_access_control" "dev_public" {
+    bucket = google_storage_bucket.dev.name
+    role = "READER"
+    entity = "allUsers"
+}
+
 */
 
 # ---------------------------------------------------------------------------
