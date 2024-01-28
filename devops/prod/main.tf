@@ -213,10 +213,23 @@ resource "google_compute_target_https_proxy" "default" {
     ssl_certificates = [google_compute_managed_ssl_certificate.non-prod.id]
 }
 
-resource "google_compute_global_forwarding_rule" "default" {
+resource "google_compute_target_http_proxy" "default" {
+    name             = "http-proxy"
+    url_map          = google_compute_url_map.main.id
+}
+
+resource "google_compute_global_forwarding_rule" "tls" {
     name       = "https-rule"
     ip_address = google_compute_global_address.default.address
     target     = google_compute_target_https_proxy.default.id
 
     port_range = "443"
+}
+
+resource "google_compute_global_forwarding_rule" "plain" {
+    name       = "http-rule"
+    ip_address = google_compute_global_address.default.address
+    target     = google_compute_target_http_proxy.default.id
+
+    port_range = "80"
 }
