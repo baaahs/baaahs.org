@@ -62,10 +62,12 @@ resource "google_storage_bucket" "prod" {
     }
 }
 
-resource "google_storage_bucket_access_control" "prod_public" {
+resource "google_storage_bucket_iam_binding" "prod_public" {
     bucket = google_storage_bucket.prod.name
-    role = "READER"
-    entity = "allUsers"
+    role   = "roles/storage.objectViewer"
+    members = [
+        "allUsers",
+    ]
 }
 
 resource "google_storage_bucket" "static" {
@@ -89,10 +91,12 @@ resource "google_storage_bucket" "static" {
     }
 }
 
-resource "google_storage_bucket_access_control" "static_public" {
+resource "google_storage_bucket_iam_binding" "static_public" {
     bucket = google_storage_bucket.static.name
-    role = "READER"
-    entity = "allUsers"
+    role   = "roles/storage.objectViewer"
+    members = [
+        "allUsers",
+    ]
 }
 
 resource "google_storage_bucket" "staging" {
@@ -116,10 +120,12 @@ resource "google_storage_bucket" "staging" {
     }
 }
 
-resource "google_storage_bucket_access_control" "staging_public" {
+resource "google_storage_bucket_iam_binding" "staging_public" {
     bucket = google_storage_bucket.staging.name
-    role = "READER"
-    entity = "allUsers"
+    role   = "roles/storage.objectViewer"
+    members = [
+        "allUsers",
+    ]
 }
 
 /* Temporarily removing until quota is increased
