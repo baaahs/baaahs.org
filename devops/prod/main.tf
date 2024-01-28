@@ -27,10 +27,13 @@ resource "google_compute_global_address" "default" {
 }
 
 # A single cert that covers all our hosts
-resource "google_compute_managed_ssl_certificate" "default" {
-    name = "ssl-cert"
+resource "google_compute_managed_ssl_certificate" "non-prod" {
+    name = "non-prod"
     managed {
-        domains = ["www.baaahs.org", "static.baaahs.org", "baaahs.org", "staging.baaahs.org", "dev.baaahs.org"]
+        # Removing the production servers which currently point at AWS because
+        # this seems to be preventing the cert from being issued.
+        # domains = ["www.baaahs.org", "static.baaahs.org", "baaahs.org", "staging.baaahs.org", "dev.baaahs.org"]
+        domains = ["static.baaahs.org", "staging.baaahs.org", "dev.baaahs.org"]
     }
 }
 
@@ -207,7 +210,7 @@ resource "google_compute_url_map" "main" {
 resource "google_compute_target_https_proxy" "default" {
     name             = "https-proxy"
     url_map          = google_compute_url_map.main.id
-    ssl_certificates = [google_compute_managed_ssl_certificate.default.id]
+    ssl_certificates = [google_compute_managed_ssl_certificate.non-prod.id]
 }
 
 resource "google_compute_global_forwarding_rule" "default" {
