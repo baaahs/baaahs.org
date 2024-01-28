@@ -10,8 +10,13 @@ terraform {
 
 provider "google" {
     project = "baaahsorg-prod"
-    # TODO: Review if this is the best region for us
-    region  = "us-central1"
+    # Choosing a region is actually kind of annoying. us-west1 is Oregon and generally
+    # pretty good, but it lacks some of the AI things in us-central1, which is Iowa.
+    # us-west2 might be another good choice because it is LA and Starlink from The Incline
+    # does downlink to LA. Plus the Bay Area to LA is a pretty solid backbone, but you can't
+    # do AI things there. Since AI is future and we want fast web for the majority of our
+    # users we're going with LA for now and other things can be elsewhere as or if needed.
+    region  = "us-west2"
 }
 
 
