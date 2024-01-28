@@ -1,20 +1,3 @@
-<<<<<<< Updated upstream
-# main.tf
-
-terraform {
-    required_providers {
-        null = {
-            source  = "hashicorp/null"
-            version = "~> 3.1"
-        }
-    }
-    required_version = "~> 1.1"
-}
-
-provider "null" {
-    # Provider-level configurations
-}
-=======
 # We live on GCP
 terraform {
     required_providers {
@@ -133,36 +116,84 @@ resource "google_storage_bucket" "dev" {
 
 # ---------------------------------------------------------------------------
 # To be accessible to the load balancer each bucket needs to be exposed
-# as a google_compute_backend_bucket as well
+# as a google_compute_backend_bucket as well. This is where we could
+# enable cloud CDN for these things, but it's not yet clear what the
+# cost or utility would be, so this is more a note for the future.
 
 resource "google_compute_backend_bucket" "prod" {
-    name        = "backend"
-    bucket_name = google_storage_bucket.static.name
+    name        = "prod"
+    bucket_name = google_storage_bucket.prod.name
 }
 
 resource "google_compute_backend_bucket" "static" {
-    name        = "backend"
+    name        = "static"
     bucket_name = google_storage_bucket.static.name
 }
 
-resource "google_compute_url_map" "default" {
+resource "google_compute_backend_bucket" "staging" {
+    name        = "staging"
+    bucket_name = google_storage_bucket.staging.name
+}
+
+resource "google_compute_backend_bucket" "dev" {
+    name        = "dev"
+    bucket_name = google_storage_bucket.dev.name
+}
+
+# ---------------------------------------------------------------------------
+# Now we need a url map to get traffic to the right bucket, and eventually
+# to the right backends for api things.
+
+resource "google_compute_url_map" "main" {
     name            = "lb-map"
-    default_service = google_compute_backend_bucket.default.id
+    default_service = google_compute_backend_bucket.prod.id
+
+    # Host rules get us from a hostname to a named path_matcher
+    host_rule {
+        path_matcher = "prod"
+        hosts        = ["www.baaahs.org", "baaahs.org"]
+    }
 
     host_rule {
-        path_matcher = "allpaths"
-        hosts        = ["www.baaahs.org"]
+        path_matcher = "static"
+        hosts        = ["static.baaahs.org"]
+    }
+
+    host_rule {
+        path_matcher = "staging"
+        hosts        = ["staging.baaahs.org"]
+    }
+
+    host_rule {
+        path_matcher = "dev"
+        hosts        = ["dev.baaahs.org"]
+    }
+
+    # Path matchers get us to a backend
+    path_matcher {
+        name            = "prod"
+        default_service = google_compute_backend_bucket.prod.id
     }
 
     path_matcher {
-        name            = "allpaths"
-        default_service = google_compute_backend_bucket.default.id
+        name            = "static"
+        default_service = google_compute_backend_bucket.static.id
+    }
+
+    path_matcher {
+        name            = "staging"
+        default_service = google_compute_backend_bucket.staging.id
+    }
+
+    path_matcher {
+        name            = "dev"
+        default_service = google_compute_backend_bucket.dev.id
     }
 }
 
 resource "google_compute_target_https_proxy" "default" {
     name             = "https-proxy"
-    url_map          = google_compute_url_map.default.id
+    url_map          = google_compute_url_map.main.id
     ssl_certificates = [google_compute_managed_ssl_certificate.default.id]
 }
 
@@ -173,7 +204,3 @@ resource "google_compute_global_forwarding_rule" "default" {
 
     port_range = "443"
 }
-
-# -------
-
->>>>>>> Stashed changes
