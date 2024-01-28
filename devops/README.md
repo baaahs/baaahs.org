@@ -18,22 +18,11 @@ https://dev.baaahs.org
 
 What about `main`? Well, you can think of one more environment named ***local*** which refers to running the website (and possibly services) on your local machine. If the local code you are running needs a backend you don't want to host locally, it should probably use the development backend. We are starting with a static site though so this concern will be addressed as we come to it.
 
-Each of the three environments prod, staging, and dev, map to corresponding GCP projects. Static is part of prod. Each of these projects has a corresponding workspace within the Hashicorp Terraform Cloud, and each of these workspaces maps to a `deploy-XXX` branch as noted.
+When commits are made on the deployment branches a github action is kicked off which will build the site from source and presuming things go well will then push the build artifacts into google cloud storage buckets that map one to one with the branch. There is a fourth bucket for the static files.
 
+(Ok, at this exact moment, 2024-01-28, the GCP project has a limitation of only 3 buckets so the `dev` bucket is aspirational. A quota increase request has been sent and this should be fine in a few days.)
 
-# Terraform
+While three Terraform Cloud workspaces got created in the exploration of how to set things up correctly, it has shaken out that we are only using the `prod` workspace. The driving factor was that to use a custom domain name in GCP you have to do it right and terminate TLS at a load balancer. The load balancer can then only be backended by resources in the same GCP project. Load balancers cost money, so we don't want unnecessary extra ones laying around just because. Thus, one load balancer, one GCP project, multiple buckets for the github build actions to push artifacts into.
 
-Terraform is a popular infrastructure-as-code software tool created by HashiCorp. It allows developers to use a high-level configuration language to describe the desired "end-state" cloud or on-premises infrastructure for running an application. Then it generates a plan for reaching that end-state and executes the plan.
-
-In this directory, the terraform configuration files are created to set up the Google Cloud storage buckets, potentially along with load balancers, to host three websites: `dev.baaahs.org`, `staging.baaahs.org`, and `www.baaahs.org`. 
-
-These websites are linked with the respective branches: `deploy-dev`, `deploy-staging`, and `deploy-prod` in github. Using the Terraform cloud workspace simplifies collaboration and sharing within the team. 
-
-When commits are made on these branches, they will trigger the Terraform runs. This pipeline helps to ensure the consistency of the infrastructure with the code in repositories and automate the process of infrastructure provisioning.
-
-## WIP Notes
-
-Do we need one terraform workspace for each deployment?
-
-Do we need a GCP project per deployment?
+The `staging` and `dev` terraform cloud workspaces and corresponding GCP projects are still hanging out simply because it was a bit of a hassle to set them up to begin with, and they're there, so if we change our mind in the future it is probably easier to have these things functional. You will note that the `main.tf` files for these dormant infrastructures are null. So no costs are happening.
 
