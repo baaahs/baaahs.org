@@ -98,6 +98,7 @@ resource "google_storage_bucket" "staging" {
     }
 }
 
+/* Temporarily removing until quota is increased
 resource "google_storage_bucket" "dev" {
     name          = "dev.baaahs.org"
     location      = "US"
@@ -118,6 +119,7 @@ resource "google_storage_bucket" "dev" {
         max_age_seconds = 3600
     }
 }
+*/
 
 # ---------------------------------------------------------------------------
 # To be accessible to the load balancer each bucket needs to be exposed
@@ -140,10 +142,12 @@ resource "google_compute_backend_bucket" "staging" {
     bucket_name = google_storage_bucket.staging.name
 }
 
+/* Temporarily removing until quota is increased
 resource "google_compute_backend_bucket" "dev" {
     name        = "dev"
     bucket_name = google_storage_bucket.dev.name
 }
+*/
 
 # ---------------------------------------------------------------------------
 # Now we need a url map to get traffic to the right bucket, and eventually
@@ -169,10 +173,12 @@ resource "google_compute_url_map" "main" {
         hosts        = ["staging.baaahs.org"]
     }
 
+    /* Temporarily removing until quota is increased
     host_rule {
         path_matcher = "dev"
         hosts        = ["dev.baaahs.org"]
     }
+    */
 
     # Path matchers get us to a backend
     path_matcher {
@@ -190,10 +196,12 @@ resource "google_compute_url_map" "main" {
         default_service = google_compute_backend_bucket.staging.id
     }
 
+    /* Temporarily removing until quota is increased
     path_matcher {
         name            = "dev"
         default_service = google_compute_backend_bucket.dev.id
     }
+    */
 }
 
 resource "google_compute_target_https_proxy" "default" {
