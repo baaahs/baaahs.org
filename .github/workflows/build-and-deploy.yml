@@ -33,16 +33,18 @@ jobs:
       - name: Build
         run: yarn build
 
-      - name: Setup cloud sdk
-        uses: google-github-actions/setup-gcloud@v2
-        with:
-          project_id: ${{ secrets.GCP_PROJECT_ID }}
+      # Somewhat weirdly you do the auth before the setup for the google CLI
 
       - name: Authenticate the cloud sdk
         uses: google-github-actions/auth@v2
         with:
           credentials_json: ${{ secrets.GCP_SA_KEY }}
           export_environment_variables: true
+
+      - name: Setup cloud sdk
+        uses: google-github-actions/setup-gcloud@v2
+        with:
+          project_id: ${{ secrets.GCP_PROJECT_ID }}
 
       - name: Deploy to GCS
         run: |
