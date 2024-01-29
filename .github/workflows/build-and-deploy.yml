@@ -46,7 +46,11 @@ jobs:
 
       - name: Deploy to GCS
         run: |
-          BUCKET_NAME="baaahsorg-$(echo ${BRANCH_NAME} | cut -d'-' -f 2)"
+          BUCKET_NAME="$(echo ${BRANCH_NAME} | cut -d'-' -f 2)"
+          if [[ "$BUCKET_NAME" == "prod" ]]; then
+            BUCKET_NAME="www"
+          fi
+          BUCKET_NAME="${BUCKET_NAME}.baaahs.org"
           gsutil -m rsync -r -d ./build gs://${BUCKET_NAME}
         env:
           BRANCH_NAME: ${{ github.ref }}
