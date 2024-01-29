@@ -34,7 +34,7 @@ jobs:
         run: yarn build
 
       - name: Setup cloud sdk
-        uses: github-actions/setup-gcloud@master
+        uses: google-github-actions/setup-gcloud@v2
         with:
           project_id: ${{ secrets.GCP_PROJECT_ID }}
           service_account_key: ${{ secrets.GCP_SA_KEY }}
