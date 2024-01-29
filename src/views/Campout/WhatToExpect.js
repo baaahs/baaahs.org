@@ -4,12 +4,12 @@ import { useTheme } from '@mui/material/styles';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Grid';
 
-import Main from 'layouts/Main';
+import CampoutMain from 'layouts/CampoutMain.js';
 
-const CampoutHome = () => {
+const WhatToExpect = () => {
   const theme = useTheme();
   return (
-    <Main>
+    <CampoutMain>
       <Box>
         <Box marginBottom={4}>
           <Grid
@@ -193,8 +193,8 @@ const CampoutHome = () => {
           </Box>
         </Box>
       </Box>
-    </Main>
+    </CampoutMain>
   );
 };
 
-export default CampoutHome;
+export default WhatToExpect;
