@@ -144,7 +144,7 @@ locals {
 resource "google_storage_bucket_iam_binding" "buckets_public" {
     for_each = toset(local.buckets)
 
-    bucket = each.key
+    bucket = "${each.key}.baaahs.org"
     role   = "roles/storage.objectViewer"
     members = [
         "allUsers",
