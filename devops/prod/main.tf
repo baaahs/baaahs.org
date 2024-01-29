@@ -62,13 +62,13 @@ resource "google_storage_bucket" "prod" {
     }
 }
 
-resource "google_storage_bucket_iam_binding" "prod_public" {
-    bucket = google_storage_bucket.prod.name
-    role   = "roles/storage.objectViewer"
-    members = [
-        "allUsers",
-    ]
-}
+#resource "google_storage_bucket_iam_binding" "prod_public" {
+#    bucket = google_storage_bucket.prod.name
+#    role   = "roles/storage.objectViewer"
+#    members = [
+#        "allUsers",
+#    ]
+#}
 
 resource "google_storage_bucket" "static" {
     name          = "static.baaahs.org"
@@ -89,14 +89,6 @@ resource "google_storage_bucket" "static" {
         response_header = ["*"]
         max_age_seconds = 3600
     }
-}
-
-resource "google_storage_bucket_iam_binding" "static_public" {
-    bucket = google_storage_bucket.static.name
-    role   = "roles/storage.objectViewer"
-    members = [
-        "allUsers",
-    ]
 }
 
 resource "google_storage_bucket" "staging" {
@@ -120,13 +112,6 @@ resource "google_storage_bucket" "staging" {
     }
 }
 
-resource "google_storage_bucket_iam_binding" "staging_public" {
-    bucket = google_storage_bucket.staging.name
-    role   = "roles/storage.objectViewer"
-    members = [
-        "allUsers",
-    ]
-}
 
 /* Temporarily removing until quota is increased
 resource "google_storage_bucket" "dev" {
@@ -150,13 +135,34 @@ resource "google_storage_bucket" "dev" {
     }
 }
 
-resource "google_storage_bucket_access_control" "dev_public" {
-    bucket = google_storage_bucket.dev.name
-    role = "READER"
-    entity = "allUsers"
+*/
+
+locals {
+    buckets = ["www", "static", "staging"/*, "dev"*/]
 }
 
-*/
+resource "google_storage_bucket_iam_binding" "buckets_public" {
+    for_each = toset(local.buckets)
+
+    bucket = each.key
+    role   = "roles/storage.objectViewer"
+    members = [
+        "allUsers",
+    ]
+}
+
+data "google_client_openid_userinfo" "me" {}
+
+resource "google_storage_bucket_iam_binding" "buckets_service_account" {
+    for_each = toset(local.buckets)
+
+    bucket = each.key
+    role   = "roles/storage.objectAdmin"
+    members = [
+        "serviceAccount:${data.google_client_openid_userinfo.me.email}",
+    ]
+}
+
 
 # ---------------------------------------------------------------------------
 # To be accessible to the load balancer each bucket needs to be exposed
