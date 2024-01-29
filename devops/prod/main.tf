@@ -154,6 +154,7 @@ resource "google_storage_bucket_iam_binding" "buckets_public" {
 data "google_client_openid_userinfo" "me" {}
 
 resource "google_storage_bucket_iam_binding" "buckets_service_account" {
+    depends_on = [google_project_iam_member.storage_iam]
     for_each = toset(local.buckets)
 
     bucket = each.key
@@ -163,6 +164,13 @@ resource "google_storage_bucket_iam_binding" "buckets_service_account" {
     ]
 }
 
+data "google_client_config" "default" {}
+
+resource "google_project_iam_member" "storage_iam" {
+    project = data.google_client_config.default.project
+    role    = "roles/storage.admin"
+    member  = "serviceAccount:${data.google_client_openid_userinfo.me.email}"
+}
 
 # ---------------------------------------------------------------------------
 # To be accessible to the load balancer each bucket needs to be exposed
