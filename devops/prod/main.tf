@@ -157,7 +157,7 @@ resource "google_storage_bucket_iam_binding" "buckets_service_account" {
     depends_on = [google_project_iam_member.storage_iam]
     for_each = toset(local.buckets)
 
-    bucket = each.key
+    bucket = "${each.key}.baaahs.org"
     role   = "roles/storage.objectAdmin"
     members = [
         "serviceAccount:${data.google_client_openid_userinfo.me.email}",
