@@ -37,6 +37,14 @@ resource "google_compute_managed_ssl_certificate" "non-prod" {
     }
 }
 
+resource "google_compute_managed_ssl_certificate" "www-gcp" {
+    name = "www-gcp"
+    managed {
+        domains = ["www-gcp.baaahs.org"]
+    }
+}
+
+
 # ---------------------------------------------------------------------------
 # The four backend buckets themselves, each of which needs to have public
 # permissions set on it.
@@ -258,7 +266,10 @@ resource "google_compute_url_map" "main" {
 resource "google_compute_target_https_proxy" "default" {
     name             = "https-proxy"
     url_map          = google_compute_url_map.main.id
-    ssl_certificates = [google_compute_managed_ssl_certificate.non-prod.id]
+    ssl_certificates = [
+        google_compute_managed_ssl_certificate.non-prod.id,
+        google_compute_managed_ssl_certificate.www-gcp.id
+    ]
 }
 
 resource "google_compute_target_http_proxy" "default" {
