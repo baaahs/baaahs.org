@@ -56,6 +56,7 @@ import {
   CampoutHome,
   CampoutWhatToExpect,
   CampoutLastYear,
+  CampoutQAndA,
   Org2024,
 } from 'views';
 
@@ -122,6 +123,7 @@ const routes = [
   page('/campout', CampoutHome),
   page('/campout/what-to-expect', CampoutWhatToExpect),
   page('/campout/last-year', CampoutLastYear),
+  page('/campout/q-and-a', CampoutQAndA),
   page('/org/2024', Org2024),
 ];
 
