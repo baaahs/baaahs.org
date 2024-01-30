@@ -151,8 +151,8 @@ const CampoutHome = () => {
               </Grid>
             ))}
           </Grid>
-          <Grid container item xs={12} justifyContent="center" spacing={4} sx={{ margin: '24px 0' }}>
-            <Grid item xs={6} md={1}>
+          <Grid container item xs={12} justifyContent="center" sx={{ margin: '24px 0' }}>
+            <Grid item xs={4} lg={2} xl={1} sx={{ margin: '0 8px' }}>
               <Button
                 component={'a'}
                 variant="contained"
@@ -164,7 +164,7 @@ const CampoutHome = () => {
                 Join the flock
               </Button>
             </Grid>
-            <Grid item xs={6} md={1}>
+            <Grid item xs={4} lg={2} xl={1} sx={{ margin: '0 8px' }}>
               <Button
                 component={'a'}
                 href={'/about'}
