@@ -11,7 +11,7 @@ const content = [
   {
     question: 'Where is The Incline?',
     answer:
-      'The Incline is in Potter Valley, Mendocino, about two and a half hours drive from San Francisco. We’ll help you get there with detailed directions.',
+      '<a href="https://maps.app.goo.gl/66XPhYAn7Pd9A4kJ7">The Incline</a> is in Potter Valley, Mendocino, about two and a half hours drive from San Francisco. We’ll help you get there with detailed directions.',
   },
   {
     question: 'Do I need a special vehicle to get up to The Incline?',
@@ -31,7 +31,7 @@ const content = [
   {
     question: 'This is everything I want. I’m in. What do I need to bring?',
     answer:
-      'Check out our packing list. Don’t forget a good tent, lights, and your own cup, plate and utensils.',
+      'Check out our <a href="https://docs.google.com/document/d/1a3cFYl_xIt_aG26M7SRYsMUY78l2k4Q-cjS4X9po4xw/edit?usp=sharing">packing list</a>. Don’t forget a good tent, lights, and your own cup, plate and utensils.',
   },
   {
     question: 'Is there anything I shouldn’t bring?',
@@ -51,7 +51,7 @@ const content = [
   {
     question: 'What if I have a question that is not in the Q&A section',
     answer:
-      'Email campout@baaahs.org and we will answer',
+      'Email <a href="mailto:campout@baaahs.org">campout@baaahs.org</a> and we will answer',
   },
   {
     question: 'Can I bring my RV or can I camp with my car?',
@@ -128,7 +128,11 @@ const QAndA = () => {
           {content.map((item, key) => (
             <Grid item xs={11} key={key} sx={{ margin: '24px'}}>
               <Typography component="h1">{item.question}</Typography>
-              <Typography>{item.answer}</Typography>
+              <Typography 
+                dangerouslySetInnerHTML={{
+                  __html: item.answer
+                }} 
+              />
             </Grid>
           ))}
         </Grid>
