@@ -169,19 +169,6 @@ resource "google_storage_bucket_iam_binding" "buckets_service_account" {
     ]
 }
 
-# And these buckets need to be explicitly writable to the service account -
-#data "google_client_openid_userinfo" "me" {}
-#
-#resource "google_storage_bucket_iam_binding" "buckets_service_account" {
-#    for_each = toset(local.buckets)
-#
-#    bucket = "${each.key}.baaahs.org"
-#    role   = "roles/storage.objectAdmin"
-#    members = [
-#        "serviceAccount:${data.google_client_openid_userinfo.me.email}",
-#    ]
-#}
-
 # ---------------------------------------------------------------------------
 # To be accessible to the load balancer each bucket needs to be exposed
 # as a google_compute_backend_bucket as well. This is where we could
