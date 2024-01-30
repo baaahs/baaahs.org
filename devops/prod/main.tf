@@ -149,6 +149,7 @@ locals {
     buckets = ["www", "static", "staging"/*, "dev"*/]
 }
 
+# Make all the buckets public
 resource "google_storage_bucket_iam_binding" "buckets_public" {
     for_each = toset(local.buckets)
 
@@ -159,9 +160,8 @@ resource "google_storage_bucket_iam_binding" "buckets_public" {
     ]
 }
 
+# This bucket needs to be writable to devs
 resource "google_storage_bucket_iam_binding" "buckets_service_account" {
-    # depends_on = [google_project_iam_member.storage_iam]
-
     bucket = "static.baaahs.org"
     role   = "roles/storage.objectAdmin"
     members = [
@@ -169,11 +169,10 @@ resource "google_storage_bucket_iam_binding" "buckets_service_account" {
     ]
 }
 
-
-data "google_client_openid_userinfo" "me" {}
-
+# And these buckets need to be explicitly writable to the service account -
+#data "google_client_openid_userinfo" "me" {}
+#
 #resource "google_storage_bucket_iam_binding" "buckets_service_account" {
-##    depends_on = [google_project_iam_member.storage_iam]
 #    for_each = toset(local.buckets)
 #
 #    bucket = "${each.key}.baaahs.org"
@@ -181,14 +180,6 @@ data "google_client_openid_userinfo" "me" {}
 #    members = [
 #        "serviceAccount:${data.google_client_openid_userinfo.me.email}",
 #    ]
-#}
-
-#data "google_client_config" "default" {}
-#
-#resource "google_project_iam_member" "storage_iam" {
-#    project = data.google_client_config.default.project
-#    role    = "roles/storage.admin"
-#    member  = "serviceAccount:${data.google_client_openid_userinfo.me.email}"
 #}
 
 # ---------------------------------------------------------------------------
