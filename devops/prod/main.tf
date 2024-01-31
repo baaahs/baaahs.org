@@ -121,7 +121,7 @@ resource "google_storage_bucket" "staging" {
 }
 
 
-/* Temporarily removing until quota is increased
+#/* Temporarily removing until quota is increased
 resource "google_storage_bucket" "dev" {
     name          = "dev.baaahs.org"
     location      = "US"
@@ -143,10 +143,9 @@ resource "google_storage_bucket" "dev" {
     }
 }
 
-*/
 
 locals {
-    buckets = ["www", "static", "staging"/*, "dev"*/]
+    buckets = ["www", "static", "staging", "dev"]
 }
 
 # Make all the buckets public
@@ -161,7 +160,7 @@ resource "google_storage_bucket_iam_binding" "buckets_public" {
 }
 
 # This bucket needs to be writable to devs
-resource "google_storage_bucket_iam_binding" "buckets_service_account" {
+resource "google_storage_bucket_iam_binding" "buckets_gcp_static" {
     bucket = "static.baaahs.org"
     role   = "roles/storage.objectAdmin"
     members = [
