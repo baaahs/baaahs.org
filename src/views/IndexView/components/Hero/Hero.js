@@ -120,7 +120,7 @@ const Hero = () => {
               marginBottom={{ xs: 1, sm: 2 }}
               color='text.primary'
               fontFamily={'Smooth Circulars'}
-              fontSize={{ xs: '4.5rem', sm: '4.5rem', md: '4.5rem', lg: '5.75rem', xl: '5.75.rem' }}
+              fontSize={{ xs: '3.7rem', sm: '4rem', md: '4.5rem', lg: '5.75rem', xl: '5.75.rem' }}
               sx={{ cursor: 'default' }}
             >
               <HoverableLetter letterSelector='.baaahs-letter-b'>B</HoverableLetter>
@@ -139,7 +139,8 @@ const Hero = () => {
               component="p"
               color="text.primary"
               fontFamily={'Smooth Circulars'}
-              fontSize={{ xs: '.85rem', sm: '.85rem', md: '.85rem', lg: '.85rem', xl: '.85rem' }}
+              fontSize={{ xs: '.55rem', sm: '.59rem', md: '.67rem', lg: '.85rem', xl: '.85rem' }}
+              whiteSpace="nowrap"
               sx={{
                 fontWeight: 400,
                 cursor: 'default',
