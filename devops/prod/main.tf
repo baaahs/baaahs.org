@@ -137,7 +137,7 @@ resource "google_storage_bucket" "dev" {
 
 
 locals {
-    buckets = ["www", "static", "staging", "dev"]
+    buckets = ["www", /*"static", "staging", "dev"*/]
 }
 
 # Make all the buckets public
