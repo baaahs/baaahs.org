@@ -10,7 +10,29 @@ To see if the deployment worked or not you can check the [github actions](https:
 
 # Putting Big Files in The Static Bucket
 
-The short answer for the moment is "talk to Tom". You will need a google identity and then permissions can be granted to let you access the cloud console for the production project where you could upload things via the web interface. Alternatively one can use the `gcloud rsync` command to push stuff back and forth - which is the right way to do things.
+You will need a google identity and then you must be added to the <gcp-static-bucket@baaahs.org> google group within the `baaahs.org` google workspace. Note that this is a different workspace and set of groups than the ones which control access to the long-lived BAAAHS gdrive. Talk to Tom to get this access. I will need to know what email you commonly authenticate to google with.
+
+Once your account has been added to the group you currently have two options to upload files. For one offs I would probably recommend just using the [google cloud web console](https://console.cloud.google.com/storage/browser/static.baaahs.org) directly. It's not the best but it should largely work - usually.
+
+If you have lots of files to upload you will want to use the `gsutil` command line tool that is part of the gcloud CLI. This is a two step process to get setup.
+
+1. Follow the instructions from the official documentation, making appropriate choices as you do so.
+2. Run the `gcloud init` command. Information you will need to know:
+
+    **Region / Zone** = `us-west2-a`
+
+    **Project** = `baaahsorg-prod`
+3. Run `gcloud auth login` which will open your default browser. Be sure to use the same email when logging in to google that was granted permissions 
+
+At this point you should be able to run `gcloud` and `gsutil` commands at the command line. Follow the google docs to debug issues. Depending on what you're doing there may be other necessary environment tweaks. If this documentation is missing stuff, please update it.
+
+Making it this far gets you the reward of being able to run the `devops/rsync_static.sh` script which will rsync from the `/static` folder within the repo hierarchy up to the root of https://static.baaahs.org
+
+The `/static` folder is in `.gitignore` so you can have big stuff in there, or it can be symlinked out as necessary and rsync should do it's magic. Note that the command specifically does not use the `-d` option, which is the full sync where it would delete files on the remote drive that you don't already have locally. You probably don't have everything that others have uploaded, so this seems safest.
+
+***TODO (maybe)*** - Someone might someday want to write a similar script to download all the stuff from the server. 
+
+***TODO*** - The local `/static` should be served by the same local web server when you do a `yarn run` This isn't strictly important because if you have internet you can just refer to the files in the cloud, but maybe it would be handy for something.
 
 
 -------
