@@ -245,7 +245,7 @@ resource "google_compute_url_map" "main" {
     # Host rules get us from a hostname to a named path_matcher
     host_rule {
         path_matcher = "prod"
-        hosts        = ["www.baaahs.org", "baaahs.org"]
+        hosts        = ["www.baaahs.org", "baaahs.org", "www-gcp.baaahs.org"]
     }
 
     host_rule {
@@ -267,21 +267,33 @@ resource "google_compute_url_map" "main" {
     path_matcher {
         name            = "prod"
         default_service = google_compute_backend_bucket.prod.id
+        path_rule {
+            paths = ["/*"]
+        }
     }
 
     path_matcher {
         name            = "static"
         default_service = google_compute_backend_bucket.static.id
+        path_rule {
+            paths = ["/*"]
+        }
     }
 
     path_matcher {
         name            = "staging"
         default_service = google_compute_backend_bucket.staging.id
+        path_rule {
+            paths = ["/*"]
+        }
     }
 
     path_matcher {
         name            = "dev"
         default_service = google_compute_backend_bucket.dev.id
+        path_rule {
+            paths = ["/*"]
+        }
     }
 }
 
