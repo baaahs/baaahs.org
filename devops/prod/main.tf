@@ -153,22 +153,20 @@ resource "google_storage_bucket_iam_binding" "buckets_public" {
 
 # Handle static differently because it needs the extra thing stacked on
 data "google_iam_policy" "static" {
-    binding = [
-        {
-            role = "roles/storage.objectViewer"
-            members = [ "allUsers" ]
-        },
+    binding {
+        role = "roles/storage.objectViewer"
+        members = [ "allUsers" ]
+    }
 
-        {
-            role = "roles/storage.objectAdmin"
-            members = [ "group:gcp-static-bucket@baaahs.org" ]
-        }
-    ]
+    binding {
+        role = "roles/storage.objectAdmin"
+        members = [ "group:gcp-static-bucket@baaahs.org" ]
+    }
 }
 
 resource "google_storage_bucket_iam_policy" "static" {
     bucket = google_storage_bucket.static.name
-    policy_data = data.google_iam_policy.static
+    policy_data = data.google_iam_policy.static.policy_data
 }
 
 # This bucket needs to be writable to devs
