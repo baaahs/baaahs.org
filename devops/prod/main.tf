@@ -142,6 +142,7 @@ locals {
 
 # Make all the buckets public
 resource "google_storage_bucket_iam_binding" "buckets_public" {
+    depends_on = [google_project_iam_member.storage_iam]
     for_each = toset(local.buckets)
 
     bucket = "${each.key}.baaahs.org"
@@ -165,6 +166,7 @@ data "google_iam_policy" "static" {
 }
 
 resource "google_storage_bucket_iam_policy" "static" {
+    depends_on = [google_project_iam_member.storage_iam]
     bucket = google_storage_bucket.static.name
     policy_data = data.google_iam_policy.static.policy_data
 }
@@ -178,7 +180,25 @@ resource "google_storage_bucket_iam_policy" "static" {
 #    ]
 #}
 
+data "google_client_openid_userinfo" "me" {}
+data "google_client_config" "me" {}
 
+#resource "google_storage_bucket_iam_binding" "buckets_service_account" {
+#    depends_on = [google_project_iam_member.storage_iam]
+#    for_each = toset(local.buckets)
+#
+#    bucket = "${each.key}.baaahs.org"
+#    role   = "roles/storage.objectAdmin"
+#    members = [
+#        "serviceAccount:${data.google_client_openid_userinfo.me.email}",
+#    ]
+#}
+
+resource "google_project_iam_member" "storage_iam" {
+    project = data.google_client_config.me.project
+    role    = "roles/storage.admin"
+    member  = "serviceAccount:${data.google_client_openid_userinfo.me.email}"
+}
 
 # ---------------------------------------------------------------------------
 # To be accessible to the load balancer each bucket needs to be exposed
