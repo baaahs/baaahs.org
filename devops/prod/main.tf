@@ -137,12 +137,11 @@ resource "google_storage_bucket" "dev" {
 
 
 locals {
-    buckets = ["www", "staging", "dev"]
+    buckets = ["www", "static", "staging", "dev"]
 }
 
 # Make all the buckets public
 resource "google_storage_bucket_iam_binding" "buckets_public" {
-    depends_on = [google_project_iam_member.sa_storage_iam]
     for_each = toset(local.buckets)
 
     bucket = "${each.key}.baaahs.org"
@@ -175,39 +174,39 @@ data "google_iam_policy" "static" {
 #}
 
 # This bucket needs to be writable to devs
-#resource "google_storage_bucket_iam_binding" "buckets_gcp_static" {
-#    bucket = "static.baaahs.org"
-#    role   = "roles/storage.objectAdmin"
-#    members = [
-#        "group:gcp-static-bucket@baaahs.org",
-#    ]
-#}
-
-data "google_client_openid_userinfo" "me" {}
-data "google_client_config" "me" {}
-
-resource "google_storage_bucket_iam_binding" "buckets_service_account" {
-    depends_on = [google_project_iam_member.sa_storage_iam]
-    for_each = toset(local.buckets)
-
-    bucket = "${each.key}.baaahs.org"
+resource "google_storage_bucket_iam_binding" "buckets_gcp_static" {
+    bucket = "static.baaahs.org"
     role   = "roles/storage.objectAdmin"
     members = [
-        "serviceAccount:${data.google_client_openid_userinfo.me.email}",
+        "group:gcp-static-bucket@baaahs.org",
     ]
 }
 
-resource "google_project_iam_member" "sa_storage_iam" {
-    project = data.google_client_config.me.project
-    role    = "roles/storage.admin"
-    member  = "serviceAccount:${data.google_client_openid_userinfo.me.email}"
-}
-
-resource "google_project_iam_member" "group_static_iam" {
-    project = data.google_client_config.me.project
-    role    = "roles/storage.objectAdmin"
-    member  = "group:gcp-static-bucket@baaahs.org"
-}
+#data "google_client_openid_userinfo" "me" {}
+#data "google_client_config" "me" {}
+#
+#resource "google_storage_bucket_iam_binding" "buckets_service_account" {
+#    depends_on = [google_project_iam_member.sa_storage_iam]
+#    for_each = toset(local.buckets)
+#
+#    bucket = "${each.key}.baaahs.org"
+#    role   = "roles/storage.objectAdmin"
+#    members = [
+#        "serviceAccount:${data.google_client_openid_userinfo.me.email}",
+#    ]
+#}
+#
+#resource "google_project_iam_member" "sa_storage_iam" {
+#    project = data.google_client_config.me.project
+#    role    = "roles/storage.admin"
+#    member  = "serviceAccount:${data.google_client_openid_userinfo.me.email}"
+#}
+#
+#resource "google_project_iam_member" "group_static_iam" {
+#    project = data.google_client_config.me.project
+#    role    = "roles/storage.objectAdmin"
+#    member  = "group:gcp-static-bucket@baaahs.org"
+#}
 
 # ---------------------------------------------------------------------------
 # To be accessible to the load balancer each bucket needs to be exposed
