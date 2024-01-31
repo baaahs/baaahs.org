@@ -11,7 +11,6 @@ import IconInstagram from 'svg/illustrations/IconInstagram';
 import IconFacebook from 'svg/illustrations/IconFacebook';
 import BAAAHSLogo from '../../BAAAHSLogo';
 
-
 const defaultNavBarItems = [
   {
     title: 'events',
@@ -85,7 +84,9 @@ const Topbar = ({ onSidebarOpen, colorInvert = false, data }) => {
             color={colorInvert ? 'common.white' : 'text.primary'}
             sx={{ display: 'flex', alignItems: 'center' }}
           >
-            <IconSoundcloud />
+            <IconSoundcloud
+              color={colorInvert ? 'common.white' : 'text.primary'}
+            />
           </Link>
         </Box>
         <Box marginLeft={4}>
@@ -96,7 +97,7 @@ const Topbar = ({ onSidebarOpen, colorInvert = false, data }) => {
             color={colorInvert ? 'common.white' : 'text.primary'}
             sx={{ display: 'flex', alignItems: 'center' }}
           >
-            <IconEmail />
+            <IconEmail color={colorInvert ? 'common.white' : 'text.primary'} />
           </Link>
         </Box>
         <Box marginLeft={4}>
@@ -107,7 +108,9 @@ const Topbar = ({ onSidebarOpen, colorInvert = false, data }) => {
             color={colorInvert ? 'common.white' : 'text.primary'}
             sx={{ display: 'flex', alignItems: 'center' }}
           >
-            <IconInstagram />
+            <IconInstagram
+              color={colorInvert ? 'common.white' : 'text.primary'}
+            />
           </Link>
         </Box>
         <Box marginLeft={4}>
@@ -118,7 +121,9 @@ const Topbar = ({ onSidebarOpen, colorInvert = false, data }) => {
             color={colorInvert ? 'common.white' : 'text.primary'}
             sx={{ display: 'flex', alignItems: 'center' }}
           >
-            <IconFacebook />
+            <IconFacebook
+              color={colorInvert ? 'common.white' : 'text.primary'}
+            />
           </Link>
         </Box>
       </Box>
