@@ -1,8 +1,8 @@
 import React from 'react';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
-import Button from '@mui/material/Button';
-import useMediaQuery from '@mui/material/useMediaQuery';
+// import Button from '@mui/material/Button';
+// import useMediaQuery from '@mui/material/useMediaQuery';
 import { alpha, useTheme } from '@mui/material/styles';
 
 import Container from 'components/Container';
@@ -95,9 +95,9 @@ const HoverableLetter = ({ letterSelector, children }) => {
 
 const Hero = () => {
   const theme = useTheme();
-  const isMd = useMediaQuery(theme.breakpoints.up('md'), {
-    defaultMatches: true,
-  });
+  // const isMd = useMediaQuery(theme.breakpoints.up('md'), {
+  //   defaultMatches: true,
+  // });
 
   return (
     <Box
@@ -166,6 +166,7 @@ const Hero = () => {
               The Big-Ass Amazingly Awesome Homosexual Sheep (BAAAHS) is a
               mutant vehicle, a mobile disco, and a penetrable social statement.
             </Typography>
+            {/*
             <Box
               display="flex"
               flexDirection={{ xs: 'column', sm: 'row' }}
@@ -199,6 +200,7 @@ const Hero = () => {
                 </Button>
               </Box>
             </Box>
+          */}
           </Box>
         </Container>
         <Box
