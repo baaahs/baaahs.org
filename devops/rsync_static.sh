@@ -5,7 +5,7 @@ cd "$(dirname "$0")/.." || exit
 
 # Checks if gcloud is installed
 if ! command -v gcloud &>/dev/null; then
-    printf "\033[31mgcloud CLI is not installed.\033[0m Please download and install it from the following URL:\n\n\thttps://cloud.google.com/sdk/docs/install\n\n"
+    printf "[31mgcloud CLI is not installed.\033[0m Please download and install it from the following URL:\n\n\thttps://cloud.google.com/sdk/docs/install\n\n"
     exit
 else
     printf "gcloud CLI is installed.\n"
