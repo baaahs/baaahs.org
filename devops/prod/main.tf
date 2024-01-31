@@ -268,6 +268,7 @@ resource "google_compute_url_map" "main" {
         name            = "prod"
         default_service = google_compute_backend_bucket.prod.id
         path_rule {
+            service = google_compute_backend_bucket.prod.id
             paths = ["/*"]
         }
     }
@@ -276,6 +277,7 @@ resource "google_compute_url_map" "main" {
         name            = "static"
         default_service = google_compute_backend_bucket.static.id
         path_rule {
+            service = google_compute_backend_bucket.static.id
             paths = ["/*"]
         }
     }
@@ -284,6 +286,7 @@ resource "google_compute_url_map" "main" {
         name            = "staging"
         default_service = google_compute_backend_bucket.staging.id
         path_rule {
+            service = google_compute_backend_bucket.staging.id
             paths = ["/*"]
         }
     }
@@ -292,6 +295,7 @@ resource "google_compute_url_map" "main" {
         name            = "dev"
         default_service = google_compute_backend_bucket.dev.id
         path_rule {
+            service = google_compute_backend_bucket.dev.id
             paths = ["/*"]
         }
     }
