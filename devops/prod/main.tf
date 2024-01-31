@@ -70,14 +70,6 @@ resource "google_storage_bucket" "prod" {
     }
 }
 
-#resource "google_storage_bucket_iam_binding" "prod_public" {
-#    bucket = google_storage_bucket.prod.name
-#    role   = "roles/storage.objectViewer"
-#    members = [
-#        "allUsers",
-#    ]
-#}
-
 resource "google_storage_bucket" "static" {
     name          = "static.baaahs.org"
     location      = "US"
@@ -189,12 +181,10 @@ resource "google_compute_backend_bucket" "staging" {
     bucket_name = google_storage_bucket.staging.name
 }
 
-/* Temporarily removing until quota is increased
 resource "google_compute_backend_bucket" "dev" {
     name        = "dev"
     bucket_name = google_storage_bucket.dev.name
 }
-*/
 
 # ---------------------------------------------------------------------------
 # Now we need a url map to get traffic to the right bucket, and eventually
@@ -220,12 +210,10 @@ resource "google_compute_url_map" "main" {
         hosts        = ["staging.baaahs.org"]
     }
 
-    /* Temporarily removing until quota is increased
     host_rule {
         path_matcher = "dev"
         hosts        = ["dev.baaahs.org"]
     }
-    */
 
     # Path matchers get us to a backend
     path_matcher {
@@ -243,12 +231,10 @@ resource "google_compute_url_map" "main" {
         default_service = google_compute_backend_bucket.staging.id
     }
 
-    /* Temporarily removing until quota is increased
     path_matcher {
         name            = "dev"
         default_service = google_compute_backend_bucket.dev.id
     }
-    */
 }
 
 resource "google_compute_target_https_proxy" "default" {
