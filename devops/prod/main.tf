@@ -137,7 +137,7 @@ resource "google_storage_bucket" "dev" {
 
 
 locals {
-    buckets = ["www", "static", "staging", "dev"]
+    buckets = ["www", "staging", "dev"]
 }
 
 # Make all the buckets public
@@ -151,14 +151,34 @@ resource "google_storage_bucket_iam_binding" "buckets_public" {
     ]
 }
 
-# This bucket needs to be writable to devs
-resource "google_storage_bucket_iam_binding" "buckets_gcp_static" {
-    bucket = "static.baaahs.org"
-    role   = "roles/storage.objectAdmin"
-    members = [
-        "group:gcp-static-bucket@baaahs.org",
-    ]
+# Handle static differently because it needs the extra thing stacked on
+data "google_iam_policy" "static" {
+    binding {
+        role = "roles/storage.objectViewer"
+        members = [ "allUsers" ]
+    }
+
+    binding {
+        role = "roles/storage.objectAdmin"
+        members = [ "group:gcp-static-bucket@baaahs.org" ]
+    }
 }
+
+resource "google_storage_bucket_iam_policy" "static" {
+    bucket = google_storage_bucket.static.name
+    policy_data = data.google_iam_policy.static
+}
+
+# This bucket needs to be writable to devs
+#resource "google_storage_bucket_iam_binding" "buckets_gcp_static" {
+#    bucket = "static.baaahs.org"
+#    role   = "roles/storage.objectAdmin"
+#    members = [
+#        "group:gcp-static-bucket@baaahs.org",
+#    ]
+#}
+
+
 
 # ---------------------------------------------------------------------------
 # To be accessible to the load balancer each bucket needs to be exposed
