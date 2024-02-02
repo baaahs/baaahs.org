@@ -270,6 +270,7 @@ resource "google_compute_url_map" "main" {
         path_rule {
             service = google_compute_backend_bucket.prod.id
             paths = ["/*"]
+
         }
     }
 
@@ -297,6 +298,10 @@ resource "google_compute_url_map" "main" {
         path_rule {
             service = google_compute_backend_bucket.dev.id
             paths = ["/*"]
+            url_rewrite {
+                prefix_rewrite = "/"
+                strip_query    = true
+            }
         }
     }
 }
