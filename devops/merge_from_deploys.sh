@@ -27,8 +27,8 @@ if ! git pull origin main; then
   exit 1
 fi
 
-green "Sleeping for 1s to respect rate limits..."
-sleep 1
+green "Sleeping for 2s to respect rate limits..."
+sleep 2
 
 # Declare an array for all deploy branches
 declare -a deploy_branches=("deploy-prod" "deploy-staging" "deploy-dev")
@@ -49,8 +49,8 @@ for branch_name in "${deploy_branches[@]}"; do
    exit 1
  fi
 
- green "Sleeping for 1s to respect rate limits..."
- sleep 1
+ green "Sleeping for 2s to respect rate limits..."
+ sleep 2
 done
 
 green "\nAll deployment branches are merged down to main."
