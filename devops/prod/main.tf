@@ -243,9 +243,8 @@ resource "google_compute_backend_bucket" "dev" {
 resource "google_compute_url_map" "main" {
     name            = "lb-map"
 
-    # If nothing else matches go to this backend
-    # Disabling for now in order to work through all the things
-    # default_service = google_compute_backend_bucket.prod.id
+    # If nothing else matches go to this backend. This is required.
+    default_service = google_compute_backend_bucket.prod.id
 
     # Host rules get us from a hostname to a named path_matcher. Since they do not
     # have a service attribute, we must use a path_matcher to connect to an actual
