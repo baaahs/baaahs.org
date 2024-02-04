@@ -123,7 +123,7 @@ resource "google_storage_bucket" "dev" {
 
     website {
         main_page_suffix = "index.html"
-        not_found_page   = "404.html"
+        not_found_page   = "index.html"
     }
 
     # TODO: Review this attribute
@@ -320,18 +320,18 @@ resource "google_compute_url_map" "main" {
         # A route_rules block needs a match_rules attribute and either a route_action
         # or a url_redirect attribute
 
-        route_rules {
-            priority = 10
-
-            match_rules {
-                path_template_match = "/{one=*}/*"
-            }
-
-            url_redirect {
-                path_redirect = "/"
-                redirect_response_code = "TEMPORARY_REDIRECT"
-            }
-        }
+#        route_rules {
+#            priority = 10
+#
+#            match_rules {
+#                path_template_match = "/{one=*}/*"
+#            }
+#
+#            url_redirect {
+#                path_redirect = "/"
+#                redirect_response_code = "TEMPORARY_REDIRECT"
+#            }
+#        }
     }
 
     # The static path_matcher is easy. It's a filesystem. No fancy stuff.
