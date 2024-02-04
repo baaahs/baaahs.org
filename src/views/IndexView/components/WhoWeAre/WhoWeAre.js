@@ -52,7 +52,7 @@ const WhoWeAre = () => {
       <Grid container spacing={4} direction={isMd ? 'row' : 'column-reverse'}>
         <Grid item xs={12} md={6}>
           <Box marginBottom={4}>
-            <Typography sx={{ fontWeight: 700 }} variant={'h4'} gutterBottom>
+            <Typography sx={{ fontWeight: 700 }} variant={'h4'} gutterBottom fontFamily={'Smooth Circulars'}>
               What is BAAAHS?
             </Typography>
             <Typography variant={'h6'} component={'p'} color={'text.secondary'}>
@@ -73,10 +73,10 @@ const WhoWeAre = () => {
                     onChange={(isVisible) => setViewPortVisibility(isVisible)}
                     delayedCall
                   >
-                    <Typography variant={'h5'}>{item.title}</Typography>
+                    <Typography variant={'h6'} fontFamily={'Smooth Circulars'} >{item.title}</Typography>
                   </VisibilitySensor>
                 </Typography>
-                <Typography color="text.secondary" component="p">
+                <Typography color="text.secondary" component="p" >
                   {item.subtitle}
                 </Typography>
               </Grid>

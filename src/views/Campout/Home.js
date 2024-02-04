@@ -90,10 +90,7 @@ const CampoutHome = () => {
                 alignItems="center"
                 justifyContent="center"
               >
-                <Box 
-                  width={500} 
-                  bgcolor={theme.palette.primary.main}
-                >
+                <Box width={500} bgcolor={theme.palette.primary.main}>
                   <BAAAHSLogo />
                 </Box>
               </Box>
@@ -101,17 +98,38 @@ const CampoutHome = () => {
           </Grid>
           <Grid item container xs={10} xl={8}>
             <Box marginBottom={4}>
-              <Typography align={'center'} fontWeight={600} component="h1">
+              <Typography
+                align={'center'}
+                fontWeight={600}
+                component="h1"
+                fontFamily={'Smooth Circulars'}
+              >
                 What is it?
               </Typography>
               <Typography align={'center'}>
-                A campout put on by BAAAHS and friends over Memorial Day weekend. We’ve been putting it on for three years now and excited for our fourth! Our campouts are known for being whimsical, community driven, silly, and of course a whole lot of queer fun. We aim to create a safe space for self-expression, creativity and kindness. Live music, sparkle-tastic lights, dance parties, group events, art and other surprises included. Eccentric outfits, gifting and showing off the best of you is strongly encouraged. And much like Burning Man, it is a Leave No Trace event.
+                A campout put on by BAAAHS and friends over Memorial Day
+                weekend. We’ve been putting it on for three years now and
+                excited for our fourth! Our campouts are known for being
+                whimsical, community driven, silly, and of course a whole lot of
+                queer fun. We aim to create a safe space for self-expression,
+                creativity and kindness. Live music, sparkle-tastic lights,
+                dance parties, group events, art and other surprises included.
+                Eccentric outfits, gifting and showing off the best of you is
+                strongly encouraged. And much like Burning Man, it is a Leave No
+                Trace event.
               </Typography>
             </Box>
           </Grid>
-          <Grid container item xs={10} xl={8} spacing={2} justifyContent="center">
+          <Grid
+            container
+            item
+            xs={10}
+            xl={8}
+            spacing={2}
+            justifyContent="center"
+          >
             {content.map((item, i) => (
-              <Grid item xs={12} sm={6} md={4} lg={3} xl={2} key={i}>
+              <Grid item xs={12} sm={6} md={4} lg={4} xl={2} key={i}>
                 <Box
                   alignItems="center"
                   component={Card}
@@ -126,13 +144,13 @@ const CampoutHome = () => {
                     display={'flex'}
                     flexDirection={'column'}
                     alignItems="center"
+                    gap={2}
                   >
                     <Box
                       alignItems="center"
                       component={Avatar}
                       width={150}
                       height={150}
-                      marginBottom={2}
                       bgcolor={theme.palette.primary.main}
                       color={theme.palette.background.paper}
                     >
@@ -141,39 +159,36 @@ const CampoutHome = () => {
                     <Typography
                       variant={'h6'}
                       gutterBottom
-                      sx={{ fontWeight: 500 }}
+                      fontFamily={'Smooth Circulars'}
+                      textAlign={'center'}
                     >
                       {item.title}
                     </Typography>
-                    <Typography color="text.secondary">{item.subtitle}</Typography>
+                    <Typography color="text.secondary" textAlign={'center'}>
+                      {item.subtitle}
+                    </Typography>
                   </Box>
                 </Box>
               </Grid>
             ))}
           </Grid>
-          <Grid container item xs={12} justifyContent="center" sx={{ margin: '24px 0' }}>
+          <Grid
+            container
+            item
+            xs={12}
+            justifyContent="center"
+            sx={{ margin: '24px 0' }}
+          >
             <Grid item xs={4} lg={2} xl={1} sx={{ margin: '0 8px' }}>
               <Button
                 component={'a'}
                 variant="contained"
                 color="primary"
                 size="large"
-                href={'/crew'}
+                href={'/campout/register'}
                 fullWidth
               >
-                Join the flock
-              </Button>
-            </Grid>
-            <Grid item xs={4} lg={2} xl={1} sx={{ margin: '0 8px' }}>
-              <Button
-                component={'a'}
-                href={'/about'}
-                variant="outlined"
-                color="primary"
-                size="large"
-                fullWidth
-              >
-                Learn more
+                Register
               </Button>
             </Grid>
           </Grid>

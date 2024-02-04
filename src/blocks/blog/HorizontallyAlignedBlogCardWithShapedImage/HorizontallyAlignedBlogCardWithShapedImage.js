@@ -6,7 +6,6 @@ import CardContent from '@mui/material/CardContent';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Avatar from '@mui/material/Avatar';
-import Chip from '@mui/material/Chip';
 import Container from 'components/Container';
 
 const mock = {
@@ -69,15 +68,6 @@ const HorizontallyAlignedBlogCardWithShapedImage = ({ data }) => {
                   theme.palette.mode === 'dark' ? 'brightness(0.7)' : 'none',
               }}
             />
-            <Chip
-              label="Featured"
-              sx={{
-                position: 'absolute',
-                top: 20,
-                right: 20,
-                bgcolor: 'background.paper',
-              }}
-            />
             <Box
               component={'svg'}
               viewBox="0 0 112 690"
@@ -114,7 +104,7 @@ const HorizontallyAlignedBlogCardWithShapedImage = ({ data }) => {
             }}
           >
             <Box>
-              <Typography variant={'h5'} gutterBottom>
+              <Typography variant={'h5'} gutterBottom fontFamily={'Smooth Circulars'}>
                 {title}
               </Typography>
               <Typography color="text.secondary">{description}</Typography>

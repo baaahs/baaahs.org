@@ -10,6 +10,10 @@ error_exit()
     exit 1
 }
 
+green() {
+  echo -e "\033[32m${1}\033[0m"
+}
+
 # Variables for branch names
 deploy_branches=("deploy-dev" "deploy-staging" "deploy-prod")
 
@@ -44,5 +48,10 @@ do
     fi
 
     git merge main || error_exit "Failed to merge 'main' into $branch"
+
+    green "Pushing to $branch"
     git push origin "$branch" || error_exit "Failed to push $branch to the origin"
+
+    green "Pausing for 2s so github doesn't get mad..."
+    sleep 2
 done
