@@ -18,4 +18,7 @@ As we are a largely trusting group, if you have commit access to this repo, you 
 
 The way a React website works is that the front-end code expects that `/` and `/someRoute/` will actually return the same same `index.html` file. React wasn't really mean to be the entire website, and all client side UI trickery based on the URL was layered on later.
 
-Thus, there are some server side configuration subtleties that still being explored. This README will be updated with more information as it emerges.
+After much soul-searching and gnashing of teeth, it seems like our best option is to name `index.html` as both the default document and the 404 document for our static buckets. This seems to work more or less okay since the user isn't all that aware of whether the server returned a 404 or a 200 status code along with the `index.html` content when they hit `/someRoute/`. It screws with effective caching of course and is philosophically inappropriate, but this is the world we live in these days.
+
+More detail in the devops directory and the terraform configuration for prod.
+

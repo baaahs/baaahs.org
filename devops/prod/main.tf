@@ -10,6 +10,7 @@ terraform {
 
 provider "google" {
     project = "baaahsorg-prod"
+
     # Choosing a region is actually kind of annoying. us-west1 is Oregon and generally
     # pretty good, but it lacks some of the AI things in us-central1, which is Iowa.
     # us-west2 might be another good choice because it is LA and Starlink from The Incline
@@ -26,17 +27,17 @@ resource "google_compute_global_address" "default" {
     name = "lb-ip"
 }
 
-# A single cert that covers all our hosts
+# Certificates won't deploy without DNS for the name pointing at the load balancer.
+# Thus, instead of doing all hosts together, this is all hosts except the production
+# names.
 resource "google_compute_managed_ssl_certificate" "non-prod" {
     name = "non-prod"
     managed {
-        # Removing the production servers which currently point at AWS because
-        # this seems to be preventing the cert from being issued.
-        # domains = ["www.baaahs.org", "static.baaahs.org", "baaahs.org", "staging.baaahs.org", "dev.baaahs.org"]
         domains = ["static.baaahs.org", "staging.baaahs.org", "dev.baaahs.org"]
     }
 }
 
+# This is a temporary name for the production bucket.
 resource "google_compute_managed_ssl_certificate" "www-gcp" {
     name = "www-gcp"
     managed {
@@ -147,7 +148,11 @@ resource "google_storage_bucket" "dev" {
     }
 }
 
-
+# At this point the AI decided an array with a for_each made sense.
+# Regarding IAM permissions, this is where terraform kinda breaks down
+# and doesn't seem plausible to be able to start from scratch and achieve
+# working infrastructure. But that's okay (sort-of) since we are using
+# shared state at the terraform cloud project.
 locals {
     buckets = ["www", "static", "staging", "dev"]
 }
@@ -163,7 +168,7 @@ resource "google_storage_bucket_iam_binding" "buckets_public" {
     ]
 }
 
-# Handle static differently because it needs the extra thing stacked on
+# Handle static differently because it needs the extra binding stacked on
 data "google_iam_policy" "static" {
     binding {
         role = "roles/storage.objectViewer"
@@ -175,15 +180,6 @@ data "google_iam_policy" "static" {
         members = [ "group:gcp-static-bucket@baaahs.org" ]
     }
 }
-
-#resource "google_storage_bucket_iam_policy" "static" {
-#    depends_on = [
-#        google_project_iam_member.sa_storage_iam,
-#        google_project_iam_member.group_static_iam,
-#    ]
-#    bucket = google_storage_bucket.static.name
-#    policy_data = data.google_iam_policy.static.policy_data
-#}
 
 # This bucket needs to be writable to devs
 resource "google_storage_bucket_iam_binding" "buckets_gcp_static" {
@@ -313,6 +309,9 @@ resource "google_compute_url_map" "main" {
     }
 }
 
+# Now we need targets that will be used by the port level rules.
+# One for https with all the certs and one for http access.
+# TODO: Add make all the http stuff redirect to https
 resource "google_compute_target_https_proxy" "default" {
     name             = "https-proxy"
     url_map          = google_compute_url_map.main.id
@@ -327,7 +326,8 @@ resource "google_compute_target_http_proxy" "default" {
     url_map          = google_compute_url_map.main.id
 }
 
-
+# And finally the actual border rules which bind an ip:port to a
+# target for all of the above. The two standard web ports
 resource "google_compute_global_forwarding_rule" "tls" {
     name       = "https-rule"
     ip_address = google_compute_global_address.default.address
