@@ -335,6 +335,7 @@ resource "google_compute_url_map" "main" {
 
             url_redirect {
                 path_redirect = "/"
+                redirect_response_code = "TEMPORARY_REDIRECT"
             }
         }
     }
