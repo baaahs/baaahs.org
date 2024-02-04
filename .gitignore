@@ -42,3 +42,6 @@ yarn-error.log*
 
 .eslintcache
 .vscode
+
+# local copy of static files hosted by static.baaahs.org
+/static
