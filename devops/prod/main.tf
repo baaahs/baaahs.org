@@ -287,11 +287,6 @@ resource "google_compute_url_map" "main" {
     }
 
     path_matcher {
-        name            = "static"
-        default_service = google_compute_backend_bucket.static.id
-    }
-
-    path_matcher {
         name            = "staging"
         default_service = google_compute_backend_bucket.staging.id
     }
