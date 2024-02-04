@@ -252,8 +252,7 @@ resource "google_compute_url_map" "main" {
     # service.
     host_rule {
         path_matcher = "prod"
-        # There are two ways to address the production set of files
-        hosts        = ["www.baaahs.org", "baaahs.org"]
+        hosts        = ["www.baaahs.org", "baaahs.org", "www-gcp.baaahs.org"]
     }
 
     host_rule {
@@ -286,6 +285,11 @@ resource "google_compute_url_map" "main" {
     path_matcher {
         name            = "prod"
         default_service = google_compute_backend_bucket.prod.id
+    }
+
+    path_matcher {
+        name            = "static"
+        default_service = google_compute_backend_bucket.static.id
     }
 
     path_matcher {
