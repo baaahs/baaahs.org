@@ -126,8 +126,8 @@ const QAndA = () => {
             </Box>
           </Grid>
           {content.map((item, key) => (
-            <Grid item xs={11} xl={8} key={key} sx={{ margin: '24px'}}>
-              <Typography component="h1" >{item.question}</Typography>
+            <Grid item xs={11} xl={8} key={key} sx={{ margin: '24px'}} textAlign={'center'}>
+              <Typography component="h1" fontFamily={'Smooth Circulars'} >{item.question}</Typography>
               <Typography 
                 dangerouslySetInnerHTML={{
                   __html: item.answer

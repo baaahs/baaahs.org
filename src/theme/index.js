@@ -14,6 +14,18 @@ const getTheme = (mode, themeToggler) =>
           textTransform: 'none',
           fontWeight: 'medium',
         },
+        h4: {
+          fontFamily: 'Smooth Circulars',
+        },
+        h5: {
+          fontFamily: 'Smooth Circulars',
+        },
+        h2: {
+          fontFamily: 'Smooth Circulars',
+        },
+        h1: {
+          fontFamily: 'Smooth Circulars',
+        },
       },
       zIndex: {
         appBar: 1200,

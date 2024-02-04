@@ -37,7 +37,7 @@ const principles = [
     ),
   },
   {
-    title: 'Decommodification',
+    title: 'Decommo-dification',
     subtitle:
       'In order to preserve the spirit of gifting, our community seeks to create social environments that are unmediated by commercial sponsorships, transactions, or advertising. We stand ready to protect our culture from such exploitation. We resist the substitution of consumption for participatory experience.',
     icon: (
@@ -162,6 +162,7 @@ const TenPrinciples = () => {
         sx={{
           fontWeight: 700,
         }}
+        fontFamily={'Smooth Circulars'}
       >
         Burning Man Principles
       </Typography>
@@ -182,6 +183,7 @@ const TenPrinciples = () => {
                 display={'flex'}
                 flexDirection={'column'}
                 alignItems="center"
+                gap={2}
               >
                 <Box
                   alignItems="center"
@@ -195,9 +197,12 @@ const TenPrinciples = () => {
                   {item.icon}
                 </Box>
                 <Typography
-                  variant={'h6'}
+                  // variant={'h6'}
                   gutterBottom
-                  sx={{ fontWeight: 500 }}
+                  sx={{ fontWeight: 250, wordWrap: 'break-word'}}
+                  fontFamily={'Smooth Circulars'}
+                  textAlign={'center'}
+
                 >
                   {item.title}
                 </Typography>
