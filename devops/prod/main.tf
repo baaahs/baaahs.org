@@ -48,6 +48,18 @@ resource "google_compute_managed_ssl_certificate" "www-gcp" {
 # ---------------------------------------------------------------------------
 # The four backend buckets themselves, each of which needs to have public
 # permissions set on it.
+#
+# Notice that while the static bucket is as you would expect - a default
+# index.html and 404.html page, all of the other three buckets have the
+# not_found_page set to be the index.html page. This is so that the client
+# side React Router stuff will work. When it goes asking for crazy paths that
+# the front-end folks just invented out of thin air, it will just shovel the
+# same old SPA index.html page back. Now, it will send it with a 404 instead
+# of a 200, but browsers don't seem to care. This is a much easier, albeit
+# somewhat hacky and cache-busting, way to get the front-end routing working.
+#
+# Inspiration for this approach came from the github pages section of this
+# documentation https://create-react-app.dev/docs/deployment/
 
 resource "google_storage_bucket" "prod" {
     name          = "www.baaahs.org"
@@ -58,7 +70,7 @@ resource "google_storage_bucket" "prod" {
 
     website {
         main_page_suffix = "index.html"
-        not_found_page   = "404.html"
+        not_found_page   = "index.html"
     }
 
     # TODO: Review this attribute
@@ -100,7 +112,7 @@ resource "google_storage_bucket" "staging" {
 
     website {
         main_page_suffix = "index.html"
-        not_found_page   = "404.html"
+        not_found_page   = "index.html"
     }
 
     # TODO: Review this attribute
@@ -274,12 +286,10 @@ resource "google_compute_url_map" "main" {
     # Path Matchers
     #
     # The name of the path matcher is referenced by the host_rule above.
-    # The path_matchers also do some trickery for the React websites that want to
-    # be able to have arbitrary paths all map to the same set of source files.
-    # We're trying to do this with 302 temporary redirects for two reasons. The first
-    # is so that the browser understands it already has the file locally and the second
-    # is tha the React front end code is going to use the URL in the location to determine
-    # what UI to show.
+    # Ideally we might extend each path_matcher so that it understands all routes
+    # the client might request and then did fancy url rewriting. However,
+    # we've come up with an alternative approach documented above so all of
+    # our path_matchers are now simple.
 
     path_matcher {
         name            = "prod"
@@ -293,45 +303,7 @@ resource "google_compute_url_map" "main" {
 
     path_matcher {
         name            = "dev"
-
-        # The bucket is obvious even though we are going to muck with paths
         default_service = google_compute_backend_bucket.dev.id
-
-        # TS: Disagree with myself here.....
-        # We must use path_rule not route_rule according to documentation that
-        # says "route_rules are not for external load balancers"
-
-        # This first one I think is not strictly necessary. I believe we are
-        # saying if you have no path elements, send to default service with no
-        # modifications. May remove this.
-#        path_rule {
-#            paths = [ "/*" ]
-#        }
-
-        # Now we are going to send redirects for one level of path
-#        path_rule {
-#            paths = [ "/{one = *}/*", ]
-#        }
-
-        # Documentation at https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/compute_url_map#argument-reference
-        # Says "routeRules are not supported in UrlMaps intended for External load balancers"
-        # Let's see if that's true???
-
-        # A route_rules block needs a match_rules attribute and either a route_action
-        # or a url_redirect attribute
-
-#        route_rules {
-#            priority = 10
-#
-#            match_rules {
-#                path_template_match = "/{one=*}/*"
-#            }
-#
-#            url_redirect {
-#                path_redirect = "/"
-#                redirect_response_code = "TEMPORARY_REDIRECT"
-#            }
-#        }
     }
 
     # The static path_matcher is easy. It's a filesystem. No fancy stuff.
