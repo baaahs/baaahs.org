@@ -3,7 +3,7 @@
  * Import this file using the following HTML or equivalent:
  * <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css" /> */
 
-@import "compass/reset";
+@import-normalize;
 
 $information-phone: "only screen and (max-device-width : 640px)";
 
@@ -24,119 +24,6 @@ body {
     background-image: -ms-linear-gradient(bottom, rgb(29, 42, 84) 50%, rgb(16, 24, 48) 86%);
 
     background-image: -webkit-gradient(linear, left bottom, left top, color-stop(0.5, rgb(29, 42, 84)), color-stop(0.86, rgb(16, 24, 48)));
-  }
-}
-
-body.blueprint {
-  div#page {
-    header {
-      font-family: "Open Sans";
-      background-color: rgba(0, 0, 0, 0.6);
-      margin: 0 auto 0 auto;
-      padding: 0;
-      border-bottom: 3px;
-      border-image: url(/images/chalk-h.png) 100% 10 round;
-    }
-
-    max-width: 960px;
-    min-width: 960px;
-    background-image: url("/images/blueprint.gif");
-    background-attachment: fixed;
-    border: 1px solid #aaa;
-    padding: 0;
-
-    @media #{$information-phone} {
-      margin: 0;
-      width: auto;
-      max-width: inherit;
-      min-width: inherit;
-    }
-  }
-}
-
-div.content {
-  padding: 50px 0px 20px 0px;
-  position: relative;
-  background: url(/images/cruising2014.jpg) 0 50px no-repeat;
-
-  @media #{$information-phone} {
-    background-size: auto;
-    background-position-x: -200px;
-  }
-}
-
-div.content-no-img {
-  padding: 50px 0px 20px 0px;
-  position: relative;
-
-  @media #{$information-phone} {
-    background-size: auto;
-    background-position-x: -200px;
-  }
-}
-
-div.polaroids {
-  position: absolute;
-  top: 20px;
-  left: 600px;
-
-  @media #{$information-phone} {
-    position: inherit;
-    top: inherit;
-    left: inherit;
-  }
-}
-
-div.background-gradient {
-  position: absolute;
-  margin-top: -50px;
-  height: 80px;
-  width: 100%;
-  background-image: linear-gradient(bottom, rgba(0,0,0,.5) 56%, rgba(0,0,0,0) 78%);
-  background-image: -o-linear-gradient(bottom, rgba(0,0,0,.5) 56%, rgba(0,0,0,0) 78%);
-  background-image: -moz-linear-gradient(bottom, rgba(0,0,0,.5) 56%, rgba(0,0,0,0) 78%);
-  background-image: -webkit-linear-gradient(bottom, rgba(0,0,0,.5) 56%, rgba(0,0,0,0) 78%);
-  background-image: -ms-linear-gradient(bottom, rgba(0,0,0,.5) 56%, rgba(0,0,0,0) 78%);
-
-  background-image: -webkit-gradient(
-      linear,
-      left top,
-      left bottom,
-      color-stop(0, rgba(0,0,0,.5)),
-      color-stop(1, rgba(0,0,0,0))
-  );
-}
-
-div.news {
-  h3 {
-    margin-top: 0.75em;
-    margin-bottom: 0.125em;
-    font-family: "Special Elite";
-    color: #333;
-    text-shadow: 1px 1px rgba(16, 16, 16, .25);
-  }
-  p {
-    font-family: "Special Elite";
-    color: #333;
-    text-shadow: 1px 1px rgba(16, 16, 16, .25);
-  }
-
-  p + p {
-    margin-top: 0.5em;
-  }
-
-  position: relative;
-  margin-top: -20px;
-  margin-left: 30px;
-  padding: 1em;
-  width: 280px;
-  min-height: 531px;
-  background-color: rgba(255,255,255,.3);
-
-  @media #{$information-phone} {
-    margin: 1em;
-    margin-top: -1em;
-    width: 80%;
   }
 }
 
@@ -181,25 +68,6 @@ article {
 .question {
   font-weight: bold;
   font-style: italic;
-}
-
-.tape {
-  position: absolute;
-  width: 161px;
-  height: 115px;
-  opacity: .6;
-}
-
-.top-left.tape {
-  top: -3em;
-  left: -3em;
-  background: url("/images/tape.png") no-repeat;
-}
-
-.bottom-right.tape {
-  bottom: -3em;
-  right: -3em;
-  background: url("/images/tape.png") bottom right no-repeat;
 }
 
 .volunteer-page {
@@ -405,54 +273,6 @@ section.required.condensed h3::after {
 
   @media #{$information-phone} {
     display: block;
-  }
-}
-
-article .polaroid {
-  width: inherit;
-  height: inherit;
-  background: #eeeeee;
-  position: inherit;
-
-  max-width: 100%;
-  padding: 2em;
-  margin-top: 1em;
-  margin-bottom: 1em;
-
-  img {
-    width: inherit;
-    height: inherit;
-    max-width: 100%;
-    margin: inherit;
-  }
-}
-
-.polaroid {
-  width: 276px;
-  height: 282px;
-  background-image: url("/images/polaroid.png");
-  position: absolute;
-  box-shadow: 10px 10px 5px rgba(0,0,0,.25);
-  -webkit-box-shadow: 10px 10px 5px rgba(0,0,0,.25);
-
-
-  @media #{$information-phone} {
-    position: inherit;
-    margin: 1em;
-  }
-
-  img {
-    width: 251px;
-    height: 206px;
-    margin: 19px 0 0 12.5px;
-  }
-
-  p {
-    text-align: center;
-//    font-family: Georgia, serif;
-    font-size: 150%;
-    color: #2E2E2E;
-    margin-top: 15px;
   }
 }
 

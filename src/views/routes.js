@@ -58,6 +58,7 @@ import {
   CampoutLastYear,
   CampoutQAndA,
   Org2024,
+  Setup,
 } from 'views';
 
 function page(path, view) {
@@ -125,6 +126,7 @@ const routes = [
   page('/campout/last-year', CampoutLastYear),
   page('/campout/q-and-a', CampoutQAndA),
   page('/org/2024', Org2024),
+  page('/setup', Setup),
 ];
 
 export default routes;
