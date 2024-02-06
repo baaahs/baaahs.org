@@ -2,8 +2,6 @@
  * Import this file using the following HTML or equivalent:
  * <link href="/stylesheets/print.css" media="print" rel="stylesheet" type="text/css" /> */
 
-@import "compass/reset";
-
 @page {
   size: auto;
   margin: 25mm;
@@ -21,13 +19,8 @@ div.sidebar, div.parts-needed {
   page-break-inside: avoid;
 }
 
-@import "common";
-
-hgroup.logotype {
-  h1 {
-    font-size: 90pt;
-  }
-  h2 {
-    font-size: 12pt;
-  }
+#edition-picker {
+  display: none;
 }
+
+@import "common";
