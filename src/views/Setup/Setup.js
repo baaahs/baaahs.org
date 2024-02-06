@@ -7,6 +7,26 @@ import Main from 'layouts/Main';
 
 import '../../styles/setup/screen.scss';
 
+const Measure = ({children}) => {
+  const fractionOfInch = /(\d+)\/(\d+)"/.exec(children);
+  if (fractionOfInch) {
+    return (
+      <span className="measure"><sup>{fractionOfInch[1]}</sup>⁄<sub>{fractionOfInch[2]}</sub>&Prime;</span>
+    );
+  }
+
+  const metric = /([\d.]+)([a-z]+)/.exec(children);
+  if (metric) {
+    return (
+      <span className="measure">{metric[1]}<small>{metric[2]}</small></span>
+    );
+  }
+
+  return (
+    <span className="measure">{children}</span>
+  );
+}
+
 const Setup = () => {
   const theme = useTheme();
 
@@ -293,7 +313,7 @@ const Setup = () => {
             <div className="parts-needed">
               <h4>Requires:</h4>
               <span className="street-edition"> • Lots of heavy-duty zip ties.<br/></span>
-              • Lots of <sup>1</sup>⁄<sub>4</sub>&quot; bolts, various lengths, with wing nuts.
+              • Lots of <Measure>1/4"</Measure>quot; bolts, various lengths, with wing nuts.
               <br/><b>Tools:</b> vice grips, aligner pins.
             </div>
 
@@ -373,13 +393,13 @@ const Setup = () => {
                   <li>Crescent wrench</li>
                   <li>Ratchet wrenches or socket wrenches:
                     <ul>
-                      <li><sup>3</sup>⁄<sub>4</sub>″ or 19mm (for <sup>1</sup>⁄<sub>2</sub>″ hardware)</li>
-                      <li><sup>9</sup>⁄<sub>16</sub>″ or 15mm (for <sup>3</sup>⁄<sub>8</sub>″ hardware)</li>
-                      <li><sup>1</sup>⁄<sub>2</sub>″ or 13mm (for <sup>5</sup>⁄<sub>16</sub>″ hardware) (optional)</li>
-                      <li><sup>3</sup>⁄<sub>8</sub>″ or 10mm (for <sup>1</sup>⁄<sub>4</sub>″ hardware) (optional)</li>
+                      <li><Measure>3/4"</Measure> or <Measure>19mm</Measure> (for <Measure>1/2"</Measure> hardware)</li>
+                      <li><Measure>9/16"</Measure> or <Measure>15mm</Measure> (for <Measure>3/8"</Measure> hardware)</li>
+                      <li><Measure>1/2"</Measure> or <Measure>13mm</Measure> (for <Measure>5/16"</Measure> hardware) (optional)</li>
+                      <li><Measure>3/8"</Measure> or <Measure>10mm</Measure> (for <Measure>1/4"</Measure> hardware) (optional)</li>
                     </ul>
                   </li>
-                  <li>Bin with <sup>1</sup>⁄<sub>4</sub>″ hardware sets</li>
+                  <li>Bin with <Measure>1/4"</Measure> hardware sets</li>
                 </ul>
               </li>
               <li>Gloves</li>
@@ -415,8 +435,8 @@ const Setup = () => {
               <div className="parts-needed">
                 <h4>Requires:</h4>
                 3 people
-                <br/>5 8″×<sup>1</sup>⁄<sub>2</sub>″ bolts.
-                <br/><b>Tools:</b> <sup>9</sup>⁄<sub>16</sub>″ socket wrench, pliers.
+                <br/>5 8"×<Measure>1/2"</Measure> bolts.
+                <br/><b>Tools:</b> <Measure>9/16"</Measure> socket wrench, pliers.
               </div>
 
               <h3>Install speaker shelves.</h3>
@@ -513,7 +533,7 @@ const Setup = () => {
             </section>
 
             <section>
-              <h3>Install forward panel sections (as described above in <a href="setup-useful-info-section">Generally Useful Knowledge</a>) in this order:</h3>
+              <h3>Install forward panel sections (as described above in <a href="#setup-useful-info-section">Generally Useful Knowledge</a>) in this order:</h3>
 
               <ul>
                 <li>Belly (14D … 18D … 23D)</li>
@@ -528,7 +548,7 @@ const Setup = () => {
             </section>
 
             <section>
-              <h3>Install aft panel sections (as described above in <a href="setup-useful-info-section">Generally Useful Knowledge</a>) in this order:</h3>
+              <h3>Install aft panel sections (as described above in <a href="#setup-useful-info-section">Generally Useful Knowledge</a>) in this order:</h3>
 
               <ul>
                 <li>
@@ -800,18 +820,18 @@ const Setup = () => {
                 <h4>Requires:</h4>
                 4 people
                 <br/>15’ rope, front platform, 2 black steel support beams
-                <br/>• 2@2″×<sup>3</sup>⁄<sub>8</sub>″ bolts
-                <br/>• 4@3″×<sup>1</sup>⁄<sub>2</sub>″ bolts
-                <br/>Tools: 2 C-clamps, pliers, impact driver with <sup>3</sup>⁄<sub>4</sub>″ socket.
+                <br/>• 2@2"×<Measure>3/8"</Measure> bolts
+                <br/>• 4@3"×<Measure>1/2"</Measure> bolts
+                <br/>Tools: 2 C-clamps, pliers, impact driver with <Measure>3/4"</Measure> socket.
                 <br/>Shop stairs.
               </div>
               <h3>Install front platform extension.</h3>
 
               <ul>
-                <li>Attach support beams to the sides of the platform using the <sup>3</sup>⁄<sub>8</sub>″ bolts. They'll hang down at a 45° angle.</li>
+                <li>Attach support beams to the sides of the platform using the <Measure>3/8"</Measure> bolts. They'll hang down at a 45° angle.</li>
                 <li>Feed rope through loops at front of platform.</li>
                 <li>Place a person on each side of the narrower front section of the fixed platform. Each should have a
-                  C-clamp and two <sup>1</sup>⁄<sub>2</sub>″ bolts.
+                  C-clamp and two <Measure>1/2"</Measure> bolts.
                 </li>
                 <li>Position platform vertically above Arch #1. Align it so the bolt holes will match when lowered into
                   place.
@@ -820,7 +840,7 @@ const Setup = () => {
                   beams should rest on the horizontal beam just above the bus roof.
                 </li>
                 <li>Use C-clamps to temporarily secure the platform.</li>
-                <li>One side at a time, insert <sup>1</sup>⁄<sub>2</sub>″ bolts and tighten using impact driver. You may need
+                <li>One side at a time, insert <Measure>1/2"</Measure> bolts and tighten using impact driver. You may need
                   to leave the bolts a little loose until they've all been inserted since the holes aren't perfectly aligned.
                 </li>
               </ul>
@@ -829,7 +849,7 @@ const Setup = () => {
             <section>
               <div className="parts-needed">
                 <h4>Requires:</h4>
-                4 people, 10' rope, 4 <sup>1</sup>⁄<sub>4</sub>″ bolts, hammer, 2 large vice grips, 4 wood screws, drill.
+                4 people, 10' rope, 4 <Measure>1/4"</Measure> bolts, hammer, 2 large vice grips, 4 wood screws, drill.
               </div>
 
               <h3>Install face.</h3>
@@ -918,7 +938,7 @@ const Setup = () => {
 
             <p>Disable bus suspension.
               <span className="stationary">For stationary setup, use four jack stands. Position the stands so they support a
-              part of the bus that is connected to the frame with heavy-gauge steel (<sup>1</sup>⁄<sub>4</sub>″ or thicker),
+              part of the bus that is connected to the frame with heavy-gauge steel (<Measure>1/4"</Measure> or thicker),
               as close to the outer edges of the bus as possible. You'll likely need cinder or wood blocks under the rear
               jacks. Lift the bus an inch or two using the bottle jack, place the jack stands, and lower the bus onto them.</span>
               <span className="mobile">For mobile setup, use wood blocks between axle and bus.</span>
