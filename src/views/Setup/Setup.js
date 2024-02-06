@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useTheme } from '@mui/material/styles';
 import MetaTags from 'react-meta-tags';
 import Container from 'components/Container';
@@ -6,6 +6,7 @@ import Container from 'components/Container';
 import Main from 'layouts/Main';
 
 import '../../styles/setup/screen.scss';
+import { Input } from '@mui/material';
 
 const Measure = ({children}) => {
   const fractionOfInch = /(\d+)\/(\d+)"/.exec(children);
@@ -25,7 +26,7 @@ const Measure = ({children}) => {
   return (
     <span className="measure">{children}</span>
   );
-}
+};
 
 const Setup = () => {
   const theme = useTheme();
@@ -67,16 +68,17 @@ const Setup = () => {
     document.body.classList.toggle('street-edition', !isBrcEdition);
   }
 
-  window.addEventListener('load', function () {
-    applyEdition(document.location.hash.substr(1));
+  useEffect(() => {
+    applyEdition(document.location.hash.substring(1));
     updateBrcEdition();
-  });
+  }, [applyEdition, updateBrcEdition]);
+
   window.addEventListener('hashchange', function () {
-    applyEdition(document.location.hash.substr(1));
+    applyEdition(document.location.hash.substring(1));
   });
 
   return (
-    <Main>
+    <Main className="setup">
       <MetaTags>
         <title>BAAAHS Setup Guide</title>
 
@@ -89,39 +91,13 @@ const Setup = () => {
           href="https://fonts.googleapis.com/css?family=Open+Sans|Open+Sans+Condensed:300|Special+Elite|Noto+Sans:400,700,400italic,700italic"
           rel="stylesheet" type="text/css"/>
 
-        <link href="../../styles/setup/screen.css"
+        <link href="../../styles/setup/screen.scss"
           media="screen, projection" rel="stylesheet" type="text/css"/>
-        <link href="../../styles/setup/print.css" media="print"
+        <link href="../../styles/setup/print.scss" media="print"
           rel="stylesheet" type="text/css"/>
-
-
-        {/*
-          <style type="text/css">
-            .brc-edition .not-brc-edition, .brc-edition .street-edition {
-              display: none;
-            }
-            .street-edition .not-street-edition, .street-edition .brc-edition {
-              display: none;
-            }
-          </style>
-        */}
-
       </MetaTags>
 
       <Container>
-        <header className="logotype">
-          <hgroup className="logotype">
-            <img
-              src="/images/logo/BAAAHS2015LogoWithBorder-160x136.png"
-              srcSet="/images/logo/BAAAHS2015LogoWithBorder-320x272.png 2x "
-              className="logo"/>
-
-            <h1>B<span className="a">AA</span>AHS</h1>
-
-            <h2>big-ass amazingly awesome homosexual sheep</h2>
-          </hgroup>
-        </header>
-
         <div id="edition-picker">
           Edition:
           <ul>
@@ -131,7 +107,7 @@ const Setup = () => {
             <li><a href="#business-crew">Business Crew</a></li>
             <li><a href="#head-and-hind-crew">Head & Hind Crew</a></li>
             <li><a href="#tech-crew">Tech</a></li>
-            <li><label><input id="brc-edition-checkbox" type="checkbox" checked onClick="updateBrcEdition()"/> BRC</label></li>
+            <li><label><Input id="brc-edition-checkbox" type="checkbox" checked onChange={updateBrcEdition}/> BRC</label></li>
           </ul>
         </div>
 
