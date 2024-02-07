@@ -8,7 +8,7 @@ import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Grid';
 
 import CampoutMain from 'layouts/CampoutMain.js';
-import BAAAHSLogo from 'layouts/Main/BAAAHSLogo';
+import FullScreenHeader from 'components/FullScreenHeader';
 
 const content = [
   {
@@ -54,48 +54,20 @@ const CampoutHome = () => {
 
   return (
     <CampoutMain>
-      <Box>
+      <Box gap={3}>
+        <FullScreenHeader
+          image={
+            'https://storage.googleapis.com/static.baaahs.org/PXL_20230416_022706111.jpeg'
+          }
+          logo={
+            'https://storage.googleapis.com/static.baaahs.org/campout_logo_no_border.png'
+          }
+          title={'BAAAHS Campout'}
+          text={
+            'Our Campout has been going on for years. Here are some of the highlights from previous years.'
+          }
+        />
         <Grid container spacing={2} justifyContent={'center'}>
-          <Grid
-            item
-            container
-            justifyContent={'center'}
-            alignItems={'center'}
-            xs={12}
-            xl={8}
-          >
-            <Box position="relative" width={1}>
-              <Box
-                component={'img'}
-                loading="lazy"
-                height={721}
-                width={1}
-                src={
-                  'https://s3-alpha-sig.figma.com/img/c89d/4e12/eefe946ff30cbb1cb7a179dbdea276cb?Expires=1707091200&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=Laf-0O8AHbiQ3adR48PYDVWA6Bz~~hAmuaJ2Cb7nisp2ZbAs2~1DTjLei-HnHJ2hlfdZ-UtrhU1DeovvyLd4gEEf3dCstgWjEuFz-Y~o1KKZ~P6tLV7rc7kkQk86dUWXLwBvAQrsvsquvEhup5tKgTb2XkhiVfQZnOM0i-CLhfOKjLoTSIFDlS9oVdUIx9xbVrtRVeMuce4jGUysvqwElDDf60PvOzSNBVvQjRTiCx~28mfzlpUNL2OxB75zNfD77Xk805XOTHiGv~XrbTxETueqWp0gM48GF~IFLyX3SuEGEXDV9vg5JIrhjfT7zZxfD2lXBZK22K~Z7MvPfNM~Fg__'
-                }
-                alt="BAAAHS Campout 2024 background image"
-                sx={{
-                  objectFit: 'cover',
-                  filter:
-                    theme.palette.mode === 'dark' ? 'brightness(0.6)' : 'none',
-                }}
-              />
-              <Box
-                position="absolute"
-                top={0}
-                left={0}
-                width={1}
-                height={1}
-                display="flex"
-                alignItems="center"
-                justifyContent="center"
-              >
-                <Box width={500} bgcolor={theme.palette.primary.main}>
-                  <BAAAHSLogo />
-                </Box>
-              </Box>
-            </Box>
-          </Grid>
           <Grid item container xs={10} xl={8}>
             <Box marginBottom={4}>
               <Typography
