@@ -112,10 +112,10 @@ const WhatToExpect = () => {
                     direction="column"
                     justifyContent={'center'}
                   >
-                    <Typography component="h1" align={isMd ? 'end' : 'center'}>
+                    <Typography component="h2" align={isMd ? 'end' : 'center'} fontFamily={'Smooth Circulars'}>
                       {item.header}
                     </Typography>
-                    <Typography align={isMd ? 'end' : 'center'}>
+                    <Typography component="" align={isMd ? 'end' : 'center'}>
                       {item.body}
                     </Typography>
                   </Grid>
@@ -129,7 +129,7 @@ const WhatToExpect = () => {
                   alignItems='center'
                 >
                   <Box 
-                    component="img" 
+                    component="img"
                     loading="lazy"
                     src={item.img.src}
                     alt={item.body}
@@ -152,10 +152,16 @@ const WhatToExpect = () => {
                     alignItems={'start'}
                     direction="column"
                   >
-                    <Typography component="h1" align="start">
+                    <Typography 
+                      component="h2" 
+                      align="start" 
+                      sx={{
+                        fontWeight: 700,
+                      }}
+                      fontFamily={'Smooth Circulars'}>
                       {item.header}
                     </Typography>
-                    <Typography align="start">
+                    <Typography variant="h4" align="start">
                       {item.body}
                     </Typography>
                   </Grid>
