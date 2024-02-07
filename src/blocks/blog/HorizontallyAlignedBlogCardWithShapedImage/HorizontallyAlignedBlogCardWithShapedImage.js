@@ -62,8 +62,9 @@ const HorizontallyAlignedBlogCardWithShapedImage = ({ data }) => {
               src={image}
               alt="..."
               sx={{
+                width: '100%',
+                height: '100%',
                 objectFit: 'cover',
-                maxHeight: 360,
                 filter:
                   theme.palette.mode === 'dark' ? 'brightness(0.7)' : 'none',
               }}
@@ -86,12 +87,7 @@ const HorizontallyAlignedBlogCardWithShapedImage = ({ data }) => {
                 transformOrigin: 'top center',
                 display: { xs: 'none', md: 'block' },
               }}
-            >
-              <path
-                d="M0 0h62.759v172C38.62 384 112 517 112 517v173H0V0z"
-                fill="currentColor"
-              />
-            </Box>
+            />
           </Box>
           <CardContent
             sx={{
