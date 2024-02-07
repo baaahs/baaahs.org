@@ -1,14 +1,17 @@
 import React, { useEffect } from 'react';
 import { alpha } from '@mui/material/styles';
 import Box from '@mui/material/Box';
+import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 
 import Container from 'components/Container';
 
-const FullScreenHeader = ({ image, title, text }) => {
+const FullScreenHeader = ({ image, title, text, logo }) => {
   const backgroundImage = image || 'https://assets.maccarianagency.com/backgrounds/img52.jpg';
   const titleText = title || 'About Us';
   const bodyText = text || 'We are founded by a leading academic and researcher in the field of Industrial Systems Engineering.';
+  const displayLogo = logo || false;
+
   useEffect(() => {
     const jarallaxInit = async () => {
       const jarallaxElems = document.querySelectorAll('.jarallax');
@@ -68,7 +71,28 @@ const FullScreenHeader = ({ image, title, text }) => {
           zIndex: 1,
         }}
       />
-      <Container position={'relative'} zIndex={2}>
+      {displayLogo && (
+        <Container position={'relative'} zIndex={2}>
+          <Grid container xs={12} columnGap={12} sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            <Grid item xs={4} >
+              <img
+                src={logo}
+                alt="Logo"
+                width={450}
+              />
+            </Grid>
+            <Grid item xs={6} sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+              <Typography
+                variant="h2"
+                color='common.white'
+                fontWeight={900}
+              >
+                {titleText}
+              </Typography>
+            </Grid>
+          </Grid>
+        </Container>)}
+      {!displayLogo && (<Container position={'relative'} zIndex={2}>
         <Box>
           <Typography
             variant="h2"
@@ -92,7 +116,7 @@ const FullScreenHeader = ({ image, title, text }) => {
             {bodyText}
           </Typography>
         </Box>
-      </Container>
+      </Container>)}
     </Box>
   );
 };
