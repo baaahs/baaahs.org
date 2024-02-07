@@ -13,7 +13,7 @@ import { Topbar, Sidebar, Footer } from './components';
 
 import pages from '../navigation';
 
-const Main = ({ children, colorInvert = false, bgcolor = 'transparent' }) => {
+const Main = ({ children, colorInvert = false, bgcolor = 'transparent', className = '' }) => {
   const theme = useTheme();
   const isMd = useMediaQuery(theme.breakpoints.up('md'), {
     defaultMatches: true,
@@ -60,7 +60,7 @@ const Main = ({ children, colorInvert = false, bgcolor = 'transparent' }) => {
         variant="temporary"
         pages={pages}
       />
-      <main>
+      <main className={className}>
         {children}
         <Divider />
       </main>
@@ -75,6 +75,7 @@ Main.propTypes = {
   children: PropTypes.node,
   colorInvert: PropTypes.bool,
   bgcolor: PropTypes.string,
+  className: PropTypes.string,
 };
 
 export default Main;

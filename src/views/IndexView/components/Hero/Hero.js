@@ -1,8 +1,8 @@
 import React from 'react';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
-import Button from '@mui/material/Button';
-import useMediaQuery from '@mui/material/useMediaQuery';
+// import Button from '@mui/material/Button';
+// import useMediaQuery from '@mui/material/useMediaQuery';
 import { alpha, useTheme } from '@mui/material/styles';
 
 import Container from 'components/Container';
@@ -95,9 +95,9 @@ const HoverableLetter = ({ letterSelector, children }) => {
 
 const Hero = () => {
   const theme = useTheme();
-  const isMd = useMediaQuery(theme.breakpoints.up('md'), {
-    defaultMatches: true,
-  });
+  // const isMd = useMediaQuery(theme.breakpoints.up('md'), {
+  //   defaultMatches: true,
+  // });
 
   return (
     <Box
@@ -120,7 +120,7 @@ const Hero = () => {
               marginBottom={{ xs: 1, sm: 2 }}
               color='text.primary'
               fontFamily={'Smooth Circulars'}
-              fontSize={{ xs: '4.5rem', sm: '4.5rem', md: '4.5rem', lg: '5.75rem', xl: '5.75.rem' }}
+              fontSize={{ xs: '3.7rem', sm: '4rem', md: '4.5rem', lg: '5.75rem', xl: '5.75.rem' }}
               sx={{ cursor: 'default' }}
             >
               <HoverableLetter letterSelector='.baaahs-letter-b'>B</HoverableLetter>
@@ -139,7 +139,8 @@ const Hero = () => {
               component="p"
               color="text.primary"
               fontFamily={'Smooth Circulars'}
-              fontSize={{ xs: '.85rem', sm: '.85rem', md: '.85rem', lg: '.85rem', xl: '.85rem' }}
+              fontSize={{ xs: '.55rem', sm: '.59rem', md: '.67rem', lg: '.85rem', xl: '.85rem' }}
+              whiteSpace="nowrap"
               sx={{
                 fontWeight: 400,
                 cursor: 'default',
@@ -165,6 +166,7 @@ const Hero = () => {
               The Big-Ass Amazingly Awesome Homosexual Sheep (BAAAHS) is a
               mutant vehicle, a mobile disco, and a penetrable social statement.
             </Typography>
+            {/*
             <Box
               display="flex"
               flexDirection={{ xs: 'column', sm: 'row' }}
@@ -198,6 +200,7 @@ const Hero = () => {
                 </Button>
               </Box>
             </Box>
+          */}
           </Box>
         </Container>
         <Box

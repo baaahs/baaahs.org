@@ -11,33 +11,12 @@ import IconInstagram from 'svg/illustrations/IconInstagram';
 import IconFacebook from 'svg/illustrations/IconFacebook';
 import BAAAHSLogo from '../../BAAAHSLogo';
 
-const defaultNavBarItems = [
-  {
-    title: 'events',
-    href: '/events',
-  },
-  {
-    title: 'music',
-    href: '/music',
-  },
-  {
-    title: 'campout',
-    href: '/campout',
-  },
-  {
-    title: 'fundraising',
-    href: '/fundraising',
-  },
-  {
-    title: 'about',
-    href: '/about',
-  },
-];
+import pages from '../../../navigation';
 
 const Topbar = ({ onSidebarOpen, colorInvert = false, data }) => {
   const theme = useTheme();
 
-  const navItems = data?.navItems ?? defaultNavBarItems;
+  const navItems = data?.navItems ?? pages.sections;
   return (
     <Box
       display={'flex'}
@@ -67,6 +46,7 @@ const Topbar = ({ onSidebarOpen, colorInvert = false, data }) => {
                   display: 'flex',
                   alignItems: 'center',
                   fontWeight: 'bold',
+                  textTransform: 'lowercase',
                 }}
               >
                 {item.title}
