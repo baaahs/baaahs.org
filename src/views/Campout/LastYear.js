@@ -95,7 +95,7 @@ const LastYear = () => {
   return (
     <CampoutMain colorInvert={true} >
       <Box gap={3}>
-        <FullScreenHeader image={'https://s3-alpha-sig.figma.com/img/f6ef/7aa3/355af7866134365ca27494dcfbd78f51?Expires=1707091200&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=GvuXE7YdqZL67nSS8h4f8Nze7oNeDypOqsDXBr05uxL9ZUYNJbkGM~~TXbz45LdefCfwzqMeO-Mcy73cr4kcGNLZ88Y1INxdwwKwda-eTkhY7QlmlmvNi67jGoumBsJTGffhZS0KMKxE6R7Us0mURuFdbRdFm~05XGaKCrFqtKosjvafpYtzOwSzDW7yBO7EijpIzCN4hhy5NnzhPTy5GHGoFW-kmTYdMNsX~X4HiFeHJE46s7l2nazcuO8eFy5IjvC4T1cyjZ9FBOoxmiPx8SRFR2d71WrSrz6UsAoduAatUDHmKJaU5tsH6WPFwwKF2iglzfxmiPaoecOpfPHAKA__'} 
+        <FullScreenHeader image={'https://storage.googleapis.com/static.baaahs.org/drag_bingpo_candid0.jpeg'} 
           title={'Previous Years'}
           text={'Our Campout has been going on for years. Here are some of the highlights from previous years.'}
         />
