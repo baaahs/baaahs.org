@@ -24,21 +24,21 @@ const Footer = () => {
             title="theFront"
             width={100}
           >
-            <BAAAHSLogo/>
+            <BAAAHSLogo />
           </Box>
           <Box display="flex" flexWrap={'wrap'} alignItems={'center'}>
             <Box marginTop={1} marginRight={2}>
               <Link
                 underline="none"
                 component="a"
-                href="/events"
+                href="/campout"
                 color="text.primary"
                 variant={'subtitle2'}
               >
-                events
+                campout
               </Link>
             </Box>
-            <Box marginTop={1} marginRight={2}>
+            {/* <Box marginTop={1} marginRight={2}>
               <Link
                 underline="none"
                 component="a"
@@ -59,7 +59,7 @@ const Footer = () => {
               >
                 fundraising
               </Link>
-            </Box>
+            </Box> */}
             <Box marginTop={1} marginRight={2}>
               <Link
                 underline="none"
@@ -80,7 +80,7 @@ const Footer = () => {
                 href="mailto:info@baaahs.org?subject=Writing%20from%20the%20web"
                 size="small"
               >
-                Contact
+                contact
               </Button>
             </Box>
           </Box>
@@ -93,7 +93,7 @@ const Footer = () => {
           color="text.secondary"
           gutterBottom
         >
-          Footer main
+          Hey cutie
         </Typography>
         <Typography
           align={'center'}
@@ -101,7 +101,7 @@ const Footer = () => {
           color="text.secondary"
           component={'p'}
         >
-          Footer description
+          Thanks for reading this. Xoxo BAAAHS
         </Typography>
       </Grid>
     </Grid>
