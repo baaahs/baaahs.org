@@ -12,37 +12,18 @@ const images = [
     group: [
       {
         cover:
-          'https://assets.maccarianagency.com/screenshots/the-front/img1.png',
-        coverDark:
-          'https://assets.maccarianagency.com/screenshots/the-front/img1--dark.png',
+          'https://storage.googleapis.com/static.baaahs.org/2013_sheep.jpeg',
+        coverDark: undefined,
       },
       {
         cover:
-          'https://assets.maccarianagency.com/screenshots/the-front/img4.png',
-        coverDark:
-          'https://assets.maccarianagency.com/screenshots/the-front/img4--dark.png',
-      },
-    ],
-  },
-  {
-    group: [
-      {
-        cover:
-          'https://assets.maccarianagency.com/screenshots/the-front/img13.png',
-        coverDark:
-          'https://assets.maccarianagency.com/screenshots/the-front/img13--dark.png',
+          'https://storage.googleapis.com/static.baaahs.org/2015_sheep.jpeg',
+        coverDark: undefined,
       },
       {
         cover:
-          'https://assets.maccarianagency.com/screenshots/the-front/img10.png',
-        coverDark:
-          'https://assets.maccarianagency.com/screenshots/the-front/img10--dark.png',
-      },
-      {
-        cover:
-          'https://assets.maccarianagency.com/screenshots/the-front/img7.png',
-        coverDark:
-          'https://assets.maccarianagency.com/screenshots/the-front/img7--dark.png',
+          'https://storage.googleapis.com/static.baaahs.org/shady_xian_discoballs.jpeg',
+        coverDark: undefined,
       },
     ],
   },
@@ -50,27 +31,42 @@ const images = [
     group: [
       {
         cover:
-          'https://assets.maccarianagency.com/screenshots/the-front/img6.png',
-        coverDark:
-          'https://assets.maccarianagency.com/screenshots/the-front/img6--dark.png',
+          'https://storage.googleapis.com/static.baaahs.org/2019_sheep.jpeg',
+        coverDark: undefined,
       },
       {
         cover:
-          'https://assets.maccarianagency.com/screenshots/the-front/img24.png',
-        coverDark:
-          'https://assets.maccarianagency.com/screenshots/the-front/img24--dark.png',
+          'https://storage.googleapis.com/static.baaahs.org/rainbow_baaahs.png',
+        coverDark: undefined,
       },
       {
         cover:
-          'https://assets.maccarianagency.com/screenshots/the-front/img17.png',
-        coverDark:
-          'https://assets.maccarianagency.com/screenshots/the-front/img17--dark.png',
+          'https://storage.googleapis.com/static.baaahs.org/sunset_balls_sheep.jpeg',
+        coverDark: undefined,
+      },
+    ],
+  },
+  {
+    group: [
+      {
+        cover:
+          'https://storage.googleapis.com/static.baaahs.org/2019_sheep_2.jpeg',
+        coverDark: undefined,
+      },
+      {
+        cover:
+          'https://storage.googleapis.com/static.baaahs.org/build_sheep.jpeg',
+        coverDark: undefined,
+      },
+      {
+        cover:
+          'https://storage.googleapis.com/static.baaahs.org/kinky_sheep.jpeg',
+        coverDark: undefined,
       },
       {
         cover:
           'https://assets.maccarianagency.com/screenshots/the-front/img12.png',
-        coverDark:
-          'https://assets.maccarianagency.com/screenshots/the-front/img12--dark.png',
+        coverDark: undefined,
       },
     ],
   },
@@ -89,7 +85,9 @@ const HoverableLetter = ({ letterSelector, children }) => {
           el.classList.remove('baaahs-letter-hover');
         });
       }}
-    >{children}</span>
+    >
+      {children}
+    </span>
   );
 };
 
@@ -114,21 +112,39 @@ const Hero = () => {
         <Container>
           <Box maxWidth={{ xs: 1, sm: '50%' }}>
             <Typography
-              component='h2'
+              component="h2"
               gutterBottom={true}
               width={{ xs: 300, md: 580 }}
               marginBottom={{ xs: 1, sm: 2 }}
-              color='text.primary'
+              color="text.primary"
               fontFamily={'Smooth Circulars'}
-              fontSize={{ xs: '3.7rem', sm: '4rem', md: '4.5rem', lg: '5.75rem', xl: '5.75.rem' }}
+              fontSize={{
+                xs: '3.7rem',
+                sm: '4rem',
+                md: '4.5rem',
+                lg: '5.75rem',
+                xl: '5.75.rem',
+              }}
               sx={{ cursor: 'default' }}
             >
-              <HoverableLetter letterSelector='.baaahs-letter-b'>B</HoverableLetter>
-              <HoverableLetter letterSelector='.baaahs-letter-a1'>A</HoverableLetter>
-              <HoverableLetter letterSelector='.baaahs-letter-a2'>A</HoverableLetter>
-              <HoverableLetter letterSelector='.baaahs-letter-a3'>A</HoverableLetter>
-              <HoverableLetter letterSelector='.baaahs-letter-h'>H</HoverableLetter>
-              <HoverableLetter letterSelector='.baaahs-letter-s'>S</HoverableLetter>
+              <HoverableLetter letterSelector=".baaahs-letter-b">
+                B
+              </HoverableLetter>
+              <HoverableLetter letterSelector=".baaahs-letter-a1">
+                A
+              </HoverableLetter>
+              <HoverableLetter letterSelector=".baaahs-letter-a2">
+                A
+              </HoverableLetter>
+              <HoverableLetter letterSelector=".baaahs-letter-a3">
+                A
+              </HoverableLetter>
+              <HoverableLetter letterSelector=".baaahs-letter-h">
+                H
+              </HoverableLetter>
+              <HoverableLetter letterSelector=".baaahs-letter-s">
+                S
+              </HoverableLetter>
             </Typography>
 
             <Typography
@@ -139,30 +155,37 @@ const Hero = () => {
               component="p"
               color="text.primary"
               fontFamily={'Smooth Circulars'}
-              fontSize={{ xs: '.55rem', sm: '.59rem', md: '.67rem', lg: '.85rem', xl: '.85rem' }}
+              fontSize={{
+                xs: '.55rem',
+                sm: '.59rem',
+                md: '.67rem',
+                lg: '.85rem',
+                xl: '.85rem',
+              }}
               whiteSpace="nowrap"
               sx={{
                 fontWeight: 400,
                 cursor: 'default',
                 '& .baaahs-letter-hover': {
                   fontWeight: 700,
-                  fontStyle: 'italic'
-                }
+                  fontStyle: 'italic',
+                },
               }}
             >
               <span className="baaahs-letter-b">Big</span>-
-              <span className="baaahs-letter-a1">Ass</span><span> </span>
-              <span className="baaahs-letter-a2">Amazingly</span><span> </span>
-              <span className="baaahs-letter-a3">Awesome</span><span> </span>
-              <span className="baaahs-letter-h">Homosexual</span><span> </span>
-              <span className="baaahs-letter-s">Sheep</span><span> </span>
+              <span className="baaahs-letter-a1">Ass</span>
+              <span> </span>
+              <span className="baaahs-letter-a2">Amazingly</span>
+              <span> </span>
+              <span className="baaahs-letter-a3">Awesome</span>
+              <span> </span>
+              <span className="baaahs-letter-h">Homosexual</span>
+              <span> </span>
+              <span className="baaahs-letter-s">Sheep</span>
+              <span> </span>
             </Typography>
 
-            <Typography
-              variant="h6"
-              component="p"
-              color="text.primary"
-            >
+            <Typography variant="h6" component="p" color="text.primary">
               The Big-Ass Amazingly Awesome Homosexual Sheep (BAAAHS) is a
               mutant vehicle, a mobile disco, and a penetrable social statement.
             </Typography>
@@ -212,13 +235,13 @@ const Hero = () => {
           <Box
             display={'flex'}
             width={'50rem'}
-            left={'50%'}
+            left={'45%'}
             top={0}
             position={'absolute'}
-            sx={{ transform: 'translate3d(20%, -50%, 0)' }}
+            sx={{ transform: 'translate3d(20%, -40%, 0)' }}
           >
             {images.map((item, i) => (
-              <Box key={i} marginTop={{ sm: -(i * 16) }} marginX={1}>
+              <Box key={i} marginTop={{ sm: i * 4 }} marginX={1}>
                 {item.group.map((g, j) => (
                   <Box
                     key={j}
@@ -232,7 +255,9 @@ const Hero = () => {
                       component={'img'}
                       loading="lazy"
                       src={
-                        theme.palette.mode === 'dark' ? g.coverDark : g.cover
+                        theme.palette.mode === 'dark'
+                          ? g.coverDark ?? g.cover
+                          : g.cover
                       }
                       height={1}
                       width={1}
