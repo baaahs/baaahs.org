@@ -22,7 +22,17 @@ const mock = {
 
 const HorizontallyAlignedBlogCardWithShapedImage = ({ data }) => {
   const theme = useTheme();
-  const { image, description, title, date, author, flip, maxHeight, maxWidth } = data || mock;
+  const {
+    image,
+    description,
+    title,
+    date,
+    author,
+    flip,
+    maxHeight,
+    maxWidth,
+    fontSize,
+  } = data || mock;
   return (
     <Container>
       <Box
@@ -45,7 +55,10 @@ const HorizontallyAlignedBlogCardWithShapedImage = ({ data }) => {
           height={1}
           boxShadow={4}
           display={'flex'}
-          flexDirection={{ xs: flip ? 'column' : 'column-reverse', md: flip ? 'row-reverse' : 'row' }}
+          flexDirection={{
+            xs: flip ? 'column' : 'column-reverse',
+            md: flip ? 'row-reverse' : 'row',
+          }}
           sx={{ backgroundImage: 'none' }}
         >
           <Box
@@ -100,10 +113,16 @@ const HorizontallyAlignedBlogCardWithShapedImage = ({ data }) => {
             }}
           >
             <Box>
-              <Typography variant={'h5'} gutterBottom fontFamily={'Smooth Circulars'}>
+              <Typography
+                variant={'h5'}
+                gutterBottom
+                fontFamily={'Smooth Circulars'}
+              >
                 {title}
               </Typography>
-              <Typography color="text.secondary">{description}</Typography>
+              <Typography color="text.secondary" fontSize={fontSize}>
+                {description}
+              </Typography>
             </Box>
             <Box>
               <Divider sx={{ marginY: 2 }} />

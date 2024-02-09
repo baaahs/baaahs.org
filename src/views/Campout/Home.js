@@ -15,37 +15,67 @@ const content = [
     title: 'Community Driven',
     subtitle:
       'It really takes a village folks. Campers are expected to participate during the weekend to make the event possible, and we encourage helping and getting involved even before the campout for the full BAAAHS experience.',
-    icon: <img src=""></img>,
+    icon: (
+      <img
+        src="https://storage.googleapis.com/static.baaahs.org/trixie_and_friends.jpeg"
+        style={{ borderRadius: '50%', width: '150%' }}
+      ></img>
+    ),
   },
   {
     title: 'BAAAHS Lights and Sound',
     subtitle:
       'You can expect the iconic BAAAHS light arrays in full display along with our world class sound system while you’re dancing with your closest friends surrounded by nature. There ain’t no party like a BAAAHS party bb!!',
-    icon: <img src=""></img>,
+    icon: (
+      <img
+        src="https://storage.googleapis.com/static.baaahs.org/ben_dancing_lights.png"
+        style={{ borderRadius: '50%', width: '150%' }}
+      ></img>
+    ),
   },
   {
     title: 'Nature',
     subtitle:
       'Hosted at The Incline, a new queer-owned retreat space in the mountains close to the Mendocino National Forest. You can expect majestic views of the surrounding forest and a beautiful canopy to set up your tent under.',
-    icon: <img src=""></img>,
+    icon: (
+      <img
+        src="https://storage.googleapis.com/static.baaahs.org/mendocino_view.jpeg"
+        style={{ borderRadius: '50%', height: '120%' }}
+      ></img>
+    ),
   },
   {
     title: 'Participation',
     subtitle:
       'Through out the weekend we put on amazing parties and activities, and they all need YOU! A big part of our campout is to try something new and leave that pride and judgement at the gate. We are all in this together and we lift each other up when someone challenges themselves to grow and flourish.',
-    icon: <img src=""></img>,
+    icon: (
+      <img
+        src="https://storage.googleapis.com/static.baaahs.org/crafts.jpeg"
+        style={{ borderRadius: '50%', width: '150%' }}
+      ></img>
+    ),
   },
   {
     title: 'Art',
     subtitle:
       'Art is a big part of our campout and have worked hard in previous years to bring queer art from the Bay Area to the Incline. Attendees are encouraged to reach out to us if they themselves want to bring their art to the campout, we are always willing to lend a hand with logistics.',
-    icon: <img src=""></img>,
+    icon: (
+      <img
+        src="https://storage.googleapis.com/static.baaahs.org/simon_art_piece.png"
+        style={{ borderRadius: '50%', width: '150%' }}
+      ></img>
+    ),
   },
   {
     title: 'Values',
     subtitle:
       'BAAAHS is a Burning Man camp and so it’s important for us to follow the Ten Principles of Burning Man. We also STRONGLY value consent of all forms and in general aim to create a Safe Space for ALL.',
-    icon: <img src=""></img>,
+    icon: (
+      <img
+        src="https://storage.googleapis.com/static.baaahs.org/gender_reveal.jpeg"
+        style={{ borderRadius: '50%', width: '150%' }}
+      ></img>
+    ),
   },
 ];
 

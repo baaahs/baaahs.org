@@ -55,7 +55,7 @@ const content = [
   },
   {
     header: 'Camping',
-    body: 'We are sleeping (mostly) in tents folks! There will be some campsite power for charging phones and lights, but nothing crazy. There are also VERY LIMITED RV and car camping slots available at extra cost.',
+    body: 'We are sleeping (mostly) in tents folks! There will be some campsite power for charging phones and lights, but nothing crazy. There are also VERY LIMITED RV passes available at extra cost.',
     img: {
       src: 'https://storage.googleapis.com/static.baaahs.org/Baaahs-camp%20out-fire-fb.png',
       height: '100%',
@@ -76,27 +76,35 @@ const WhatToExpect = () => {
   return (
     <CampoutMain colorInvert={true}>
       <Box gap={3}>
-        <FullScreenHeader image={'https://storage.googleapis.com/static.baaahs.org/drag_bingo_pan.png'} 
+        <FullScreenHeader
+          image={
+            'https://storage.googleapis.com/static.baaahs.org/drag_bingo_pan.png'
+          }
           title={'What To Expect'}
-          text={'BAAAHS Campout is a 3-night queer-Burner camping experience for your NERVES'}
+          text={
+            'BAAAHS Campout is a 3-night queer-Burner camping experience for your NERVES'
+          }
         />
-        <Grid
-          container
-          spacing={2}
-          justifyContent={'center'}
-        >
-          <Grid container item xs={12} xl={8} spacing={2} justifyContent="center">
+        <Grid container spacing={2} justifyContent={'center'}>
+          <Grid
+            container
+            item
+            xs={12}
+            xl={8}
+            spacing={2}
+            justifyContent="center"
+          >
             {content.map((item, key) => (
               <HorizontallyAlignedBlogCardWithShapedImage
                 key={key}
                 flip={key % 2 === 0}
                 data={{
                   image: item.img.src,
-                  description:
-                    item.body,
+                  description: item.body,
                   title: item.header,
                   maxHeight: item.img.height,
                   maxWidth: item.img.width,
+                  fontSize: 32,
                 }}
               />
             ))}
