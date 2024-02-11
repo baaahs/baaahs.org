@@ -194,7 +194,7 @@ const Project = ({ name, x, y }) => {
   return (
     <Fragment>
       <g className="project-group">
-        <rect x={x} y={y} width="0" height="0" data-orig-x={x} data-orig-y={y}/>
+        <rect x={x} y={y} rx='3' ry="3" width="0" height="0" data-orig-x={x} data-orig-y={y}/>
         <text x={x} y={y} dx="100%">
           {
             name.split(' ').map((word, i) => {
@@ -247,7 +247,7 @@ export const Org2024 = () => {
         <Container>
           <span>BAAAHS Org 2024</span>
 
-          <svg ref={svgLoaded} viewBox="-576 -20 2100 356" width="1200px"
+          <svg ref={svgLoaded} viewBox="-576 -20 2100 356" width="100%"
             height="726px" xmlns="http://www.w3.org/2000/svg">
             <style>{`
               .ring-group ellipse {
@@ -267,6 +267,10 @@ export const Org2024 = () => {
                 stroke-width: 1;
                 fill: rgb(135, 135, 240);
                 opacity: .5;
+              }
+              .project-group:hover rect {
+                stroke-width: 2;
+                opacity: .8;
               }
               
               .project-group text {
