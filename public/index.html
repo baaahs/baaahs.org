@@ -8,8 +8,10 @@
       const hostname = document.location.hostname;
       if (hostname === "staging.baaahs.org") {
         favicon.setAttribute("href", "/images/favicon-staging.png");
-      } else if (hostname === "dev.baaahs.org" || hostname.indexOf("baaahs.org") === -1) {
+      } else if (hostname === "dev.baaahs.org") {
         favicon.setAttribute("href", "/images/favicon-dev.png");
+      } else if (hostname.indexOf("baaahs.org") === -1) {
+        favicon.setAttribute("href", "/images/favicon-local.png");
       }
     </script>
     <meta
