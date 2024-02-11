@@ -74,11 +74,11 @@ const FullScreenHeader = ({ image, title, text, logo }) => {
       {displayLogo && (
         <Container position={'relative'} zIndex={2}>
           <Grid container xs={12} columnGap={12} sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-            <Grid item xs={4} >
+            <Grid item xs={4}>
               <img
                 src={logo}
                 alt="Logo"
-                width={450}
+                width="100%"
               />
             </Grid>
             <Grid item xs={6} sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
