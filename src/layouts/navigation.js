@@ -4,7 +4,7 @@ const pages = {
     // { title: 'Events', href: '/events' },
     // { title: 'Music', href: '/music' },
     // { title: 'Fundraising', href: '/fundraising' },
-    { title: 'About', href: '/about' },
+    // { title: 'About', href: '/about' },
   ],
   landings: [
     { title: 'Mobile App', href: '/mobile-app' },
