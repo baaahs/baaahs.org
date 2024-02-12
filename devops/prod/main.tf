@@ -300,6 +300,18 @@ resource "google_compute_url_map" "main" {
     path_matcher {
         name            = "dev"
         default_service = google_compute_backend_bucket.dev.id
+
+        route_rules {
+            priority = 10
+            match_rules {
+                full_path_match = "/drive"
+            }
+            url_redirect {
+                https_redirect = true
+                host_redirect = "drive.google.com"
+                path_redirect = "/drive/folders/0B_TasILTM6TWa18zdHdmNHpUYzg"
+            }
+        }
     }
 
     # The static path_matcher is easy. It's a filesystem. No fancy stuff.
