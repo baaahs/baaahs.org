@@ -247,6 +247,8 @@ resource "google_compute_backend_bucket" "dev" {
 # to the right backends for api things. So we have a request that has various
 # parts, and we're trying to get it matched up with one of those services
 # we defined above.
+#
+# Documentation https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/compute_url_map
 
 resource "google_compute_url_map" "main" {
     name            = "lb-map"
@@ -290,6 +292,210 @@ resource "google_compute_url_map" "main" {
     path_matcher {
         name            = "prod"
         default_service = google_compute_backend_bucket.prod.id
+
+        route_rules {
+            priority = 10
+            match_rules {
+                full_path_match = "/drive"
+            }
+            url_redirect {
+                https_redirect = true
+                host_redirect = "drive.google.com"
+                path_redirect = "/drive/folders/0B_TasILTM6TWa18zdHdmNHpUYzg"
+            }
+        }
+
+        # TODO: Check if this one is still valid
+        route_rules {
+            priority = 20
+            match_rules {
+                full_path_match = "/pspride"
+            }
+            url_redirect {
+                https_redirect = true
+                path_redirect = "/psp/"
+            }
+        }
+
+        route_rules {
+            priority = 30
+            match_rules {
+                full_path_match = "/join"
+            }
+            url_redirect {
+                https_redirect = true
+                host_redirect = "goo.gl"
+                path_redirect = "/forms/XUvltyxql2"
+            }
+        }
+
+        # TODO: Check if this one is still valid
+        route_rules {
+            priority = 40
+            match_rules {
+                full_path_match = "/setup"
+            }
+            url_redirect {
+                https_redirect = true
+                path_redirect = "/setup/"
+            }
+        }
+
+        route_rules {
+            priority = 50
+            match_rules {
+                full_path_match = "/geometry"
+            }
+            url_redirect {
+                https_redirect = true
+                host_redirect = "baaahs.github.io"
+                path_redirect = "/geometry/html/viewer.html?#map"
+            }
+        }
+
+        route_rules {
+            priority = 60
+            match_rules {
+                full_path_match = "/model"
+            }
+            url_redirect {
+                https_redirect = true
+                host_redirect = "baaahs.github.io"
+                path_redirect = "/geometry/html/viewer.html?#map"
+            }
+        }
+
+        route_rules {
+            priority = 70
+            match_rules {
+                full_path_match = "/cal"
+            }
+            url_redirect {
+                https_redirect = true
+                host_redirect = "calendar.google.com"
+                path_redirect = "/calendar?cid=ODlydDZ0MWs1am1oMm9odnZicXBvbTZyMW9AZ3JvdXAuY2FsZW5kYXIuZ29vZ2xlLmNvbQ"
+            }
+        }
+
+        route_rules {
+            priority = 80
+            match_rules {
+                full_path_match = "/cal-private"
+            }
+            url_redirect {
+                https_redirect = true
+                host_redirect = "calendar.google.com"
+                path_redirect = "/calendar/embed?src=eo8lcds32ki40o14dr6m5t0o5s%40group.calendar.google.com&ctz=America%2FLos_Angeles"
+            }
+        }
+
+        route_rules {
+            priority = 90
+            match_rules {
+                full_path_match = "/slack"
+            }
+            url_redirect {
+                https_redirect = true
+                host_redirect = "baaahs.slack.com"
+                path_redirect = "/"
+            }
+        }
+
+        route_rules {
+            priority = 100
+            match_rules {
+                full_path_match = "/slack-invite"
+            }
+            url_redirect {
+                https_redirect = true
+                host_redirect = "join.slack.com"
+                path_redirect = "/t/baaahs/shared_invite/enQtODg3MTE3NTk1ODA4LTRhMDEyZTY1MmI4YjIzN2JlYmUxMWQyNGMyYjA4MDhkMmMwMTU3YWFjOTVjNGZhZGY3YTc4MTNlZDE1NzFmMmY"
+            }
+        }
+
+        route_rules {
+            priority = 110
+            match_rules {
+                full_path_match = "/2020"
+            }
+            url_redirect {
+                https_redirect = true
+                host_redirect = "drive.google.com"
+                path_redirect = "/drive/folders/1-5VGf1gZXyzGN1lYNVF1KwGBrJ6n9t4L"
+            }
+        }
+
+        route_rules {
+            priority = 120
+            match_rules {
+                full_path_match = "/2020-form"
+            }
+            url_redirect {
+                https_redirect = true
+                host_redirect = "docs.google.com"
+                path_redirect = "/forms/d/e/1FAIpQLSfuh4BvWp1q4eQ_W_sVCDsKmlOPPB1N5RekJHLTjCsR5qdeFQ/viewform"
+            }
+        }
+
+        route_rules {
+            priority = 130
+            match_rules {
+                full_path_match = "/2020-doc"
+            }
+            url_redirect {
+                https_redirect = true
+                host_redirect = "docs.google.com"
+                path_redirect = "/document/d/10Do2qdITwrQxGOeMGd7pe1jrIxQejF-W5jHK2wbagfE"
+            }
+        }
+
+        route_rules {
+            priority = 140
+            match_rules {
+                full_path_match = "/2020-sheet"
+            }
+            url_redirect {
+                https_redirect = true
+                host_redirect = "docs.google.com"
+                path_redirect = "/spreadsheets/d/11FeKLaktPhMq_Oh_mG8TBK3U9_eY2oHBGxE0T3GzLhU"
+            }
+        }
+
+        route_rules {
+            priority = 150
+            match_rules {
+                full_path_match = "/crew"
+            }
+            url_redirect {
+                https_redirect = true
+                host_redirect = "docs.google.com"
+                path_redirect = "/document/d/11mQX1lZpP0rMNNV1Uni_J0hutXaMEhsjvKtermUuY6Q
+            }
+        }
+
+        route_rules {
+            priority = 160
+            match_rules {
+                full_path_match = "/dj"
+            }
+            url_redirect {
+                https_redirect = true
+                host_redirect = "docs.google.com"
+                path_redirect = "/forms/d/e/1FAIpQLSeaDIVG7c5uKHetUvo1IX4R6PrTg1agjyGdEMnxYOvTBCF_YQ/viewform?usp=sf_link
+            }
+        }
+
+        route_rules {
+            priority = 170
+            match_rules {
+                full_path_match = "/apply"
+            }
+            url_redirect {
+                https_redirect = true
+                host_redirect = "bit.ly"
+                path_redirect = "/baaahs-2024-application
+            }
+        }
     }
 
     path_matcher {
@@ -301,6 +507,10 @@ resource "google_compute_url_map" "main" {
         name            = "dev"
         default_service = google_compute_backend_bucket.dev.id
 
+        # The following is the general format of a redirect. Rather than
+        # repeating them across all environments I'm only going to put them on prod
+        # because typing. Someday it might be nice to have a script that reads
+        # a simpler format and generates the terraform format.
         route_rules {
             priority = 10
             match_rules {
