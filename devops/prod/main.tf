@@ -469,7 +469,7 @@ resource "google_compute_url_map" "main" {
             url_redirect {
                 https_redirect = true
                 host_redirect = "docs.google.com"
-                path_redirect = "/document/d/11mQX1lZpP0rMNNV1Uni_J0hutXaMEhsjvKtermUuY6Q
+                path_redirect = "/document/d/11mQX1lZpP0rMNNV1Uni_J0hutXaMEhsjvKtermUuY6Q"
             }
         }
 
@@ -481,7 +481,7 @@ resource "google_compute_url_map" "main" {
             url_redirect {
                 https_redirect = true
                 host_redirect = "docs.google.com"
-                path_redirect = "/forms/d/e/1FAIpQLSeaDIVG7c5uKHetUvo1IX4R6PrTg1agjyGdEMnxYOvTBCF_YQ/viewform?usp=sf_link
+                path_redirect = "/forms/d/e/1FAIpQLSeaDIVG7c5uKHetUvo1IX4R6PrTg1agjyGdEMnxYOvTBCF_YQ/viewform?usp=sf_link"
             }
         }
 
@@ -493,7 +493,7 @@ resource "google_compute_url_map" "main" {
             url_redirect {
                 https_redirect = true
                 host_redirect = "bit.ly"
-                path_redirect = "/baaahs-2024-application
+                path_redirect = "/baaahs-2024-application"
             }
         }
     }
