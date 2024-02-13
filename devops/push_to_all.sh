@@ -35,14 +35,15 @@ for branch in "${deploy_branches[@]}"
 do
     printf "\nBranch 🌴 ${branch}\n"
 
-    green "Pausing for 5s so github doesn't get mad..."
-    sleep 5
+    green "Pausing for 10s so github doesn't get mad..."
+    sleep 10
 
     green "git checkout"
     git checkout "$branch" || error_exit "Failed to checkout $branch"
 
     green "git fetch"
-    git fetch
+    git fetch || error_exit "Failed to fetch on $branch"
+    
     LOCAL=$(git rev-parse @)
     REMOTE=$(git rev-parse @{u})
     if [[ "$LOCAL" != "$REMOTE" ]]; then
@@ -56,6 +57,9 @@ do
 
     green "Merging main into this branch"
     git merge main || error_exit "Failed to merge 'main' into $branch"
+
+    green "Another 10s for rate limits..."
+    sleep 10
 
     green "Pushing to $branch"
     git push origin "$branch" || error_exit "Failed to push $branch to the origin"
