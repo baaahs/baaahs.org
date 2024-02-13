@@ -1,5 +1,6 @@
 import React from 'react';
 import Box from '@mui/material/Box';
+import CardMedia from '@mui/material/CardMedia';
 import Grid from '@mui/material/Grid';
 import ImageList from '@mui/material/ImageList';
 import ImageListItem from '@mui/material/ImageListItem';
@@ -23,7 +24,7 @@ const contentItems = [
   {
     src: 'https://storage.googleapis.com/static.baaahs.org/20230527_174339.jpg',
     cols: 3,
-    rows: 2,
+    rows: 3,
   },
   {
     src: 'https://storage.googleapis.com/static.baaahs.org/20230528_004535.jpg',
@@ -73,7 +74,69 @@ const contentItems = [
   {
     src: 'https://storage.googleapis.com/static.baaahs.org/20230528_051741.jpg',
     cols: 3,
-    rows: 2,
+    rows: 3,
+  },
+  {
+    src: 'https://storage.googleapis.com/static.baaahs.org/afik_hugging.jpg',
+    cols: 3,
+    rows: 3,
+  },
+  {
+    src: 'https://storage.googleapis.com/static.baaahs.org/baaahs_dark_sign.jpg',
+    cols: 3,
+    rows: 3,
+  },
+  {
+    src: 'https://storage.googleapis.com/static.baaahs.org/dark_rainbow_pasture.png',
+    cols: 3,
+    rows: 3,
+  },
+  {
+    src: 'https://storage.googleapis.com/static.baaahs.org/eric_and_phillip.png',
+    cols: 3,
+    rows: 3,
+  },
+  {
+    src: 'https://storage.googleapis.com/static.baaahs.org/mendocino_view_1.jpg',
+    cols: 4,
+    rows: 3,
+  },
+  {
+    src: 'https://storage.googleapis.com/static.baaahs.org/pasture_lights_c%26j.jpeg',
+    cols: 4,
+    rows: 3,
+  },
+  {
+    src: 'https://storage.googleapis.com/static.baaahs.org/pasture_preview_lights.mov',
+    cols: 4,
+    rows: 3,
+    isVideo: true,
+  },
+  {
+    src: 'https://storage.googleapis.com/static.baaahs.org/pelican.jpg',
+    cols: 3,
+    rows: 3,
+  },
+  {
+    src: 'https://storage.googleapis.com/static.baaahs.org/shae_green.jpg',
+    cols: 3,
+    rows: 3,
+  },
+  {
+    src: 'https://storage.googleapis.com/static.baaahs.org/the_grove_lights_preview.mov',
+    cols: 3,
+    rows: 4,
+    isVideo: true,
+  },
+  {
+    src: 'https://storage.googleapis.com/static.baaahs.org/the_pasture_crowd.jpg',
+    cols: 3,
+    rows: 3,
+  },
+  {
+    src: 'https://storage.googleapis.com/static.baaahs.org/the_pasture_wide_shot.jpg',
+    cols: 3,
+    rows: 3,
   },
 ];
 
@@ -99,20 +162,40 @@ const LastYear = () => {
                 cols={item.cols || 1}
                 rows={item.rows || 1}
               >
-                <Box
-                  component="img"
-                  loading="lazy"
-                  src={item.src}
-                  width={item.cols * imgSize}
-                  height={item.rows * imgSize}
-                  sx={{
-                    objectFit: 'cover',
-                    filter:
-                      theme.palette.mode === 'dark'
-                        ? 'brightness(0.6)'
-                        : 'none',
-                  }}
-                />
+                {item.isVideo ? (
+                  <CardMedia
+                    component="video"
+                    src={item.src}
+                    width={item.cols * imgSize}
+                    height={item.rows * imgSize}
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                    sx={{
+                      objectFit: 'cover',
+                      filter:
+                        theme.palette.mode === 'dark'
+                          ? 'brightness(0.6)'
+                          : 'none',
+                    }}
+                  />
+                ) : (
+                  <Box
+                    component="img"
+                    loading="lazy"
+                    src={item.src}
+                    width={item.cols * imgSize}
+                    height={item.rows * imgSize}
+                    sx={{
+                      objectFit: 'cover',
+                      filter:
+                        theme.palette.mode === 'dark'
+                          ? 'brightness(0.6)'
+                          : 'none',
+                    }}
+                  />
+                )}
               </ImageListItem>
             ))}
           </ImageList>
