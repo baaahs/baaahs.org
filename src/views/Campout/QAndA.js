@@ -1,11 +1,11 @@
+/* eslint-disable quotes */
 import React from 'react';
-import { useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Grid';
 
 import CampoutMain from 'layouts/CampoutMain.js';
-import BAAAHSLogo from 'layouts/Main/BAAAHSLogo';
+import FullScreenHeader from 'components/FullScreenHeader';
 
 const content = [
   {
@@ -16,7 +16,7 @@ const content = [
   {
     question: 'Do I need a special vehicle to get up to The Incline?',
     answer:
-      'Yes and no: the road is a little steep (it\'s called The Incline for a reason). We recommend an all-wheel drive vehicle if possible, but we\'ve had all sorts of vehicles arrive successfully. To encourage carpooling we offer a free option to load your gear on a truck in San Francisco and it\'ll be waiting for you at the Incline!',
+      "Yes and no: the road is a little steep (it's called The Incline for a reason). We recommend an all-wheel drive vehicle if possible, but we've had all sorts of vehicles arrive successfully. To encourage carpooling we offer a free option to load your gear on a truck in San Francisco and it'll be waiting for you at the Incline!",
   },
   {
     question: 'When is it?',
@@ -26,17 +26,17 @@ const content = [
   {
     question: 'Is this event open for everyone?',
     answer:
-      'Yes! The campout is created by BAAAHS but is intended for everyone. If you\'re interested in getting involved with BAAAHS, the campout is the perfect way to get to know our community, but can also be just a fun adventure full of meeting new people and enjoying nature and dancing your ass off.',
+      "Yes! The campout is created by BAAAHS but is intended for everyone. If you're interested in getting involved with BAAAHS, the campout is the perfect way to get to know our community, but can also be just a fun adventure full of meeting new people and enjoying nature and dancing your ass off.",
   },
   {
-    question: 'This is everything I want. I\'m in. What do I need to bring?',
+    question: "This is everything I want. I'm in. What do I need to bring?",
     answer:
       'Check out our <a href="https://docs.google.com/document/d/1a3cFYl_xIt_aG26M7SRYsMUY78l2k4Q-cjS4X9po4xw/edit?usp=sharing">packing list</a>. Don\'t forget a good tent, lights, and your own cup, plate and utensils.',
   },
   {
-    question: 'Is there anything I shouldn\'t bring?',
+    question: "Is there anything I shouldn't bring?",
     answer:
-      'Dogs, ferrets, or pets of any kind. And anything that draws too much power (fridge, A/C, hair dryer, etc) is discouraged as camp power won\'t be strong enough to support it and you\'re gonna ruin it for everyone.',
+      "Dogs, ferrets, or pets of any kind. And anything that draws too much power (fridge, A/C, hair dryer, etc) is discouraged as camp power won't be strong enough to support it and you're gonna ruin it for everyone.",
   },
   {
     question: 'Do I need to bring food?',
@@ -51,12 +51,12 @@ const content = [
   {
     question: 'Can I bring my RV or can I camp with my car?',
     answer:
-      'RV camping will be VERY limited, so be sure to get your ticket ASAP. Also note that we won\'t have any hook ups for you, plus getting a trailer up the mountain can be challenging. Car camping is NOT ALLOWED, you will have to leave your car at the designated parking area.',
+      "RV camping will be VERY limited, so be sure to get your ticket ASAP. Also note that we won't have any hook ups for you, plus getting a trailer up the mountain can be challenging. Car camping is NOT ALLOWED, you will have to leave your car at the designated parking area.",
   },
   {
     question: 'Will there be a schedule?',
     answer:
-      'Yes there will be! We\'ll send out a post and put it here when we have it ready.',
+      "Yes there will be! We'll send out a post and put it here when we have it ready.",
   },
   {
     question: 'What can I expect for Arrival?',
@@ -76,62 +76,33 @@ const content = [
 ];
 
 const QAndA = () => {
-  const theme = useTheme();
-
   return (
     <CampoutMain>
-      <Box>
+      <Box gap={3}>
+        <FullScreenHeader
+          image={
+            'https://storage.googleapis.com/static.baaahs.org/twunkerbell_backshot.jpeg'
+          }
+          title={'Q&A'}
+          text={'Your questions, our answers!'}
+        />
         <Grid container spacing={2} justifyContent={'center'}>
-          <Grid
-            item
-            container
-            justifyContent={'center'}
-            alignItems={'center'}
-            xs={12}
-            xl={8}
-          >
-            <Box position="relative" width={1}>
-              <Box
-                component={'img'}
-                loading="lazy"
-                height={721}
-                width={1}
-                src={
-                  'https://s3-alpha-sig.figma.com/img/c89d/4e12/eefe946ff30cbb1cb7a179dbdea276cb?Expires=1707091200&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=Laf-0O8AHbiQ3adR48PYDVWA6Bz~~hAmuaJ2Cb7nisp2ZbAs2~1DTjLei-HnHJ2hlfdZ-UtrhU1DeovvyLd4gEEf3dCstgWjEuFz-Y~o1KKZ~P6tLV7rc7kkQk86dUWXLwBvAQrsvsquvEhup5tKgTb2XkhiVfQZnOM0i-CLhfOKjLoTSIFDlS9oVdUIx9xbVrtRVeMuce4jGUysvqwElDDf60PvOzSNBVvQjRTiCx~28mfzlpUNL2OxB75zNfD77Xk805XOTHiGv~XrbTxETueqWp0gM48GF~IFLyX3SuEGEXDV9vg5JIrhjfT7zZxfD2lXBZK22K~Z7MvPfNM~Fg__'
-                }
-                alt="BAAAHS Campout 2024 background image"
-                sx={{
-                  objectFit: 'cover',
-                  filter:
-                    theme.palette.mode === 'dark' ? 'brightness(0.6)' : 'none',
-                }}
-              />
-              <Box
-                position="absolute"
-                top={0}
-                left={0}
-                width={1}
-                height={1}
-                display="flex"
-                alignItems="center"
-                justifyContent="center"
-              >
-                <Box 
-                  width={500} 
-                  bgcolor={theme.palette.primary.main}
-                >
-                  <BAAAHSLogo />
-                </Box>
-              </Box>
-            </Box>
-          </Grid>
           {content.map((item, key) => (
-            <Grid item xs={11} xl={8} key={key} sx={{ margin: '24px'}} textAlign={'center'}>
-              <Typography component="h1" fontFamily={'Smooth Circulars'} >{item.question}</Typography>
-              <Typography 
+            <Grid
+              item
+              xs={11}
+              xl={8}
+              key={key}
+              sx={{ margin: '24px' }}
+              textAlign={'center'}
+            >
+              <Typography component="h1" fontFamily={'Smooth Circulars'}>
+                {item.question}
+              </Typography>
+              <Typography
                 dangerouslySetInnerHTML={{
-                  __html: item.answer
-                }} 
+                  __html: item.answer,
+                }}
               />
             </Grid>
           ))}
