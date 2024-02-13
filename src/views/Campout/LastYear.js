@@ -1,15 +1,14 @@
 import React from 'react';
 import Box from '@mui/material/Box';
 import CardMedia from '@mui/material/CardMedia';
-import Grid from '@mui/material/Grid';
 import ImageList from '@mui/material/ImageList';
 import ImageListItem from '@mui/material/ImageListItem';
+import useMediaQuery from '@mui/material/useMediaQuery';
 
 import CampoutMain from 'layouts/CampoutMain.js';
 import FullScreenHeader from 'components/FullScreenHeader';
 import { useTheme } from '@emotion/react';
 
-const imgSize = 128;
 const contentItems = [
   {
     src: 'https://storage.googleapis.com/static.baaahs.org/20230527_174212.jpg',
@@ -142,6 +141,8 @@ const contentItems = [
 
 const LastYear = () => {
   const theme = useTheme();
+  const isLg = useMediaQuery(theme.breakpoints.up('lg'));
+  const isMd = useMediaQuery(theme.breakpoints.up('md'));
   return (
     <CampoutMain colorInvert={true}>
       <Box gap={3}>
@@ -154,20 +155,19 @@ const LastYear = () => {
             'Our Campout has been going on for years. Here are some of the highlights from previous years.'
           }
         />
-        <Grid container spacing={2} justifyContent={'center'}>
-          <ImageList sx={{ width: 1200 }} cols={9} variant="quilted" gap={2}>
+        <Box display="flex" justifyContent={'center'}>
+          <ImageList sx={{ maxWidth: 1200 }} cols={isLg ? 9 : (isMd ? 6 : 3)} variant="quilted" gap={16} rowHeight={121}>
             {contentItems.map((item, key) => (
               <ImageListItem
                 key={key}
                 cols={item.cols || 1}
                 rows={item.rows || 1}
+                sx={{ display: 'flex' }}
               >
                 {item.isVideo ? (
                   <CardMedia
                     component="video"
                     src={item.src}
-                    width={item.cols * imgSize}
-                    height={item.rows * imgSize}
                     autoPlay
                     loop
                     muted
@@ -182,11 +182,10 @@ const LastYear = () => {
                   />
                 ) : (
                   <Box
+                    width={1}
                     component="img"
                     loading="lazy"
                     src={item.src}
-                    width={item.cols * imgSize}
-                    height={item.rows * imgSize}
                     sx={{
                       objectFit: 'cover',
                       filter:
@@ -199,7 +198,7 @@ const LastYear = () => {
               </ImageListItem>
             ))}
           </ImageList>
-        </Grid>
+        </Box>
       </Box>
     </CampoutMain>
   );
