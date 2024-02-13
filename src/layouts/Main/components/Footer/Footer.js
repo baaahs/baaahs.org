@@ -6,7 +6,13 @@ import Link from '@mui/material/Link';
 import Typography from '@mui/material/Typography';
 import BAAAHSLogo from '../../BAAAHSLogo';
 
-const Footer = () => {
+const Footer = ({ links }) => {
+  const navItems = links || [
+    { title: 'campout', href: '/campout' },
+    // { title: 'music', href: '/music' },
+    // { title: 'fundraising', href: '/fundraising' },
+    // { title: 'about', href: '/about' },
+  ];
   return (
     <Grid container spacing={2}>
       <Grid item xs={12}>
@@ -26,51 +32,20 @@ const Footer = () => {
           >
             <BAAAHSLogo />
           </Box>
-          <Box display="flex" flexWrap={'wrap'} alignItems={'center'}>
-            <Box marginTop={1} marginRight={2}>
-              <Link
-                underline="none"
-                component="a"
-                href="/campout"
-                color="text.primary"
-                variant={'subtitle2'}
-              >
-                campout
-              </Link>
-            </Box>
-            {/* <Box marginTop={1} marginRight={2}>
-              <Link
-                underline="none"
-                component="a"
-                href="/music"
-                color="text.primary"
-                variant={'subtitle2'}
-              >
-                music
-              </Link>
-            </Box>
-            <Box marginTop={1} marginRight={2}>
-              <Link
-                underline="none"
-                component="a"
-                href="/fundraising"
-                color="text.primary"
-                variant={'subtitle2'}
-              >
-                fundraising
-              </Link>
-            </Box> */}
-            <Box marginTop={1} marginRight={2}>
-              <Link
-                underline="none"
-                component="a"
-                href="/about"
-                color="text.primary"
-                variant={'subtitle2'}
-              >
-                about
-              </Link>
-            </Box>
+          <Box display="flex" flexDirection="column" alignItems="center">
+            {navItems.map((item, i) => (
+              <Box key={i} marginTop={1} gap={2}>
+                <Link
+                  underline="none"
+                  component="a"
+                  href={item.href}
+                  color="text.primary"
+                  variant={'subtitle2'}
+                >
+                  {item.title}
+                </Link>
+              </Box>
+            ))}
             <Box marginTop={1}>
               <Button
                 variant="outlined"

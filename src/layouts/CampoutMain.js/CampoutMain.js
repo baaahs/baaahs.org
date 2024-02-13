@@ -73,14 +73,16 @@ const CampoutMain = ({
         onClose={handleSidebarClose}
         open={open}
         variant="temporary"
-        pages={pages}
+        pages={{
+          sections: campoutNavItems,
+        }}
       />
       <main>
         {children}
         <Divider />
       </main>
       <Container paddingY={4}>
-        <Footer />
+        <Footer links={campoutNavItems} />
       </Container>
     </Box>
   );
