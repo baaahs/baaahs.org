@@ -546,7 +546,7 @@ resource "google_compute_target_https_proxy" "default" {
     url_map          = google_compute_url_map.main.id
     ssl_certificates = [
         google_compute_managed_ssl_certificate.non-prod.id,
-        google_compute_managed_ssl_certificate.www-gcp.id
+        google_compute_managed_ssl_certificate.www-gcp.id,
         google_compute_managed_ssl_certificate.www.id
     ]
 }
