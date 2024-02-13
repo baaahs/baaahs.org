@@ -34,6 +34,11 @@ fi
 for branch in "${deploy_branches[@]}"
 do
     printf "\nBranch 🌴 ${branch}\n"
+
+    green "Pausing for 5s so github doesn't get mad..."
+    sleep 5
+
+    green "git checkout"
     git checkout "$branch" || error_exit "Failed to checkout $branch"
 
     green "git fetch"
@@ -54,7 +59,9 @@ do
 
     green "Pushing to $branch"
     git push origin "$branch" || error_exit "Failed to push $branch to the origin"
-
-    green "Pausing for 5s so github doesn't get mad..."
-    sleep 5
 done
+
+green "Switching back to main"
+git checkout main
+
+printf "\n\n\tAround the 🌎 push completed.\n\n"
