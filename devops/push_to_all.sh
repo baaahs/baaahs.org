@@ -36,6 +36,7 @@ do
     printf "\nBranch 🌴 ${branch}\n"
     git checkout "$branch" || error_exit "Failed to checkout $branch"
 
+    green "git fetch"
     git fetch
     LOCAL=$(git rev-parse @)
     REMOTE=$(git rev-parse @{u})
@@ -43,10 +44,12 @@ do
         error_exit "Your $branch is not up-to-date with the origin"
     fi
 
+    green "Check for un-merged commits using rev-list"
     if git rev-list --right-only --count main.."$branch" | grep -q '^[1-9][0-9]*$'; then
         error_exit "$branch contains commits that are not on the 'main' branch"
     fi
 
+    green "Merging main into this branch"
     git merge main || error_exit "Failed to merge 'main' into $branch"
 
     green "Pushing to $branch"
