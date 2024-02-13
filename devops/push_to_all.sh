@@ -55,6 +55,6 @@ do
     green "Pushing to $branch"
     git push origin "$branch" || error_exit "Failed to push $branch to the origin"
 
-    green "Pausing for 2s so github doesn't get mad..."
-    sleep 2
+    green "Pausing for 5s so github doesn't get mad..."
+    sleep 5
 done
