@@ -4,7 +4,7 @@ const BAAAHSLogo = () => {
   return (
     <Box
       component={'img'}
-      src='/images/baaahs-logo.svg'
+      src='/images/baaahs-logotype.svg'
       height={1}
       width={1}
       alt='BAAAHS Logo'
