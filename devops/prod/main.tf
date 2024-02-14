@@ -232,22 +232,24 @@ resource "google_storage_bucket_iam_binding" "buckets_gcp_static" {
 resource "google_compute_backend_bucket" "prod" {
     name        = "prod"
     bucket_name = google_storage_bucket.prod.name
+    enable_cdn = true
 }
 
 resource "google_compute_backend_bucket" "static" {
     name        = "static"
     bucket_name = google_storage_bucket.static.name
+    enable_cdn = true
 }
 
 resource "google_compute_backend_bucket" "staging" {
     name        = "staging"
     bucket_name = google_storage_bucket.staging.name
+    enable_cdn = true
 }
 
 resource "google_compute_backend_bucket" "dev" {
     name        = "dev"
     bucket_name = google_storage_bucket.dev.name
-    enable_cdn = true
 }
 
 # ---------------------------------------------------------------------------
