@@ -247,6 +247,7 @@ resource "google_compute_backend_bucket" "staging" {
 resource "google_compute_backend_bucket" "dev" {
     name        = "dev"
     bucket_name = google_storage_bucket.dev.name
+    enable_cdn = true
 }
 
 # ---------------------------------------------------------------------------
