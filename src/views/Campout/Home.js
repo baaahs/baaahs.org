@@ -12,70 +12,34 @@ import FullScreenHeader from 'components/FullScreenHeader';
 
 const content = [
   {
-    title: 'Community Driven',
-    subtitle:
-      'It really takes a village folks. Campers are expected to participate during the weekend to make the event possible, and we encourage helping and getting involved even before the campout for the full BAAAHS experience.',
-    icon: (
-      <img
-        src="https://storage.googleapis.com/static.baaahs.org/trixie_and_friends.jpeg"
-        style={{ borderRadius: '50%', width: '150%' }}
-      ></img>
-    ),
+    title: 'Enthralling Visions',
+    subtitle: 'Be ready for BAAAHS light wizardry set to full face-melt mode, nestled cutely amongst the trees. There ain’t no party like a BAAAHS party bb!!',
+    img: { src: 'https://storage.googleapis.com/static.baaahs.org/dark_rainbow_pasture.png' },
   },
   {
-    title: 'BAAAHS Lights and Sound',
-    subtitle:
-      'You can expect the iconic BAAAHS light arrays in full display along with our world class sound system while you’re dancing with your closest friends surrounded by nature. There ain’t no party like a BAAAHS party bb!!',
-    icon: (
-      <img
-        src="https://storage.googleapis.com/static.baaahs.org/ben_dancing_lights.png"
-        style={{ borderRadius: '50%', width: '150%' }}
-      ></img>
-    ),
+    title: 'Enchanting Aurals',
+    subtitle: 'Two stages and three nights of BAAAHS-rockin\' beats from your fav BAAAHS DJs and special guests on our world class sound system!',
+    img: { src: 'https://storage.googleapis.com/static.baaahs.org/ben_dancing_lights.png' },
   },
   {
-    title: 'Nature',
-    subtitle:
-      'Hosted at The Incline, a new queer-owned retreat space in the mountains close to the Mendocino National Forest. You can expect majestic views of the surrounding forest and a beautiful canopy to set up your tent under.',
-    icon: (
-      <img
-        src="https://storage.googleapis.com/static.baaahs.org/mendocino_view.jpeg"
-        style={{ borderRadius: '50%', height: '120%' }}
-      ></img>
-    ),
+    title: 'Alluring Art',
+    subtitle: 'Art is core to BAAAHS and we work hard to bring queer art from the Bay Area and beyond to our campout. Want to bring art? Let us know, we may be able to help with materials and logistics!',
+    img: { src: 'https://storage.googleapis.com/static.baaahs.org/simon_art_piece.png' },
   },
   {
-    title: 'Participation',
-    subtitle:
-      'Through out the weekend we put on amazing parties and activities, and they all need YOU! A big part of our campout is to try something new and leave that pride and judgement at the gate. We are all in this together and we lift each other up when someone challenges themselves to grow and flourish.',
-    icon: (
-      <img
-        src="https://storage.googleapis.com/static.baaahs.org/crafts.jpeg"
-        style={{ borderRadius: '50%', width: '150%' }}
-      ></img>
-    ),
+    title: 'Into the Woods',
+    subtitle: 'Hosted at The Incline, a new queer-owned retreat space in the mountains near the Mendocino National Forest, serving majestic views, lush camping, and extensive trails to explore.',
+    img: { src: 'https://storage.googleapis.com/static.baaahs.org/mendocino_view.jpeg', style: { width: undefined, height: '120%' } },
   },
   {
-    title: 'Art',
-    subtitle:
-      'Art is a big part of our campout and have worked hard in previous years to bring queer art from the Bay Area to the Incline. Attendees are encouraged to reach out to us if they themselves want to bring their art to the campout, we are always willing to lend a hand with logistics.',
-    icon: (
-      <img
-        src="https://storage.googleapis.com/static.baaahs.org/simon_art_piece.png"
-        style={{ borderRadius: '50%', width: '150%' }}
-      ></img>
-    ),
+    title: 'Participate and Play',
+    subtitle: 'The weekend is packed with amazing parties and activities from nature hikes to screen printing, and our infamous talent expo, and they all need YOU! This is the place to try something new and leave that judgement at the gate.',
+    img: { src: 'https://storage.googleapis.com/static.baaahs.org/crafts.jpeg' },
   },
   {
-    title: 'Values',
-    subtitle:
-      'BAAAHS is a Burning Man camp and so it’s important for us to follow the Ten Principles of Burning Man. We also STRONGLY value consent of all forms and in general aim to create a Safe Space for ALL.',
-    icon: (
-      <img
-        src="https://storage.googleapis.com/static.baaahs.org/gender_reveal.jpeg"
-        style={{ borderRadius: '50%', width: '150%' }}
-      ></img>
-    ),
+    title: 'Creating Community',
+    subtitle: 'BAAAHS Campout is a place to find happiness not in things we have or things we need, but in our community and in the simple joy of being present.',
+    img: { src: 'https://storage.googleapis.com/static.baaahs.org/trixie_and_friends.jpeg' },
   },
 ];
 
@@ -86,42 +50,93 @@ const CampoutHome = () => {
     <CampoutMain>
       <Box gap={3}>
         <FullScreenHeader
-          image={
-            'https://storage.googleapis.com/static.baaahs.org/PXL_20230416_022706111.jpeg'
-          }
-          logo={
-            'https://storage.googleapis.com/static.baaahs.org/campout_logo_no_border.png'
-          }
           title={'BAAAHS Campout'}
+          image='https://storage.googleapis.com/static.baaahs.org/PXL_20230416_022706111.jpeg'
+          logo='https://storage.googleapis.com/static.baaahs.org/campout_logo_no_border.png'
           text={
-            'Our Campout has been going on for years. Here are some of the highlights from previous years.'
+            <Button
+              component={'a'}
+              variant="contained"
+              color="secondary"
+              sx={{ marginTop: '2em', fontWeight: 900 }}
+              size="large"
+              href={'/campout/register'}
+              fullWidth
+            >
+              Register Now!
+            </Button>
           }
         />
         <Grid container spacing={2} justifyContent={'center'}>
           <Grid item container xs={10} xl={8}>
-            <Box marginBottom={4}>
+            <Box marginBottom={1}>
               <Typography
                 align={'center'}
                 fontWeight={600}
                 component="h1"
                 fontFamily={'Smooth Circulars'}
               >
-                What is it?
+                Whaaat is it?
               </Typography>
-              <Typography align={'center'}>
-                A campout put on by BAAAHS and friends over Memorial Day
-                weekend. We’ve been putting it on for three years now and
-                excited for our fourth! Our campouts are known for being
-                whimsical, community driven, silly, and of course a whole lot of
-                queer fun. We aim to create a safe space for self-expression,
-                creativity and kindness. Live music, sparkle-tastic lights,
-                dance parties, group events, art and other surprises included.
-                Eccentric outfits, gifting and showing off the best of you is
-                strongly encouraged. And much like Burning Man, it is a Leave No
-                Trace event.
+              <Typography align={'justify'}>
+                <p>
+                  BAAAHS Campout is a unique three-night queer getaway hosted on
+                  The Incline, nestled in the enchanting landscapes of Mendocino
+                  County. It’s a micro-cosmos free from the mundane, where you can
+                  dance, unwind, laugh, and play to your heart's content. It’s a
+                  place to find happiness not in things we have or things we need,
+                  but in our community and in the simple joy of being present.
+                </p>
+
+                <p>
+                  Get ready for epic parties with amazing DJs, an art-filled
+                  wonderland that will captivate your senses, and all the daytime
+                  adventures you can handle. We have some surprises up our sleeves
+                  that you simply must witness firsthand.
+                </p>
+
+                <p>
+                  Drawing inspiration from the principles of Burning Man and
+                  BAAAHS, our aim is to foster an inclusive environment that
+                  embraces all forms of self-expression. We believe in the power
+                  of teamwork and active participation to create an
+                  extraordinary
+                  event together.
+                </p>
+
+                <p>
+                  This year's theme is:
+                  <Typography component='span' sx={{ fontFamily: 'Smooth Circulars', fontSize: '1.5em', padding: '0 .5em' }}>
+                    WHAAAT???
+                  </Typography>
+                  (We're just as confused as you are).
+                </p>
+
+                <p>
+                  BAAAHS beckons you to three zany nights of camping in the
+                  Mendocino mountains: to imagine the unthinkable, the dream the
+                  undreamable, to delight and be delighted.
+                </p>
               </Typography>
             </Box>
           </Grid>
+
+          <Grid container item xs={12} justifyContent="center" sx={{ margin: '0 0 24px 0' }}>
+            <Grid item xs={4} lg={2} xl={1} sx={{ margin: '0 8px' }}>
+              <Button
+                component={'a'}
+                variant="contained"
+                color="primary"
+                sx={{ fontFamily: 'Smooth Circulars' }}
+                size="large"
+                href={'/campout/register'}
+                fullWidth
+              >
+                Sign Me Up!
+              </Button>
+            </Grid>
+          </Grid>
+
           <Grid
             container
             item
@@ -142,12 +157,7 @@ const CampoutHome = () => {
                   data-aos={'fade-up'}
                   data-aos-delay={i * 100}
                 >
-                  <Box
-                    display={'flex'}
-                    flexDirection={'column'}
-                    alignItems="center"
-                    gap={2}
-                  >
+                  <Box display={'flex'} flexDirection={'column'} alignItems="center" gap={2}>
                     <Box
                       alignItems="center"
                       component={Avatar}
@@ -156,17 +166,16 @@ const CampoutHome = () => {
                       bgcolor={theme.palette.primary.main}
                       color={theme.palette.background.paper}
                     >
-                      {item.icon}
+                      <img
+                        src={item.img.src}
+                        style={Object.assign({ borderRadius: '50%', width: '150%' }, item.img.style)}
+                        alt=""
+                      />
                     </Box>
-                    <Typography
-                      variant={'h6'}
-                      gutterBottom
-                      fontFamily={'Smooth Circulars'}
-                      textAlign={'center'}
-                    >
+                    <Typography variant='h6' fontFamily='Smooth Circulars' textAlign='center'>
                       {item.title}
                     </Typography>
-                    <Typography color="text.secondary" textAlign={'center'}>
+                    <Typography color="text.secondary" textAlign='center'>
                       {item.subtitle}
                     </Typography>
                   </Box>
@@ -174,23 +183,19 @@ const CampoutHome = () => {
               </Grid>
             ))}
           </Grid>
-          <Grid
-            container
-            item
-            xs={12}
-            justifyContent="center"
-            sx={{ margin: '24px 0' }}
-          >
+
+          <Grid container item xs={12} justifyContent="center" sx={{ margin: '24px 0' }}>
             <Grid item xs={4} lg={2} xl={1} sx={{ margin: '0 8px' }}>
               <Button
                 component={'a'}
                 variant="contained"
                 color="primary"
+                sx={{ fontFamily: 'Smooth Circulars', textAlign: 'center' }}
                 size="large"
                 href={'/campout/register'}
                 fullWidth
               >
-                Register
+                Let's Go Camping!
               </Button>
             </Grid>
           </Grid>
