@@ -28,7 +28,6 @@ const Topbar = ({ onSidebarOpen, colorInvert = false, data }) => {
         display={'flex'}
         component="a"
         href="/"
-        title="theFront"
         width={{ xs: 120, md: 150 }}
       >
         <BAAAHSLogo />
