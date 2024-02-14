@@ -11,9 +11,9 @@ function error(message) {
 }
 
 const FullScreenHeader = ({ image, title, text, logo }) => {
-  const backgroundImage = image || error("No image provided");
-  const titleText = title || error("No title provided");
-  const bodyText = text || error("No text provided");
+  const backgroundImage = image || error('No image provided');
+  const titleText = title || error('No title provided');
+  const bodyText = text || error('No text provided');
   const displayLogo = logo || false;
 
   useEffect(() => {
@@ -93,7 +93,7 @@ const FullScreenHeader = ({ image, title, text, logo }) => {
         )}
         {!displayLogo && (
           <Box>
-            <Typography variant="h2" gutterBottom sx={{ fontWeight: 900, color: 'common.white', textTransform: 'uppercase', }}>
+            <Typography variant="h2" gutterBottom sx={{ fontWeight: 900, color: 'common.white', textTransform: 'uppercase' }}>
               {titleText}
             </Typography>
             <Typography variant="h6" component="p" color="text.primary" sx={{ color: 'common.white' }}>
