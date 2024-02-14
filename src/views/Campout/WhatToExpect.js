@@ -2,9 +2,10 @@ import React from 'react';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 
-import CampoutMain from 'layouts/CampoutMain.js';
+import Main from 'layouts/Main';
 import FullScreenHeader from 'components/FullScreenHeader';
 import { HorizontallyAlignedBlogCardWithShapedImage } from 'blocks/blog';
+import NavItems from './NavItems';
 
 const content = [
   {
@@ -74,7 +75,7 @@ const content = [
 
 const WhatToExpect = () => {
   return (
-    <CampoutMain colorInvert={true}>
+    <Main colorInvert={true} navItems={NavItems}>
       <Box gap={3}>
         <FullScreenHeader
           image={
@@ -111,7 +112,7 @@ const WhatToExpect = () => {
           </Grid>
         </Grid>
       </Box>
-    </CampoutMain>
+    </Main>
   );
 };
 
