@@ -45,6 +45,13 @@ resource "google_compute_managed_ssl_certificate" "www-gcp" {
     }
 }
 
+# And the for realsies names that we could only add after first updating DNS
+resource "google_compute_managed_ssl_certificate" "www" {
+    name = "www"
+    managed {
+        domains = ["www.baaahs.org", "baaahs.org"]
+    }
+}
 
 # ---------------------------------------------------------------------------
 # The four backend buckets themselves, each of which needs to have public
@@ -539,7 +546,8 @@ resource "google_compute_target_https_proxy" "default" {
     url_map          = google_compute_url_map.main.id
     ssl_certificates = [
         google_compute_managed_ssl_certificate.non-prod.id,
-        google_compute_managed_ssl_certificate.www-gcp.id
+        google_compute_managed_ssl_certificate.www-gcp.id,
+        google_compute_managed_ssl_certificate.www.id
     ]
 }
 
