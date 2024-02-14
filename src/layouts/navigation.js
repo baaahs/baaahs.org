@@ -1,6 +1,7 @@
 const pages = {
   sections: [
     { title: 'Campout', href: '/campout' },
+    { title: 'apply', href: '/apply' },
     // { title: 'Events', href: '/events' },
     // { title: 'Music', href: '/music' },
     // { title: 'Fundraising', href: '/fundraising' },
