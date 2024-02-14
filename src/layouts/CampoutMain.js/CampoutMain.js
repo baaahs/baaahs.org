@@ -46,7 +46,7 @@ const CampoutMain = ({
     { title: 'line up', href: '/campout/line-up' },
     { title: 'last year', href: '/campout/last-year' },
     { title: 'q & a', href: '/campout/q-and-a' },
-    { title: 'register', href: '/campout/register' }, // TODO: Send to ticket tailor
+    { title: 'register', href: '/campout/register' },
   ];
   return (
     <Box>
