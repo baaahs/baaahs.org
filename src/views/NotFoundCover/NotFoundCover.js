@@ -44,7 +44,7 @@ const NotFoundCover = () => {
                     align={isMd ? 'left' : 'center'}
                     sx={{ fontWeight: 700 }}
                   >
-                    404
+                    TBD
                   </Typography>
                   <Typography
                     variant="h6"
@@ -52,12 +52,10 @@ const NotFoundCover = () => {
                     color="text.secondary"
                     align={isMd ? 'left' : 'center'}
                   >
-                    Oops! Looks like you followed a bad link.
+                    Oops! Looks like you found something that's not ready yet.
                     <br />
-                    If you think this is a problem with us, please{' '}
-                    <Link href={''} underline="none">
-                      tell us
-                    </Link>
+                    If you think this is a problem with us, you'd probably be
+                    right.
                   </Typography>
                   <Box
                     marginTop={4}
@@ -122,6 +120,7 @@ const NotFoundCover = () => {
                         height: { xs: 'auto', md: 1 },
                         '& img': {
                           objectFit: 'cover',
+                          transform: 'scaleX(-1)',
                         },
                       }}
                     >
@@ -129,7 +128,7 @@ const NotFoundCover = () => {
                         component={'img'}
                         loading="lazy"
                         src={
-                          'https://assets.maccarianagency.com/backgrounds/img23.jpg'
+                          'https://storage.googleapis.com/static.baaahs.org/2013_sheep.jpeg'
                         }
                         height={{ xs: 'auto', md: 1 }}
                         maxHeight={{ xs: 300, md: 1 }}

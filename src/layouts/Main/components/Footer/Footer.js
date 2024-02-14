@@ -9,6 +9,7 @@ import BAAAHSLogo from '../../BAAAHSLogo';
 const Footer = ({ links }) => {
   const navItems = links || [
     { title: 'campout', href: '/campout' },
+    { title: 'apply', href: '/apply' },
     // { title: 'music', href: '/music' },
     // { title: 'fundraising', href: '/fundraising' },
     // { title: 'about', href: '/about' },
@@ -32,7 +33,12 @@ const Footer = ({ links }) => {
           >
             <BAAAHSLogo />
           </Box>
-          <Box display="flex" flexDirection="column" alignItems="center">
+          <Box
+            display="flex"
+            flexDirection={{ xs: 'column', sm: 'row' }}
+            alignItems="center"
+            gap={2}
+          >
             {navItems.map((item, i) => (
               <Box key={i} marginTop={1} gap={2}>
                 <Link
