@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback, useEffect } from 'react';
 import { useTheme } from '@mui/material/styles';
 import Avatar from '@mui/material/Avatar';
 import Box from '@mui/material/Box';
@@ -10,6 +10,7 @@ import Typography from '@mui/material/Grid';
 import Main from 'layouts/Main';
 import FullScreenHeader from 'components/FullScreenHeader';
 import NavItems from './NavItems';
+import { useInterval } from 'usehooks-ts';
 
 const content = [
   {
@@ -47,6 +48,20 @@ const content = [
 const CampoutHome = () => {
   const theme = useTheme();
 
+  const whaaatRef = React.createRef();
+  const questions = [
+    'Whaaat is the capital of Assyria?',
+    'Whaaat is your favorite color?',
+    'Whaaat is your favourite colour?',
+    'Whaaat is the airspeed velocity of an unladen swallow?',
+  ];
+  const whiiichRef = React.createRef(0);
+  const updateWhaaat = useCallback(() => {
+    whaaatRef.current.innerText = questions[whiiichRef.current++ % questions.length];
+  }, []);
+  useEffect(updateWhaaat, []);
+  useInterval(updateWhaaat, 5000);
+
   return (
     <Main navItems={NavItems}>
       <Box gap={3}>
@@ -59,7 +74,7 @@ const CampoutHome = () => {
               component={'a'}
               variant="contained"
               color="secondary"
-              sx={{ marginTop: '2em', fontWeight: 900 }}
+              sx={{ marginTop: '3em', fontFamily: 'Smooth Circulars', textAlign: 'center' }}
               size="large"
               href={'/campout/register'}
               fullWidth
@@ -77,7 +92,7 @@ const CampoutHome = () => {
                 component="h1"
                 fontFamily={'Smooth Circulars'}
               >
-                Whaaat is it?
+                WHAAAT???
               </Typography>
               <Typography align={'justify'}>
                 <p>
@@ -107,10 +122,16 @@ const CampoutHome = () => {
 
                 <p>
                   This year's theme is:
-                  <Typography component='span' sx={{ fontFamily: 'Smooth Circulars', fontSize: '1.5em', padding: '0 .5em' }}>
+                  <Typography component='span' sx={{ fontFamily: 'Smooth Circulars', fontSize: '1.25em', padding: '0 .5em' }}>
                     WHAAAT???
                   </Typography>
                   (We're just as confused as you are).
+                </p>
+
+                <p>
+                  Whaaat will you do?
+                  <br/>Whaaat will you be?
+                  <div ref={whaaatRef}></div>
                 </p>
 
                 <p>
@@ -128,7 +149,7 @@ const CampoutHome = () => {
                 component={'a'}
                 variant="contained"
                 color="primary"
-                sx={{ fontFamily: 'Smooth Circulars' }}
+                sx={{ fontFamily: 'Smooth Circulars', textAlign: 'center' }}
                 size="large"
                 href={'/campout/register'}
                 fullWidth
