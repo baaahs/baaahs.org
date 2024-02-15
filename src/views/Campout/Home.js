@@ -59,7 +59,7 @@ const CampoutHome = () => {
               component={'a'}
               variant="contained"
               color="secondary"
-              sx={{ marginTop: '2em', fontWeight: 900 }}
+              sx={{ marginTop: '3em', fontFamily: 'Smooth Circulars', textAlign: 'center' }}
               size="large"
               href={'/campout/register'}
               fullWidth
@@ -77,7 +77,7 @@ const CampoutHome = () => {
                 component="h1"
                 fontFamily={'Smooth Circulars'}
               >
-                Whaaat is it?
+                WHAAAT???
               </Typography>
               <Typography align={'justify'}>
                 <p>
@@ -107,7 +107,7 @@ const CampoutHome = () => {
 
                 <p>
                   This year's theme is:
-                  <Typography component='span' sx={{ fontFamily: 'Smooth Circulars', fontSize: '1.5em', padding: '0 .5em' }}>
+                  <Typography component='span' sx={{ fontFamily: 'Smooth Circulars', fontSize: '1.25em', padding: '0 .5em' }}>
                     WHAAAT???
                   </Typography>
                   (We're just as confused as you are).
@@ -128,7 +128,7 @@ const CampoutHome = () => {
                 component={'a'}
                 variant="contained"
                 color="primary"
-                sx={{ fontFamily: 'Smooth Circulars' }}
+                sx={{ fontFamily: 'Smooth Circulars', textAlign: 'center' }}
                 size="large"
                 href={'/campout/register'}
                 fullWidth
