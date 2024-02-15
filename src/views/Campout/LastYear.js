@@ -5,9 +5,10 @@ import ImageList from '@mui/material/ImageList';
 import ImageListItem from '@mui/material/ImageListItem';
 import useMediaQuery from '@mui/material/useMediaQuery';
 
-import CampoutMain from 'layouts/CampoutMain.js';
+import Main from 'layouts/Main';
 import FullScreenHeader from 'components/FullScreenHeader';
 import { useTheme } from '@emotion/react';
+import NavItems from './NavItems';
 
 const contentItems = [
   {
@@ -144,7 +145,7 @@ const LastYear = () => {
   const isLg = useMediaQuery(theme.breakpoints.up('lg'));
   const isMd = useMediaQuery(theme.breakpoints.up('md'));
   return (
-    <CampoutMain colorInvert={true}>
+    <Main colorInvert={true} navItems={NavItems}>
       <Box gap={3}>
         <FullScreenHeader
           image={
@@ -200,7 +201,7 @@ const LastYear = () => {
           </ImageList>
         </Box>
       </Box>
-    </CampoutMain>
+    </Main>
   );
 };
 

@@ -6,10 +6,14 @@ import Typography from '@mui/material/Typography';
 
 import Container from 'components/Container';
 
+function error(message) {
+  throw new Error(message);
+}
+
 const FullScreenHeader = ({ image, title, text, logo }) => {
-  const backgroundImage = image || 'https://assets.maccarianagency.com/backgrounds/img52.jpg';
-  const titleText = title || 'About Us';
-  const bodyText = text || 'We are founded by a leading academic and researcher in the field of Industrial Systems Engineering.';
+  const backgroundImage = image || error('No image provided');
+  const titleText = title || error('No title provided');
+  const bodyText = text || error('No text provided');
   const displayLogo = logo || false;
 
   useEffect(() => {
@@ -71,52 +75,33 @@ const FullScreenHeader = ({ image, title, text, logo }) => {
           zIndex: 1,
         }}
       />
-      {displayLogo && (
-        <Container position={'relative'} zIndex={2}>
-          <Grid container xs={12} columnGap={12} sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+      <Container position={'relative'} zIndex={2}>
+        {displayLogo && (
+          <Grid container columnGap={12} sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
             <Grid item xs={4}>
-              <img
-                src={logo}
-                alt="Logo"
-                width="100%"
-              />
+              <img src={logo} alt="Logo" width="100%"/>
             </Grid>
-            <Grid item xs={6} sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-              <Typography
-                variant="h2"
-                color='common.white'
-                fontWeight={900}
-              >
+            <Grid item xs={6} sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', flexDirection: 'column' }}>
+              <Typography variant="h2" color='common.white' fontWeight='900'>
                 {titleText}
+              </Typography>
+              <Typography variant="h6" component="p" color="common.white">
+                {bodyText}
               </Typography>
             </Grid>
           </Grid>
-        </Container>)}
-      {!displayLogo && (<Container position={'relative'} zIndex={2}>
-        <Box>
-          <Typography
-            variant="h2"
-            gutterBottom
-            sx={{
-              fontWeight: 900,
-              color: 'common.white',
-              textTransform: 'uppercase',
-            }}
-          >
-            {titleText}
-          </Typography>
-          <Typography
-            variant="h6"
-            component="p"
-            color="text.primary"
-            sx={{
-              color: 'common.white',
-            }}
-          >
-            {bodyText}
-          </Typography>
-        </Box>
-      </Container>)}
+        )}
+        {!displayLogo && (
+          <Box>
+            <Typography variant="h2" gutterBottom sx={{ fontWeight: 900, color: 'common.white', textTransform: 'uppercase' }}>
+              {titleText}
+            </Typography>
+            <Typography variant="h6" component="p" color="text.primary" sx={{ color: 'common.white' }}>
+              {bodyText}
+            </Typography>
+          </Box>
+        )}
+      </Container>
     </Box>
   );
 };

@@ -4,8 +4,9 @@ import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Grid';
 
-import CampoutMain from 'layouts/CampoutMain.js';
+import Main from 'layouts/Main';
 import FullScreenHeader from 'components/FullScreenHeader';
+import NavItems from './NavItems';
 
 const content = [
   {
@@ -77,7 +78,7 @@ const content = [
 
 const QAndA = () => {
   return (
-    <CampoutMain>
+    <Main navItems={NavItems}>
       <Box gap={3}>
         <FullScreenHeader
           image={
@@ -108,7 +109,7 @@ const QAndA = () => {
           ))}
         </Grid>
       </Box>
-    </CampoutMain>
+    </Main>
   );
 };
 
