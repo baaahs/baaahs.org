@@ -53,7 +53,8 @@ resource "google_cloud_run_v2_service" "imgproxy" {
     ingress = "INGRESS_TRAFFIC_ALL"
 
     template {
-        timeout = "60s"
+        # the default seems to be 300, but still things are timing out after only 10s
+        timeout = "300s"
 
         scaling {
             min_instance_count = 0
@@ -76,6 +77,15 @@ resource "google_cloud_run_v2_service" "imgproxy" {
             # Options reference https://docs.imgproxy.net/configuration/options
             env {
                 name  = "IMGPROXY_DOWNLOAD_TIMEOUT"
+                value = "60"
+            }
+
+            env {
+                name  = "IMGPROXY_READ_TIMEOUT"
+                value = "60"
+            }
+            env {
+                name  = "IMGPROXY_WRITE_TIMEOUT"
                 value = "60"
             }
 
