@@ -534,10 +534,53 @@ resource "google_compute_url_map" "main" {
         }
     }
 
-    # The static path_matcher is easy. It's a filesystem. No fancy stuff.
+    # The static path_matcher is relatively easy. Mostly it's a filesystem without
+    # fancy stuff, but the imgproxy service is mapped in so content can be
+    # requested either through the imgproxy or not.
     path_matcher {
         name            = "static"
         default_service = google_compute_backend_bucket.static.id
+
+        # This provides an escape mechanism to avoid the imgproxy
+        # We are pretty limited by the restrictions on global load balancers. I
+        # guess we could get tricky and try to stack an INTERNAL_SELF_MANAGED
+        # load balancer behind the global one, but that seems like it's own
+        # version of whack - oh and actually I don't think it would work right anyway,
+        # but I honestly haven't fully thought it through. For now, let's go
+        # with the approach of "If you want raw access, you must specify that"
+        route_rules {
+            priority = 10
+            service = google_compute_backend_bucket.static.id
+
+            match_rules {
+                prefix_match = "/raw/"
+            }
+            route_action {
+                url_rewrite {
+                    path_prefix_rewrite = "/"
+                }
+            }
+        }
+
+        # I was thinking that we should rewrite all thing in static so as to avoid
+        # needing to touch every image. But then I discovered that images are apparently
+        # being referenced by the squirrel name using the googlecloudapi.com domain
+        # directly, which is wrong and breaks everything, so since those paths have to
+        # be touched anyway, let's just hide the image proxy at it's own path. I
+        # have chosen /Z/ just because. It's also kind of pretty if you stare at it.
+        route_rules {
+            priority = 200
+            service = google_compute_backend_service.imgproxy.id
+
+            match_rules {
+                prefix_match = "/Z/"
+            }
+            route_action {
+                url_rewrite {
+                    path_prefix_rewrite = "/_/plain/gs://static.baaahs.org/"
+                }
+            }
+        }
     }
 }
 
