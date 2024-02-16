@@ -53,6 +53,8 @@ resource "google_cloud_run_v2_service" "imgproxy" {
     ingress = "INGRESS_TRAFFIC_ALL"
 
     template {
+        timeout = "60s"
+
         scaling {
             min_instance_count = 0
             max_instance_count = 6
@@ -133,6 +135,10 @@ resource "google_compute_region_network_endpoint_group" "imgproxy-west2" {
     cloud_run {
         service = google_cloud_run_v2_service.imgproxy.name
     }
+
+    enable_cdn = true
+    timeout_sec = 60
+    connection_draining_timeout_sec = 60
 }
 
 # But the url map really wants global things, so we define a global
@@ -155,5 +161,8 @@ resource "google_compute_backend_service" "imgproxy" {
         # No really, actually do some caching please...
         cache_mode = "USE_ORIGIN_HEADERS"
     }
+
+    timeout_sec = 60
+    connection_draining_timeout_sec = 60
 }
 
