@@ -99,6 +99,14 @@ resource "google_cloud_run_v2_service" "imgproxy" {
     }
 }
 
+# The Cloud Run needs to be accessible to people who aren't bringing an oauth token along
+resource "google_cloud_run_v2_service_iam_member" "allusers" {
+    name = google_cloud_run_v2_service.imgproxy.name
+    location = google_cloud_run_v2_service.imgproxy.location
+    member = "allUsers"
+    role = "roles/run.invoker"
+}
+
 # Cloud Run is a managed instance service, so a region NEG is the only
 # type of NEG that can be used for it.
 resource "google_compute_region_network_endpoint_group" "imgproxy-west2" {
