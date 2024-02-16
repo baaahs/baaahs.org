@@ -128,7 +128,7 @@ const NotFoundCover = () => {
                         component={'img'}
                         loading="lazy"
                         src={
-                          'https://storage.googleapis.com/static.baaahs.org/2013_sheep.jpeg'
+                          'https://static.baaahs.org/Z/2013_sheep.jpeg'
                         }
                         height={{ xs: 'auto', md: 1 }}
                         maxHeight={{ xs: 300, md: 1 }}
