@@ -143,9 +143,10 @@ resource "google_compute_backend_service" "imgproxy" {
     }
     enable_cdn = true
     cdn_policy {
-        cache_key_policy {
-            include_http_headers = [ "dpr", "width", "viewport-width" ]
-        }
+        # Hmmm, something is whacky
+#        cache_key_policy {
+#            include_http_headers = [ "dpr", "width", "viewport-width" ]
+#        }
 
         # No really, actually do some caching please...
         cache_mode = "USE_ORIGIN_HEADERS"
