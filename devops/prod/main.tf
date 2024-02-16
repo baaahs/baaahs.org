@@ -557,6 +557,7 @@ resource "google_compute_url_map" "main" {
 
         route_rules {
             priority = 20
+            service = google_compute_backend_bucket.static.id
 
             match_rules {
                 path_template_match = "/Z/{body=*}"
