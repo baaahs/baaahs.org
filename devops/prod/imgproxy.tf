@@ -149,7 +149,7 @@ resource "google_compute_backend_service" "imgproxy" {
 
         # No really, actually do some caching please...
         cache_mode = "FORCE_CACHE_ALL"
-        max_ttl = "7200"
+        max_ttl = 10800
     }
 }
 
