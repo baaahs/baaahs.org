@@ -534,10 +534,22 @@ resource "google_compute_url_map" "main" {
         }
     }
 
-    # The static path_matcher is easy. It's a filesystem. No fancy stuff.
+    # The static path_matcher is relatively easy. Mostly it's a filesystem without
+    # fancy stuff, but the imgproxy service is mapped in so content can be
+    # requested either through the imgproxy or not.
     path_matcher {
         name            = "static"
         default_service = google_compute_backend_bucket.static.id
+
+        path_rule {
+            paths = ["/Z/*"]
+            service = google_compute_region_network_endpoint_group.imgproxy-west2.id
+            route_action {
+                url_rewrite {
+                    path_prefix_rewrite = "/"
+                }
+            }
+        }
     }
 }
 
