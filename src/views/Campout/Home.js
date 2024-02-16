@@ -16,32 +16,32 @@ const content = [
   {
     title: 'Enthralling Visions',
     subtitle: 'Be ready for BAAAHS light wizardry set to full face-melt mode, nestled cutely amongst the trees. There ain’t no party like a BAAAHS party bb!!',
-    img: { src: 'https://storage.googleapis.com/static.baaahs.org/dark_rainbow_pasture.png' },
+    img: { src: 'https://static.baaahs.org/Z/dark_rainbow_pasture.png' },
   },
   {
     title: 'Enchanting Aurals',
     subtitle: 'Two stages and three nights of BAAAHS-rockin\' beats from your fav BAAAHS DJs and special guests on our world class sound system!',
-    img: { src: 'https://storage.googleapis.com/static.baaahs.org/ben_dancing_lights.png' },
+    img: { src: 'https://static.baaahs.org/Z/ben_dancing_lights.png' },
   },
   {
     title: 'Alluring Art',
     subtitle: 'Art is core to BAAAHS and we work hard to bring queer art from the Bay Area and beyond to our campout. Want to bring art? Let us know, we may be able to help with materials and logistics!',
-    img: { src: 'https://storage.googleapis.com/static.baaahs.org/simon_art_piece.png' },
+    img: { src: 'https://static.baaahs.org/Z/simon_art_piece.png' },
   },
   {
     title: 'Into the Woods',
     subtitle: 'Hosted at The Incline, a new queer-owned retreat space in the mountains near the Mendocino National Forest, serving majestic views, lush camping, and extensive trails to explore.',
-    img: { src: 'https://storage.googleapis.com/static.baaahs.org/mendocino_view.jpeg', style: { width: undefined, height: '120%' } },
+    img: { src: 'https://static.baaahs.org/Z/mendocino_view.jpeg', style: { width: undefined, height: '120%' } },
   },
   {
     title: 'Participate and Play',
     subtitle: 'The weekend is packed with amazing parties and activities from nature hikes to screen printing, and our infamous talent expo, and they all need YOU! This is the place to try something new and leave that judgement at the gate.',
-    img: { src: 'https://storage.googleapis.com/static.baaahs.org/crafts.jpeg' },
+    img: { src: 'https://static.baaahs.org/Z/crafts.jpeg' },
   },
   {
     title: 'Creating Community',
     subtitle: 'BAAAHS Campout is a place to find happiness not in things we have or things we need, but in our community and in the simple joy of being present.',
-    img: { src: 'https://storage.googleapis.com/static.baaahs.org/trixie_and_friends.jpeg' },
+    img: { src: 'https://static.baaahs.org/Z/trixie_and_friends.jpeg' },
   },
 ];
 
@@ -67,8 +67,8 @@ const CampoutHome = () => {
       <Box gap={3}>
         <FullScreenHeader
           title={'BAAAHS Campout'}
-          image='https://storage.googleapis.com/static.baaahs.org/PXL_20230416_022706111.jpeg'
-          logo='https://storage.googleapis.com/static.baaahs.org/campout_logo_no_border.png'
+          image='https://static.baaahs.org/Z/PXL_20230416_022706111.jpeg'
+          logo='https://static.baaahs.org/Z/campout_logo_no_border.png'
           text={
             <Button
               component={'a'}

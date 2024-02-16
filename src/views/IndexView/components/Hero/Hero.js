@@ -12,36 +12,17 @@ const images = [
     group: [
       {
         cover:
-          'https://storage.googleapis.com/static.baaahs.org/2013_sheep.jpeg',
+          'https://static.baaahs.org/Z/2013_sheep.jpeg',
         coverDark: undefined,
       },
       {
         cover:
-          'https://storage.googleapis.com/static.baaahs.org/2015_sheep.jpeg',
+          'https://static.baaahs.org/Z/2015_sheep.jpeg',
         coverDark: undefined,
       },
       {
         cover:
-          'https://storage.googleapis.com/static.baaahs.org/shady_xian_discoballs.jpeg',
-        coverDark: undefined,
-      },
-    ],
-  },
-  {
-    group: [
-      {
-        cover:
-          'https://storage.googleapis.com/static.baaahs.org/2019_sheep.jpeg',
-        coverDark: undefined,
-      },
-      {
-        cover:
-          'https://storage.googleapis.com/static.baaahs.org/rainbow_baaahs.png',
-        coverDark: undefined,
-      },
-      {
-        cover:
-          'https://storage.googleapis.com/static.baaahs.org/sunset_balls_sheep.jpeg',
+          'https://static.baaahs.org/Z/shady_xian_discoballs.jpeg',
         coverDark: undefined,
       },
     ],
@@ -50,17 +31,36 @@ const images = [
     group: [
       {
         cover:
-          'https://storage.googleapis.com/static.baaahs.org/2019_sheep_2.jpeg',
+          'https://static.baaahs.org/Z/2019_sheep.jpeg',
         coverDark: undefined,
       },
       {
         cover:
-          'https://storage.googleapis.com/static.baaahs.org/build_sheep.jpeg',
+          'https://static.baaahs.org/Z/rainbow_baaahs.png',
         coverDark: undefined,
       },
       {
         cover:
-          'https://storage.googleapis.com/static.baaahs.org/kinky_sheep.jpeg',
+          'https://static.baaahs.org/Z/sunset_balls_sheep.jpeg',
+        coverDark: undefined,
+      },
+    ],
+  },
+  {
+    group: [
+      {
+        cover:
+          'https://static.baaahs.org/Z/2019_sheep_2.jpeg',
+        coverDark: undefined,
+      },
+      {
+        cover:
+          'https://static.baaahs.org/Z/build_sheep.jpeg',
+        coverDark: undefined,
+      },
+      {
+        cover:
+          'https://static.baaahs.org/Z/kinky_sheep.jpeg',
         coverDark: undefined,
       },
       {
