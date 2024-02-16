@@ -546,11 +546,24 @@ resource "google_compute_url_map" "main" {
             service = google_compute_backend_service.imgproxy.id
 
             match_rules {
-                prefix_match = "/Z/"
+                path_template_match = "/Z/{body=*}.png"
             }
             route_action {
                 url_rewrite {
-                    path_prefix_rewrite = "/_/plain/gs://static.baaahs.org/"
+                    path_template_rewrite = "/_/plain/gs://static.baaahs.org/{body}.png"
+                }
+            }
+        }
+
+        route_rules {
+            priority = 20
+
+            match_rules {
+                path_template_match = "/Z/{body=*}"
+            }
+            route_action {
+                url_rewrite {
+                    path_template_rewrite = "/{body}"
                 }
             }
         }
