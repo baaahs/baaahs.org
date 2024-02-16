@@ -543,7 +543,7 @@ resource "google_compute_url_map" "main" {
 
         path_rule {
             paths = ["/Z/*"]
-            service = google_compute_region_network_endpoint_group.imgproxy-west2XX.id
+            service = google_compute_region_network_endpoint_group.imgproxy-west2XY.id
             route_action {
                 url_rewrite {
                     path_prefix_rewrite = "/"
