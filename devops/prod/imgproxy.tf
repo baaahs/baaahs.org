@@ -87,10 +87,11 @@ resource "google_cloud_run_v2_service" "imgproxy" {
                 value = "true"
             }
 
-            env {
-                name  = "IMGPROXY_ENFORCE_AVIF"
-                value = "true"
-            }
+            # This seems to be causing crashes
+#            env {
+#                name  = "IMGPROXY_ENFORCE_AVIF"
+#                value = "false"
+#            }
 
             env {
                 name  = "IMGPROXY_ENABLE_CLIENT_HINTS"
