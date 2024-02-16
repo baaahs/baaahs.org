@@ -541,30 +541,28 @@ resource "google_compute_url_map" "main" {
         name            = "static"
         default_service = google_compute_backend_bucket.static.id
 
+        # Anything that doesn't have one of these file extensions goes
+        # directly to the bucket
         route_rules {
             priority = 10
-            service = google_compute_backend_service.imgproxy.id
-
-            match_rules {
-                path_template_match = "/Z/{body=*}.png"
-            }
-            route_action {
-                url_rewrite {
-                    path_template_rewrite = "/_/plain/gs://static.baaahs.org/{body}.png"
-                }
-            }
-        }
-
-        route_rules {
-            priority = 20
             service = google_compute_backend_bucket.static.id
 
             match_rules {
-                path_template_match = "/Z/{body=*}"
+                regex_match = ".*\\.(?!(png|jpg|jpeg)$)"
+            }
+        }
+
+        # Things that make it here go through the imgproxy
+        route_rules {
+            priority = 200
+            service = google_compute_backend_service.imgproxy.id
+
+            match_rules {
+                prefix_match = "/"
             }
             route_action {
                 url_rewrite {
-                    path_template_rewrite = "/{body}"
+                    path_prefix_rewrite = "/_/plain/gs://static.baaahs.org/"
                 }
             }
         }
