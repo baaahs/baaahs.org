@@ -57,46 +57,46 @@ resource "google_cloud_run_v2_service" "imgproxy" {
 
         containers {
             image = "us-west2-docker.pkg.dev/baaahsorg-prod/docker/imgproxy"
-        }
 
-        resources {
-            limits {
-                cpu = 1
-                memory = "512Mi"
+            resources {
+                limits = {
+                    cpu    = 1
+                    memory = "512Mi"
+                }
+
+                # May want to explore this for cold-start latency
+                # startup_cpu_boost = true
             }
 
-            # May want to explore this for cold-start latency
-            # startup_cpu_boost = true
-        }
+            env {
+                name  = "IMGPROXY_DOWNLOAD_TIMEOUT"
+                value = "10"
+            }
 
-        env {
-            name = "IMGPROXY_DOWNLOAD_TIMEOUT"
-            value = "10"
-        }
+            env {
+                name  = "IMGPROXY_TTL"
+                value = "31536000"
+            }
 
-        env {
-            name = "IMGPROXY_TTL"
-            value = "31536000"
-        }
+            env {
+                name  = "IMGPROXY_ENABLE_WEBP_DETECTION"
+                value = "true"
+            }
 
-        env {
-            name = "IMGPROXY_ENABLE_WEBP_DETECTION"
-            value = "true"
-        }
+            env {
+                name  = "IMGPROXY_USE_GCS"
+                value = "true"
+            }
 
-        env {
-            name = "IMGPROXY_USE_GCS"
-            value = "true"
-        }
+            env {
+                name = "IMGPROXY_ALLOWED_SOURCES"
+                # value = ""
+            }
 
-        env {
-            name = "IMGPROXY_ALLOWED_SOURCES"
-            # value = ""
-        }
-
-        env {
-            name = "IMGPROXY_GCS_KEY"
-            # value = ""
+            env {
+                name = "IMGPROXY_GCS_KEY"
+                # value = ""
+            }
         }
     }
 }
