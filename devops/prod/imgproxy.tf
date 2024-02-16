@@ -148,6 +148,8 @@ resource "google_compute_backend_service" "imgproxy" {
 #            include_http_headers = [ "dpr", "width", "viewport-width" ]
 #        }
 
+        signed_url_cache_max_age_sec = 14000
+
         # No really, actually do some caching please...
         cache_mode = "USE_ORIGIN_HEADERS"
     }
