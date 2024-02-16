@@ -104,13 +104,23 @@ resource "google_cloud_run_v2_service" "imgproxy" {
     }
 }
 
-# Then we need a network endpoint group, which can be zonal, region, or global
+# Cloud Run is a managed instance service, so a region NEG is the only
+# type of NEG that can be used for it.
 resource "google_compute_region_network_endpoint_group" "imgproxy-west2" {
     name = "imgproxy-west2"
     network_endpoint_type = "SERVERLESS"
     region = "us-west2"
     cloud_run {
         service = google_cloud_run_v2_service.imgproxy.name
+    }
+}
+
+# But the url map really wants global things, so we define a global
+# backend that uses that region group.
+resource "google_compute_backend_service" "imgproxy" {
+    name = "imgproxy"
+    backend {
+        group = google_compute_region_network_endpoint_group.imgproxy-west2.id
     }
 }
 
