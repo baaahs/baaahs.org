@@ -541,14 +541,24 @@ resource "google_compute_url_map" "main" {
         name            = "static"
         default_service = google_compute_backend_bucket.static.id
 
-        # Anything that doesn't have one of these file extensions goes
-        # directly to the bucket
+        # This provides an escape mechanism to avoid the imgproxy
+        # We are pretty limited by the restrictions on global load balancers. I
+        # guess we could get tricky and try to stack an INTERNAL_SELF_MANAGED
+        # load balancer behind the global one, but that seems like it's own
+        # version of whack - oh and actually I don't think it would work right anyway,
+        # but I honestly haven't fully thought it through. For now, let's go
+        # with the approach of "If you want raw access, you must specify that"
         route_rules {
             priority = 10
             service = google_compute_backend_bucket.static.id
 
             match_rules {
-                regex_match = ".*\\.(?!(png|jpg|jpeg)$)"
+                prefix_match = "/raw/"
+            }
+            route_action {
+                url_rewrite {
+                    path_prefix_rewrite = "/"
+                }
             }
         }
 
