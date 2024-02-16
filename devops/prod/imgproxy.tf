@@ -31,17 +31,20 @@ resource "google_artifact_registry_repository" "docker" {
 }
 
 # Second step is to pull the latest imgproxy container, tag it, and then
-# push it into the new registry as described in the tutorial linked above
+# push it into the new registry as described in the tutorial linked above.
+# VERY IMPORTANT - this either has to be done from an amd64 architecture machine
+# (as in not a M-series mac) or perhaps you can fiddle around to get docker to
+# respect the amd64 platform.
 #
 #     gcloud auth login
 #     gcloud auth configure-docker us-west2-docker.pkg.dev
 #     docker pull darthsim/imgproxy:latest
-#     docker tag darthsim/imgproxy us-west2-docker.pkg.dev/baaahsorg-prod/docker/imgproxy
-#     docker push us-west2-docker.pkg.dev/baaahsorg-prod/docker/imgproxy
+#     docker tag darthsim/imgproxy:latest us-west2-docker.pkg.dev/baaahsorg-prod/docker/imgproxy:2024021601
+#     docker push us-west2-docker.pkg.dev/baaahsorg-prod/docker/imgproxy:2024021601
 #
 
 # With the image pushed into the artifact registry we can setup the cloud run service
-
+# Similiarly will fail on first run needing the API enabled https://console.developers.google.com/apis/api/run.googleapis.com/overview?project=baaahsorg-prod
 resource "google_cloud_run_v2_service" "imgproxy" {
     name = "imgproxy"
     location = "us-west2"
@@ -56,7 +59,7 @@ resource "google_cloud_run_v2_service" "imgproxy" {
         }
 
         containers {
-            image = "us-west2-docker.pkg.dev/baaahsorg-prod/docker/imgproxy"
+            image = "us-west2-docker.pkg.dev/baaahsorg-prod/docker/imgproxy:2024021601"
 
             resources {
                 limits = {
