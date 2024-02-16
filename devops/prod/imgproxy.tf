@@ -135,10 +135,6 @@ resource "google_compute_region_network_endpoint_group" "imgproxy-west2" {
     cloud_run {
         service = google_cloud_run_v2_service.imgproxy.name
     }
-
-    enable_cdn = true
-    timeout_sec = 60
-    connection_draining_timeout_sec = 60
 }
 
 # But the url map really wants global things, so we define a global
