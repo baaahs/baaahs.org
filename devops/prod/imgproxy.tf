@@ -55,7 +55,7 @@ resource "google_cloud_run_v2_service" "imgproxy" {
     template {
         scaling {
             min_instance_count = 0
-            max_instance_count = 2
+            max_instance_count = 6
         }
 
         containers {
@@ -63,8 +63,8 @@ resource "google_cloud_run_v2_service" "imgproxy" {
 
             resources {
                 limits = {
-                    cpu    = 1
-                    memory = "512Mi"
+                    cpu    = 2
+                    memory = "1024Mi"
                 }
 
                 # May want to explore this for cold-start latency
@@ -74,7 +74,7 @@ resource "google_cloud_run_v2_service" "imgproxy" {
             # Options reference https://docs.imgproxy.net/configuration/options
             env {
                 name  = "IMGPROXY_DOWNLOAD_TIMEOUT"
-                value = "10"
+                value = "60"
             }
 
             env {
