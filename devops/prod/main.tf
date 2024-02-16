@@ -541,9 +541,13 @@ resource "google_compute_url_map" "main" {
         name            = "static"
         default_service = google_compute_backend_bucket.static.id
 
-        path_rule {
-            paths = ["/Z/*"]
+        route_rules {
+            priority = 10
             service = google_compute_backend_service.imgproxy.id
+
+            match_rules {
+                prefix_match = "/Z/"
+            }
             route_action {
                 url_rewrite {
                     path_prefix_rewrite = "/_/plain/gs://static.baaahs.org/"
