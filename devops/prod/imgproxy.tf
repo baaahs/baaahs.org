@@ -158,7 +158,6 @@ resource "google_compute_backend_service" "imgproxy" {
         cache_mode = "USE_ORIGIN_HEADERS"
     }
 
-    timeout_sec = 60
     connection_draining_timeout_sec = 60
 }
 
