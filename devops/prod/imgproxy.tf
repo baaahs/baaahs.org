@@ -155,19 +155,19 @@ resource "google_compute_backend_service" "imgproxy" {
         group = google_compute_region_network_endpoint_group.imgproxy-west2.id
     }
     enable_cdn = true
-    cdn_policy {
+#    cdn_policy {
         # Hmmm, something is whacky
-        cache_key_policy {
-            include_host = true
+#        cache_key_policy {
+#            include_host = true
 #            include_http_headers = [ "dpr", "width", "viewport-width" ]
-        }
+#        }
 
 #        signed_url_cache_max_age_sec = 14000
 
         # No really, actually do some caching please...
-        cache_mode = "USE_ORIGIN_HEADERS"
-    }
+#        cache_mode = "USE_ORIGIN_HEADERS"
+#    }
 
-    connection_draining_timeout_sec = 60
+#    connection_draining_timeout_sec = 60
 }
 
