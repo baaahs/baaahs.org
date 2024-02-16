@@ -45,8 +45,8 @@ resource "google_artifact_registry_repository" "docker" {
 
 # With the image pushed into the artifact registry we can setup the cloud run service
 # Similiarly will fail on first run needing the API enabled https://console.developers.google.com/apis/api/run.googleapis.com/overview?project=baaahsorg-prod
-resource "google_cloud_run_v2_service" "imgproxyXY" {
-    name = "imgproxyxy"
+resource "google_cloud_run_v2_service" "imgproxy" {
+    name = "imgproxy"
     location = "us-west2"
 
     # This probably could be INGRESS_TRAFFIC_INTERNAL_LOAD_BALANCER
@@ -105,12 +105,12 @@ resource "google_cloud_run_v2_service" "imgproxyXY" {
 }
 
 # Then we need a network endpoint group, which can be zonal, region, or global
-resource "google_compute_region_network_endpoint_group" "imgproxy-west2XY" {
-    name = "imgproxy-west2xy"
+resource "google_compute_region_network_endpoint_group" "imgproxy-west2" {
+    name = "imgproxy-west2"
     network_endpoint_type = "SERVERLESS"
     region = "us-west2"
     cloud_run {
-        service = google_cloud_run_v2_service.imgproxyXY.name
+        service = google_cloud_run_v2_service.imgproxy.name
     }
 }
 
