@@ -71,6 +71,7 @@ resource "google_cloud_run_v2_service" "imgproxy" {
                 # startup_cpu_boost = true
             }
 
+            # Options reference https://docs.imgproxy.net/configuration/options
             env {
                 name  = "IMGPROXY_DOWNLOAD_TIMEOUT"
                 value = "10"
@@ -82,8 +83,23 @@ resource "google_cloud_run_v2_service" "imgproxy" {
             }
 
             env {
-                name  = "IMGPROXY_ENABLE_WEBP_DETECTION"
+                name  = "IMGPROXY_ENFORCE_WEBP"
                 value = "true"
+            }
+
+            env {
+                name  = "IMGPROXY_ENFORCE_AVIF"
+                value = "true"
+            }
+
+            env {
+                name  = "IMGPROXY_ENABLE_CLIENT_HINTS"
+                value = "true"
+            }
+
+            env {
+                name  = "IMGPROXY_LOG_FORMAT"
+                value = "gcp"
             }
 
             env {
@@ -124,6 +140,12 @@ resource "google_compute_backend_service" "imgproxy" {
     name = "imgproxy"
     backend {
         group = google_compute_region_network_endpoint_group.imgproxy-west2.id
+    }
+    enable_cdn = true
+    cdn_policy {
+        cache_key_policy {
+            include_http_headers = [ "dpr", "width", "viewport-width", "accept" ]
+        }
     }
 }
 

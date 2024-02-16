@@ -562,13 +562,18 @@ resource "google_compute_url_map" "main" {
             }
         }
 
-        # Things that make it here go through the imgproxy
+        # I was thinking that we should rewrite all thing in static so as to avoid
+        # needing to touch every image. But then I discovered that images are apparently
+        # being referenced by the squirrel name using the googlecloudapi.com domain
+        # directly, which is wrong and breaks everything, so since those paths have to
+        # be touched anyway, let's just hide the image proxy at it's own path. I
+        # have chosen /Z/ just because. It's also kind of pretty if you stare at it.
         route_rules {
             priority = 200
             service = google_compute_backend_service.imgproxy.id
 
             match_rules {
-                prefix_match = "/"
+                prefix_match = "/Z/"
             }
             route_action {
                 url_rewrite {
