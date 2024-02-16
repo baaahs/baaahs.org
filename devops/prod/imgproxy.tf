@@ -146,6 +146,9 @@ resource "google_compute_backend_service" "imgproxy" {
         cache_key_policy {
             include_http_headers = [ "dpr", "width", "viewport-width" ]
         }
+
+        # No really, actually do some caching please...
+        cache_mode = "FORCE_CACHE_ALL"
     }
 }
 
