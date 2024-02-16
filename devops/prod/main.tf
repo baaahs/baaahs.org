@@ -546,7 +546,7 @@ resource "google_compute_url_map" "main" {
             service = google_compute_backend_service.imgproxy.id
             route_action {
                 url_rewrite {
-                    path_prefix_rewrite = "/"
+                    path_prefix_rewrite = "/_/plain/gs://static.baaahs.org/"
                 }
             }
         }

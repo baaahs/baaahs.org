@@ -93,12 +93,7 @@ resource "google_cloud_run_v2_service" "imgproxy" {
 
             env {
                 name = "IMGPROXY_ALLOWED_SOURCES"
-                # value = ""
-            }
-
-            env {
-                name = "IMGPROXY_GCS_KEY"
-                # value = ""
+                value = "gs://static.baaahs.org"
             }
         }
     }
