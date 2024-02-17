@@ -19,7 +19,7 @@ const content = [
   },
   {
     header: 'Pure Queer Fun',
-    body: 'Other than parties, we put on events through the week like Drag Bingo, a No-Talent Show, arts and crafts, and more! Lots of opportunities for folks to really express themselves and share it with the world.',
+    body: 'There\'s never a dull moment. Besides some epic parties, dive in to Draaag Dodgeball, a No-Talent Show, arts and crafts, nature walks, and more! We’re also planning a bunch of other surprises, so stay tuned.',
     img: {
       src: 'https://static.baaahs.org/Z/eric_and_phillip.png',
       height: '100%',
@@ -28,8 +28,8 @@ const content = [
     },
   },
   {
-    header: 'Iconic BAAAHS Lights and Sound',
-    body: 'Our parties are some of the best in the Bay Area and we bring it to you on a mountain. BAAAHS DJs and friends will be spinning till sunrise, and you can expect some of the same technology powering our art car to decorate the canopy of trees as you’re dancing your ass off.',
+    header: 'Off of the Playa, Into the Woods',
+    body: 'We\'re bringing our legendary Burning Man parties to you on a mountain. BAAAHS DJs and friends will be spinning till sunrise, and the lights from our big gay sheep will decorate the canopy of trees as you’re dancing your ass off.',
     img: {
       src: 'https://static.baaahs.org/Z/dark_rainbow_pasture.png',
       height: '100%',
@@ -38,7 +38,7 @@ const content = [
   },
   {
     header: 'Family Meals',
-    body: 'We serve breakfast and dinner every day and it’s campout tradition that we all sit down together to enjoy your meal. After all, you’re part of the BAAAHS family now.',
+    body: 'We\'ve got you covered for food. Join the herd for delicious vegan, veggie, and omnivore options for brunch and dinner every day, and some delightful surprise snaaacks!',
     img: {
       src: 'https://static.baaahs.org/Z/drag_bingo_pan.png',
       height: '100%',
@@ -46,8 +46,8 @@ const content = [
     },
   },
   {
-    header: 'Gear Transport',
-    body: 'We are weary of too many cars going up on the narrow road up to the Incline. So we offer to transport your camping gear for you free of charge! With the extra space in everyone’s vehicles, we strongly encourage folks to offer space in their vehicle leading up to the event. We will announce drop-off and pick-up locations in San Francisco closer to the event and carpool sign up soon.',
+    header: 'Transportation',
+    body: 'To keep the event as green as possible we offer transportation for your camping gear free of charge! With the extra space in everyone’s vehicles, and we strongly encourage carpooling. We will announce drop-off and pick-up locations in San Francisco closer to the event and the carpool sign up is coming soon.',
     img: {
       src: 'https://static.baaahs.org/Z/yotam_mood.png',
       height: '100%',
@@ -55,8 +55,8 @@ const content = [
     },
   },
   {
-    header: 'Camping',
-    body: 'We are sleeping (mostly) in tents folks! There will be some campsite power for charging phones and lights, but nothing crazy. There are also VERY LIMITED RV passes available at extra cost.',
+    header: 'Camping & Glamping',
+    body: 'We are sleeping (mostly) in tents folks! There will be some campsite power for charging phones and lights, but nothing crazy, bring your own extension cord. There are also limited RV passes available at extra cost. Outdoor showers and toilets are available for everyone.',
     img: {
       src: 'https://static.baaahs.org/Z/Baaahs-camp%20out-fire-fb.png',
       height: '100%',
@@ -105,7 +105,7 @@ const WhatToExpect = () => {
                   title: item.header,
                   maxHeight: item.img.height,
                   maxWidth: item.img.width,
-                  fontSize: 32,
+                  fontSize: 24,
                 }}
               />
             ))}

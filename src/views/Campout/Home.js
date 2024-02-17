@@ -14,24 +14,24 @@ import { useInterval } from 'usehooks-ts';
 
 const content = [
   {
+    title: 'Into the Woods',
+    subtitle: 'Hosted at The Incline, a new queer-owned retreat space in the mountains near the Mendocino National Forest, serving majestic views, lush camping, and extensive trails to explore.',
+    img: { src: 'https://static.baaahs.org/Z/mendocino_view.jpeg', style: { width: undefined, height: '120%' } },
+  },
+  {
     title: 'Enthralling Visions',
     subtitle: 'Be ready for BAAAHS light wizardry set to full face-melt mode, nestled cutely amongst the trees. There ain’t no party like a BAAAHS party bb!!',
     img: { src: 'https://static.baaahs.org/Z/dark_rainbow_pasture.png' },
   },
   {
     title: 'Aural Pleasures',
-    subtitle: 'Two stages and three nights of BAAAHS-rockin\' beats from your fav BAAAHS DJs and special guests on our world class sound system!',
+    subtitle: 'Multiple stages and three nights of BAAAHS-rockin\' beats from your fav BAAAHS DJs and special guests on our world class sound system!',
     img: { src: 'https://static.baaahs.org/Z/ben_dancing_lights.png' },
   },
   {
     title: 'Alluring Art',
     subtitle: 'Art is core to BAAAHS and we work hard to bring queer art from the Bay Area and beyond to our campout. Want to bring art? Let us know, we may be able to help with materials and logistics!',
     img: { src: 'https://static.baaahs.org/Z/simon_art_piece.png' },
-  },
-  {
-    title: 'Into the Woods',
-    subtitle: 'Hosted at The Incline, a new queer-owned retreat space in the mountains near the Mendocino National Forest, serving majestic views, lush camping, and extensive trails to explore.',
-    img: { src: 'https://static.baaahs.org/Z/mendocino_view.jpeg', style: { width: undefined, height: '120%' } },
   },
   {
     title: 'Participate and Play',
