@@ -125,14 +125,11 @@ const CampoutHome = () => {
                   <Typography component='span' sx={{ fontFamily: 'Smooth Circulars', fontSize: '1.25em', padding: '0 .5em' }}>
                     WHAAAT???
                   </Typography>
-                  (We're just as confused as you are).
                 </p>
 
-                <p>
-                  Whaaat will you do?
-                  <br/>Whaaat will you be?
-                  <div ref={whaaatRef}></div>
-                </p>
+                <div>Whaaat will you do?</div>
+                <div>Whaaat will you be?</div>
+                <div ref={whaaatRef}></div>
 
                 <p>
                   BAAAHS beckons you to three zany nights of camping in the
