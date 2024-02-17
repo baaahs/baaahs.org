@@ -78,7 +78,7 @@ const content = [
 
 const QAndA = () => {
   return (
-    <Main navItems={NavItems}>
+    <Main navItems={NavItems} colorInvert={true}>
       <Box gap={3}>
         <FullScreenHeader
           image={

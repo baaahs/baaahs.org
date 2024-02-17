@@ -19,7 +19,7 @@ const content = [
     img: { src: 'https://static.baaahs.org/Z/dark_rainbow_pasture.png' },
   },
   {
-    title: 'Enchanting Aurals',
+    title: 'Aural Pleasures',
     subtitle: 'Two stages and three nights of BAAAHS-rockin\' beats from your fav BAAAHS DJs and special guests on our world class sound system!',
     img: { src: 'https://static.baaahs.org/Z/ben_dancing_lights.png' },
   },
