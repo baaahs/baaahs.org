@@ -1,4 +1,4 @@
-$information-phone: "only screen and (max-device-width : 640px)";
+$information-phone: 'only screen and (max-device-width : 640px)';
 
 $party-color: red;
 $business-color: green;
@@ -7,9 +7,10 @@ $tech-color: orange;
 $support-color: grey;
 
 .setup {
-  a:link, a:visited {
+  a:link,
+  a:visited {
     color: #333;
-    text-shadow: 1px 1px rgba(16, 16, 16, .25);
+    text-shadow: 1px 1px rgba(16, 16, 16, 0.25);
   }
 
   a:hover {
@@ -24,11 +25,17 @@ $support-color: grey;
     font-weight: 900;
   }
 
-  header h1, header h2 {
+  header h1,
+  header h2 {
     text-align: center;
   }
 
-  h1, h2, h3, h4, h5, h6 {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
     font-weight: bold;
     padding-top: 0.5em;
     padding-bottom: 0.5em;
@@ -60,7 +67,9 @@ $support-color: grey;
     margin-top: 2em;
   }
 
-  p + p, ul + p, ol + p {
+  p + p,
+  ul + p,
+  ol + p {
     margin-top: 1em;
   }
 
@@ -105,7 +114,7 @@ $support-color: grey;
   }
 
   @mixin crew-section($color) {
-    border-left-width: .25em;
+    border-left-width: 0.25em;
     border-left-style: dashed;
     border-left-color: $color;
     padding-left: 1em;
@@ -116,23 +125,28 @@ $support-color: grey;
     border-left-style: solid !important;
   }
 
-  section.setup-lead, .crew-marker.setup-lead {
+  section.setup-lead,
+  .crew-marker.setup-lead {
     @include crew-section($support-color);
   }
 
-  section.party-crew, .crew-marker.party-crew {
+  section.party-crew,
+  .crew-marker.party-crew {
     @include crew-section($party-color);
   }
 
-  section.business-crew, .crew-marker.business-crew {
+  section.business-crew,
+  .crew-marker.business-crew {
     @include crew-section($business-color);
   }
 
-  section.head-and-hind-crew, .crew-marker.head-and-hind-crew {
+  section.head-and-hind-crew,
+  .crew-marker.head-and-hind-crew {
     @include crew-section($head-and-hind-color);
   }
 
-  section.tech-crew, .crew-marker.tech-crew {
+  section.tech-crew,
+  .crew-marker.tech-crew {
     @include crew-section($tech-color);
   }
 
@@ -142,15 +156,15 @@ $support-color: grey;
     right: 0;
     width: 25%;
     background-color: #eee;
-    padding: .25em 1em .5em 1em;
-    margin: 0 0 .5em 1em;
-    font-size: .9em;
+    padding: 0.25em 1em 0.5em 1em;
+    margin: 0 0 0.5em 1em;
+    font-size: 0.9em;
     border: 1px solid black;
   }
 
   .safety-checks {
     background-color: #fee;
-    padding: .25em;
+    padding: 0.25em;
     border: 1px solid black;
   }
 
@@ -168,23 +182,99 @@ $support-color: grey;
     display: block !important;
     text-align: center;
     width: 100%;
-    padding: .5em 0;
+    padding: 0.5em 0;
     border: 1px solid black;
 
-    ul, li {
+    ul,
+    li {
       display: inline;
       margin: 0;
     }
 
     li + li::before {
-      content: " | ";
+      content: ' | ';
     }
   }
 
-  .brc-edition .not-brc-edition, .brc-edition .street-edition {
+  .brc-edition .not-brc-edition,
+  .brc-edition .street-edition {
     display: none;
   }
-  .street-edition .not-street-edition, .street-edition .brc-edition {
+  .street-edition .not-street-edition,
+  .street-edition .brc-edition {
     display: none;
+  }
+}
+
+.rainbow {
+  height: '100%';
+  width: '100%';
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  position: 'absolute';
+  background: linear-gradient(
+    '124deg',
+    '#ff2400',
+    '#e81d1d',
+    '#e8b71d',
+    '#e3e81d',
+    '#1de840',
+    '#1ddde8',
+    '#2b1de8',
+    '#dd00f3',
+    '#dd00f3'
+  );
+  background-size: '1800% 1800%';
+
+  -webkit-animation: 'rainbow 18s ease infinite';
+  -z-animation: 'rainbow 18s ease infinite';
+  -o-animation: 'rainbow 18s ease infinite';
+  animation: 'rainbow 18s ease infinite';
+}
+
+@-webkit-keyframes rainbow {
+  0% {
+    background-position: 0% 82%;
+  }
+  50% {
+    background-position: 100% 19%;
+  }
+  100% {
+    background-position: 0% 82%;
+  }
+}
+@-moz-keyframes rainbow {
+  0% {
+    background-position: 0% 82%;
+  }
+  50% {
+    background-position: 100% 19%;
+  }
+  100% {
+    background-position: 0% 82%;
+  }
+}
+@-o-keyframes rainbow {
+  0% {
+    background-position: 0% 82%;
+  }
+  50% {
+    background-position: 100% 19%;
+  }
+  100% {
+    background-position: 0% 82%;
+  }
+}
+@keyframes rainbow {
+  0% {
+    background-position: 0% 82%;
+  }
+  50% {
+    background-position: 100% 19%;
+  }
+  100% {
+    background-position: 0% 82%;
   }
 }

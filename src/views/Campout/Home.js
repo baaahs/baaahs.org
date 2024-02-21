@@ -1,4 +1,5 @@
-import React, { useCallback, useEffect } from 'react';
+/* eslint-disable quotes */
+import React, { useCallback, useEffect, useState } from 'react';
 import { useTheme } from '@mui/material/styles';
 import Avatar from '@mui/material/Avatar';
 import Box from '@mui/material/Box';
@@ -11,43 +12,63 @@ import Main from 'layouts/Main';
 import FullScreenHeader from 'components/FullScreenHeader';
 import NavItems from './NavItems';
 import { useInterval } from 'usehooks-ts';
+import '../../styles/whaaat.css';
 
 const content = [
   {
     title: 'Enthralling Visions',
-    subtitle: 'Be ready for BAAAHS light wizardry set to full face-melt mode, nestled cutely amongst the trees. There ain’t no party like a BAAAHS party bb!!',
-    img: { src: 'https://storage.googleapis.com/static.baaahs.org/dark_rainbow_pasture.png' },
+    subtitle:
+      'Be ready for BAAAHS light wizardry set to full face-melt mode, nestled cutely amongst the trees. There ain’t no party like a BAAAHS party bb!!',
+    img: {
+      src: 'https://storage.googleapis.com/static.baaahs.org/dark_rainbow_pasture.png',
+    },
   },
   {
     title: 'Enchanting Aurals',
-    subtitle: 'Two stages and three nights of BAAAHS-rockin\' beats from your fav BAAAHS DJs and special guests on our world class sound system!',
-    img: { src: 'https://storage.googleapis.com/static.baaahs.org/ben_dancing_lights.png' },
+    subtitle:
+      "Two stages and three nights of BAAAHS-rockin' beats from your fav BAAAHS DJs and special guests on our world class sound system!",
+    img: {
+      src: 'https://storage.googleapis.com/static.baaahs.org/ben_dancing_lights.png',
+    },
   },
   {
     title: 'Alluring Art',
-    subtitle: 'Art is core to BAAAHS and we work hard to bring queer art from the Bay Area and beyond to our campout. Want to bring art? Let us know, we may be able to help with materials and logistics!',
-    img: { src: 'https://storage.googleapis.com/static.baaahs.org/simon_art_piece.png' },
+    subtitle:
+      'Art is core to BAAAHS and we work hard to bring queer art from the Bay Area and beyond to our campout. Want to bring art? Let us know, we may be able to help with materials and logistics!',
+    img: {
+      src: 'https://storage.googleapis.com/static.baaahs.org/simon_art_piece.png',
+    },
   },
   {
     title: 'Into the Woods',
-    subtitle: 'Hosted at The Incline, a new queer-owned retreat space in the mountains near the Mendocino National Forest, serving majestic views, lush camping, and extensive trails to explore.',
-    img: { src: 'https://storage.googleapis.com/static.baaahs.org/mendocino_view.jpeg', style: { width: undefined, height: '120%' } },
+    subtitle:
+      'Hosted at The Incline, a new queer-owned retreat space in the mountains near the Mendocino National Forest, serving majestic views, lush camping, and extensive trails to explore.',
+    img: {
+      src: 'https://storage.googleapis.com/static.baaahs.org/mendocino_view.jpeg',
+      style: { width: undefined, height: '120%' },
+    },
   },
   {
     title: 'Participate and Play',
-    subtitle: 'The weekend is packed with amazing parties and activities from nature hikes to screen printing, and our infamous talent expo, and they all need YOU! This is the place to try something new and leave that judgement at the gate.',
-    img: { src: 'https://storage.googleapis.com/static.baaahs.org/crafts.jpeg' },
+    subtitle:
+      'The weekend is packed with amazing parties and activities from nature hikes to screen printing, and our infamous talent expo, and they all need YOU! This is the place to try something new and leave that judgement at the gate.',
+    img: {
+      src: 'https://storage.googleapis.com/static.baaahs.org/crafts.jpeg',
+    },
   },
   {
     title: 'Creating Community',
-    subtitle: 'BAAAHS Campout is a place to find happiness not in things we have or things we need, but in our community and in the simple joy of being present.',
-    img: { src: 'https://storage.googleapis.com/static.baaahs.org/trixie_and_friends.jpeg' },
+    subtitle:
+      'BAAAHS Campout is a place to find happiness not in things we have or things we need, but in our community and in the simple joy of being present.',
+    img: {
+      src: 'https://storage.googleapis.com/static.baaahs.org/trixie_and_friends.jpeg',
+    },
   },
 ];
 
 const CampoutHome = () => {
   const theme = useTheme();
-
+  const [whichIndex, setWhichIndex] = useState(0);
   const whaaatRef = React.createRef();
   const questions = [
     'Whaaat is the capital of Assyria?',
@@ -55,9 +76,10 @@ const CampoutHome = () => {
     'Whaaat is your favourite colour?',
     'Whaaat is the airspeed velocity of an unladen swallow?',
   ];
-  const whiiichRef = React.createRef(0);
   const updateWhaaat = useCallback(() => {
-    whaaatRef.current.innerText = questions[whiiichRef.current++ % questions.length];
+    const newIndex = Math.floor(Math.random() * questions.length);
+    setWhichIndex(newIndex);
+    whaaatRef.current.innerText = questions[whichIndex];
   }, []);
   useEffect(updateWhaaat, []);
   useInterval(updateWhaaat, 5000);
@@ -67,14 +89,19 @@ const CampoutHome = () => {
       <Box gap={3}>
         <FullScreenHeader
           title={'BAAAHS Campout'}
-          image='https://storage.googleapis.com/static.baaahs.org/PXL_20230416_022706111.jpeg'
-          logo='https://storage.googleapis.com/static.baaahs.org/campout_logo_no_border.png'
+          image="https://storage.googleapis.com/static.baaahs.org/PXL_20230416_022706111.jpeg"
+          logo="https://storage.googleapis.com/static.baaahs.org/campout_logo_no_border.png"
           text={
             <Button
               component={'a'}
               variant="contained"
               color="secondary"
-              sx={{ marginTop: '3em', fontFamily: 'Smooth Circulars', textAlign: 'center' }}
+              className="rainbow"
+              sx={{
+                marginTop: '3em',
+                fontFamily: 'Smooth Circulars',
+                textAlign: 'center',
+              }}
               size="large"
               href={'/campout/register'}
               fullWidth
@@ -98,17 +125,18 @@ const CampoutHome = () => {
                 <p>
                   BAAAHS Campout is a unique three-night queer getaway hosted on
                   The Incline, nestled in the enchanting landscapes of Mendocino
-                  County. It’s a micro-cosmos free from the mundane, where you can
-                  dance, unwind, laugh, and play to your heart's content. It’s a
-                  place to find happiness not in things we have or things we need,
-                  but in our community and in the simple joy of being present.
+                  County. It’s a micro-cosmos free from the mundane, where you
+                  can dance, unwind, laugh, and play to your heart's content.
+                  It’s a place to find happiness not in things we have or things
+                  we need, but in our community and in the simple joy of being
+                  present.
                 </p>
 
                 <p>
                   Get ready for epic parties with amazing DJs, an art-filled
-                  wonderland that will captivate your senses, and all the daytime
-                  adventures you can handle. We have some surprises up our sleeves
-                  that you simply must witness firsthand.
+                  wonderland that will captivate your senses, and all the
+                  daytime adventures you can handle. We have some surprises up
+                  our sleeves that you simply must witness firsthand.
                 </p>
 
                 <p>
@@ -116,13 +144,19 @@ const CampoutHome = () => {
                   BAAAHS, our aim is to foster an inclusive environment that
                   embraces all forms of self-expression. We believe in the power
                   of teamwork and active participation to create an
-                  extraordinary
-                  event together.
+                  extraordinary event together.
                 </p>
 
                 <p>
                   This year's theme is:
-                  <Typography component='span' sx={{ fontFamily: 'Smooth Circulars', fontSize: '1.25em', padding: '0 .5em' }}>
+                  <Typography
+                    component="span"
+                    sx={{
+                      fontFamily: 'Smooth Circulars',
+                      fontSize: '1.25em',
+                      padding: '0 .5em',
+                    }}
+                  >
                     WHAAAT???
                   </Typography>
                   (We're just as confused as you are).
@@ -130,7 +164,8 @@ const CampoutHome = () => {
 
                 <p>
                   Whaaat will you do?
-                  <br/>Whaaat will you be?
+                  <br />
+                  Whaaat will you be?
                   <div ref={whaaatRef}></div>
                 </p>
 
@@ -143,12 +178,19 @@ const CampoutHome = () => {
             </Box>
           </Grid>
 
-          <Grid container item xs={12} justifyContent="center" sx={{ margin: '0 0 24px 0' }}>
+          <Grid
+            container
+            item
+            xs={12}
+            justifyContent="center"
+            sx={{ margin: '0 0 24px 0' }}
+          >
             <Grid item xs={4} lg={2} xl={1} sx={{ margin: '0 8px' }}>
               <Button
                 component={'a'}
                 variant="contained"
                 color="primary"
+                className="rainbow"
                 sx={{ fontFamily: 'Smooth Circulars', textAlign: 'center' }}
                 size="large"
                 href={'/campout/register'}
@@ -179,7 +221,12 @@ const CampoutHome = () => {
                   data-aos={'fade-up'}
                   data-aos-delay={i * 100}
                 >
-                  <Box display={'flex'} flexDirection={'column'} alignItems="center" gap={2}>
+                  <Box
+                    display={'flex'}
+                    flexDirection={'column'}
+                    alignItems="center"
+                    gap={2}
+                  >
                     <Box
                       alignItems="center"
                       component={Avatar}
@@ -190,14 +237,21 @@ const CampoutHome = () => {
                     >
                       <img
                         src={item.img.src}
-                        style={Object.assign({ borderRadius: '50%', width: '150%' }, item.img.style)}
+                        style={Object.assign(
+                          { borderRadius: '50%', width: '150%' },
+                          item.img.style,
+                        )}
                         alt=""
                       />
                     </Box>
-                    <Typography variant='h6' fontFamily='Smooth Circulars' textAlign='center'>
+                    <Typography
+                      variant="h6"
+                      fontFamily="Smooth Circulars"
+                      textAlign="center"
+                    >
                       {item.title}
                     </Typography>
-                    <Typography color="text.secondary" textAlign='center'>
+                    <Typography color="text.secondary" textAlign="center">
                       {item.subtitle}
                     </Typography>
                   </Box>
@@ -206,12 +260,19 @@ const CampoutHome = () => {
             ))}
           </Grid>
 
-          <Grid container item xs={12} justifyContent="center" sx={{ margin: '24px 0' }}>
+          <Grid
+            container
+            item
+            xs={12}
+            justifyContent="center"
+            sx={{ margin: '24px 0' }}
+          >
             <Grid item xs={4} lg={2} xl={1} sx={{ margin: '0 8px' }}>
               <Button
                 component={'a'}
                 variant="contained"
                 color="primary"
+                className="rainbow"
                 sx={{ fontFamily: 'Smooth Circulars', textAlign: 'center' }}
                 size="large"
                 href={'/campout/register'}
