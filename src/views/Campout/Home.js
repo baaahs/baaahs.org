@@ -1,11 +1,11 @@
-import React, { useCallback, useEffect } from 'react';
+import React, { Fragment, useCallback, useEffect } from 'react';
 import { useTheme } from '@mui/material/styles';
 import Avatar from '@mui/material/Avatar';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Card from '@mui/material/Card';
 import Grid from '@mui/material/Grid';
-import Typography from '@mui/material/Grid';
+import Typography from '@mui/material/Typography';
 
 import Main from 'layouts/Main';
 import FullScreenHeader from 'components/FullScreenHeader';
@@ -57,10 +57,12 @@ const CampoutHome = () => {
   ];
   const whiiichRef = React.createRef(0);
   const updateWhaaat = useCallback(() => {
-    whaaatRef.current.innerText = questions[whiiichRef.current++ % questions.length];
-  }, []);
+    if (whaaatRef.current) {
+      whaaatRef.current.innerText = questions[whiiichRef.current++ % questions.length];
+    }
+  }, [whaaatRef, whiiichRef]);
   useEffect(updateWhaaat, []);
-  useInterval(updateWhaaat, 5000);
+  useInterval(updateWhaaat, 2500);
 
   return (
     <Main navItems={NavItems}>
@@ -70,17 +72,23 @@ const CampoutHome = () => {
           image='https://static.baaahs.org/Z/PXL_20230416_022706111.jpeg'
           logo='https://static.baaahs.org/Z/campout_logo_no_border.png'
           text={
-            <Button
-              component={'a'}
-              variant="contained"
-              color="secondary"
-              sx={{ marginTop: '3em', fontFamily: 'Smooth Circulars', textAlign: 'center' }}
-              size="large"
-              href={'/campout/register'}
-              fullWidth
-            >
-              Register Now!
-            </Button>
+            <Fragment>
+              <Typography marginTop={{ xs: '1em', md: '2em' }} style={{ fontFamily: 'Smooth Circulars', textAlign: 'center' }}>
+                Memorial Day Weekend, May 24–27
+              </Typography>
+              <div style={{ width: '100%', textAlign: 'center' }}>
+                <Button
+                  component={'a'}
+                  variant="contained"
+                  color="secondary"
+                  sx={{ marginTop: '1.5em', fontFamily: 'Smooth Circulars', textAlign: 'center' }}
+                  size="large"
+                  href={'/campout/register'}
+                >
+                  Register Now!
+                </Button>
+              </div>
+            </Fragment>
           }
         />
         <Grid container spacing={2} justifyContent={'center'}>
@@ -89,12 +97,13 @@ const CampoutHome = () => {
               <Typography
                 align={'center'}
                 fontWeight={600}
-                component="h1"
+                variant="h3"
                 fontFamily={'Smooth Circulars'}
+                marginTop='.5em'
               >
                 WHAAAT???
               </Typography>
-              <Typography align={'justify'}>
+              <Box align={'justify'}>
                 <p>
                   BAAAHS Campout is a unique three-night queer getaway hosted on
                   The Incline, nestled in the enchanting landscapes of Mendocino
@@ -136,7 +145,7 @@ const CampoutHome = () => {
                   Mendocino mountains: to imagine the unthinkable, the dream the
                   undreamable, to delight and be delighted.
                 </p>
-              </Typography>
+              </Box>
             </Box>
           </Grid>
 
