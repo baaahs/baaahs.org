@@ -78,11 +78,11 @@ const content = [
 
 const QAndA = () => {
   return (
-    <Main navItems={NavItems}>
+    <Main navItems={NavItems} colorInvert={true}>
       <Box gap={3}>
         <FullScreenHeader
           image={
-            'https://storage.googleapis.com/static.baaahs.org/twunkerbell_backshot.jpeg'
+            'https://static.baaahs.org/Z/twunkerbell_backshot.jpeg'
           }
           title={'Q&A'}
           text={'Your questions, our answers!'}

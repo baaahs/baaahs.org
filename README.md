@@ -22,3 +22,15 @@ After much soul-searching and gnashing of teeth, it seems like our best option i
 
 More detail in the devops directory and the terraform configuration for prod.
 
+## Automatic Image Optimization
+
+Images hosted from the `static.baaahs.org` can now be automagically optimized on the fly. All you have to do is prepend the path element `/Z/` at the beginning of the path to get the magic version of the image. For example:
+
+   https://static.baaahs.org/gladbox_hanging.png    21.4 MB
+   https://static.baaahs.org/Z/gladbox_hanging.png   2.0 MB (and it is converted to AVIF or WEBP)
+
+Note that this magic only happens when using the actual `static.baaahs.org` hostname. There are currently some images that are being referenced using the `storage.googleapis.com` hostname directly, and that is incorrect. You will not get magic via that URL.
+
+More detail can be found in the `devops/prop/imgproxy.tf` file and eventually in the `devops/README.md` file as well.
+
+
