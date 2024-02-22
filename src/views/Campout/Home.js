@@ -90,7 +90,7 @@ const CampoutHome = () => {
               >
                 Memorial Day Weekend, May 24–27
               </Typography>
-              <div style={{ width: '100%', textAlign: 'center' }}>
+              <Box display="flex" justifyContent="center" mr={{ xs: 2, md: 8 }}>
                 <Button
                   component={'a'}
                   variant="contained"
@@ -99,6 +99,7 @@ const CampoutHome = () => {
                   sx={{
                     marginTop: '1.5em',
                     fontFamily: 'Smooth Circulars',
+                    width: '60%',
                     textAlign: 'center',
                   }}
                   size="large"
@@ -106,7 +107,7 @@ const CampoutHome = () => {
                 >
                   Register Now!
                 </Button>
-              </div>
+              </Box>
             </Fragment>
           }
         />
