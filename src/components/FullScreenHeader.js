@@ -81,11 +81,11 @@ const FullScreenHeader = ({ image, title, text, logo }) => {
             <Grid item xs={4}>
               <img src={logo} alt="Logo" width="100%"/>
             </Grid>
-            <Grid item xs={6} sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', flexDirection: 'column' }}>
+            <Grid item xs={10} md={6} sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', flexDirection: 'column' }}>
               <Typography variant="h2" color='common.white' fontWeight='900'>
                 {titleText}
               </Typography>
-              <Typography variant="h6" component="p" color="common.white">
+              <Typography variant="h6" component="div" color="common.white">
                 {bodyText}
               </Typography>
             </Grid>
@@ -96,7 +96,7 @@ const FullScreenHeader = ({ image, title, text, logo }) => {
             <Typography variant="h2" gutterBottom sx={{ fontWeight: 900, color: 'common.white', textTransform: 'uppercase' }}>
               {titleText}
             </Typography>
-            <Typography variant="h6" component="p" color="text.primary" sx={{ color: 'common.white' }}>
+            <Typography variant="h6" component="div" color="text.primary" sx={{ color: 'common.white' }}>
               {bodyText}
             </Typography>
           </Box>
