@@ -1,24 +1,29 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8" />
     <link id="favicon" rel="shortcut icon" href="/images/favicon.png" />
     <script>
-      const favicon = document.getElementById("favicon");
+      const favicon = document.getElementById('favicon');
       const hostname = document.location.hostname;
-      if (hostname === "staging.baaahs.org") {
-        favicon.setAttribute("href", "/images/favicon-staging.png");
-      } else if (hostname === "dev.baaahs.org") {
-        favicon.setAttribute("href", "/images/favicon-dev.png");
-      } else if (hostname.indexOf("baaahs.org") === -1) {
-        favicon.setAttribute("href", "/images/favicon-local.png");
+      if (hostname === 'staging.baaahs.org') {
+        favicon.setAttribute('href', '/images/favicon-staging.png');
+      } else if (hostname === 'dev.baaahs.org') {
+        favicon.setAttribute('href', '/images/favicon-dev.png');
+      } else if (hostname.indexOf('baaahs.org') === -1) {
+        favicon.setAttribute('href', '/images/favicon-local.png');
       }
     </script>
     <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-QZMPXXFY1S"></script>
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-QZMPXXFY1S"
+    ></script>
     <script>
       window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
+      function gtag() {
+        dataLayer.push(arguments);
+      }
       gtag('js', new Date());
       gtag('config', 'G-QZMPXXFY1S');
     </script>
@@ -35,17 +40,20 @@
       name="robots"
       content="max-snippet:-1, max-image-preview:large, max-video-preview:-1"
     />
-    <meta property="og:locale" content="en_US"/>
-    <meta property="og:type" content="website"/>
-    <meta property="og:image" content="/images/baaahs.svg"/>
-    <meta property="og:title" content="Get on the BAAAHS!"/>
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="/images/baaahs.svg" />
+    <meta property="og:title" content="Get on the BAAAHS!" />
     <meta
       property="og:description"
       content="BAAAHS is the Big-Ass Amazingly Awesome Homosexual Sheep, and he wants you inside!"
     />
     <meta property="og:url" content="https://baaahs.org" />
     <link rel="preconnect" href="https://fonts.gstatic.com" />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
     <link href="/fonts/fonts.css" rel="stylesheet" />
     <title>Get on the BAAAHS!</title>
   </head>
