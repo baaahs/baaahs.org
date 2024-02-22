@@ -1,5 +1,5 @@
 /* eslint-disable quotes */
-import React, { Fragment, useCallback, useEffect, useState } from 'react';
+import React, { Fragment, useCallback, useEffect } from 'react';
 import { useTheme } from '@mui/material/styles';
 import Avatar from '@mui/material/Avatar';
 import Box from '@mui/material/Box';
@@ -58,7 +58,6 @@ const content = [
 
 const CampoutHome = () => {
   const theme = useTheme();
-  const [whichIndex, setWhichIndex] = useState(0);
   const whaaatRef = React.createRef();
   const questions = [
     'Whaaat is the capital of Assyria?',
@@ -66,9 +65,11 @@ const CampoutHome = () => {
     'Whaaat is your favourite colour?',
     'Whaaat is the airspeed velocity of an unladen swallow?',
   ];
+  const whiiichRef = React.createRef(0);
   const updateWhaaat = useCallback(() => {
     if (whaaatRef.current) {
-      whaaatRef.current.innerText = questions[whiiichRef.current++ % questions.length];
+      whaaatRef.current.innerText =
+        questions[whiiichRef.current++ % questions.length];
     }
   }, [whaaatRef, whiiichRef]);
   useEffect(updateWhaaat, []);
@@ -83,7 +84,10 @@ const CampoutHome = () => {
           logo="https://static.baaahs.org/Z/campout_logo_no_border.png"
           text={
             <Fragment>
-              <Typography marginTop={{ xs: '1em', md: '2em' }} style={{ fontFamily: 'Smooth Circulars', textAlign: 'center' }}>
+              <Typography
+                marginTop={{ xs: '1em', md: '2em' }}
+                style={{ fontFamily: 'Smooth Circulars', textAlign: 'center' }}
+              >
                 Memorial Day Weekend, May 24–27
               </Typography>
               <div style={{ width: '100%', textAlign: 'center' }}>
@@ -92,7 +96,11 @@ const CampoutHome = () => {
                   variant="contained"
                   color="secondary"
                   className="rainbow"
-                  sx={{ marginTop: '1.5em', fontFamily: 'Smooth Circulars', textAlign: 'center' }}
+                  sx={{
+                    marginTop: '1.5em',
+                    fontFamily: 'Smooth Circulars',
+                    textAlign: 'center',
+                  }}
                   size="large"
                   href={'/campout/register'}
                 >
@@ -110,7 +118,7 @@ const CampoutHome = () => {
                 fontWeight={600}
                 variant="h3"
                 fontFamily={'Smooth Circulars'}
-                marginTop='.5em'
+                marginTop=".5em"
               >
                 WHAAAT???
               </Typography>
