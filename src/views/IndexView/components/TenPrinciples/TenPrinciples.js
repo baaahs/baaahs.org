@@ -11,55 +11,55 @@ const principles = [
   {
     title: 'Radical Inclusion',
     subtitle:
-      'Anyonecan ride the BAAAHS.  No prerequisites exist to slide through the butt into our party on the big gay sheep. It’s the art car you can always count on.',
+      'We want everyone to ride the BAAAHS.  No prerequisites exist to slide through his butt and party on the big gay sheep. We're the art car you can always count on.',
     icon: 'https://static.baaahs.org/Z/wick-radical-inclusion.png'
   },
   {
     title: 'Gifting',
     subtitle:
-      'Our favorite thing to do is to throw a party for other people. We love watching people at our parties having the time of their lives. All the hours of hard work are worth the look on someone's face the moment they slide into the sheep.',
+      'Our favorite thing to do is to throw a party for other people. We love seeing people at our parties have the time of their lives. All the hours of hard work are worth seeing the look on someone\'s face the moment they slide into the sheep.',
     icon: 'https://static.baaahs.org/Z/wick-gifting.png',
   },
   {
     title: 'Decommo-dification',
     subtitle:
-      'As a burning man camp and as a community we value the space that is not centered around money or transactions.',
+      'As a burning man camp and as a community we value space that is not centered around money or transactions.',
     icon: 'https://static.baaahs.org/Z/wick-decommodification.png',
   },
   {
     title: 'Radical Self-reliance',
     subtitle:
-      'BIf you build a sheep in the desert, you can do anything. BAAAHS teaches you to fix your own stuff, and that with a little can-do attitude and a lot of ratchet straps, anything is possible. With so many wrenches around camp you already gained two dexterity points.',
+      'If you can build a sheep in the desert, you can do anything. BAAAHS teaches you to fix your own stuff, and that with a little can-do attitude and a lot of ratchet straps, anything is possible. With so many wrenches around camp you\'ve already gained two dexterity points.',
     icon: 'https://static.baaahs.org/Z/wick-radical-self-reliance.png',
   },
   {
     title: 'Radical Self-expression',
     subtitle:
-      'We are literally a stage with a big-ass sound system on wheels. We create the platform for everyone to show us what they got, and we drive around the playa so everyone can see it.',
+      'We are literally a stage and a big-ass sound system on wheels. We create the platform for everyone to show us what they got, and make sure everyone on the playa can see it.',
     icon: 'https://static.baaahs.org/Z/wick-radical-self-expression.png',
   },
   {
     title: 'Communal Effort',
     subtitle:
-      'Building BAAAHS alone is not really a thing. The very definition of our camp is the miracle of this huge project that is only possible thanks to everyone who come together to make it happen.',
+      'Building BAAAHS alone just can\'t be done. The foundation of our camp is the miracle of this huge project that is only possible thanks to the work of multitudes of people who\'ve come together to make it happen.',
     icon: 'https://static.baaahs.org/Z/wick-communal-effort.png',
   },
   {
     title: 'Civic Responsibility',
     subtitle:
-      'It’s all fun and games but if you drive the sheep you need your driver license and to be sober.',
+      'It’s all fun and games but if you drive the sheep you need your driver\'s license and you need to be sober.',
     icon: 'https://static.baaahs.org/Z/wick-civic-responsibility.png',
   },
   {
     title: 'Leaving No Trace',
     subtitle:
-      'Want to leave no trace? Take the BAAAHS. We put a lot of effort into cleaning our area, and also in BAAAHS events off playa we encourage carpooling and the use of reusable dishes to minimize our impact on the planet.',
+      'Want to leave no trace? Take the BAAAHS. We obsessively aim for the lowest possible environmental impact on the planet, at our parties, in our camp, and in every way we can off-playa.',
     icon: 'https://static.baaahs.org/Z/wick-leaving-no-trace.png',
   },
   {
     title: 'Participation',
     subtitle:
-      'Being a part of BAAAHS means participating in creating it. Everyone in BAAAHS is welcome (And expected) to find an awesome project to bring to life, and shape their own little part of BAAAHS.',
+      'Being a part of BAAAHS means participating in creating it. Everyone in BAAAHS is welcome (and expected) to find an awesome project to bring to life, and shape their own little (or ginormous) part of BAAAHS.',
     icon: 'https://static.baaahs.org/Z/wick-participation.png',
   },
   {
