@@ -11,7 +11,7 @@ const principles = [
   {
     title: 'Radical Inclusion',
     subtitle:
-      'We want everyone to ride the BAAAHS.  No prerequisites exist to slide through his butt and party on the big gay sheep. We're the art car you can always count on.',
+      'We want everyone to ride the BAAAHS.  No prerequisites exist to slide through his butt and party on the big gay sheep. We\'re the art car you can always count on.',
     icon: 'https://static.baaahs.org/Z/wick-radical-inclusion.png'
   },
   {
