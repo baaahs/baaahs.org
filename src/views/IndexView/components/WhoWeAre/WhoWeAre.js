@@ -6,7 +6,7 @@ import React, { useState } from 'react';
 import VisibilitySensor from 'react-visibility-sensor';
 import { useTheme } from '@mui/material/styles';
 import Card from '@mui/material/Card';
-// import CardMedia from '@mui/material/CardMedia';
+import CardMedia from '@mui/material/CardMedia';
 import Box from '@mui/material/Box';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import Typography from '@mui/material/Typography';
@@ -56,7 +56,7 @@ const WhoWeAre = () => {
               What is BAAAHS?
             </Typography>
             <Typography variant={'h6'} component={'p'} color={'text.secondary'}>
-              In 2013, the founders of BAAAHS (Xian and Joey) and a bunch of
+              In 2013, the founders of BAAAHS and a bunch of
               friends got together to build one crazy social experiment. Ten
               years later and we’re still producing amazing parties that brings
               everyone together and supporting our community in the Bay Area. We
@@ -85,24 +85,18 @@ const WhoWeAre = () => {
         </Grid>
         <Grid
           item
-          container
           justifyContent="center"
           alignItems="center"
           xs={12}
           md={6}
-          sx={{
-            display: { xs: 'none', md: 'flex' },
-          }}
         >
-          <Box component={Card} boxShadow={4} height={1} width={1}>
-            <Box
-              component={'img'}
-              height={1}
-              width={1}
-              minHeight={300}
-              src="/images/bml_baaahs.png"
+          <Card boxShadow={4} sx={{ minHeight: 300, height: 1 }}>
+            <CardMedia
+              image="/images/bml_baaahs.png"
+              title="Black Lives Matter sign next to BAAAHS"
+              sx={{ minHeight: 300, height: 1 }}
             />
-          </Box>
+          </Card>
         </Grid>
       </Grid>
     </Box>

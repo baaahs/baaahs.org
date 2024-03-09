@@ -22,7 +22,7 @@ const images = [
       },
       {
         cover:
-          'https://static.baaahs.org/Z/shady_xian_discoballs.jpeg',
+          'https://static.baaahs.org/Z/kinky_sheep.jpeg',
         coverDark: undefined,
       },
     ],
@@ -60,12 +60,7 @@ const images = [
       },
       {
         cover:
-          'https://static.baaahs.org/Z/kinky_sheep.jpeg',
-        coverDark: undefined,
-      },
-      {
-        cover:
-          'https://assets.maccarianagency.com/screenshots/the-front/img12.png',
+          'https://static.baaahs.org/Z/shady_xian_discoballs.jpeg',
         coverDark: undefined,
       },
     ],
