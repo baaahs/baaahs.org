@@ -4,9 +4,12 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Link from '@mui/material/Link';
 import Typography from '@mui/material/Typography';
-import BAAAHSLogo from '../../../Main/BAAAHSLogo';
+import { useTheme } from '@mui/material/styles';
 
 const Footer = () => {
+  const theme = useTheme();
+  const { mode } = theme.palette;
+
   return (
     <Grid container spacing={2}>
       <Grid item xs={12}>
@@ -24,51 +27,39 @@ const Footer = () => {
             title="theFront"
             width={80}
           >
-            <BAAAHSLogo/>
+            <Box
+              component={'img'}
+              src={
+                mode === 'light'
+                  ? 'https://assets.maccarianagency.com/the-front/logos/logo.svg'
+                  : 'https://assets.maccarianagency.com/the-front/logos/logo-negative.svg'
+              }
+              height={1}
+              width={1}
+            />
           </Box>
           <Box display="flex" flexWrap={'wrap'} alignItems={'center'}>
             <Box marginTop={1} marginRight={2}>
               <Link
                 underline="none"
                 component="a"
-                href="/events"
+                href="/"
                 color="text.primary"
                 variant={'subtitle2'}
               >
-                events
+                Home
               </Link>
             </Box>
             <Box marginTop={1} marginRight={2}>
               <Link
                 underline="none"
                 component="a"
-                href="/music"
+                href="https://thefront.maccarianagency.com/docs/introduction"
+                target={'blank'}
                 color="text.primary"
                 variant={'subtitle2'}
               >
-                music
-              </Link>
-            </Box>
-            <Box marginTop={1} marginRight={2}>
-              <Link
-                underline="none"
-                component="a"
-                href="/fundraising"
-                color="text.primary"
-                variant={'subtitle2'}
-              >
-                fundraising
-              </Link>
-            </Box>
-            <Box marginTop={1} marginRight={2}>
-              <Link
-                underline="none"
-                component="a"
-                href="/about"
-                color="text.primary"
-                variant={'subtitle2'}
-              >
-                about
+                Documentation
               </Link>
             </Box>
             <Box marginTop={1}>
@@ -77,10 +68,10 @@ const Footer = () => {
                 color="primary"
                 component="a"
                 target="blank"
-                href="mailto:info@baaahs.org?subject=Writing%20from%20the%20web"
+                href="https://mui.com/store/items/the-front-landing-page/"
                 size="small"
               >
-                Contact
+                Purchase now
               </Button>
             </Box>
           </Box>

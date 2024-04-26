@@ -5,7 +5,7 @@ const pages = [
     pages: [
       {
         title: 'Introduction',
-        href: '/docs/introduction',
+        href: 'https://thefront.maccarianagency.com/docs/introduction',
       },
       {
         title: 'Initial Setup',

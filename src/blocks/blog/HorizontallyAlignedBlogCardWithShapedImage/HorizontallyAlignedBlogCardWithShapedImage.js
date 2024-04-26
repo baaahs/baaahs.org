@@ -121,7 +121,7 @@ const HorizontallyAlignedBlogCardWithShapedImage = ({ data }) => {
                 <Typography
                   variant={'h5'}
                   gutterBottom
-                  fontFamily={'Smooth Circulars'}
+                  fontFamily={'var(--font-smooth-circulars)'}
                 >
                   {title}
                 </Typography>

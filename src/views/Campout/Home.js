@@ -1,3 +1,4 @@
+'use client'
 /* eslint-disable quotes */
 import React, { Fragment, useCallback, useEffect } from 'react';
 import { useTheme } from '@mui/material/styles';
@@ -86,7 +87,7 @@ const CampoutHome = () => {
             <Fragment>
               <Typography
                 marginTop={{ xs: '1em', md: '2em' }}
-                style={{ fontFamily: 'Smooth Circulars', textAlign: 'center' }}
+                style={{ fontFamily: 'var(--font-smooth-circulars)', textAlign: 'center' }}
               >
                 Memorial Day Weekend, May 24–27
               </Typography>
@@ -98,7 +99,7 @@ const CampoutHome = () => {
                   className="rainbow"
                   sx={{
                     marginTop: '1.5em',
-                    fontFamily: 'Smooth Circulars',
+                    fontFamily: 'var(--font-smooth-circulars)',
                     width: '60%',
                     textAlign: 'center',
                   }}
@@ -118,7 +119,7 @@ const CampoutHome = () => {
                 align={'center'}
                 fontWeight={600}
                 variant="h3"
-                fontFamily={'Smooth Circulars'}
+                fontFamily={'var(--font-smooth-circulars)'}
                 marginTop=".5em"
               >
                 WHAAAT???
@@ -154,7 +155,7 @@ const CampoutHome = () => {
                   <Typography
                     component="span"
                     sx={{
-                      fontFamily: 'Smooth Circulars',
+                      fontFamily: 'var(--font-smooth-circulars)',
                       fontSize: '1.25em',
                       padding: '0 .5em',
                     }}
@@ -189,7 +190,7 @@ const CampoutHome = () => {
                 variant="contained"
                 color="primary"
                 className="rainbow"
-                sx={{ fontFamily: 'Smooth Circulars', textAlign: 'center' }}
+                sx={{ fontFamily: 'var(--font-smooth-circulars)', textAlign: 'center' }}
                 size="large"
                 href={'/campout/register'}
                 fullWidth
@@ -244,7 +245,7 @@ const CampoutHome = () => {
                     </Box>
                     <Typography
                       variant="h6"
-                      fontFamily="Smooth Circulars"
+                      fontFamily={'var(--font-smooth-circulars)'}
                       textAlign="center"
                     >
                       {item.title}
@@ -271,7 +272,7 @@ const CampoutHome = () => {
                 variant="contained"
                 color="primary"
                 className="rainbow"
-                sx={{ fontFamily: 'Smooth Circulars', textAlign: 'center' }}
+                sx={{ fontFamily: 'var(--font-smooth-circulars)', textAlign: 'center' }}
                 size="large"
                 href={'/campout/register'}
                 fullWidth

@@ -1,16 +1,17 @@
 {
-  "name": "thefront-js--react-scripts",
+  "name": "thefront-js--nextjs",
   "author": "maccarian",
   "email": "hi@maccarianagency.com",
-  "version": "4.8.0",
+  "version": "5.0.0",
   "private": true,
   "scripts": {
-    "start": "react-scripts start",
-    "build": "cross-env GENERATE_SOURCEMAP=false react-scripts build",
+    "dev": "NODE_OPTIONS='--inspect' next dev",
+    "build": "next build",
+    "start": "next start",
     "prettier:fix": "prettier './src/**/*.js' --write",
     "eslint:fix": "eslint ./src --fix",
     "codeStyle:fix": "npm run prettier:fix && npm run eslint:fix",
-    "clear-all": "rimraf ./build ./node_modules"
+    "clear-all": "rimraf ./node_modules ./.next"
   },
   "eslintConfig": {
     "extends": [
@@ -42,6 +43,7 @@
     "formik": "^2.4.5",
     "jarallax": "^2.1.4",
     "prop-types": "^15.8.1",
+    "next": "^14.0.4",
     "react": "^18.2.0",
     "react-countup": "^6.5.0",
     "react-dom": "^18.2.0",
