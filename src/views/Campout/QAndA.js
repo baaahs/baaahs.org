@@ -97,7 +97,7 @@ const QAndA = () => {
               sx={{ margin: '24px' }}
               textAlign={'center'}
             >
-              <Typography component="h1" fontFamily={'Smooth Circulars'}>
+              <Typography component="h1" fontFamily={'var(--font-smooth-circulars)'}>
                 {item.question}
               </Typography>
               <Typography

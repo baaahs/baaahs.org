@@ -111,8 +111,8 @@ const Hero = () => {
               gutterBottom={true}
               width={{ xs: 300, md: 580 }}
               marginBottom={{ xs: 1, sm: 2 }}
+              fontFamily={'var(--font-smooth-circulars)'}
               color="text.primary"
-              fontFamily={'Smooth Circulars'}
               fontSize={{
                 xs: '3.7rem',
                 sm: '4rem',
@@ -149,7 +149,7 @@ const Hero = () => {
               gutterBottom={true}
               component="p"
               color="text.primary"
-              fontFamily={'Smooth Circulars'}
+              fontFamily={'var(--font-smooth-circulars)'}
               fontSize={{
                 xs: '.55rem',
                 sm: '.59rem',

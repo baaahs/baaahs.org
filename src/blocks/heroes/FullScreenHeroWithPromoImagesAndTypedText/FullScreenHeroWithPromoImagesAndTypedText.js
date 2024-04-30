@@ -154,7 +154,8 @@ const FullScreenHeroWithPromoImagesAndTypedText = () => {
                 >
                   <Button
                     component={'a'}
-                    href={'/docs/introduction'}
+                    href={'https://thefront.maccarianagency.com/docs/introduction'}
+                    target={'blank'}
                     variant="outlined"
                     color="primary"
                     size="large"

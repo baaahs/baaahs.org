@@ -54,7 +54,8 @@ const Footer = () => {
               <Link
                 underline="none"
                 component="a"
-                href="/docs/introduction"
+                href="https://thefront.maccarianagency.com/docs/introduction"
+                target={'blank'}
                 color="text.primary"
                 variant={'subtitle2'}
               >

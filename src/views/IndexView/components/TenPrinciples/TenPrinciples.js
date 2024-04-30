@@ -83,7 +83,7 @@ const TenPrinciples = () => {
         sx={{
           fontWeight: 700,
         }}
-        fontFamily={'Smooth Circulars'}
+        fontFamily={'var(--font-smooth-circulars)'}
       >
         Burning Man Principles
       </Typography>
@@ -131,7 +131,7 @@ const TenPrinciples = () => {
                   // variant={'h6'}
                   gutterBottom
                   sx={{ fontWeight: 250, wordWrap: 'break-word'}}
-                  fontFamily={'Smooth Circulars'}
+                  fontFamily={'var(--font-smooth-circulars)'}
                   textAlign={'center'}
                 >
                   {item.title}

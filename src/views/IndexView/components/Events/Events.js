@@ -22,7 +22,7 @@ const Events = () => {
         sx={{
           fontWeight: 700,
         }}
-        fontFamily={'Smooth Circulars'}
+        fontFamily={'var(--font-smooth-circulars)'}
       >
         Upcoming Events
       </Typography>

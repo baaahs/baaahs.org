@@ -52,7 +52,7 @@ const WhoWeAre = () => {
       <Grid container spacing={4} direction={isMd ? 'row' : 'column-reverse'}>
         <Grid item xs={12} md={6}>
           <Box marginBottom={4}>
-            <Typography sx={{ fontWeight: 700 }} variant={'h4'} gutterBottom fontFamily={'Smooth Circulars'}>
+            <Typography sx={{ fontWeight: 700 }} variant={'h4'} gutterBottom fontFamily={'var(--font-smooth-circulars)'}>
               What is BAAAHS?
             </Typography>
             <Typography variant={'h6'} component={'p'} color={'text.secondary'}>
@@ -68,14 +68,14 @@ const WhoWeAre = () => {
           <Grid container spacing={2}>
             {mock.map((item, i) => (
               <Grid key={i} item xs={12} md={4}>
-                <Typography variant="h4" color={'primary'} gutterBottom>
-                  <VisibilitySensor
-                    onChange={(isVisible) => setViewPortVisibility(isVisible)}
-                    delayedCall
-                  >
-                    <Typography variant={'h6'} fontFamily={'Smooth Circulars'} >{item.title}</Typography>
-                  </VisibilitySensor>
-                </Typography>
+                <VisibilitySensor
+                  onChange={(isVisible) => setViewPortVisibility(isVisible)}
+                  delayedCall
+                >
+                  <Typography color={'text.primary'} gutterBottom variant={'h6'} fontFamily={'var(--font-smooth-circulars)'}>
+                    {item.title}
+                  </Typography>
+                </VisibilitySensor>
                 <Typography color="text.secondary" component="p" >
                   {item.subtitle}
                 </Typography>

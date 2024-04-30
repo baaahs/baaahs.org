@@ -7,6 +7,7 @@ import { Events, Hero, WhoWeAre, TenPrinciples } from './components';
 
 const IndexView = () => {
   const theme = useTheme();
+
   return (
     <Box sx={{ overflowX: 'hidden' }}>
       <Main bgcolor={'background.paper'}>

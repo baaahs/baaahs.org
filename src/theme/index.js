@@ -15,16 +15,16 @@ const getTheme = (mode, themeToggler) =>
           fontWeight: 'medium',
         },
         h4: {
-          fontFamily: 'Smooth Circulars',
+          fontFamily: 'var(--font-smooth-circulars)',
         },
         h5: {
-          fontFamily: 'Smooth Circulars',
+          fontFamily: 'var(--font-smooth-circulars)',
         },
         h2: {
-          fontFamily: 'Smooth Circulars',
+          fontFamily: 'var(--font-smooth-circulars)',
         },
         h1: {
-          fontFamily: 'Smooth Circulars',
+          fontFamily: 'var(--font-smooth-circulars)',
         },
       },
       zIndex: {
