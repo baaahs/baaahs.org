@@ -56,5 +56,6 @@ export {
   CampoutHome,
   CampoutLastYear,
   CampoutQAndA,
+  CampoutSchedule,
 } from './Campout';
 export { default as Setup } from './Setup';

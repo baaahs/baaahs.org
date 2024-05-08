@@ -4,6 +4,7 @@ const NavItems = [
   { title: 'line up', href: '/campout/line-up' },
   { title: 'last year', href: '/campout/last-year' },
   { title: 'q & a', href: '/campout/q-and-a' },
+  { title: 'schedule', href: '/campout/schedule' },
   { title: 'register', href: '/campout/register' },
 ];
 
