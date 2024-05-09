@@ -15,11 +15,33 @@ import IconSoundcloud from 'svg/illustrations/IconSoundcloud';
 
 const djs = [
   {
-    name: 'Aphex',
-    blurb: 'Trance, Melodic Techno, Progressive House',
-    soundcloud: 'https://soundcloud.com/aphexcx',
-    instagram: 'http://aphex.dj',
-    image: 'https://storage.googleapis.com/static.baaahs.org/z_aphek.png',
+    name: 'Kelly Naughton',
+    blurb: 'Disco, House, Techno',
+    soundcloud: 'https://soundcloud.com/kellynaughton',
+    instagram: 'https://www.instagram.com/naughtontime',
+    image: 'https://storage.googleapis.com/static.baaahs.org/z_kelly.png',
+  },
+  {
+    name: 'Booty Juice',
+    blurb: 'Disco, House, Techno, Hip-Hop',
+    soundcloud: 'https://soundcloud.com/bootyjuicesf',
+    instagram: 'https://www.instagram.com/bootyjuicesf',
+    image: 'https://storage.googleapis.com/static.baaahs.org/z_booty.png',
+  },
+  {
+    name: 'StormyRoxx',
+    blurb: 'Disco, House, Techno',
+    soundcloud: 'https://soundcloud.com/stormyroxx',
+    instagram: 'https://www.instagram.com/stormyroxx',
+    image: 'https://storage.googleapis.com/static.baaahs.org/z_stormy.png',
+  },
+  {
+    name: 'Tiny Tim',
+    blurb:
+      'Funky/Jackin’ House, Funk/Soul, Disco, Soulful House, R&B, Deep House, Tech House and Nu Disco.',
+    soundcloud: 'https://www.soundcloud.com/djtinytp',
+    instagram: 'https://www.instagram.com/djtinytp',
+    image: 'https://storage.googleapis.com/static.baaahs.org/z_tiny.png',
   },
   {
     name: 'Trevor Sigler',
@@ -33,21 +55,50 @@ const djs = [
     blurb: 'Baile Funk, Jackin House, Jersey Club, Hard Techno, Dubstep',
     soundcloud: 'https://on.soundcloud.com/HKpGb',
     instagram: 'https://www.instagram.com/inebriatedfelon',
+    image: 'https://storage.googleapis.com/static.baaahs.org/z_del.png',
+  },
+  {
+    name: 'Romii',
+    blurb:
+      'House, Techno, Breakbeat, Trance, Darkwave, Lofi/Downtempo/Memphis, Rap/Alt-Rock',
+    soundcloud: 'https://soundcloud.com/kingromii',
+    instagram: 'https://www.instagram.com/romii_dreamtension',
+    image: 'https://storage.googleapis.com/static.baaahs.org/z_romii.png',
+  },
+  {
+    name: 'GUERRILLA PUMP',
+    blurb: 'GHETTO HOUSE, ELECTRO BOOTY BASS AND BALLROOM (VOGUE)',
+    soundcloud: 'https://youtu.be/MkYdduxP8Pc?si=M5p2lL9VyziP5JeO&t=693',
+    instagram: 'https://www.instagram.com/shotbyguerrilla',
     image: '',
   },
   {
-    name: 'Mike Bradley',
-    blurb: 'House, Techno, Tech House. Always fun with a splash of sass~',
-    soundcloud: 'https://m.mixcloud.com/mikebradley9216/',
+    name: 'Issa',
+    blurb: 'House, Disco, Hip-Hop, Techno, World Music',
+    soundcloud: 'https://soundcloud.com/itsissa',
+    instagram: 'http://instagram.com/issaaraj',
+    image: 'https://storage.googleapis.com/static.baaahs.org/z_issa.png',
+  },
+  {
+    name: 'Twunkerbell',
+    blurb: 'Tech House, EDM, Mashups, Disco, Trance',
+    soundcloud: 'https://soundcloud.com/twunkerbell',
     instagram: '',
-    image: '',
+    image: 'https://storage.googleapis.com/static.baaahs.org/z_twunkerbell.png',
   },
   {
-    name: 'StormyRoxx',
+    name: 'Mondo Nexus',
+    blurb: 'Sleazy Synthy Disco mixed with Groovin House with a touch of Acid',
+    soundcloud: 'https://soundcloud.com/mondonexus',
+    instagram: 'https://www.instagram.com/mondonexus',
+    image: 'https://storage.googleapis.com/static.baaahs.org/z_mondo.png',
+  },
+  {
+    name: 'Prince Wolf',
     blurb: 'Disco, House, Techno',
-    soundcloud: 'https://soundcloud.com/stormyroxx',
-    instagram: 'https://www.instagram.com/stormyroxx',
-    image: 'https://storage.googleapis.com/static.baaahs.org/z_stormy.png',
+    soundcloud: '',
+    instagram: 'https://www.instagram.com/somaqlo',
+    image: 'https://storage.googleapis.com/static.baaahs.org/z_prince_wolf.png',
   },
   {
     name: 'Sir Spense',
@@ -79,41 +130,20 @@ const djs = [
     image: '',
   },
   {
-    name: 'Wayne Sobon',
-    blurb: '',
-    soundcloud: '',
-    instagram: 'https://www.instagram.com/waynebone',
-    image: '',
+    name: 'Aphex',
+    blurb: 'Trance, Melodic Techno, Progressive House',
+    soundcloud: 'https://soundcloud.com/aphexcx',
+    instagram: 'http://aphex.dj',
+    image: 'https://storage.googleapis.com/static.baaahs.org/z_aphek.png',
   },
   {
-    name: 'Romii',
-    blurb:
-      'House, Techno, Breakbeat, Trance, Darkwave, Lofi/Downtempo/Memphis, Rap/Alt-Rock',
-    soundcloud: 'https://soundcloud.com/kingromii',
-    instagram: 'https://www.instagram.com/romii_dreamtension',
-    image: 'https://storage.googleapis.com/static.baaahs.org/z_romii.png',
-  },
-  {
-    name: 'Twunkerbell',
-    blurb: 'Tech House, EDM, Mashups, Disco, Trance',
-    soundcloud: 'https://soundcloud.com/twunkerbell',
+    name: 'Mike Bradley',
+    blurb: 'House, Techno, Tech House. Always fun with a splash of sass~',
+    soundcloud: 'https://m.mixcloud.com/mikebradley9216/',
     instagram: '',
-    image: 'https://storage.googleapis.com/static.baaahs.org/z_twunkerbell.png',
+    image: 'https://storage.googleapis.com/static.baaahs.org/z_mike_b.png',
   },
-  {
-    name: 'Mondo Nexus',
-    blurb: 'Sleazy Synthy Disco mixed with Groovin House with a touch of Acid',
-    soundcloud: 'https://soundcloud.com/mondonexus',
-    instagram: 'https://www.instagram.com/mondonexus',
-    image: 'https://storage.googleapis.com/static.baaahs.org/z_mondo.png',
-  },
-  {
-    name: 'Prince Wolf',
-    blurb: 'Disco, House, Techno',
-    soundcloud: '',
-    instagram: 'https://www.instagram.com/somaqlo',
-    image: 'https://storage.googleapis.com/static.baaahs.org/z_prince_wolf.png',
-  },
+
   {
     name: 'Dennis Dashing',
     blurb: 'Techno, House',
@@ -146,13 +176,6 @@ const djs = [
     image: '',
   },
   {
-    name: 'Issa Araj',
-    blurb: 'House, Disco, Hip-Hop, Techno, World Music',
-    soundcloud: 'https://soundcloud.com/itsissa',
-    instagram: 'http://instagram.com/issaaraj',
-    image: '',
-  },
-  {
     name: 'LAKEVERETT',
     blurb:
       'House, Hip-Hop, Baile Funk, Breakbeat, Disco, Electro, Bass and R&B',
@@ -161,33 +184,11 @@ const djs = [
     image: '',
   },
   {
-    name: 'GUERRILLA PUMP',
-    blurb: 'GHETTO HOUSE, ELECTRO BOOTY BASS AND BALLROOM (VOGUE)',
-    soundcloud: 'https://youtu.be/MkYdduxP8Pc?si=M5p2lL9VyziP5JeO&t=693',
-    instagram: 'https://www.instagram.com/shotbyguerrilla',
+    name: 'State of Wayne',
+    blurb: '',
+    soundcloud: '',
+    instagram: 'https://www.instagram.com/waynebone',
     image: '',
-  },
-  {
-    name: 'Kelly Naughton',
-    blurb: 'Disco, House, Techno',
-    soundcloud: 'https://soundcloud.com/kellynaughton',
-    instagram: 'https://www.instagram.com/naughtontime',
-    image: 'https://storage.googleapis.com/static.baaahs.org/z_kelly.png',
-  },
-  {
-    name: 'Booty Juice',
-    blurb: 'Disco, House, Techno, Hip-Hop',
-    soundcloud: 'https://soundcloud.com/bootyjuicesf',
-    instagram: 'https://www.instagram.com/bootyjuicesf',
-    image: 'https://storage.googleapis.com/static.baaahs.org/z_booty.png',
-  },
-  {
-    name: 'Tiny Tim',
-    blurb:
-      'Funky/Jackin’ House, Funk/Soul, Disco, Soulful House, R&B, Deep House, Tech House and Nu Disco.',
-    soundcloud: 'https://www.soundcloud.com/djtinytp',
-    instagram: 'https://www.instagram.com/djtinytp',
-    image: 'https://storage.googleapis.com/static.baaahs.org/z_tiny.png',
   },
 ];
 
@@ -205,10 +206,8 @@ const DJLineup = () => {
           <Grid container item xs={12} xl={8} spacing={2}>
             {djs
               .filter((i) => i.image)
+              .filter((i) => i.blurb)
               .map((item, i) => {
-                if (!item.blurb) {
-                  item.blurb = 'This is some text description of the artist';
-                }
                 return (
                   <Grid item xs={12} sm={6} md={4} lg={3} xl={2} key={i}>
                     <Box
