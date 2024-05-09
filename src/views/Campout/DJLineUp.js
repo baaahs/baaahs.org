@@ -200,7 +200,7 @@ const DJLineup = () => {
         <FullScreenHeader
           image={'https://static.baaahs.org/twunkerbell_backshot.jpeg'}
           title={'Lineup'}
-          text={"It wouldn't be a BAAAHS Campout without a sick line up"}
+          text={'It would not be a BAAAHS Campout without a sick line up'}
         />
         <Grid container spacing={2}>
           <Grid container item xs={12} xl={8} spacing={2}>
