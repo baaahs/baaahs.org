@@ -57,5 +57,6 @@ export {
   CampoutLastYear,
   CampoutQAndA,
   CampoutSchedule,
+  CampoutDJLineUp,
 } from './Campout';
 export { default as Setup } from './Setup';
