@@ -12,7 +12,7 @@ const content = [
     header: 'The Incline',
     body: 'The Incline is situated in the mountains of the Mendocino National Forest. You’ll have views for days, plus more like: a pool, multiple indoor and outdoor party spaces, lots of campsites, fancy outdoor shower, and beautiful forest trails.',
     img: {
-      src: 'https://raw.githubusercontent.com/baaahs/baaahs.org/main/resized/mendocino_view.webp',
+      src: '/images/resized/mendocino_view.webp',
       height: 380,
       width: '100%',
     },
@@ -21,7 +21,7 @@ const content = [
     header: 'Pure Queer Fun',
     body: 'There\'s never a dull moment. Besides some epic parties, dive in to Draaag Dodgeball, a No-Talent Show, arts and crafts, nature walks, and more! We’re also planning a bunch of other surprises, so stay tuned.',
     img: {
-      src: 'https://raw.githubusercontent.com/baaahs/baaahs.org/main/resized/eric_and_phillip.webp',
+      src: '/images/resized/eric_and_phillip.webp',
       height: '100%',
       width: '100%',
       round: true,
@@ -31,7 +31,7 @@ const content = [
     header: 'Off of the Playa, Into the Woods',
     body: 'We\'re bringing our legendary Burning Man parties to you on a mountain. BAAAHS DJs and friends will be spinning till sunrise, and the lights from our big gay sheep will decorate the canopy of trees as you’re dancing your ass off.',
     img: {
-      src: 'https://raw.githubusercontent.com/baaahs/baaahs.org/main/resized/dark_rainbow_pasture.webp',
+      src: '/images/resized/dark_rainbow_pasture.webp',
       height: '100%',
       width: '100%',
     },
@@ -40,7 +40,7 @@ const content = [
     header: 'Family Meals',
     body: 'We\'ve got you covered for food. Join the herd for delicious vegan, veggie, and omnivore options for brunch and dinner every day, and some delightful surprise snaaacks!',
     img: {
-      src: 'https://raw.githubusercontent.com/baaahs/baaahs.org/main/resized/drag_bingo_pan.webp',
+      src: '/images/resized/drag_bingo_pan.webp',
       height: '100%',
       width: '100%',
     },
@@ -49,7 +49,7 @@ const content = [
     header: 'Transportation',
     body: 'To keep the event as green as possible we offer transportation for your camping gear free of charge! With the extra space in everyone’s vehicles, and we strongly encourage carpooling. We will announce drop-off and pick-up locations in San Francisco closer to the event and the carpool sign up is coming soon.',
     img: {
-      src: 'https://raw.githubusercontent.com/baaahs/baaahs.org/main/resized/yotam_mood.webp',
+      src: '/images/resized/yotam_mood.webp',
       height: '100%',
       width: '100%',
     },
@@ -58,7 +58,7 @@ const content = [
     header: 'Camping & Glamping',
     body: 'We are sleeping (mostly) in tents folks! There will be some campsite power for charging phones and lights, but nothing crazy, bring your own extension cord. There are also limited RV passes available at extra cost. Outdoor showers and toilets are available for everyone.',
     img: {
-      src: 'https://raw.githubusercontent.com/baaahs/baaahs.org/main/resized/Baaahs-camp%2520out-fire-fb.webp',
+      src: '/images/resized/Baaahs-camp%2520out-fire-fb.webp',
       height: '100%',
       width: '100%',
     },
@@ -79,7 +79,7 @@ const WhatToExpect = () => {
       <Box gap={3}>
         <FullScreenHeader
           image={
-            'https://raw.githubusercontent.com/baaahs/baaahs.org/main/resized/drag_bingo_pan.webp'
+            '/images/resized/drag_bingo_pan.webp'
           }
           title={'What To Expect'}
           text={

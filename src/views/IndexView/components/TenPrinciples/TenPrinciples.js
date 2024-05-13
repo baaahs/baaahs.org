@@ -12,61 +12,61 @@ const principles = [
     title: 'Radical Inclusion',
     subtitle:
       'We want everyone to ride the BAAAHS.  No prerequisites exist to slide through his butt and party on the big gay sheep. We\'re the art car you can always count on.',
-    icon: 'https://raw.githubusercontent.com/baaahs/baaahs.org/main/resized/wick-radical-inclusion.webp'
+    icon: '/images/resized/wick-radical-inclusion.webp'
   },
   {
     title: 'Gifting',
     subtitle:
       'Our favorite thing to do is to throw a party for other people. We love seeing people at our parties have the time of their lives. All the hours of hard work are worth seeing the look on someone\'s face the moment they slide into the sheep.',
-    icon: 'https://raw.githubusercontent.com/baaahs/baaahs.org/main/resized/wick-gifting.webp',
+    icon: '/images/resized/wick-gifting.webp',
   },
   {
     title: 'Decommo-dification',
     subtitle:
       'As a burning man camp and as a community we value space that is not centered around money or transactions.',
-    icon: 'https://raw.githubusercontent.com/baaahs/baaahs.org/main/resized/wick-decommodification.webp',
+    icon: '/images/resized/wick-decommodification.webp',
   },
   {
     title: 'Radical Self-reliance',
     subtitle:
       'If you can build a sheep in the desert, you can do anything. BAAAHS teaches you to fix your own stuff, and that with a little can-do attitude and a lot of ratchet straps, anything is possible. With so many wrenches around camp you\'ve already gained two dexterity points.',
-    icon: 'https://raw.githubusercontent.com/baaahs/baaahs.org/main/resized/wick-radical-self-reliance.webp',
+    icon: '/images/resized/wick-radical-self-reliance.webp',
   },
   {
     title: 'Radical Self-expression',
     subtitle:
       'We are literally a stage and a big-ass sound system on wheels. We create the platform for everyone to show us what they got, and make sure everyone on the playa can see it.',
-    icon: 'https://raw.githubusercontent.com/baaahs/baaahs.org/main/resized/wick-radical-self-expression.webp',
+    icon: '/images/resized/wick-radical-self-expression.webp',
   },
   {
     title: 'Communal Effort',
     subtitle:
       'Building BAAAHS alone just can\'t be done. The foundation of our camp is the miracle of this huge project that is only possible thanks to the work of multitudes of people who\'ve come together to make it happen.',
-    icon: 'https://raw.githubusercontent.com/baaahs/baaahs.org/main/resized/wick-communal-effort.webp',
+    icon: '/images/resized/wick-communal-effort.webp',
   },
   {
     title: 'Civic Responsibility',
     subtitle:
       'It’s all fun and games but if you drive the sheep you need your driver\'s license and you need to be sober.',
-    icon: 'https://raw.githubusercontent.com/baaahs/baaahs.org/main/resized/wick-civic-responsibility.webp',
+    icon: '/images/resized/wick-civic-responsibility.webp',
   },
   {
     title: 'Leaving No Trace',
     subtitle:
       'Want to leave no trace? Take the BAAAHS. We obsessively aim for the lowest possible environmental impact on the planet, at our parties, in our camp, and in every way we can off-playa.',
-    icon: 'https://raw.githubusercontent.com/baaahs/baaahs.org/main/resized/wick-leaving-no-trace.webp',
+    icon: '/images/resized/wick-leaving-no-trace.webp',
   },
   {
     title: 'Participation',
     subtitle:
       'Being a part of BAAAHS means participating in creating it. Everyone in BAAAHS is welcome (and expected) to find an awesome project to bring to life, and shape their own little (or ginormous) part of BAAAHS.',
-    icon: 'https://raw.githubusercontent.com/baaahs/baaahs.org/main/resized/wick-participation.webp',
+    icon: '/images/resized/wick-participation.webp',
   },
   {
     title: 'Immediacy',
     subtitle:
       'No amount of pictures, words or sounds can capture the BAAAHS experience. You just have to be there.',
-    icon: 'https://raw.githubusercontent.com/baaahs/baaahs.org/main/resized/wick-immediacy.webp',
+    icon: '/images/resized/wick-immediacy.webp',
   },
 ];
 

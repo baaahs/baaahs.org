@@ -128,7 +128,7 @@ const NotFoundCover = () => {
                         component={'img'}
                         loading="lazy"
                         src={
-                          'https://raw.githubusercontent.com/baaahs/baaahs.org/main/resized/2013_sheep.webp'
+                          '/images/resized/2013_sheep.webp'
                         }
                         height={{ xs: 'auto', md: 1 }}
                         maxHeight={{ xs: 300, md: 1 }}
