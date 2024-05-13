@@ -12,97 +12,97 @@ import NavItems from './NavItems';
 
 const contentItems = [
   {
-    src: 'https://raw.githubusercontent.com/baaahs/baaahs.org/main/resized/20230527_174212.webp',
+    src: '/images/resized/20230527_174212.webp',
     cols: 3,
     rows: 2,
   },
   {
-    src: 'https://raw.githubusercontent.com/baaahs/baaahs.org/main/resized/IMG_0448.webp',
+    src: '/images/resized/IMG_0448.webp',
     cols: 3,
     rows: 3,
   },
   {
-    src: 'https://raw.githubusercontent.com/baaahs/baaahs.org/main/resized/20230527_174339.webp',
+    src: '/images/resized/20230527_174339.webp',
     cols: 3,
     rows: 3,
   },
   {
-    src: 'https://raw.githubusercontent.com/baaahs/baaahs.org/main/resized/20230528_004535.webp',
+    src: '/images/resized/20230528_004535.webp',
     cols: 2,
     rows: 3,
   },
   {
-    src: 'https://raw.githubusercontent.com/baaahs/baaahs.org/main/resized/20230529_002733.webp',
+    src: '/images/resized/20230529_002733.webp',
     cols: 3,
     rows: 2,
   },
   {
-    src: 'https://raw.githubusercontent.com/baaahs/baaahs.org/main/resized/20230528_174740.webp',
+    src: '/images/resized/20230528_174740.webp',
     cols: 3,
     rows: 2,
   },
   {
-    src: 'https://raw.githubusercontent.com/baaahs/baaahs.org/main/resized/20230528_004629.webp',
+    src: '/images/resized/20230528_004629.webp',
     cols: 2,
     rows: 3,
   },
   {
-    src: 'https://raw.githubusercontent.com/baaahs/baaahs.org/main/resized/20230528_172118.webp',
+    src: '/images/resized/20230528_172118.webp',
     cols: 3,
     rows: 2,
   },
   {
-    src: 'https://raw.githubusercontent.com/baaahs/baaahs.org/main/resized/20230528_232605.webp',
+    src: '/images/resized/20230528_232605.webp',
     cols: 3,
     rows: 2,
   },
   {
-    src: 'https://raw.githubusercontent.com/baaahs/baaahs.org/main/resized/20230528_065034.webp',
+    src: '/images/resized/20230528_065034.webp',
     cols: 3,
     rows: 2,
   },
   {
-    src: 'https://raw.githubusercontent.com/baaahs/baaahs.org/main/resized/20230528_172109.webp',
+    src: '/images/resized/20230528_172109.webp',
     cols: 3,
     rows: 2,
   },
   {
-    src: 'https://raw.githubusercontent.com/baaahs/baaahs.org/main/resized/20230528_052014.webp',
+    src: '/images/resized/20230528_052014.webp',
     cols: 3,
     rows: 2,
   },
   {
-    src: 'https://raw.githubusercontent.com/baaahs/baaahs.org/main/resized/20230528_051741.webp',
+    src: '/images/resized/20230528_051741.webp',
     cols: 3,
     rows: 3,
   },
   {
-    src: 'https://raw.githubusercontent.com/baaahs/baaahs.org/main/resized/afik_hugging.webp',
+    src: '/images/resized/afik_hugging.webp',
     cols: 3,
     rows: 3,
   },
   {
-    src: 'https://raw.githubusercontent.com/baaahs/baaahs.org/main/resized/baaahs_dark_sign.webp',
+    src: '/images/resized/baaahs_dark_sign.webp',
     cols: 3,
     rows: 3,
   },
   {
-    src: 'https://raw.githubusercontent.com/baaahs/baaahs.org/main/resized/dark_rainbow_pasture.webp',
+    src: '/images/resized/dark_rainbow_pasture.webp',
     cols: 3,
     rows: 3,
   },
   {
-    src: 'https://raw.githubusercontent.com/baaahs/baaahs.org/main/resized/eric_and_phillip.webp',
+    src: '/images/resized/eric_and_phillip.webp',
     cols: 3,
     rows: 3,
   },
   {
-    src: 'https://raw.githubusercontent.com/baaahs/baaahs.org/main/resized/mendocino_view_1.webp',
+    src: '/images/resized/mendocino_view_1.webp',
     cols: 4,
     rows: 3,
   },
   {
-    src: 'https://raw.githubusercontent.com/baaahs/baaahs.org/main/resized/pasture_lights_c%2526j.webp',
+    src: '/images/resized/pasture_lights_c%2526j.webp',
     cols: 4,
     rows: 3,
   },
@@ -113,12 +113,12 @@ const contentItems = [
     isVideo: true,
   },
   {
-    src: 'https://raw.githubusercontent.com/baaahs/baaahs.org/main/resized/pelican.webp',
+    src: '/images/resized/pelican.webp',
     cols: 3,
     rows: 3,
   },
   {
-    src: 'https://raw.githubusercontent.com/baaahs/baaahs.org/main/resized/shae_green.webp',
+    src: '/images/resized/shae_green.webp',
     cols: 3,
     rows: 3,
   },
@@ -129,12 +129,12 @@ const contentItems = [
     isVideo: true,
   },
   {
-    src: 'https://raw.githubusercontent.com/baaahs/baaahs.org/main/resized/the_pasture_crowd.webp',
+    src: '/images/resized/the_pasture_crowd.webp',
     cols: 3,
     rows: 3,
   },
   {
-    src: 'https://raw.githubusercontent.com/baaahs/baaahs.org/main/resized/the_pasture_wide_shot.webp',
+    src: '/images/resized/the_pasture_wide_shot.webp',
     cols: 3,
     rows: 3,
   },
@@ -149,7 +149,7 @@ const LastYear = () => {
       <Box gap={3}>
         <FullScreenHeader
           image={
-            'https://raw.githubusercontent.com/baaahs/baaahs.org/main/resized/drag_bingpo_candid0.webp'
+            '/images/resized/drag_bingpo_candid0.webp'
           }
           title={'Previous Years'}
           text={

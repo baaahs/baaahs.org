@@ -12,36 +12,17 @@ const images = [
     group: [
       {
         cover:
-          'https://raw.githubusercontent.com/baaahs/baaahs.org/main/resized/2013_sheep.webp',
+          '/images/resized/2013_sheep.webp',
         coverDark: undefined,
       },
       {
         cover:
-          'https://raw.githubusercontent.com/baaahs/baaahs.org/main/resized/2015_sheep.webp',
+          '/images/resized/2015_sheep.webp',
         coverDark: undefined,
       },
       {
         cover:
-          'https://raw.githubusercontent.com/baaahs/baaahs.org/main/resized/kinky_sheep.webp',
-        coverDark: undefined,
-      },
-    ],
-  },
-  {
-    group: [
-      {
-        cover:
-          'https://raw.githubusercontent.com/baaahs/baaahs.org/main/resized/2019_sheep.webp',
-        coverDark: undefined,
-      },
-      {
-        cover:
-          'https://raw.githubusercontent.com/baaahs/baaahs.org/main/resized/rainbow_baaahs.webp',
-        coverDark: undefined,
-      },
-      {
-        cover:
-          'https://raw.githubusercontent.com/baaahs/baaahs.org/main/resized/sunset_balls_sheep.webp',
+          '/images/resized/kinky_sheep.webp',
         coverDark: undefined,
       },
     ],
@@ -50,17 +31,36 @@ const images = [
     group: [
       {
         cover:
-          'https://raw.githubusercontent.com/baaahs/baaahs.org/main/resized/2019_sheep_2.webp',
+          '/images/resized/2019_sheep.webp',
         coverDark: undefined,
       },
       {
         cover:
-          'https://raw.githubusercontent.com/baaahs/baaahs.org/main/resized/build_sheep.webp',
+          '/images/resized/rainbow_baaahs.webp',
         coverDark: undefined,
       },
       {
         cover:
-          'https://raw.githubusercontent.com/baaahs/baaahs.org/main/resized/shady_xian_discoballs.webp',
+          '/images/resized/sunset_balls_sheep.webp',
+        coverDark: undefined,
+      },
+    ],
+  },
+  {
+    group: [
+      {
+        cover:
+          '/images/resized/2019_sheep_2.webp',
+        coverDark: undefined,
+      },
+      {
+        cover:
+          '/images/resized/build_sheep.webp',
+        coverDark: undefined,
+      },
+      {
+        cover:
+          '/images/resized/shady_xian_discoballs.webp',
         coverDark: undefined,
       },
     ],
