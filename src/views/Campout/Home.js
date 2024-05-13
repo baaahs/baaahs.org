@@ -20,7 +20,7 @@ const content = [
     subtitle:
       'Hosted at The Incline, a new queer-owned retreat space in the mountains near the Mendocino National Forest, serving majestic views, lush camping, and extensive trails to explore.',
     img: {
-      src: 'https://static.baaahs.org/Z/mendocino_view.jpeg',
+      src: 'https://raw.githubusercontent.com/baaahs/baaahs.org/main/resized/mendocino_view.webp',
       style: { width: undefined, height: '120%' },
     },
   },
@@ -28,31 +28,31 @@ const content = [
     title: 'Enthralling Visions',
     subtitle:
       'Be ready for BAAAHS light wizardry set to full face-melt mode, nestled cutely amongst the trees. There ain’t no party like a BAAAHS party bb!!',
-    img: { src: 'https://static.baaahs.org/Z/dark_rainbow_pasture.png' },
+    img: { src: 'https://raw.githubusercontent.com/baaahs/baaahs.org/main/resized/dark_rainbow_pasture.webp' },
   },
   {
     title: 'Aural Pleasures',
     subtitle:
       "Multiple stages and three nights of BAAAHS-rockin' beats from your fav BAAAHS DJs and special guests on our world class sound system!",
-    img: { src: 'https://static.baaahs.org/Z/ben_dancing_lights.png' },
+    img: { src: 'https://raw.githubusercontent.com/baaahs/baaahs.org/main/resized/ben_dancing_lights.webp' },
   },
   {
     title: 'Alluring Art',
     subtitle:
       'Art is core to BAAAHS and we work hard to bring queer art from the Bay Area and beyond to our campout. Want to bring art? Let us know, we may be able to help with materials and logistics!',
-    img: { src: 'https://static.baaahs.org/Z/simon_art_piece.png' },
+    img: { src: 'https://raw.githubusercontent.com/baaahs/baaahs.org/main/resized/simon_art_piece.webp' },
   },
   {
     title: 'Participate and Play',
     subtitle:
       'The weekend is packed with amazing parties and activities from nature hikes to screen printing, and our infamous talent expo, and they all need YOU! This is the place to try something new and leave that judgement at the gate.',
-    img: { src: 'https://static.baaahs.org/Z/crafts.jpeg' },
+    img: { src: 'https://raw.githubusercontent.com/baaahs/baaahs.org/main/resized/crafts.webp' },
   },
   {
     title: 'Creating Community',
     subtitle:
       'BAAAHS Campout is a place to find happiness not in things we have or things we need, but in our community and in the simple joy of being present.',
-    img: { src: 'https://static.baaahs.org/Z/trixie_and_friends.jpeg' },
+    img: { src: 'https://raw.githubusercontent.com/baaahs/baaahs.org/main/resized/trixie_and_friends.webp' },
   },
 ];
 

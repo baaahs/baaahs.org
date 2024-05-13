@@ -92,7 +92,7 @@ const QAndA = () => {
       <Box gap={3}>
         <FullScreenHeader
           image={
-            'https://static.baaahs.org/Z/twunkerbell_backshot.jpeg'
+            'https://raw.githubusercontent.com/baaahs/baaahs.org/main/resized/twunkerbell_backshot.webp'
           }
           title={'Q&A'}
           text={'Your questions, our answers!'}

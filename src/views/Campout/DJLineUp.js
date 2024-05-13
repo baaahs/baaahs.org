@@ -202,7 +202,7 @@ const DJLineup = () => {
           title={'Lineup'}
           text={"It wouldn't be a BAAAHS Campout without a sick line up"}
         />
-        <Grid container spacing={2}>
+        <Grid container marginTop={2} spacing={2} justifyContent='center'>
           <Grid container item xs={12} xl={8} spacing={2}>
             {djs
               .filter((i) => i.image)
