@@ -7,6 +7,7 @@ import Button from '@mui/material/Button';
 import Card from '@mui/material/Card';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
+import Link from 'components/Link';
 
 import Main from 'layouts/Main';
 import FullScreenHeader from 'components/FullScreenHeader';
@@ -182,7 +183,13 @@ const CampoutHome = () => {
             <ContentItem
               index={2}
               title="Aural Pleasures"
-              subtitle="Multiple stages and three nights of BAAAHS-rockin' beats from your fav BAAAHS DJs and special guests on our world class sound system!"
+              subtitle={
+                <fragment>
+                  Multiple stages and three nights of BAAAHS-rockin\' beats from your fav BAAAHS DJs and special guests on our world class sound system!
+                  <p>Here's this year's <a href="/campout/dj-lineup">line-up!</a></p>
+                </fragment>
+              }
+              link={'/campout/dj-lineup'}
               img={{ src: '/images/resized/ben_dancing_lights.webp' }}
             />
             <ContentItem
@@ -233,7 +240,7 @@ const CampoutHome = () => {
   );
 };
 
-const ContentItem = ({ title, subtitle, img, index }) => {
+const ContentItem = ({ title, subtitle, img, link, index }) => {
   const theme = useTheme();
 
   return <Grid item xs={12} sm={6} md={4} lg={4} xl={2} key={index}>
@@ -261,22 +268,26 @@ const ContentItem = ({ title, subtitle, img, index }) => {
           bgcolor={theme.palette.primary.main}
           color={theme.palette.background.paper}
         >
-          <img
-            src={img.src}
-            style={Object.assign(
-              { borderRadius: '50%', width: '150%' },
-              img.style,
-            )}
-            alt=""
-          />
+          <Link href={link}>
+            <img
+              src={img.src}
+              style={Object.assign(
+                { borderRadius: '50%', width: '150%' },
+                img.style,
+              )}
+              alt=""
+            />
+          </Link>
         </Box>
-        <Typography
-          variant="h6"
-          fontFamily="Smooth Circulars"
-          textAlign="center"
-        >
-          {title}
-        </Typography>
+        <Link href={link}>
+          <Typography
+            variant="h6"
+            fontFamily="Smooth Circulars"
+            textAlign="center"
+          >
+            {title}
+          </Typography>
+        </Link>
         <Typography color="text.secondary" textAlign="center">
           {subtitle}
         </Typography>
