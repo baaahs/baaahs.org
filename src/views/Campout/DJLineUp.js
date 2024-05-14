@@ -87,7 +87,9 @@ const DJLineup = () => {
             <DJ
               name="Guerrilla Pump"
               affiliation="Pump Paradise"
-              bio="DJ Guardian Guerrilla Pump aka Sailor G is a Queer 1st Gen Afro-Pinoy, Award Winning DJ and Community-based Artist/Organizer rooted in the East Bay’s Underground Scene."
+              bio="DJ Guardian Guerrilla Pump aka Sailor G is a Queer 1st Gen
+              Afro-Pinoy, Award Winning DJ and Community-based Artist/Organizer
+              rooted in the East Bay’s Underground Scene."
               soundcloud="https://soundcloud.com/guerrillapump"
               instagram="https://www.instagram.com/shotbyguerrilla"
               image="/images/campout/2024/djs/guerrillapump.jpg"
@@ -123,7 +125,10 @@ const DJLineup = () => {
             <DJ
               name="Kelly Naughton"
               affiliation="DAD SF, BAAAHS"
-              bio="Kelly Naughton is a San Francisco based DJ focusing on delectable Disco, racy Italo, sassy House, & thumping Techno. He created DAD SF, a disco/vers unabashedly joyous dance party in SF's SOMA district."
+              bio="Kelly Naughton is a San Francisco based DJ focusing on
+               delectable Disco, racy Italo, sassy House, & thumping Techno.
+               He created DAD SF, a disco/vers unabashedly joyous dance party in
+               SF's SOMA district."
               soundcloud="https://soundcloud.com/kellynaughton"
               instagram="https://www.instagram.com/naughtontime"
               image="https://storage.googleapis.com/static.baaahs.org/z_kelly.png"
@@ -131,14 +136,19 @@ const DJLineup = () => {
             <DJ
               name="LAKEVERETT"
               affiliation="Callback"
-              bio="LAKEVERETT's sound embodies respite, offering joyful and relaxing moments amid hectic schedules with splashes of house cooled by funk, delivering refreshing tunes that soothe muscles and ease minds."
+              bio="LAKEVERETT's sound embodies respite, offering joyful and
+               relaxing moments amid hectic schedules with splashes of house
+               cooled by funk, delivering refreshing tunes that soothe muscles and ease minds."
               soundcloud="https://soundcloud.com/lakeverett"
               instagram="https://www.instagram.com/lakeverett"
               image="/images/campout/2024/djs/lakeverett.jpg"
             />
             <DJ
               name="LOVR"
-              bio="Dirty bass, music to fuck to, a walk through the hood that makes you feel unsafe."
+              bio="Hailing from Detroit, LOVR blends techno and house, creating
+               immersive experiences with pulsating beats and hypnotic melodies.
+               His empathetic sets connect deeply with audiences, embodying
+               Detroit's rich electronic music history."
               soundcloud=""
               instagram="https://www.instagram.com/yakewiththecake"
               image="/images/campout/2024/djs/lovr.jpg"
@@ -174,6 +184,14 @@ const DJLineup = () => {
               soundcloud=""
               instagram="https://www.instagram.com/somaqlo"
               image="https://storage.googleapis.com/static.baaahs.org/z_prince_wolf.png"
+            />
+            <DJ
+              name="Rich King"
+              affiliation="theSUNDAYSITUATION, EASY/NYC"
+              bio="In addition to his background as a competitive classical solo-violinist, Romii is influenced by Motown era artists, 80’s soul, 90’s hiphop and Detroit synthetic underground sounds."
+              soundcloud="https://soundcloud.com/djrichking"
+              instagram="https://www.instagram.com/heyrichking"
+              image="/images/campout/2024/djs/richking.jpg"
             />
             <DJ
               name="Romii"
