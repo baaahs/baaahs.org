@@ -131,7 +131,7 @@ const DJLineup = () => {
             <DJ
               name="LAKEVERETT"
               affiliation="Callback"
-              bio="House, Hip-Hop, Baile Funk, Breakbeat, Disco, Electro, Bass and R&B"
+              bio="LAKEVERETT's sound embodies respite, offering joyful and relaxing moments amid hectic schedules with splashes of house cooled by funk, delivering refreshing tunes that soothe muscles and ease minds."
               soundcloud="https://soundcloud.com/lakeverett"
               instagram="https://www.instagram.com/lakeverett"
               image="/images/campout/2024/djs/lakeverett.jpg"
