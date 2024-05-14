@@ -109,9 +109,13 @@ const DJLineup = () => {
             <DJ
               name="Issa"
               affiliation=""
-              bio="Does anyone want my miso soup?"
+              bio="ISSA developed a passion for dance music growing up in SF in
+               the 90s. He blends classic house, Arabic and Latin sounds,
+               hip-hop, disco, R&B, techno, and pop across decades. His
+               trademark sound and genre-bending flair will keep you moving for
+               hours, day or night."
               soundcloud="https://soundcloud.com/itsissa"
-              instagram="http://instagram.com/issaqraj"
+              instagram="http://instagram.com/issaaraj"
               image="https://storage.googleapis.com/static.baaahs.org/z_issa.png"
             />
             <DJ
@@ -187,8 +191,12 @@ const DJLineup = () => {
             />
             <DJ
               name="Rich King"
-              affiliation="theSUNDAYSITUATION, EASY/NYC"
-              bio="In addition to his background as a competitive classical solo-violinist, Romii is influenced by Motown era artists, 80’s soul, 90’s hiphop and Detroit synthetic underground sounds."
+              affiliation="the SUNDAYSITUATION, EASY/NYC, SNAXX (NYC)"
+              bio="RICH KING has been celebrating life through music, starting
+               on college radio in the 80s, playing venues from dive bars to the
+               Black Party to panoramic playas. All vinyl, all the time —
+               contemporary to classic, house to disco, funk to far-out.
+               RICH KING is excited to see the sunrise with you!"
               soundcloud="https://soundcloud.com/djrichking"
               instagram="https://www.instagram.com/heyrichking"
               image="/images/campout/2024/djs/richking.jpg"
