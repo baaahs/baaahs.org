@@ -140,8 +140,8 @@ const DJLineup = () => {
               name="LOVR"
               bio="Dirty bass, music to fuck to, a walk through the hood that makes you feel unsafe."
               soundcloud=""
-              instagram=""
-              image=""
+              instagram="https://www.instagram.com/yakewiththecake"
+              image="/images/campout/2024/djs/lovr.jpg"
             />
             <DJ
               name="Mike Bradley"
