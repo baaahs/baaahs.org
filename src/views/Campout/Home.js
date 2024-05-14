@@ -7,6 +7,7 @@ import Button from '@mui/material/Button';
 import Card from '@mui/material/Card';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
+import Link from 'components/Link';
 
 import Main from 'layouts/Main';
 import FullScreenHeader from 'components/FullScreenHeader';
@@ -14,50 +15,7 @@ import NavItems from './NavItems';
 import { useInterval } from 'usehooks-ts';
 import '../../styles/whaaat.css';
 
-const content = [
-  {
-    title: 'Into the Woods',
-    subtitle:
-      'Hosted at The Incline, a new queer-owned retreat space in the mountains near the Mendocino National Forest, serving majestic views, lush camping, and extensive trails to explore.',
-    img: {
-      src: '/images/resized/mendocino_view.webp',
-      style: { width: undefined, height: '120%' },
-    },
-  },
-  {
-    title: 'Enthralling Visions',
-    subtitle:
-      'Be ready for BAAAHS light wizardry set to full face-melt mode, nestled cutely amongst the trees. There ain’t no party like a BAAAHS party bb!!',
-    img: { src: '/images/resized/dark_rainbow_pasture.webp' },
-  },
-  {
-    title: 'Aural Pleasures',
-    subtitle:
-      "Multiple stages and three nights of BAAAHS-rockin' beats from your fav BAAAHS DJs and special guests on our world class sound system!",
-    img: { src: '/images/resized/ben_dancing_lights.webp' },
-  },
-  {
-    title: 'Alluring Art',
-    subtitle:
-      'Art is core to BAAAHS and we work hard to bring queer art from the Bay Area and beyond to our campout. Want to bring art? Let us know, we may be able to help with materials and logistics!',
-    img: { src: '/images/resized/simon_art_piece.webp' },
-  },
-  {
-    title: 'Participate and Play',
-    subtitle:
-      'The weekend is packed with amazing parties and activities from nature hikes to screen printing, and our infamous talent expo, and they all need YOU! This is the place to try something new and leave that judgement at the gate.',
-    img: { src: '/images/resized/crafts.webp' },
-  },
-  {
-    title: 'Creating Community',
-    subtitle:
-      'BAAAHS Campout is a place to find happiness not in things we have or things we need, but in our community and in the simple joy of being present.',
-    img: { src: '/images/resized/trixie_and_friends.webp' },
-  },
-];
-
 const CampoutHome = () => {
-  const theme = useTheme();
   const whaaatRef = React.createRef();
   const questions = [
     'Whaaat is the capital of Assyria?',
@@ -207,55 +165,51 @@ const CampoutHome = () => {
             spacing={2}
             justifyContent="center"
           >
-            {content.map((item, i) => (
-              <Grid item xs={12} sm={6} md={4} lg={4} xl={2} key={i}>
-                <Box
-                  alignItems="center"
-                  component={Card}
-                  padding={2}
-                  borderRadius={2}
-                  width={1}
-                  height={1}
-                  data-aos={'fade-up'}
-                  data-aos-delay={i * 100}
-                >
-                  <Box
-                    display={'flex'}
-                    flexDirection={'column'}
-                    alignItems="center"
-                    gap={2}
-                  >
-                    <Box
-                      alignItems="center"
-                      component={Avatar}
-                      width={150}
-                      height={150}
-                      bgcolor={theme.palette.primary.main}
-                      color={theme.palette.background.paper}
-                    >
-                      <img
-                        src={item.img.src}
-                        style={Object.assign(
-                          { borderRadius: '50%', width: '150%' },
-                          item.img.style,
-                        )}
-                        alt=""
-                      />
-                    </Box>
-                    <Typography
-                      variant="h6"
-                      fontFamily="Smooth Circulars"
-                      textAlign="center"
-                    >
-                      {item.title}
-                    </Typography>
-                    <Typography color="text.secondary" textAlign="center">
-                      {item.subtitle}
-                    </Typography>
-                  </Box>
-                </Box>
-              </Grid>
-            ))}
+            <ContentItem
+              index={0}
+              title="Into the Woods"
+              subtitle="Hosted at The Incline, a new queer-owned retreat space in the mountains near the Mendocino National Forest, serving majestic views, lush camping, and extensive trails to explore."
+              img={{
+                src: '/images/resized/mendocino_view.webp',
+                style: { width: undefined, height: '120%' },
+              }}
+            />
+            <ContentItem
+              index={1}
+              title="Enthralling Visions"
+              subtitle="Be ready for BAAAHS light wizardry set to full face-melt mode, nestled cutely amongst the trees. There ain’t no party like a BAAAHS party bb!!"
+              img={{ src: '/images/resized/dark_rainbow_pasture.webp' }}
+            />
+            <ContentItem
+              index={2}
+              title="Aural Pleasures"
+              subtitle={
+                <fragment>
+                  Multiple stages and three nights of BAAAHS-rockin\' beats from your fav BAAAHS DJs and special guests on our world class sound system!
+                  <p>Here's this year's <a href="/campout/dj-lineup">line-up!</a></p>
+                </fragment>
+              }
+              link={'/campout/dj-lineup'}
+              img={{ src: '/images/resized/ben_dancing_lights.webp' }}
+            />
+            <ContentItem
+              index={3}
+              title="Alluring Art"
+              subtitle="Art is core to BAAAHS and we work hard to bring queer art from the Bay Area and beyond to our campout. Want to bring art? Let us know, we may be able to help with materials and logistics!"
+              img={{ src: '/images/resized/simon_art_piece.webp' }}
+            />
+            <ContentItem
+              index={4}
+              title="Participate and Play"
+              subtitle="The weekend is packed with amazing parties and activities from nature hikes to screen printing, and our infamous talent expo, and they all need YOU! This is the place to try something new and leave that judgement at the gate."
+              img={{ src: '/images/resized/crafts.webp' }}
+            />
+            <ContentItem
+              index={5}
+              title="Creating Community"
+              subtitle="BAAAHS Campout is a place to find happiness not in things we have or things we need, but in our community and in the simple joy of being present."
+              img={{ src: '/images/resized/trixie_and_friends.webp' }}
+            />
           </Grid>
 
           <Grid
@@ -284,6 +238,62 @@ const CampoutHome = () => {
       </Box>
     </Main>
   );
+};
+
+const ContentItem = ({ title, subtitle, img, link, index }) => {
+  const theme = useTheme();
+
+  return <Grid item xs={12} sm={6} md={4} lg={4} xl={2} key={index}>
+    <Box
+      alignItems="center"
+      component={Card}
+      padding={2}
+      borderRadius={2}
+      width={1}
+      height={1}
+      data-aos={'fade-up'}
+      data-aos-delay={index * 100}
+    >
+      <Box
+        display={'flex'}
+        flexDirection={'column'}
+        alignItems="center"
+        gap={2}
+      >
+        <Box
+          alignItems="center"
+          component={Avatar}
+          width={150}
+          height={150}
+          bgcolor={theme.palette.primary.main}
+          color={theme.palette.background.paper}
+        >
+          <Link href={link}>
+            <img
+              src={img.src}
+              style={Object.assign(
+                { borderRadius: '50%', width: '150%' },
+                img.style,
+              )}
+              alt=""
+            />
+          </Link>
+        </Box>
+        <Link href={link}>
+          <Typography
+            variant="h6"
+            fontFamily="Smooth Circulars"
+            textAlign="center"
+          >
+            {title}
+          </Typography>
+        </Link>
+        <Typography color="text.secondary" textAlign="center">
+          {subtitle}
+        </Typography>
+      </Box>
+    </Box>
+  </Grid>;
 };
 
 export default CampoutHome;
