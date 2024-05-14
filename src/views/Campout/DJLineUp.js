@@ -108,7 +108,7 @@ const DJLineup = () => {
             />
             <DJ
               name="Issa"
-              affiliation=""
+              affiliation="Provacateur (SF)"
               bio="ISSA developed a passion for dance music growing up in SF in
                the 90s. He blends classic house, Arabic and Latin sounds,
                hip-hop, disco, R&B, techno, and pop across decades. His
