@@ -54,6 +54,8 @@ jobs:
           fi
           BUCKET_NAME="${BUCKET_NAME}.baaahs.org"
           gsutil -m rsync -r -d ./build gs://${BUCKET_NAME}
+          gcloud compute url-maps invalidate-cdn-cache lb-map --path=/* --async
         env:
           BRANCH_NAME: ${{ github.ref }}
         shell: bash
+
