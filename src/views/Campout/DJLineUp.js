@@ -79,9 +79,9 @@ const DJLineup = () => {
             <DJ
               name="eMote"
               affiliation="BAAAHS"
-              bio="Funky crazy bitch."
-              soundcloud="https://soundcloud.com/mrseago"
-              instagram="https://www.instagram.com/mrseago"
+              bio="Grounded around dreamy, emotional melodies, eMote brings the energy to the dancefloor with trance, progressive, and the occasional DnB or dubstep banger."
+              soundcloud=""
+              instagram="https://www.instagram.com/linn.david"
               image="/images/campout/2024/djs/emote.jpg"
             />
             <DJ
