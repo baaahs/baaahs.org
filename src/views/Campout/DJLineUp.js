@@ -120,8 +120,8 @@ const DJLineup = () => {
             />
             <DJ
               name="John Major"
-              affiliation="BTW"
-              bio="House/Minimal Techno/Punk/Polyrhythmic"
+              affiliation="BTW (Oakland), Pyramid Scheme (BRC)"
+              bio="Dancer & DJ"
               soundcloud="https://soundcloud.com/majorjohn"
               instagram=""
               image="/images/campout/2024/djs/major.jpg"
