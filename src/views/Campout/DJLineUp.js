@@ -242,8 +242,8 @@ const DJLineup = () => {
             />
             <DJ
               name="Trevor Sigler"
-              affiliation="Ever Afters, EW"
-              bio=""
+              affiliation="Ever Afters, Ew (SF)"
+              bio="A staple on the SF dance music scene, Trevor has been involved in psychedelic queer parties like Romper Room, Mixed Forms, and now The Ever Afters Campout & Ew. A trained audio engineer, his sets and original productions are glacial, roomy, and precise, and take full advantage of where a sound system can go."
               soundcloud="https://on.soundcloud.com/jiaZYGot2TF5eEfo8"
               instagram="https://www.instagram.com/tater_swift"
               image="https://storage.googleapis.com/static.baaahs.org/z_trevor.png"
