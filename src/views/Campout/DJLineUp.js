@@ -44,14 +44,14 @@ const DJLineup = () => {
               name="Brian Maier"
               bio="San Francisco-based DJ Brian Maier blends his love for house music and technology, performing at global venues and events like Toronto Pride and the legendary Real Bad party."
               soundcloud="https://soundcloud.com/brianmaier"
-              instagram=""
+              instagram="https://www.instagram.com/brianmaier"
               image="/images/campout/2024/djs/brianmaier-crop.jpg"
             />
             <DJ
               name="Bryan Hughes"
               bio="Progressive, Trance/Morning, Disco, House, Gospel House"
               soundcloud="https://soundcloud.com/djbryanhughes"
-              instagram=""
+              instagram="https://www.instagram.com/bryanwastaken"
               image="https://storage.googleapis.com/static.baaahs.org/z_bryan_hughes.png"
             />
             <DJ
@@ -107,7 +107,7 @@ const DJLineup = () => {
               image="/images/campout/2024/djs/hunnycut.jpg"
             />
             <DJ
-              name="Issa"
+              name="ISSA"
               affiliation="Provacateur (SF)"
               bio="ISSA developed a passion for dance music growing up in SF in
                the 90s. He blends classic house, Arabic and Latin sounds,
@@ -166,14 +166,6 @@ const DJLineup = () => {
               image="https://storage.googleapis.com/static.baaahs.org/z_mike_b.png"
             />
             <DJ
-              name="Mondo Nexus"
-              affiliation="DAD SF"
-              bio="Sleazy Synthy Disco mixed with Groovin House with a touch of Acid"
-              soundcloud="https://soundcloud.com/mondonexus"
-              instagram="https://www.instagram.com/mondonexus"
-              image="https://storage.googleapis.com/static.baaahs.org/z_mondo.png"
-            />
-            <DJ
               name="Mr Seago"
               affiliation="BAAAHS, Something Queer"
               bio="Funky crazy bitch."
@@ -214,15 +206,15 @@ const DJLineup = () => {
               affiliation="DAD SF, BAAAHS"
               bio="Disco Pop Good vibes :)"
               soundcloud=""
-              instagram=""
+              instagram="https://www.instagram.com/spenser_morris"
               image="https://storage.googleapis.com/static.baaahs.org/z_spenser.png"
             />
             <DJ
               name="State of Wayne"
-              bio=""
+              bio="Transmuting decades of Pop, Disco, Classic Rock, Grunge, House—converging to dance your body & sparkle your soul."
               soundcloud=""
               instagram="https://www.instagram.com/waynebone"
-              image=""
+              image="/images/campout/2024/djs/stateofwayne.jpg"
             />
             <DJ
               name="StormyRoxx"
