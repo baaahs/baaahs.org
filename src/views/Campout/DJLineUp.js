@@ -71,7 +71,7 @@ const DJLineup = () => {
             />
             <DJ
               name="Dunst"
-              bio="Techno, Eelectro, Detroit, Bass, Breaks, Leftfield, IDM, Industrial, Synth-punk"
+              bio="Your least favorite DJ’s least favorite DJ"
               soundcloud=""
               instagram=""
               image="/images/campout/2024/djs/dunst.jpg"
