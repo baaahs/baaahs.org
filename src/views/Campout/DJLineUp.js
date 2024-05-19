@@ -222,7 +222,7 @@ const DJLineup = () => {
               bio=""
               soundcloud=""
               instagram="https://www.instagram.com/waynebone"
-              image=""
+              image="/images/campout/2024/djs/stateofwayne.jpg"
             />
             <DJ
               name="StormyRoxx"
@@ -231,6 +231,14 @@ const DJLineup = () => {
               soundcloud="https://soundcloud.com/stormyroxx"
               instagram="https://www.instagram.com/stormyroxx"
               image="https://storage.googleapis.com/static.baaahs.org/z_stormy.png"
+            />
+            <DJ
+              name="Tim Hansen"
+              affiliation=""
+              bio=""
+              soundcloud=""
+              instagram="https://www.instagram.com/thansen6390"
+              image="/images/campout/2024/djs/timhansen.jpg"
             />
             <DJ
               name="Tiny Tim"
