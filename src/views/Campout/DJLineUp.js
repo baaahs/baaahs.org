@@ -225,6 +225,14 @@ const DJLineup = () => {
               image="https://storage.googleapis.com/static.baaahs.org/z_stormy.png"
             />
             <DJ
+              name="Tim Hansen"
+              affiliation=""
+              bio=""
+              soundcloud=""
+              instagram="https://www.instagram.com/thansen6390"
+              image="/images/campout/2024/djs/timhansen.jpg"
+            />
+            <DJ
               name="Tiny Tim"
               affiliation="Something Queer, Chonies"
               bio="Combining 21 years of mixing with production, I love to produce and play music that comes from the soul, goes to the decks and is felt on the floor!"
