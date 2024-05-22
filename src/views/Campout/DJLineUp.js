@@ -253,7 +253,7 @@ const DJLineup = () => {
               affiliation="BAAAHS"
               bio="Music connoisseurs and headbanging ravers alike have referred to his DJ sets as &quot;decent&quot;, &quot;pretty good&quot;, and &quot;something people listen to&quot;. Combining 20 years of classical piano training with complementary musical genres such as slut pop, tech house, and nu disco, he incorporates live elements into his high-energy sets to take your ears on a magical journey of sunshine, rainbows, and unicorn ketamine."
               soundcloud="https://soundcloud.com/twunkerbell"
-              instagram="https://www.instagram.com/twunkerbell_music"
+              instagram="https://www.instagram.com/twunkerbell.music"
               image="https://storage.googleapis.com/static.baaahs.org/z_twunkerbell.png"
             />
           </Grid>
