@@ -88,7 +88,7 @@ const CampoutHome = () => {
                 marginTop={{ xs: '1em', md: '2em' }}
                 style={{ fontFamily: 'Smooth Circulars', textAlign: 'center' }}
               >
-                Memorial Day Weekend, May 24–27
+                Memorial Day Weekend, May 23–26
               </Typography>
               <Box display="flex" justifyContent="center" mr={{ xs: 2, md: 8 }}>
                 <Button
@@ -104,8 +104,9 @@ const CampoutHome = () => {
                   }}
                   size="large"
                   href={'/campout/register'}
+                  disabled
                 >
-                  Register Now!
+                  Tickets coming soon!
                 </Button>
               </Box>
             </Fragment>
@@ -275,6 +276,7 @@ const CampoutHome = () => {
                 size="large"
                 href={'/campout/register'}
                 fullWidth
+                disabled
               >
                 Let's Go Camping!
               </Button>
