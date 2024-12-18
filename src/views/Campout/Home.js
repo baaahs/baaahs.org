@@ -114,7 +114,7 @@ const CampoutHome = () => {
         />
         <Grid container spacing={2} justifyContent={'center'}>
           <Grid item container xs={10} xl={8}>
-            <Box marginBottom={1}>
+            <!-- <Box marginBottom={1}>
               <Typography
                 align={'center'}
                 fontWeight={600}
@@ -124,7 +124,7 @@ const CampoutHome = () => {
               >
                 WHAAAT???
               </Typography>
-              <Box align={'justify'}>
+              <Box align={'justify'}> -->
                 <p>
                   BAAAHS Campout is a unique three-night queer getaway hosted on
                   The Incline, nestled in the enchanting landscapes of Mendocino
@@ -150,7 +150,7 @@ const CampoutHome = () => {
                   extraordinary event together.
                 </p>
 
-                <p>
+                <!-- <p>
                   This year's theme is:
                   <Typography
                     component="span"
@@ -167,7 +167,7 @@ const CampoutHome = () => {
                 <div>Whaaat will you do?</div>
                 <div>Whaaat will you be?</div>
                 <div ref={whaaatRef}></div>
-
+-->
                 <p>
                   BAAAHS beckons you to three zany nights of camping in the
                   Mendocino mountains: to imagine the unthinkable, the dream the
