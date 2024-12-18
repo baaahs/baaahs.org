@@ -25,10 +25,10 @@ const IndexView = () => {
             <WhoWeAre />
           </Container>
           <Container>
-            <TenPrinciples />
+            <Events />
           </Container>
           <Container>
-            <Events />
+            <TenPrinciples />
           </Container>
           <Box
             component={'svg'}

@@ -20,9 +20,14 @@ const content = [
       "Yes and no: the road is a little steep (it's called The Incline for a reason). We recommend an all-wheel drive vehicle if possible, but we've had all sorts of vehicles arrive successfully. To encourage carpooling we offer a free option to load your gear on a truck in San Francisco and it'll be waiting for you at the Incline!",
   },
   {
+    question: 'Is there carpooling available?',
+    answer:
+      "Yep, there sure is. <a href='https://docs.google.com/spreadsheets/d/1HZyYwVZVLAgMPyCyRWRg3wjS6Ev7XIz06YwK64eWkzQ/edit?usp=sharing'>Sign up here</a> to either provide a ride or let folks know you're looking!"
+  },
+  {
     question: 'When is it?',
     answer:
-      'May 24-27th. Arrival will start on Friday morning. We encourage everyone to arrive by 6PM so you can find a spot and set up with some daylight. The fun starts Friday evening, and Saturday and Sunday are full days of activities. Monday we clean up and pack out.',
+      'May 24-27th. Arrival will start on Friday morning. We encourage everyone to arrive by 6PM so you can find a spot and set up with some daylight. The fun starts Friday evening, and Saturday and Sunday are full days of activities. Monday we clean up and pack out. <br><br> There\'s also a pregame event May 17-19th! If you want to get your booty moving with us while we get some last things finished, you can sign up <a href="https://docs.google.com/spreadsheets/d/1HZyYwVZVLAgMPyCyRWRg3wjS6Ev7XIz06YwK64eWkzQ/edit?usp=sharing">right here.</a>',
   },
   {
     question: 'Is this event open for everyone?',
@@ -55,9 +60,14 @@ const content = [
       "RV camping will be VERY limited, so be sure to get your ticket ASAP. Also note that we won't have any hook ups for you, plus getting a trailer up the mountain can be challenging. Car camping is NOT ALLOWED, you will have to leave your car at the designated parking area.",
   },
   {
-    question: 'Will there be a schedule?',
+    question: 'Is there a schedule?',
     answer:
-      "Yes there will be! We'll send out a post and put it here when we have it ready.",
+      "The schedule of the campout is 100% optional and 100% awesome, and you can view it <a href='/campout/schedule'>here!</a><br><br>" +
+      "Some of the highlights:<br><br>" + 
+      "Drag Dodgeball(!) - We are proud to present the first ever[citation needed] drag dodgeball tournament. We’ll have wigs, we’ll have balls, and we’ll have an extremely special half-time show. Dodgeballing with wigs is a must. Dodgeballing on hills is at your own risk.<br><br>" + 
+      "Talent(less) show - Come and show us what you can, or can’t do. Historically, we have some amazing talents showing up, and a supportive audience providing a perfect opportunity to flirt with your exhibitionist side. <a href='https://docs.google.com/forms/d/e/1FAIpQLSfO86JVDOqTte0OdU9c-bCTzDyDycbbLwTFVXl1N0DIGaWe1g/viewform'>Sign up here.</a><br><br>" + 
+      "DAD Gone Wild West Pool Party - You get the gist ;)<br><br>" + 
+      "Themed parties - Get your LEWKS ready. Or don’t. We love you either way.<br><br>",
   },
   {
     question: 'What can I expect for Arrival?',
@@ -82,7 +92,7 @@ const QAndA = () => {
       <Box gap={3}>
         <FullScreenHeader
           image={
-            'https://static.baaahs.org/Z/twunkerbell_backshot.jpeg'
+            '/images/resized/twunkerbell_backshot.webp'
           }
           title={'Q&A'}
           text={'Your questions, our answers!'}

@@ -12,36 +12,17 @@ const images = [
     group: [
       {
         cover:
-          'https://static.baaahs.org/Z/2013_sheep.jpeg',
+          '/images/resized/2013_sheep.webp',
         coverDark: undefined,
       },
       {
         cover:
-          'https://static.baaahs.org/Z/2015_sheep.jpeg',
+          '/images/resized/2015_sheep.webp',
         coverDark: undefined,
       },
       {
         cover:
-          'https://static.baaahs.org/Z/shady_xian_discoballs.jpeg',
-        coverDark: undefined,
-      },
-    ],
-  },
-  {
-    group: [
-      {
-        cover:
-          'https://static.baaahs.org/Z/2019_sheep.jpeg',
-        coverDark: undefined,
-      },
-      {
-        cover:
-          'https://static.baaahs.org/Z/rainbow_baaahs.png',
-        coverDark: undefined,
-      },
-      {
-        cover:
-          'https://static.baaahs.org/Z/sunset_balls_sheep.jpeg',
+          '/images/resized/kinky_sheep.webp',
         coverDark: undefined,
       },
     ],
@@ -50,22 +31,36 @@ const images = [
     group: [
       {
         cover:
-          'https://static.baaahs.org/Z/2019_sheep_2.jpeg',
+          '/images/resized/2019_sheep.webp',
         coverDark: undefined,
       },
       {
         cover:
-          'https://static.baaahs.org/Z/build_sheep.jpeg',
+          '/images/resized/rainbow_baaahs.webp',
         coverDark: undefined,
       },
       {
         cover:
-          'https://static.baaahs.org/Z/kinky_sheep.jpeg',
+          '/images/resized/sunset_balls_sheep.webp',
+        coverDark: undefined,
+      },
+    ],
+  },
+  {
+    group: [
+      {
+        cover:
+          '/images/resized/2019_sheep_2.webp',
         coverDark: undefined,
       },
       {
         cover:
-          'https://assets.maccarianagency.com/screenshots/the-front/img12.png',
+          '/images/resized/build_sheep.webp',
+        coverDark: undefined,
+      },
+      {
+        cover:
+          '/images/resized/shady_xian_discoballs.webp',
         coverDark: undefined,
       },
     ],

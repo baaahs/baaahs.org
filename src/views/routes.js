@@ -9,6 +9,8 @@ import {
   CampoutWhatToExpect,
   CampoutLastYear,
   CampoutQAndA,
+  CampoutSchedule,
+  CampoutDJLineUp,
   Org2024,
   Setup,
 } from 'views';
@@ -28,6 +30,8 @@ const routes = [
   page('/campout/what-to-expect', CampoutWhatToExpect),
   page('/campout/last-year', CampoutLastYear),
   page('/campout/q-and-a', CampoutQAndA),
+  page('/campout/schedule', CampoutSchedule),
+  page('/campout/dj-lineup', CampoutDJLineUp),
   page('/org/2024', Org2024),
   page('/setup', Setup),
 ];
