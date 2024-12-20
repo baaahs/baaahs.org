@@ -1,8 +1,12 @@
 /* eslint-disable quotes */
 import React from 'react';
 import Box from '@mui/material/Box';
-import Grid from '@mui/material/Grid';
+//import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Grid';
+import Accordion from '@mui/material/Accordion';
+import AccordionSummary from '@mui/material/AccordionSummary';
+import AccordionDetails from '@mui/material/AccordionDetails';
+
 
 import Main from 'layouts/Main';
 import FullScreenHeader from 'components/FullScreenHeader';
@@ -27,7 +31,7 @@ const content = [
   {
     question: 'When is it?',
     answer:
-      'May 24-27th. Arrival will start on Friday morning. We encourage everyone to arrive by 6PM so you can find a spot and set up with some daylight. The fun starts Friday evening, and Saturday and Sunday are full days of activities. Monday we clean up and pack out. <br><br> There\'s also a pregame event May 17-19th! If you want to get your booty moving with us while we get some last things finished, you can sign up <a href="https://docs.google.com/spreadsheets/d/1HZyYwVZVLAgMPyCyRWRg3wjS6Ev7XIz06YwK64eWkzQ/edit?usp=sharing">right here.</a>',
+      'May 23-26th. Arrival will start on Friday morning. We encourage everyone to arrive by 6PM so you can find a spot and set up with some daylight. The fun starts Friday evening, and Saturday and Sunday are full days of activities. Monday we clean up and pack out.'
   },
   {
     question: 'Is this event open for everyone?',
@@ -42,7 +46,7 @@ const content = [
   {
     question: "Is there anything I shouldn't bring?",
     answer:
-      "Dogs, ferrets, or pets of any kind. And anything that draws too much power (fridge, A/C, hair dryer, etc) is discouraged as camp power won't be strong enough to support it and you're gonna ruin it for everyone.",
+      "Dogs, ferrets, or pets of any kind. And anything that draws too much power (fridge, A/C, hair dryer, etc) is a no, as our power grid wo'nt be able to support it.",
   },
   {
     question: 'Do I need to bring food?',
@@ -62,10 +66,10 @@ const content = [
   {
     question: 'Is there a schedule?',
     answer:
-      "The schedule of the campout is 100% optional and 100% awesome, and you can view it <a href='/campout/schedule'>here!</a><br><br>" +
-      "Some of the highlights:<br><br>" + 
-      "Drag Dodgeball(!) - We are proud to present the first ever[citation needed] drag dodgeball tournament. We’ll have wigs, we’ll have balls, and we’ll have an extremely special half-time show. Dodgeballing with wigs is a must. Dodgeballing on hills is at your own risk.<br><br>" + 
-      "Talent(less) show - Come and show us what you can, or can’t do. Historically, we have some amazing talents showing up, and a supportive audience providing a perfect opportunity to flirt with your exhibitionist side. <a href='https://docs.google.com/forms/d/e/1FAIpQLSfO86JVDOqTte0OdU9c-bCTzDyDycbbLwTFVXl1N0DIGaWe1g/viewform'>Sign up here.</a><br><br>" + 
+      "The schedule of the campout is 100% optional and 100% awesome, we will have one ready soon, but you can take a look at last year's schedule  <a href='/campout/schedule'>here</a> to get an idea.<br><br>" +
+      "The BAAAHS favorites include:<br><br>" + 
+      "Drag Dodgeball(!) - After the meteoric success of the BAAAAHS drag dodgeball lugee, we can't wait for the 2025 season. Start practicing now.<br><br>" + 
+      "Talent(less) show - Come and show us what you can, or can’t do. Historically, we have some amazing talents showing up, and a supportive audience providing a perfect opportunity to flirt with your exhibitionist side. Keep your eye open for the sign up sheet." + 
       "DAD Gone Wild West Pool Party - You get the gist ;)<br><br>" + 
       "Themed parties - Get your LEWKS ready. Or don’t. We love you either way.<br><br>",
   },
@@ -97,27 +101,28 @@ const QAndA = () => {
           title={'Q&A'}
           text={'Your questions, our answers!'}
         />
-        <Grid container spacing={2} justifyContent={'center'}>
-          {content.map((item, key) => (
-            <Grid
-              item
-              xs={11}
-              xl={8}
-              key={key}
-              sx={{ margin: '24px' }}
-              textAlign={'center'}
-            >
+        {content.map((item, key) => (
+          <Accordion
+            xs={11}
+            xl={8}
+            eventKey={key}
+            sx={{ margin: '24px' }}
+            textAlign={'left'}
+          >
+            <AccordionSummary>
               <Typography component="h1" fontFamily={'Smooth Circulars'}>
                 {item.question}
               </Typography>
+            </AccordionSummary>
+            <AccordionDetails>
               <Typography
                 dangerouslySetInnerHTML={{
                   __html: item.answer,
                 }}
               />
-            </Grid>
-          ))}
-        </Grid>
+            </AccordionDetails>
+          </Accordion>
+        ))}
       </Box>
     </Main>
   );
