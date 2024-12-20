@@ -72,7 +72,7 @@ const CampoutHome = () => {
         />
         <Grid container spacing={2} justifyContent={'center'}>
           <Grid item container xs={10} xl={8}>
-            <!-- <Box marginBottom={1}>
+            <Box marginBottom={1}>
               <Typography
                 align={'center'}
                 fontWeight={600}
@@ -80,9 +80,9 @@ const CampoutHome = () => {
                 fontFamily={'Smooth Circulars'}
                 marginTop=".5em"
               >
-                WHAAAT???
+                A FLOCKING GOOD TIME
               </Typography>
-              <Box align={'justify'}> -->
+              <Box align={'justify'}>
                 <p>
                   BAAAHS Campout is a unique three-night queer getaway hosted on
                   The Incline, nestled in the enchanting landscapes of Mendocino
@@ -107,8 +107,8 @@ const CampoutHome = () => {
                   of teamwork and active participation to create an
                   extraordinary event together.
                 </p>
-
-                <!-- <p>
+                {/*
+                <p>
                   This year's theme is:
                   <Typography
                     component="span"
@@ -125,7 +125,7 @@ const CampoutHome = () => {
                 <div>Whaaat will you do?</div>
                 <div>Whaaat will you be?</div>
                 <div ref={whaaatRef}></div>
--->
+                */}
                 <p>
                   BAAAHS beckons you to three zany nights of camping in the
                   Mendocino mountains: to imagine the unthinkable, the dream the
@@ -135,6 +135,7 @@ const CampoutHome = () => {
             </Box>
           </Grid>
 
+          {/*
           <Grid
             container
             item
@@ -157,6 +158,7 @@ const CampoutHome = () => {
               </Button>
             </Grid>
           </Grid>
+          */}
 
           <Grid
             container
@@ -212,7 +214,7 @@ const CampoutHome = () => {
               img={{ src: '/images/resized/trixie_and_friends.webp' }}
             />
           </Grid>
-
+          {/*
           <Grid
             container
             item
@@ -230,12 +232,12 @@ const CampoutHome = () => {
                 size="large"
                 href={'/campout/register'}
                 fullWidth
-                disabled
               >
                 Let's Go Camping!
               </Button>
             </Grid>
           </Grid>
+          */}
         </Grid>
       </Box>
     </Main>
