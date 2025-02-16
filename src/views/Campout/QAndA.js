@@ -46,7 +46,7 @@ const content = [
   {
     question: "Is there anything I shouldn't bring?",
     answer:
-      "Dogs, ferrets, or pets of any kind. And anything that draws too much power (fridge, A/C, hair dryer, etc) is a no, as our power grid wo'nt be able to support it.",
+      "Dogs, ferrets, or pets of any kind. And anything that draws too much power (fridge, A/C, hair dryer, etc) is a no, as our power grid won't be able to support it.",
   },
   {
     question: 'Do I need to bring food?',
@@ -66,9 +66,9 @@ const content = [
   {
     question: 'Is there a schedule?',
     answer:
-      "The schedule of the campout is 100% optional and 100% awesome, we will have one ready soon, but you can take a look at last year's schedule  <a href='/campout/schedule'>here</a> to get an idea.<br><br>" +
+      "The schedule of the campout is 100% optional and 100% awesome, we will have one ready soon, but you can take a look at <a href='/campout/schedule'>last year's schedule</a> to get an idea.<br><br>" +
       "The BAAAHS favorites include:<br><br>" + 
-      "Drag Dodgeball(!) - After the meteoric success of the BAAAAHS drag dodgeball lugee, we can't wait for the 2025 season. Start practicing now.<br><br>" + 
+      "Drag Dodgeball(!) - After the meteoric success of the BAAAHS drag dodgeball lugee, we can't wait for the 2025 season. Start practicing now.<br><br>" + 
       "Talent(less) show - Come and show us what you can, or can’t do. Historically, we have some amazing talents showing up, and a supportive audience providing a perfect opportunity to flirt with your exhibitionist side. Keep your eye open for the sign up sheet." + 
       "DAD Gone Wild West Pool Party - You get the gist ;)<br><br>" + 
       "Themed parties - Get your LEWKS ready. Or don’t. We love you either way.<br><br>",
