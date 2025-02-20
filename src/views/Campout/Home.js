@@ -46,7 +46,7 @@ const CampoutHome = () => {
                 marginTop={{ xs: '1em', md: '2em' }}
                 style={{ fontFamily: 'Smooth Circulars', textAlign: 'center' }}
               >
-                Memorial Day Weekend, May 24–27
+                Memorial Day Weekend, May 23–26
               </Typography>
               <Box display="flex" justifyContent="center" mr={{ xs: 2, md: 8 }}>
                 <Button
@@ -62,8 +62,9 @@ const CampoutHome = () => {
                   }}
                   size="large"
                   href={'/campout/register'}
+                  disabled
                 >
-                  Register Now!
+                  Tickets coming soon!
                 </Button>
               </Box>
             </Fragment>
@@ -79,7 +80,7 @@ const CampoutHome = () => {
                 fontFamily={'Smooth Circulars'}
                 marginTop=".5em"
               >
-                WHAAAT???
+                A FLOCKING GOOD TIME
               </Typography>
               <Box align={'justify'}>
                 <p>
@@ -106,7 +107,7 @@ const CampoutHome = () => {
                   of teamwork and active participation to create an
                   extraordinary event together.
                 </p>
-
+                {/*
                 <p>
                   This year's theme is:
                   <Typography
@@ -124,7 +125,7 @@ const CampoutHome = () => {
                 <div>Whaaat will you do?</div>
                 <div>Whaaat will you be?</div>
                 <div ref={whaaatRef}></div>
-
+                */}
                 <p>
                   BAAAHS beckons you to three zany nights of camping in the
                   Mendocino mountains: to imagine the unthinkable, the dream the
@@ -134,6 +135,7 @@ const CampoutHome = () => {
             </Box>
           </Grid>
 
+          {/*
           <Grid
             container
             item
@@ -156,6 +158,7 @@ const CampoutHome = () => {
               </Button>
             </Grid>
           </Grid>
+          */}
 
           <Grid
             container
@@ -211,7 +214,7 @@ const CampoutHome = () => {
               img={{ src: '/images/resized/trixie_and_friends.webp' }}
             />
           </Grid>
-
+          {/*
           <Grid
             container
             item
@@ -234,6 +237,7 @@ const CampoutHome = () => {
               </Button>
             </Grid>
           </Grid>
+          */}
         </Grid>
       </Box>
     </Main>

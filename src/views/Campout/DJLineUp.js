@@ -20,7 +20,7 @@ const DJLineup = () => {
         <FullScreenHeader
           image={'https://static.baaahs.org/twunkerbell_backshot.jpeg'}
           title={'Lineup'}
-          text={'It would not be a BAAAHS Campout without a sick line up'}
+          text={'We\'re still herding the DJs for this year, in the meantime take a look at last year amazing ensemble to get an idea of our vibe'}
         />
         <Grid container marginTop={2} spacing={2} justifyContent='center'>
           <Grid container item xs={12} xl={8} spacing={2}>
