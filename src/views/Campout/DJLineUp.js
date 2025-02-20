@@ -20,7 +20,7 @@ const DJLineup = () => {
         <FullScreenHeader
           image={'https://static.baaahs.org/twunkerbell_backshot.jpeg'}
           title={'Lineup'}
-          text={'It would not be a BAAAHS Campout without a sick line up'}
+          text={'We\'re still herding the DJs for this year, in the meantime take a look at last year amazing ensemble to get an idea of our vibe'}
         />
         <Grid container marginTop={2} spacing={2} justifyContent='center'>
           <Grid container item xs={12} xl={8} spacing={2}>
@@ -44,14 +44,14 @@ const DJLineup = () => {
               name="Brian Maier"
               bio="San Francisco-based DJ Brian Maier blends his love for house music and technology, performing at global venues and events like Toronto Pride and the legendary Real Bad party."
               soundcloud="https://soundcloud.com/brianmaier"
-              instagram=""
+              instagram="https://www.instagram.com/brianmaier"
               image="/images/campout/2024/djs/brianmaier-crop.jpg"
             />
             <DJ
               name="Bryan Hughes"
               bio="Progressive, Trance/Morning, Disco, House, Gospel House"
               soundcloud="https://soundcloud.com/djbryanhughes"
-              instagram=""
+              instagram="https://www.instagram.com/bryanwastaken"
               image="https://storage.googleapis.com/static.baaahs.org/z_bryan_hughes.png"
             />
             <DJ
@@ -71,7 +71,7 @@ const DJLineup = () => {
             />
             <DJ
               name="Dunst"
-              bio="Techno, Eelectro, Detroit, Bass, Breaks, Leftfield, IDM, Industrial, Synth-punk"
+              bio="Your least favorite DJ’s least favorite DJ"
               soundcloud=""
               instagram=""
               image="/images/campout/2024/djs/dunst.jpg"
@@ -107,7 +107,7 @@ const DJLineup = () => {
               image="/images/campout/2024/djs/hunnycut.jpg"
             />
             <DJ
-              name="Issa"
+              name="ISSA"
               affiliation="Provacateur (SF)"
               bio="ISSA developed a passion for dance music growing up in SF in
                the 90s. He blends classic house, Arabic and Latin sounds,
@@ -166,14 +166,6 @@ const DJLineup = () => {
               image="https://storage.googleapis.com/static.baaahs.org/z_mike_b.png"
             />
             <DJ
-              name="Mondo Nexus"
-              affiliation="DAD SF"
-              bio="Sleazy Synthy Disco mixed with Groovin House with a touch of Acid"
-              soundcloud="https://soundcloud.com/mondonexus"
-              instagram="https://www.instagram.com/mondonexus"
-              image="https://storage.googleapis.com/static.baaahs.org/z_mondo.png"
-            />
-            <DJ
               name="Mr Seago"
               affiliation="BAAAHS, Something Queer"
               bio="Funky crazy bitch."
@@ -214,12 +206,12 @@ const DJLineup = () => {
               affiliation="DAD SF, BAAAHS"
               bio="Disco Pop Good vibes :)"
               soundcloud=""
-              instagram=""
+              instagram="https://www.instagram.com/spenser_morris"
               image="https://storage.googleapis.com/static.baaahs.org/z_spenser.png"
             />
             <DJ
               name="State of Wayne"
-              bio=""
+              bio="Transmuting decades of Pop, Disco, Classic Rock, Grunge, House—converging to dance your body & sparkle your soul."
               soundcloud=""
               instagram="https://www.instagram.com/waynebone"
               image="/images/campout/2024/djs/stateofwayne.jpg"
@@ -261,7 +253,7 @@ const DJLineup = () => {
               affiliation="BAAAHS"
               bio="Music connoisseurs and headbanging ravers alike have referred to his DJ sets as &quot;decent&quot;, &quot;pretty good&quot;, and &quot;something people listen to&quot;. Combining 20 years of classical piano training with complementary musical genres such as slut pop, tech house, and nu disco, he incorporates live elements into his high-energy sets to take your ears on a magical journey of sunshine, rainbows, and unicorn ketamine."
               soundcloud="https://soundcloud.com/twunkerbell"
-              instagram=""
+              instagram="https://www.instagram.com/twunkerbell.music"
               image="https://storage.googleapis.com/static.baaahs.org/z_twunkerbell.png"
             />
           </Grid>
