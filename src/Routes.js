@@ -65,9 +65,13 @@ const redirects = [
   ],
 
   // 2024
-  ['/apply', 'https://bit.ly/baaahs-2024-application'],
+  ['/apply-2024', 'https://bit.ly/baaahs-2024-application'],
   ['/campout/register', 'https://buytickets.at/baaahs24/1128001'],
   ['/campout/perform', 'https://docs.google.com/forms/d/e/1FAIpQLSdl2F0KIvLfD-qslgVMHLVmO4cckyoSjhE9LCieSymyegokyw/viewform?vc=0&c=0&w=1&flr=0'],
+
+  // 2025
+  ['/apply', 'https://bit.ly/baaahs-2025-application'],
+  ['/apply-2025', 'https://bit.ly/baaahs-2025-application'],
 ];
 
 const Routes = () => {
