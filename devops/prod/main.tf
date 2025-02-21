@@ -503,7 +503,7 @@ resource "google_compute_url_map" "main" {
             url_redirect {
                 https_redirect = true
                 host_redirect = "bit.ly"
-                path_redirect = "/baaahs-2024-application"
+                path_redirect = "/baaahs-2025-application"
             }
         }
     }
