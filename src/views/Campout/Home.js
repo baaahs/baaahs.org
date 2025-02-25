@@ -62,9 +62,8 @@ const CampoutHome = () => {
                   }}
                   size="large"
                   href={'/campout/register'}
-                  disabled
                 >
-                  Tickets coming soon!
+                  Register Now!
                 </Button>
               </Box>
             </Fragment>
@@ -188,8 +187,12 @@ const CampoutHome = () => {
               title="Aural Pleasures"
               subtitle={
                 <fragment>
-                  Multiple stages and three nights of BAAAHS-rockin\' beats from your fav BAAAHS DJs and special guests on our world class sound system!
-                  <p>Here's this year's <a href="/campout/dj-lineup">line-up!</a></p>
+                  Multiple stages and three nights of BAAAHS-rockin\' beats from
+                  your fav BAAAHS DJs and special guests on our world class
+                  sound system!
+                  <p>
+                    Here's this year's <a href="/campout/dj-lineup">line-up!</a>
+                  </p>
                 </fragment>
               }
               link={'/campout/dj-lineup'}
@@ -247,57 +250,59 @@ const CampoutHome = () => {
 const ContentItem = ({ title, subtitle, img, link, index }) => {
   const theme = useTheme();
 
-  return <Grid item xs={12} sm={6} md={4} lg={4} xl={2} key={index}>
-    <Box
-      alignItems="center"
-      component={Card}
-      padding={2}
-      borderRadius={2}
-      width={1}
-      height={1}
-      data-aos={'fade-up'}
-      data-aos-delay={index * 100}
-    >
+  return (
+    <Grid item xs={12} sm={6} md={4} lg={4} xl={2} key={index}>
       <Box
-        display={'flex'}
-        flexDirection={'column'}
         alignItems="center"
-        gap={2}
+        component={Card}
+        padding={2}
+        borderRadius={2}
+        width={1}
+        height={1}
+        data-aos={'fade-up'}
+        data-aos-delay={index * 100}
       >
         <Box
+          display={'flex'}
+          flexDirection={'column'}
           alignItems="center"
-          component={Avatar}
-          width={150}
-          height={150}
-          bgcolor={theme.palette.primary.main}
-          color={theme.palette.background.paper}
+          gap={2}
         >
-          <Link href={link}>
-            <img
-              src={img.src}
-              style={Object.assign(
-                { borderRadius: '50%', width: '150%' },
-                img.style,
-              )}
-              alt=""
-            />
-          </Link>
-        </Box>
-        <Link href={link}>
-          <Typography
-            variant="h6"
-            fontFamily="Smooth Circulars"
-            textAlign="center"
+          <Box
+            alignItems="center"
+            component={Avatar}
+            width={150}
+            height={150}
+            bgcolor={theme.palette.primary.main}
+            color={theme.palette.background.paper}
           >
-            {title}
+            <Link href={link}>
+              <img
+                src={img.src}
+                style={Object.assign(
+                  { borderRadius: '50%', width: '150%' },
+                  img.style,
+                )}
+                alt=""
+              />
+            </Link>
+          </Box>
+          <Link href={link}>
+            <Typography
+              variant="h6"
+              fontFamily="Smooth Circulars"
+              textAlign="center"
+            >
+              {title}
+            </Typography>
+          </Link>
+          <Typography color="text.secondary" textAlign="center">
+            {subtitle}
           </Typography>
-        </Link>
-        <Typography color="text.secondary" textAlign="center">
-          {subtitle}
-        </Typography>
+        </Box>
       </Box>
-    </Box>
-  </Grid>;
+    </Grid>
+  );
 };
 
 export default CampoutHome;
