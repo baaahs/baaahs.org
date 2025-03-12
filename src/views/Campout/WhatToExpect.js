@@ -19,7 +19,7 @@ const content = [
   },
   {
     header: 'Pure Queer Fun',
-    body: "There's never a dull moment. Besides some epic parties, dive in to Draaag Dodgeball, a No-Talent Show, arts and crafts, nature walks, and more! We’re also planning a bunch of other surprises, so stay tuned.",
+    body: 'There\'s never a dull moment. Besides some epic parties, dive in to Draaag Dodgeball, a No-Talent Show, arts and crafts, nature walks, and more! We’re also planning a bunch of other surprises, so stay tuned.',
     img: {
       src: '/images/resized/eric_and_phillip.webp',
       height: '100%',
@@ -29,7 +29,7 @@ const content = [
   },
   {
     header: 'Off of the Playa, Into the Woods',
-    body: "We're bringing our legendary Burning Man parties to you on a mountain. BAAAHS DJs and friends will be spinning till sunrise, and the lights from our big gay sheep will decorate the canopy of trees as you’re dancing your ass off.",
+    body: 'We\'re bringing our legendary Burning Man parties to you on a mountain. BAAAHS DJs and friends will be spinning till sunrise, and the lights from our big gay sheep will decorate the canopy of trees as you’re dancing your ass off.',
     img: {
       src: '/images/resized/dark_rainbow_pasture.webp',
       height: '100%',
@@ -38,7 +38,7 @@ const content = [
   },
   {
     header: 'Family Meals',
-    body: "We've got you covered for food. Join the herd for delicious vegan, veggie, and omnivore options for brunch and dinner every day, and some delightful surprise snaaacks!",
+    body: 'We\'ve got you covered for food. Join the herd for delicious vegan, veggie, and omnivore options for brunch and dinner every day, and some delightful surprise snaaacks!',
     img: {
       src: '/images/resized/drag_bingo_pan.webp',
       height: '100%',
