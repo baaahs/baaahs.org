@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React from 'react';
 import { useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
@@ -19,10 +20,9 @@ const DJLineup = () => {
       <Box gap={3}>
         <FullScreenHeader
           image={'https://static.baaahs.org/twunkerbell_backshot.jpeg'}
-          title={'Lineup'}
-          text={'We\'re still herding the DJs for this year, in the meantime take a look at last year amazing ensemble to get an idea of our vibe'}
+          title={'DJ Lineup'}
         />
-        <Grid container marginTop={2} spacing={2} justifyContent='center'>
+        <Grid container marginTop={2} spacing={2} justifyContent="center">
           <Grid container item xs={12} xl={8} spacing={2}>
             <DJ
               name="Aphex"
@@ -33,6 +33,13 @@ const DJLineup = () => {
               image="https://storage.googleapis.com/static.baaahs.org/z_aphek.png"
             />
             <DJ
+              name="Faster Kill Faster"
+              affiliation="BAAAHS"
+              soundcloud="https://soundcloud.com/arorah-1"
+              instagram=""
+              image=""
+            />
+            <DJ
               name="Booty Juice"
               affiliation="DAD SF, BAAAHS"
               bio="San Francisco's Wettest DJ. 🪩 Noise Polluter. Hot Mess & Neighborhood Friendly Dumpster Fire."
@@ -41,40 +48,34 @@ const DJLineup = () => {
               image="https://storage.googleapis.com/static.baaahs.org/z_booty.png"
             />
             <DJ
-              name="Brian Maier"
-              bio="San Francisco-based DJ Brian Maier blends his love for house music and technology, performing at global venues and events like Toronto Pride and the legendary Real Bad party."
-              soundcloud="https://soundcloud.com/brianmaier"
-              instagram="https://www.instagram.com/brianmaier"
-              image="/images/campout/2024/djs/brianmaier-crop.jpg"
+              name="Brian Rojas"
+              bio=""
+              soundcloud="https://soundcloud.com/brianrojasatlanta"
+              instagram=""
+              image=""
             />
             <DJ
-              name="Bryan Hughes"
-              bio="Progressive, Trance/Morning, Disco, House, Gospel House"
-              soundcloud="https://soundcloud.com/djbryanhughes"
-              instagram="https://www.instagram.com/bryanwastaken"
-              image="https://storage.googleapis.com/static.baaahs.org/z_bryan_hughes.png"
+              name="CamBam"
+              affiliation=""
+              bio=""
+              soundcloud="https://on.soundcloud.com/RxBELi5RJJ14Jr3w6"
+              instagram=""
+              image=""
             />
             <DJ
-              name="Del"
+              name="Chelsea Star"
+              bio=""
+              soundcloud="https://soundcloud.com/chelsea-starr"
+              instagram=""
+              image=""
+            />
+            <DJ
+              name="Dev"
               affiliation="Port Bar, Steamworks (Berkeley), Eli's Mile High Club"
               bio="As a pioneer in bringing Jersey Club to the Bay Area, her high energy cross genre sets and flawless blends are guaranteed to make any dance floor shake."
               soundcloud="https://on.soundcloud.com/HKpGb"
               instagram="https://www.instagram.com/inebriatedfelon"
               image="https://storage.googleapis.com/static.baaahs.org/z_del.png"
-            />
-            <DJ
-              name="Dennis Dashing"
-              bio="Techno, House"
-              soundcloud="https://on.soundcloud.com/u7ATk"
-              instagram="https://www.instagram.com/dennisdashing"
-              image="https://storage.googleapis.com/static.baaahs.org/z_dennis_dashing.png"
-            />
-            <DJ
-              name="Dunst"
-              bio="Your least favorite DJ’s least favorite DJ"
-              soundcloud=""
-              instagram=""
-              image="/images/campout/2024/djs/dunst.jpg"
             />
             <DJ
               name="eMote"
@@ -83,16 +84,6 @@ const DJLineup = () => {
               soundcloud=""
               instagram="https://www.instagram.com/linn.david"
               image="/images/campout/2024/djs/emote.jpg"
-            />
-            <DJ
-              name="Guerrilla Pump"
-              affiliation="Pump Paradise"
-              bio="DJ Guardian Guerrilla Pump aka Sailor G is a Queer 1st Gen
-              Afro-Pinoy, Award Winning DJ and Community-based Artist/Organizer
-              rooted in the East Bay’s Underground Scene."
-              soundcloud="https://soundcloud.com/guerrillapump"
-              instagram="https://www.instagram.com/shotbyguerrilla"
-              image="/images/campout/2024/djs/guerrillapump.jpg"
             />
             <DJ
               name="hunnycut"
@@ -119,12 +110,12 @@ const DJLineup = () => {
               image="https://storage.googleapis.com/static.baaahs.org/z_issa.png"
             />
             <DJ
-              name="John Major"
-              affiliation="BTW (Oakland), Pyramid Scheme (BRC)"
-              bio="Dancer & DJ"
-              soundcloud="https://soundcloud.com/majorjohn"
+              name="Jumpr"
+              affiliation="Syynthia, Stank"
+              bio=""
+              soundcloud="https://soundcloud.com/jump_r"
               instagram=""
-              image="/images/campout/2024/djs/major.jpg"
+              image=""
             />
             <DJ
               name="Kelly Naughton"
@@ -138,14 +129,11 @@ const DJLineup = () => {
               image="https://storage.googleapis.com/static.baaahs.org/z_kelly.png"
             />
             <DJ
-              name="LAKEVERETT"
-              affiliation="Callback"
-              bio="LAKEVERETT's sound embodies respite, offering joyful and
-               relaxing moments amid hectic schedules with splashes of house
-               cooled by funk, delivering refreshing tunes that soothe muscles and ease minds."
-              soundcloud="https://soundcloud.com/lakeverett"
-              instagram="https://www.instagram.com/lakeverett"
-              image="/images/campout/2024/djs/lakeverett.jpg"
+              name="Koppertone"
+              bio=""
+              soundcloud="https://soundcloud.com/koppertone"
+              instagram=""
+              image=""
             />
             <DJ
               name="LOVR"
@@ -158,30 +146,34 @@ const DJLineup = () => {
               image="/images/campout/2024/djs/lovr.jpg"
             />
             <DJ
-              name="Mike Bradley"
-              affiliation=""
-              bio="House, Techno, Tech House. Always fun with a splash of sass~"
-              soundcloud="https://m.mixcloud.com/mikebradley9216/"
+              name="M*J*R"
+              affiliation="BTW (Oakland), Pyramid Scheme (BRC)"
+              bio=""
+              soundcloud="https://soundcloud.com/majorjohn"
               instagram=""
-              image="https://storage.googleapis.com/static.baaahs.org/z_mike_b.png"
+              image="/images/campout/2024/djs/major.jpg"
             />
             <DJ
-              name="Mr Seago"
-              affiliation="BAAAHS, Something Queer"
-              bio="Funky crazy bitch."
-              soundcloud="https://soundcloud.com/mrseago"
-              instagram="https://www.instagram.com/mrseago"
-              image="/images/campout/2024/djs/mrseago.jpg"
+              name="Mondo Nexus"
+              affiliation=""
+              bio=""
+              soundcloud="https://soundcloud.com/mondonexus"
+              instagram=""
+              image=""
             />
             <DJ
-              name="Prince Wolf"
-              affiliation="THRUST"
-              bio="If the energy of moonlit rendezvous could be distilled into sound, Prince Wolf's sets embody that: thrilling, clandestine encounters with just a tinge of danger. Music that keeps you alert to the prying eyes & enticing bodies gyrating on the dancefloor."
-              soundcloud=""
-              instagram="https://www.instagram.com/somaqlo"
-              image="https://storage.googleapis.com/static.baaahs.org/z_prince_wolf.png"
+              name="MorrisMORE!"
+              affiliation="DAD SF, BAAAHS"
+              bio="Disco Pop Good vibes :)"
+              soundcloud="https://soundcloud.com/morris_more"
+              instagram="https://www.instagram.com/spenser_morris"
+              image="https://storage.googleapis.com/static.baaahs.org/z_spenser.png"
             />
             <DJ
+              name="RemyD"
+              soundcloud="https://soundcloud.com/jeremy-moore-703165379"
+            />
+            {/* <DJ
               name="Rich King"
               affiliation="the SUNDAYSITUATION, EASY/NYC, SNAXX (NYC)"
               bio="RICH KING has been celebrating life through music, starting
@@ -192,29 +184,38 @@ const DJLineup = () => {
               soundcloud="https://soundcloud.com/djrichking"
               instagram="https://www.instagram.com/heyrichking"
               image="/images/campout/2024/djs/richking.jpg"
+            /> */}
+            <DJ
+              name="SammyD"
+              affiliation=""
+              bio=""
+              soundcloud="https://soundcloud.com/sammy-taylor-sf"
+              instagram=""
+              image=""
             />
             <DJ
-              name="Romii"
-              affiliation="DreamTension"
-              bio="In addition to his background as a competitive classical solo-violinist, Romii is influenced by Motown era artists, 80’s soul, 90’s hiphop and Detroit synthetic underground sounds."
-              soundcloud="https://soundcloud.com/kingromii"
-              instagram="https://www.instagram.com/romii_dreamtension"
-              image="https://storage.googleapis.com/static.baaahs.org/z_romii.png"
+              name="Sindri"
+              affiliation=""
+              bio=""
+              soundcloud="https://soundcloud.com/djsindri"
+              instagram=""
+              image=""
             />
             <DJ
-              name="Sir Spense"
-              affiliation="DAD SF, BAAAHS"
-              bio="Disco Pop Good vibes :)"
-              soundcloud=""
-              instagram="https://www.instagram.com/spenser_morris"
-              image="https://storage.googleapis.com/static.baaahs.org/z_spenser.png"
+              name="Starkey"
+              affiliation=""
+              bio=""
+              soundcloud="https://soundcloud.com/user-575675417"
+              instagram=""
+              image=""
             />
             <DJ
-              name="State of Wayne"
-              bio="Transmuting decades of Pop, Disco, Classic Rock, Grunge, House—converging to dance your body & sparkle your soul."
-              soundcloud=""
-              instagram="https://www.instagram.com/waynebone"
-              image="/images/campout/2024/djs/stateofwayne.jpg"
+              name="StefanWays"
+              affiliation=""
+              bio=""
+              soundcloud="https://soundcloud.com/stefanways"
+              instagram=""
+              image=""
             />
             <DJ
               name="StormyRoxx"
@@ -232,26 +233,18 @@ const DJLineup = () => {
               instagram="https://www.instagram.com/thansen6390"
               image="/images/campout/2024/djs/timhansen.jpg"
             />
-            <DJ
+            {/* <DJ
               name="Tiny Tim"
               affiliation="Something Queer, Chonies"
               bio="Combining 21 years of mixing with production, I love to produce and play music that comes from the soul, goes to the decks and is felt on the floor!"
               soundcloud="https://www.soundcloud.com/djtinytp"
               instagram="https://www.instagram.com/djtinytp"
               image="https://storage.googleapis.com/static.baaahs.org/z_tiny.png"
-            />
-            <DJ
-              name="Trevor Sigler"
-              affiliation="Ever Afters, Ew (SF)"
-              bio="A staple on the SF dance music scene, Trevor has been involved in psychedelic queer parties like Romper Room, Mixed Forms, and now The Ever Afters Campout & Ew. A trained audio engineer, his sets and original productions are glacial, roomy, and precise, and take full advantage of where a sound system can go."
-              soundcloud="https://on.soundcloud.com/jiaZYGot2TF5eEfo8"
-              instagram="https://www.instagram.com/tater_swift"
-              image="https://storage.googleapis.com/static.baaahs.org/z_trevor.png"
-            />
+            /> */}
             <DJ
               name="Twunkerbell"
               affiliation="BAAAHS"
-              bio="Music connoisseurs and headbanging ravers alike have referred to his DJ sets as &quot;decent&quot;, &quot;pretty good&quot;, and &quot;something people listen to&quot;. Combining 20 years of classical piano training with complementary musical genres such as slut pop, tech house, and nu disco, he incorporates live elements into his high-energy sets to take your ears on a magical journey of sunshine, rainbows, and unicorn ketamine."
+              bio='Music connoisseurs and headbanging ravers alike have referred to his DJ sets as "decent", "pretty good", and "something people listen to". Combining 20 years of classical piano training with complementary musical genres such as slut pop, tech house, and nu disco, he incorporates live elements into his high-energy sets to take your ears on a magical journey of sunshine, rainbows, and unicorn ketamine.'
               soundcloud="https://soundcloud.com/twunkerbell"
               instagram="https://www.instagram.com/twunkerbell.music"
               image="https://storage.googleapis.com/static.baaahs.org/z_twunkerbell.png"
@@ -310,12 +303,13 @@ const DJ = ({ name, image, affiliation, bio, soundcloud, instagram }) => {
             </Typography>
 
             {affiliation && (
-              <Box>{
-                affiliation.split(', ').map((aff) => (
-                  <Typography color="text.secondary"
-                    textAlign="center">{aff}</Typography>
-                ))
-              }</Box>
+              <Box>
+                {affiliation.split(', ').map((aff) => (
+                  <Typography color="text.secondary" textAlign="center">
+                    {aff}
+                  </Typography>
+                ))}
+              </Box>
             )}
 
             <Typography color="text.secondary" textAlign="center">
