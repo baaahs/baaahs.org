@@ -172,6 +172,10 @@ const DJLineup = () => {
             <DJ
               name="RemyD"
               soundcloud="https://soundcloud.com/jeremy-moore-703165379"
+              bio=""
+              affiliation=""
+              instagram=""
+              image=""
             />
             {/* <DJ
               name="Rich King"
