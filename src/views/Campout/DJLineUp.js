@@ -73,11 +73,11 @@ const DJLineup = () => {
             />
             <DJ
               name="Dev"
-              affiliation="Port Bar, Steamworks (Berkeley), Eli's Mile High Club"
-              bio="As a pioneer in bringing Jersey Club to the Bay Area, her high energy cross genre sets and flawless blends are guaranteed to make any dance floor shake."
-              soundcloud="https://on.soundcloud.com/HKpGb"
-              instagram="https://www.instagram.com/inebriatedfelon"
-              image="https://storage.googleapis.com/static.baaahs.org/z_del.png"
+              affiliation=""
+              bio=""
+              soundcloud=""
+              instagram=""
+              image=""
             />
             <DJ
               name="eMote"
