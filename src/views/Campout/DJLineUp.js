@@ -1,3 +1,4 @@
+/* eslint-disable quotes */
 /* eslint-disable no-unused-vars */
 import React from 'react';
 import { useTheme } from '@mui/material/styles';
@@ -21,6 +22,7 @@ const DJLineup = () => {
         <FullScreenHeader
           image={'https://static.baaahs.org/twunkerbell_backshot.jpeg'}
           title={'DJ Lineup'}
+          text={`It wouldn't be a BAAAHS Campout without a sick lineup of DJs. Check out the 2025 lineup below.`}
         />
         <Grid container marginTop={2} spacing={2} justifyContent="center">
           <Grid container item xs={12} xl={8} spacing={2}>
