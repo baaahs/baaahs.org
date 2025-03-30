@@ -67,7 +67,7 @@ const content = [
     header: 'Map',
     body: 'The Incline is a new queer-owned retreat space, this is a layout of the space',
     img: {
-      src: 'images/incline_map_24.png',
+      src: '/images/incline_map_24.png',
       height: '100%',
       width: '100%',
     },
