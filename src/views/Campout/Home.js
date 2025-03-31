@@ -191,11 +191,12 @@ const CampoutHome = () => {
                   your fav BAAAHS DJs and special guests on our world class
                   sound system!
                   <p>
-                    Here's this year's <a href="/campout/dj-lineup">line-up!</a>
+                    {/* Here's this year's <a href="/campout/dj-lineup">line-up!</a> */}
+                    DJ LINE UP COMING SOON!
                   </p>
                 </fragment>
               }
-              link={'/campout/dj-lineup'}
+              // link={'/campout/dj-lineup'}
               img={{ src: '/images/resized/ben_dancing_lights.webp' }}
             />
             <ContentItem

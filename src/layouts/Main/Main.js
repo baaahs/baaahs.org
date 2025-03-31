@@ -14,7 +14,13 @@ import { Topbar, Sidebar, Footer } from './components';
 
 import pages from '../navigation';
 
-const Main = ({ children, colorInvert = false, bgcolor = null, className = '', navItems = null }) => {
+const Main = ({
+  children,
+  colorInvert = false,
+  bgcolor = null,
+  className = '',
+  navItems = null,
+}) => {
   const theme = useTheme();
   const isMd = useMediaQuery(theme.breakpoints.up('md'), {
     defaultMatches: true,
@@ -43,7 +49,9 @@ const Main = ({ children, colorInvert = false, bgcolor = null, className = '', n
         position={'sticky'}
         sx={{
           top: 0,
-          backgroundColor: trigger ? theme.palette.background.paper : bgcolor || setAlpha(theme.palette.background.paper, .25)
+          backgroundColor: trigger
+            ? theme.palette.background.paper
+            : bgcolor || setAlpha(theme.palette.background.paper, 0.25),
         }}
         elevation={trigger ? 1 : 0}
       >

@@ -12,6 +12,7 @@ import IconFacebook from 'svg/illustrations/IconFacebook';
 import BAAAHSLogo from '../../BAAAHSLogo';
 
 import pages from '../../../navigation';
+import { Tooltip } from '@mui/material';
 
 const Topbar = ({ onSidebarOpen, colorInvert = false, data }) => {
   const theme = useTheme();
@@ -24,17 +25,12 @@ const Topbar = ({ onSidebarOpen, colorInvert = false, data }) => {
       alignItems={'center'}
       width={1}
     >
-      <Box
-        display={'flex'}
-        component="a"
-        href="/"
-        width={{ xs: 120, md: 150 }}
-      >
+      <Box display={'flex'} component="a" href="/" width={{ xs: 120, md: 150 }}>
         <BAAAHSLogo />
       </Box>
       <Box sx={{ display: { xs: 'none', md: 'flex' } }} alignItems={'center'}>
         {navItems.map((item, i) => {
-          return (
+          const link = (
             <Box key={i} marginRight={{ xs: 2, sm: 4 }}>
               <Link
                 underline="none"
@@ -52,6 +48,7 @@ const Topbar = ({ onSidebarOpen, colorInvert = false, data }) => {
               </Link>
             </Box>
           );
+          return item.tbd ? <Tooltip title={item.tbd}>{link}</Tooltip> : link;
         })}
       </Box>
       <Box sx={{ display: { xs: 'none', md: 'flex' } }} alignItems={'right'}>
