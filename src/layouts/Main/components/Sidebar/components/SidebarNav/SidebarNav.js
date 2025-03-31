@@ -4,6 +4,7 @@ import Box from '@mui/material/Box';
 // import Button from '@mui/material/Button';
 import Link from '@mui/material/Link';
 // import NavItem from './components/NavItem';
+import { Tooltip } from '@mui/material';
 import BAAAHSLogo from '../../../../BAAAHSLogo';
 
 const SidebarNav = ({ pages }) => {
@@ -27,22 +28,35 @@ const SidebarNav = ({ pages }) => {
           title="BAAAHS"
           width={{ xs: 120, md: 150 }}
         >
-          <BAAAHSLogo/>
+          <BAAAHSLogo />
         </Box>
       </Box>
       <Box paddingX={2} paddingY={2}>
-        {sections.map((section) => (
-          <Box>
-            <Link
-              underline="none"
-              component="a"
-              href={section.href}
-              sx={{ display: 'flex', alignItems: 'center', fontWeight: 'bold', textTransform: 'lowercase' }}
-            >
-              {section.title}
-            </Link>
-          </Box>
-        ))}
+        {sections.map((section) => {
+          const link = (
+            <Box>
+              <Link
+                underline="none"
+                component="a"
+                href={section.href}
+                sx={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  fontWeight: 'bold',
+                  textTransform: 'lowercase',
+                }}
+              >
+                {section.title}
+              </Link>
+            </Box>
+          );
+
+          return section.tbd ? (
+            <Tooltip title={section.tbd}>{link}</Tooltip>
+          ) : (
+            link
+          );
+        })}
 
         {/*<Box>*/}
         {/*  <NavItem title={'Landings'} items={landingPages} />*/}
