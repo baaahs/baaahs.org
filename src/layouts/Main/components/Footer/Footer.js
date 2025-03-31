@@ -4,6 +4,7 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Link from '@mui/material/Link';
 import Typography from '@mui/material/Typography';
+import { Tooltip } from '@mui/material';
 import BAAAHSLogo from '../../BAAAHSLogo';
 
 const Footer = ({ links }) => {
@@ -24,12 +25,7 @@ const Footer = ({ links }) => {
           width={1}
           flexDirection={{ xs: 'column', sm: 'row' }}
         >
-          <Box
-            display={'flex'}
-            component="a"
-            href="/"
-            width={100}
-          >
+          <Box display={'flex'} component="a" href="/" width={100}>
             <BAAAHSLogo />
           </Box>
           <Box
@@ -38,19 +34,26 @@ const Footer = ({ links }) => {
             alignItems="center"
             gap={2}
           >
-            {navItems.map((item, i) => (
-              <Box key={i} marginTop={1} gap={2}>
-                <Link
-                  underline="none"
-                  component="a"
-                  href={item.href}
-                  color="text.primary"
-                  variant={'subtitle2'}
-                >
-                  {item.title}
-                </Link>
-              </Box>
-            ))}
+            {navItems.map((item, i) => {
+              const link = (
+                <Box key={i} marginTop={1} gap={2}>
+                  <Link
+                    underline="none"
+                    component="a"
+                    href={item.href}
+                    color="text.primary"
+                    variant={'subtitle2'}
+                  >
+                    {item.title}
+                  </Link>
+                </Box>
+              );
+              return item.tbd ? (
+                <Tooltip title={item.tbd}>{link}</Tooltip>
+              ) : (
+                link
+              );
+            })}
             <Box marginTop={1}>
               <Button
                 variant="outlined"
