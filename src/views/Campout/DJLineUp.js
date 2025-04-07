@@ -34,10 +34,12 @@ const DJLineup = () => {
               instagram="http://aphex.dj"
               image="https://storage.googleapis.com/static.baaahs.org/z_aphek.png"
             />
+
             <DJ
-              name="Faster Kill Faster"
-              affiliation="BAAAHS"
-              soundcloud="https://soundcloud.com/arorah-1"
+              name="Ben Fonik"
+              affiliation=""
+              bio=""
+              soundcloud=""
               instagram=""
               image=""
             />
@@ -54,7 +56,7 @@ const DJLineup = () => {
               bio=""
               soundcloud="https://soundcloud.com/brianrojasatlanta"
               instagram=""
-              image=""
+              image="https://storage.googleapis.com/static.baaahs.org/brian_rojas.png"
             />
             <DJ
               name="CamBam"
@@ -62,14 +64,14 @@ const DJLineup = () => {
               bio=""
               soundcloud="https://on.soundcloud.com/RxBELi5RJJ14Jr3w6"
               instagram=""
-              image=""
+              image="https://storage.googleapis.com/static.baaahs.org/cam_bam.png"
             />
             <DJ
               name="Chelsea Star"
               bio=""
               soundcloud="https://soundcloud.com/chelsea-starr"
               instagram=""
-              image=""
+              image="https://storage.googleapis.com/static.baaahs.org/chelsea_star.png"
             />
             <DJ
               name="Dev"
@@ -77,7 +79,7 @@ const DJLineup = () => {
               bio=""
               soundcloud=""
               instagram=""
-              image=""
+              image="https://storage.googleapis.com/static.baaahs.org/dev.png"
             />
             <DJ
               name="eMote"
@@ -86,6 +88,13 @@ const DJLineup = () => {
               soundcloud=""
               instagram="https://www.instagram.com/linn.david"
               image="/images/campout/2024/djs/emote.jpg"
+            />
+            <DJ
+              name="Faster Kill Faster"
+              affiliation="BAAAHS"
+              soundcloud="https://soundcloud.com/arorah-1"
+              instagram="https://www.instagram.com/afro_pup"
+              image="https://storage.googleapis.com/static.baaahs.org/Z/faster_kill_faster.png"
             />
             <DJ
               name="hunnycut"
@@ -117,7 +126,7 @@ const DJLineup = () => {
               bio=""
               soundcloud="https://soundcloud.com/jump_r"
               instagram=""
-              image=""
+              image="https://storage.googleapis.com/static.baaahs.org/jumpr.png"
             />
             <DJ
               name="Kelly Naughton"
@@ -135,7 +144,7 @@ const DJLineup = () => {
               bio=""
               soundcloud="https://soundcloud.com/koppertone"
               instagram=""
-              image=""
+              image="https://storage.googleapis.com/static.baaahs.org/koppertone.png"
             />
             <DJ
               name="LOVR"
@@ -161,7 +170,7 @@ const DJLineup = () => {
               bio=""
               soundcloud="https://soundcloud.com/mondonexus"
               instagram=""
-              image=""
+              image="https://storage.googleapis.com/static.baaahs.org/mondo_nexus.png"
             />
             <DJ
               name="MorrisMORE!"
@@ -177,7 +186,7 @@ const DJLineup = () => {
               bio=""
               affiliation=""
               instagram=""
-              image=""
+              image="https://storage.googleapis.com/static.baaahs.org/remy_d.png"
             />
             {/* <DJ
               name="Rich King"
@@ -197,7 +206,7 @@ const DJLineup = () => {
               bio=""
               soundcloud="https://soundcloud.com/sammy-taylor-sf"
               instagram=""
-              image=""
+              image="https://storage.googleapis.com/static.baaahs.org/sammy.png"
             />
             <DJ
               name="Sindri"
@@ -205,7 +214,7 @@ const DJLineup = () => {
               bio=""
               soundcloud="https://soundcloud.com/djsindri"
               instagram=""
-              image=""
+              image="https://storage.googleapis.com/static.baaahs.org/sindri.png"
             />
             <DJ
               name="Starkey"
@@ -213,7 +222,7 @@ const DJLineup = () => {
               bio=""
               soundcloud="https://soundcloud.com/user-575675417"
               instagram=""
-              image=""
+              image="https://storage.googleapis.com/static.baaahs.org/starkey.png"
             />
             <DJ
               name="StefanWays"
@@ -221,7 +230,7 @@ const DJLineup = () => {
               bio=""
               soundcloud="https://soundcloud.com/stefanways"
               instagram=""
-              image=""
+              image="https://storage.googleapis.com/static.baaahs.org/stefan_ways.png"
             />
             <DJ
               name="StormyRoxx"
@@ -239,14 +248,14 @@ const DJLineup = () => {
               instagram="https://www.instagram.com/thansen6390"
               image="/images/campout/2024/djs/timhansen.jpg"
             />
-            {/* <DJ
+            <DJ
               name="Tiny Tim"
               affiliation="Something Queer, Chonies"
               bio="Combining 21 years of mixing with production, I love to produce and play music that comes from the soul, goes to the decks and is felt on the floor!"
               soundcloud="https://www.soundcloud.com/djtinytp"
               instagram="https://www.instagram.com/djtinytp"
               image="https://storage.googleapis.com/static.baaahs.org/z_tiny.png"
-            /> */}
+            />
             <DJ
               name="Twunkerbell"
               affiliation="BAAAHS"

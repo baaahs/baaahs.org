@@ -3,8 +3,7 @@ const NavItems = [
   { title: 'what to expect', href: '/campout/what-to-expect' },
   {
     title: 'dj line up',
-    // href: '/campout/dj-lineup',
-    href: '',
+    href: '/campout/dj-lineup',
     tbd: 'COMING SOON!',
   },
   { title: 'previous years', href: '/campout/last-year' },
