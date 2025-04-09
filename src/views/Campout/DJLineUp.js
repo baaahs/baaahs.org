@@ -238,9 +238,9 @@ const DJLineup = () => {
             />
             <DJ
               name="Tim Hansen"
-              affiliation=""
-              bio=""
-              soundcloud=""
+              affiliation="BAAAHS"
+              bio="Reno Native, San Francisco based. Inspired by classic electronic boops and beeps."
+              soundcloud="https://www.instagram.com/thansen6390"
               instagram="https://www.instagram.com/thansen6390"
               image="/images/campout/2024/djs/timhansen.jpg"
             />
