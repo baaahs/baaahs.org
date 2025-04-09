@@ -296,13 +296,23 @@ const DJ = ({ name, image, affiliation, bio, soundcloud, instagram }) => {
                 bgcolor={theme.palette.primary.main}
                 color={theme.palette.background.paper}
               >
-                <img
-                  src={image}
-                  style={Object.assign({
-                    width: '100%',
-                  })}
-                  alt=""
-                />
+                <Link
+                  underline="none"
+                  component="a"
+                  href={soundcloud ?? instagram}
+                  color={'text.primary'}
+                  sx={{ display: 'flex', alignItems: 'center' }}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <img
+                    src={image}
+                    style={Object.assign({
+                      width: '100%',
+                    })}
+                    alt=""
+                  />
+                </Link>
               </Box>
             )}
             <Typography
@@ -340,6 +350,8 @@ const DJ = ({ name, image, affiliation, bio, soundcloud, instagram }) => {
                     href={soundcloud}
                     color={'text.primary'}
                     sx={{ display: 'flex', alignItems: 'center' }}
+                    target="_blank"
+                    rel="noopener noreferrer"
                   >
                     <IconSoundcloud color={'text.primary'} />
                   </Link>
@@ -353,6 +365,8 @@ const DJ = ({ name, image, affiliation, bio, soundcloud, instagram }) => {
                     href={instagram}
                     color={'text.primary'}
                     sx={{ display: 'flex', alignItems: 'center' }}
+                    target="_blank"
+                    rel="noopener noreferrer"
                   >
                     <IconInstagram color={'text.primary'} />
                   </Link>
