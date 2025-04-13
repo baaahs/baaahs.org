@@ -60,10 +60,10 @@ const DJLineup = () => {
             />
             <DJ
               name="CamBam"
-              bio="'I am passionate about elevating anyone who chooses to lend their ear to my sets. My go-to genre to spread the good vibes is UKG, so be ready to keep dancing from start to finish with my sets. I like to throw in a mix of nostalgic hits that scratch the deepest cracks of your memories, while bringing in current hits to keep up the excitement of that track you can't help but listen to on repeat.'"
+              bio="CAMBAM is an up and coming DJ based in San Francisco. He channels his empathetic gifts through his sets to elevate anyone lending an ear. He loves to find that nostalgic hit that scratches the deepest cracks of your memories, while bringing in recent drops you’ve been eager to hear on the dance floor. His favorite genre of the moment is UKG."
               soundcloud="https://on.soundcloud.com/RxBELi5RJJ14Jr3w6"
               instagram="https://www.instagram.com/cam_bam"
-              image="https://storage.googleapis.com/static.baaahs.org/cam_bam.JPG"
+              image="https://storage.googleapis.com/static.baaahs.org/cam_bam_2.JPG"
             />
             <DJ
               name="Chelsea Star"
@@ -122,7 +122,7 @@ const DJLineup = () => {
               bio="Hailing from San Francisco, Joe Weidman (aka Jumpr) has been a staple of SF nightlife since 2016. He got his start in the leather scene as the creative director for Fog City Pack before jumping behind the decks himself in 2018. In 2021, Jumpr, along with his dj partner Fawks, became resident of the monthly party Stank, one of SF’s longest running fetish nights. In 2023, he launched Synthia, a party that celebrates the queer sci-fi futurism of the 1970s & 80s with an emphasis on vintage synths & space disco, and along with Fog City Pack resurrected Deviants: Adult Arcade, the closing party of the Folsom Street Fair which boasted 2000 guests in attendance. Jumpr prides himself on being a dance floor filler, agnostic of genre, spinning everything from sweaty bathhouse disco to throbbing techno bangers. Jumpr wants to bring the rush and keep the energy ecstatic."
               soundcloud="https://on.soundcloud.com/jump_r"
               instagram="https://instagram.com/unluck"
-              image="https://storage.googleapis.com/static.baaahs.org/jumpr.jpeg"
+              image="https://storage.googleapis.com/static.baaahs.org/jumpr_2.jpeg"
             />
             <DJ
               name="Kelly Naughton"
@@ -202,7 +202,7 @@ const DJLineup = () => {
               bio="Southern-bred and Ohio-raised, Sammy is somewhat of the new kid on the block. Since moving to San Francisco two years ago, the singer-turned-DJ has made himeself known at queer events like Young Hearts, Electroluxx, Gemini,  and Provocateur and playing support for Alinka, Above & Beyond, and Marc Kinchen among others. In his own words, his sound highlights 'the groovier side of the underground'. He joins the BAAAHS campout for the first time in 2025."
               soundcloud="https://soundcloud.com/sammy-taylor-sf"
               instagram="https://www.instagram.com/justsammy.dj"
-              image="https://storage.googleapis.com/static.baaahs.org/sammy.jpg"
+              image="https://storage.googleapis.com/static.baaahs.org/sammy_2.jpg"
             />
             <DJ
               name="Sindri"
