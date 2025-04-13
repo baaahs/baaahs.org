@@ -4,7 +4,6 @@ const NavItems = [
   {
     title: 'dj line up',
     href: '/campout/dj-lineup',
-    tbd: 'COMING SOON!',
   },
   { title: 'previous years', href: '/campout/last-year' },
   { title: 'q & a', href: '/campout/q-and-a' },
