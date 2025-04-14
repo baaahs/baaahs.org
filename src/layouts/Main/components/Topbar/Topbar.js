@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link as RouteLink } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import Box from '@mui/material/Box';
 import Link from '@mui/material/Link';
@@ -32,20 +33,22 @@ const Topbar = ({ onSidebarOpen, colorInvert = false, data }) => {
         {navItems.map((item, i) => {
           const link = (
             <Box key={i} marginRight={{ xs: 2, sm: 4 }}>
-              <Link
-                underline="none"
-                component="a"
-                href={item.href}
-                color={colorInvert ? 'common.white' : 'text.primary'}
-                sx={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  fontWeight: 'bold',
-                  textTransform: 'lowercase',
-                }}
-              >
-                {item.title}
-              </Link>
+              <RouteLink to={item.href} style={{ textDecoration: 'none' }}>
+                <Link
+                  underline="none"
+                  component="a"
+                  href={item.href}
+                  color={colorInvert ? 'common.white' : 'text.primary'}
+                  sx={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    fontWeight: 'bold',
+                    textTransform: 'lowercase',
+                  }}
+                >
+                  {item.title}
+                </Link>
+              </RouteLink>
             </Box>
           );
           return item.tbd ? <Tooltip title={item.tbd}>{link}</Tooltip> : link;
