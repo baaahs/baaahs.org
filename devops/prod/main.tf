@@ -502,8 +502,8 @@ resource "google_compute_url_map" "main" {
             }
             url_redirect {
                 https_redirect = true
-                host_redirect = "bit.ly"
-                path_redirect = "/baaahs-2025-application"
+                host_redirect = "docs.google.com"
+                path_redirect = "/forms/d/e/1FAIpQLSf-nBepcL9qLEoNDxatDGv_kFnkbzJZrrk_JAScloY_fB6ZYQ/viewform"
             }
         }
     }
