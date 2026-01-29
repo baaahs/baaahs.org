@@ -76,8 +76,8 @@ const redirects = [
   ['/apply-2025', 'https://bit.ly/baaahs-2025-application'],
 
   // 2026
-  ['/apply', 'https://bit.ly/baaahs-2026-application'],
-  ['/apply-2026', 'https://bit.ly/baaahs-2026-application'],
+  ['/apply', 'https://docs.google.com/forms/d/e/1FAIpQLSf-nBepcL9qLEoNDxatDGv_kFnkbzJZrrk_JAScloY_fB6ZYQ/viewform'],
+  ['/apply-2026', 'https://docs.google.com/forms/d/e/1FAIpQLSf-nBepcL9qLEoNDxatDGv_kFnkbzJZrrk_JAScloY_fB6ZYQ/viewform'],
 ];
 
 const Routes = () => {
