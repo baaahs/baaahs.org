@@ -73,8 +73,11 @@ const redirects = [
   ],
 
   // 2025
-  ['/apply', 'https://bit.ly/baaahs-2025-application'],
   ['/apply-2025', 'https://bit.ly/baaahs-2025-application'],
+
+  // 2026
+  ['/apply', 'https://bit.ly/baaahs-2026-application'],
+  ['/apply-2026', 'https://bit.ly/baaahs-2026-application'],
 ];
 
 const Routes = () => {
