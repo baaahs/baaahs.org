@@ -66,7 +66,7 @@ const redirects = [
 
   // 2024
   ['/apply-2024', 'https://bit.ly/baaahs-2024-application'],
-  ['/campout/register', 'https://www.tickettailor.com/events/baaahs24/1596810'],
+  // ['/campout/register', 'https://www.tickettailor.com/events/baaahs24/1596810'],
   [
     '/campout/perform',
     'https://docs.google.com/forms/d/e/1FAIpQLSdl2F0KIvLfD-qslgVMHLVmO4cckyoSjhE9LCieSymyegokyw/viewform?vc=0&c=0&w=1&flr=0',
@@ -78,6 +78,7 @@ const redirects = [
   // 2026
   ['/apply', 'https://docs.google.com/forms/d/e/1FAIpQLSf-nBepcL9qLEoNDxatDGv_kFnkbzJZrrk_JAScloY_fB6ZYQ/viewform'],
   ['/apply-2026', 'https://docs.google.com/forms/d/e/1FAIpQLSf-nBepcL9qLEoNDxatDGv_kFnkbzJZrrk_JAScloY_fB6ZYQ/viewform'],
+  ['/campout/register', 'https://www.tickettailor.com/events/baaahs24/2028695'],
 ];
 
 const Routes = () => {

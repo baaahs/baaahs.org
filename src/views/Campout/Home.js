@@ -37,7 +37,7 @@ const CampoutHome = () => {
     <Main navItems={NavItems}>
       <Box gap={3}>
         <FullScreenHeader
-          title={'BAAAHS Campout'}
+          title={'BAAAHS Campout: SideQuest'}
           image="/images/resized/PXL_20230416_022706111.webp"
           logo="/images/resized/campout_logo_no_border.webp"
           text={
@@ -46,7 +46,7 @@ const CampoutHome = () => {
                 marginTop={{ xs: '1em', md: '2em' }}
                 style={{ fontFamily: 'Smooth Circulars', textAlign: 'center' }}
               >
-                Memorial Day Weekend, May 23–26
+                July 4th Weekend, July 2-5
               </Typography>
               <Box display="flex" justifyContent="center" mr={{ xs: 2, md: 8 }}>
                 <Button
