@@ -32,7 +32,7 @@ const Events = () => {
             '/images/resized/campout_logo_promo.webp',
           description:
             'A campout put on by BAAAHS and friends over July 4th weekend. We’ve been putting it on for four years now and excited for our fifth! Our campouts are known for being whimsical, community driven, silly, and of course a whole lot of queer fun. We aim to create an awesome space for self-expression, creativity and kindness. Live music, sparkle-tastic lights, dance parties, group events, art and other surprises included. Eccentric outfits, gifting and showing off the best of you is strongly encouraged. And much like Burning Man, it is a Leave No Trace event.',
-          title: 'BAAAHS Campout 2025: SideQuest?',
+          title: 'BAAAHS Campout 2026: SideQuest?',
           date: '2–5 Jul',
           link: '/campout/register',
         }}
