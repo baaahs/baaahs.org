@@ -13,8 +13,8 @@ const mock = {
   image: 'https://assets.maccarianagency.com/backgrounds/img4.jpg',
   description:
     'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
-  title: 'BAAAHS Campout 2024 - WHAAAT?',
-  date: '24-27 May',
+  title: 'BAAAHS Campout 2026: SideQuest?',
+  date: '2–5 Jul',
   author: {
     name: 'Clifford Hall',
     avatar: 'https://assets.maccarianagency.com/avatars/img1.jpg',

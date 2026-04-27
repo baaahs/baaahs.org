@@ -35,7 +35,7 @@ const content = [
   {
     question: 'When is it?',
     answer:
-      'May 23-26th. Arrival will start on Friday morning. We encourage everyone to arrive by 6PM so you can find a spot and set up with some daylight. The fun starts Friday evening, and Saturday and Sunday are full days of activities. Monday we clean up and pack out.',
+      'July 2–5th. Arrival will start on Thursday morning. We encourage everyone to arrive by 6PM so you can find a spot and set up with some daylight. The fun starts Thursday evening, and Friday and Saturday are full days of activities. Sunday we clean up and pack out.',
   },
   {
     question: 'Is this event open for everyone?',
